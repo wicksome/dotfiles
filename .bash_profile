@@ -5,11 +5,6 @@ export LANGUAGE=ko_KR.UTF-8
 export LANG="ko_KR.UTF-8"
 export LC_ALL="ko_KR.UTF-8"
 
-###### PATH
-#export PLAY_HOME=~/.play-2.1.0
-#export PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:$PLAY_HOME:$PATH
-
-
 ###### color setting
 c_clean="\033[0m"
 c_reverse="\033[07m"
@@ -81,40 +76,13 @@ export LSCOLORS=ExGxFxdxCxDxDxBxBxExEx
 export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
 
 
-# use Vim as default editor
-export EDITOR="/usr/local/bin/vim"
-export VISUAL=$EDITOR
-set showmatch
-set smartindent
-set enc=UTF-8
-set fileencodings=UTF-8
-
-###### for python virtual environments
-if [[ -e "$HOME/.virtualenvs" ]]; then
-	export WORKON_HOME=$HOME/.virtualenvs
-	export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
-	export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-	export PIP_VIRTUALENV_BASE=$WORKON_HOME
-	export PIP_RESPECT_VIRTUALENV=true
-	if [[ -r /usr/local/share/python/virtualenvwrapper.sh ]]; then
-		source /usr/local/share/python/virtualenvwrapper.sh
-	else
-		echo "WARNING: Can't find virtualenvwrapper.sh"
-	fi
-fi
-
-
 # aliases ---------------------------------------------------
 alias l="ls -l ${colorflag}"
 alias ll="ls -la ${colorflag}"
 alias lsd='ls -l ${colorflag} | grep "^d"'
 alias ls="command ls ${colorflag}"
 alias top_commands="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
-#alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-#alias localip="ifconfig getifaddr en1"
 alias ips="ifconfig -a | grep -o 'inet6\? \(\([0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+\)\|[a-fA-F0-9:]\+\)' | sed -e 's/inet6* //'"
-#alias whois="whois -h whois-servers.net"
-#alias dsclean="find . -type f -name '*.DS_Store' -ls -delete"
 alias ..="cd .."
 alias ...="cd ../../"
 alias top='top -o cpu'
