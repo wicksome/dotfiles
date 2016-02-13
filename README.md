@@ -17,12 +17,6 @@
     ```bash
     $ git clone https://github.com/powerline/fonts.git
     ```
-    
-    - 더 확인해볼 구분자
-        - https://github.com/ryanoasis/powerline-extra-symbols
-
-
-
 
 - install autojump
     
@@ -34,7 +28,9 @@
         - https://nolboo.github.io/blog/2015/08/21/oh-my-zsh/
 
 
-http://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean
+2>&1의 의미 - http://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean
+프롬프트 색상값의 의미 - https://www.lesstif.com/pages/viewpage.action?pageId=12943439
+더 확인해볼 구분자 - https://github.com/ryanoasis/powerline-extra-symbols
 
 ## 이슈
 
