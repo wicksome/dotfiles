@@ -39,5 +39,6 @@ http://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean
 ## 이슈
 
 - 프롬프트에서 한줄 이상 넘어갈 때 개행이 안되고 중복되는 것
+  - vcprompt 출력하는 것은 상관 없는 듯하다.(지우고 해봤는데도 중복) 
 - 이전 명령어 쓰려고 방향키 누르다 보면 한글자 안사라지는 점
 - 좀 더 나한테 맞게 커스터마이징할 것
