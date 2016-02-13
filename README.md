@@ -34,6 +34,8 @@
         - https://nolboo.github.io/blog/2015/08/21/oh-my-zsh/
 
 
+http://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean
+
 ## 이슈
 
 - 프롬프트에서 한줄 이상 넘어갈 때 개행이 안되고 중복되는 것
