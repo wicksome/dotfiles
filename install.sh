@@ -27,21 +27,23 @@ dir_backup="$dir_backup_base/$(date +'%Y%m%d-%H%M%S')"
 # create base backup directory
 if [ ! -d "$dir_backup_base" ]; then
 	echo "[INFO] CREATE .myenv"
-	mkdir $dir_backup_base
+	mkdir -v $dir_backup_base
 fi
 
 # backup current env file
-echo "[INFO] CREATE DIR FOR ENV BACKUP: $dir_backup"
-mkdir $dir_backup
-cp $d_bashrc		$dir_backup/$f_bashrc
-cp $d_bash_profile	$dir_backup/$f_bash_profile
-cp $d_gitconfig		$dir_backup/$f_gitconfig
-cp $d_vimrc			$dir_backup/$f_vimrc
+echo "[INFO] BACKUP ENV: $dir_backup"
+mkdir -v $dir_backup
+cp -v $d_bashrc			$dir_backup/$f_bashrc
+cp -v $d_bash_profile	$dir_backup/$f_bash_profile
+cp -v $d_gitconfig		$dir_backup/$f_gitconfig
+cp -v $d_vimrc			$dir_backup/$f_vimrc
 
 # copy to local
-cp $s_bashrc		$d_bashrc
-cp $s_bash_profile	$d_bash_profile
-cp $s_gitconfig		$d_gitconfig
-cp $s_vimrc			$d_vimrc
+echo "[INFO] copy to local"
+cp -v $s_bashrc			$HOME/
+cp -v $s_bash_profile	$HOME/
+cp -v $s_gitconfig		$HOME/
+cp -v $s_vimrc			$HOME/
 
+echo "[INFO] apply bash"
 source ~/.bash_profile
