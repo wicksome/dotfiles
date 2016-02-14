@@ -5,7 +5,9 @@ export LANGUAGE=ko_KR.UTF-8
 export LANG="ko_KR.UTF-8"
 export LC_ALL="ko_KR.UTF-8"
 
-###### color setting
+# prompt -------------------------------------------------
+
+## color setting
 c_clean="\033[0m"
 c_reverse="\033[07m"
 b_block="\033[40"
@@ -39,6 +41,10 @@ show_repository () {
 	echo -e "$(VCPROMPT_FORMAT=${DVCS_BRANCH}${DVCS_TYPE}${DVCS_HASH}${DVCS_SEPARATOR} vcprompt)"
 }
 
+# \[ : begin
+# \e[ : ASCII escape character(033) - prompt start
+# 
+# \] : end
 FONT_WHITE=";37m"
 COLOR1="\[\e[45;1;37m\]"
 COLOR2="\[\e[41;1;35m\]"
@@ -51,7 +57,7 @@ COLOR8="\[\e[40;1;33m\]"
 COLOR9="\[\e[0m\]"
 COLOR10="\[\e[1;30m\]"
 
-prompt="${COLOR1} \u ${COLOR2}${COLOR_WHITE} \h ${COLOR4}${COLOR5} \w ${COLOR6}${COLOR7} \n${COLOR8} ⚡️  ${COLOR9}${COLOR10}\[\033[0m\] "
+prompt="${COLOR1} \u ${COLOR2}${COLOR_WHITE} \h ${COLOR4}${COLOR5} \w ${COLOR6}${COLOR7} \n${COLOR8} ⚡️  ${COLOR9}${COLOR10}\[\033[0m\]"
 
 show_prompt() {
 	local prompt_str='\n$(show_repository)'
@@ -62,21 +68,29 @@ show_prompt() {
 export PS1="$(show_prompt) "
 export TERM=xterm-256color
 
-# Bash Exports
+# Bash Exports ---------------------------------------------
 
-# vcprompt environment variables
+# vcprompt environment variables 
 export VCPROMPT_STAGED="⚙"
 export VCPROMPT_MODIFIED="±"
 export VCPROMPT_UNTRACKED="✘"
 
-# some settings to be more colorful
+# some settings to be more colorful 
 export CLICOLOR=1
 export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 export LSCOLORS=ExGxFxdxCxDxDxBxBxExEx
-export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
+export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:':'*.hwp=01;35'
 
 
 # aliases ---------------------------------------------------
+
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+	colorflag="--color"
+else # OS X `ls`
+	colorflag="-G"
+fi
+
 alias l="ls -l ${colorflag}"
 alias ll="ls -la ${colorflag}"
 alias lsd='ls -l ${colorflag} | grep "^d"'
