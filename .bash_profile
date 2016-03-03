@@ -5,6 +5,16 @@ export LANGUAGE=ko_KR.UTF-8
 export LANG="ko_KR.UTF-8"
 export LC_ALL="ko_KR.UTF-8"
 
+# path ---------------------------------------------------
+export M2_HOME=/Users/yeongjun/apps/apache-maven-3.3.9
+export M2=$M2_HOME/bin
+export PATH=$M2:$PATH
+
+export JAVA_6=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+export JAVA_7=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
+export JAVA_HOME=$JAVA_7
+export PATH=$JAVA_HOME/bin:$PATH
+
 # prompt -------------------------------------------------
 
 ## color setting
