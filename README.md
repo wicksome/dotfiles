@@ -1,4 +1,4 @@
-# 적용하기 전 준비 
+# Install my_env
 
 ## Requirements
 
