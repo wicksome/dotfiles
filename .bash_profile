@@ -12,7 +12,8 @@ export PATH=$M2:$PATH
 
 export JAVA_6=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 export JAVA_7=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-export JAVA_HOME=$JAVA_7
+export JAVA_8=/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home
+export JAVA_HOME=$JAVA_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 # prompt -------------------------------------------------
@@ -113,9 +114,7 @@ alias top='top -o cpu'
 alias gs='git status'
 alias gl='git lg1'
 alias gl2='git lg2'
-alias gla='git lga'
-alias glf='git lgf'
-alias gm='git mg'
+alias gm='git mg' 
 alias gf='git fc'
 alias gb='git br'
 alias gc='git co'
@@ -129,8 +128,13 @@ alias gr='git rebase'
 alias gri='git rebase -i'
 alias grh='git reset --hard'
 
+alias st='open -a "Sublime Text"'
+alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
+
 # Hello Message --------------------------------------------
 #echo -e "Kernal Information: " `uname -smr`
 #echo -e "`bash --version`"
 #echo -ne "Uptime: "; uptime
 #echo -ne "Server time is: "; date
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
