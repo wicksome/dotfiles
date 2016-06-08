@@ -13,3 +13,5 @@
 
 [gager]
 	diff = diff-highlight | less
+[core]
+	autocrlf = input
