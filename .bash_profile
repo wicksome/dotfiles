@@ -138,3 +138,8 @@ alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-ac
 #echo -ne "Server time is: "; date
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+
+# ----------------------------------------------------------
+source "$HOME/.bash_other"
+echo "[INCLUDE] $HOME/.bash_other"
