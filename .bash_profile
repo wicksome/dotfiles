@@ -131,6 +131,8 @@ alias grh='git reset --hard'
 alias st='open -a "Sublime Text"'
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
+alias ip='ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk \"{print $2}\"'
+
 # Hello Message --------------------------------------------
 #echo -e "Kernal Information: " `uname -smr`
 #echo -e "`bash --version`"
@@ -142,4 +144,3 @@ alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-ac
 
 # ----------------------------------------------------------
 source "$HOME/.bash_other"
-echo "[INCLUDE] $HOME/.bash_other"
