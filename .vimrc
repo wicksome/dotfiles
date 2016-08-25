@@ -15,7 +15,7 @@ set fileencodings=utf-8
 set autoindent	" 자동 들여쓰기
 set cindent	" C 자동 들여쓰기
 set smartindent	" 스마트 들여쓰기
-set shiftwidth=4" 들여쓰기 여백
+set shiftwidth=4 " 들여쓰기 여백
 " set expandtab " 탭 대신 스페이스 사용
 
 " tab setting
@@ -24,6 +24,9 @@ set tabstop=4
 " 줄 번호 설정
 set number
 highlight LineNr ctermfg=white ctermbg=234
+
+" 한줄 최대 길이
+set textwidth=120
 
 " 커서 라인 설정
 hi CursorLine cterm=bold term=bold ctermfg=NONE guibg=NONE guifg=NONE
