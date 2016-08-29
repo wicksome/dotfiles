@@ -75,8 +75,11 @@ show_prompt() {
 	prompt_str+="${prompt}"
 	echo $prompt_str
 }
+#export PS1="$(show_prompt) "
 
-export PS1="$(show_prompt) "
+# perfect prompt
+#export PS1='\n$(show_repository)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+export PS1='\n$(show_repository)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡︎ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
 export TERM=xterm-256color
 
 # Bash Exports ---------------------------------------------
