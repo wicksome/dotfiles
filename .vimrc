@@ -26,7 +26,7 @@ set number
 highlight LineNr ctermfg=white ctermbg=234
 
 " 한줄 최대 길이
-set textwidth=120
+"set textwidth=120
 
 " 커서 라인 설정
 hi CursorLine cterm=bold term=bold ctermfg=NONE guibg=NONE guifg=NONE
