@@ -78,6 +78,35 @@ set showmatch   " 자동 괄호맞춰주기  (set sm)
 set showcmd		" display incomplete commands
 
 " 파일 타입 관련 설정
-filetype plugin on
-filetype indent on " 파일 종류에 따른 구문강조  
-filetype plugin indent on
+"filetype plugin on
+"filetype indent on " 파일 종류에 따른 구문강조  
+
+" -----------------------------------------------------------------------------
+" Vundle config
+set nocompatible
+filetype off " required
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+"Plugin 'git://git.wincent.com/command-t.git'
+"Plugin 'file:///home/gmarik/path/to/plugin'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" My Bundles here:
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+call vundle#end()
+filetype plugin indent on 
+
+" airline config
+set laststatus=2
+let g:airline_powerline_fonts = 1
+"g:airline_symbols
+let g:airline_theme='powerlineish theme'
+"let g:airline_theme='solarized dark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'

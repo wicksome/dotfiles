@@ -100,3 +100,13 @@ $ brew install htop
 ```bash
 $ brew install tree
 ```
+
+**Vunble**
+
+vim plugin manager, [github](https://github.com/VundleVim/Vundle.vim)
+
+```bash
+$ mkdir -p ~/.vim/bundle/
+$ cd ~/.vim/bundle
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+```
