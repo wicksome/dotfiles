@@ -21,5 +21,6 @@
 - minimap-highlight-selected
 - pigments
 - git-plus
+- tree-view-git-status
 
 ## change key map
