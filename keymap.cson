@@ -1,0 +1,90 @@
+# intellij-idea-keymap
+
+# Disable keynindings
+## tree-view, bookmarks
+
+'body':
+    'ctrl-shift-tab ^ctrl': 'unset!'
+
+    # window
+    'cmd-shift-]': 'pane:show-next-item' # Select Next Tab
+    'cmd-shift-[': 'pane:show-previous-item' # Select Previous Tab
+    'alt-tab': 'window:focus-next-pane' # Goto Next Splitter
+    'alt-shift-tab': 'window:focus-previous-pane' # Goto Splitter Splitter
+
+# 전체 발생
+'.platform-darwin atom-workspace':
+    # General
+    'cmd-shift-a': 'command-palette:toggle' # Find action
+    'cmd-1': 'tree-view:toggle' # Open corresponding tool window
+
+    # Search / Replace
+    'cmd-shift-f': 'project-find:show' # Find in path
+    'cmd-shift-r': 'project-find:show' # Replace in path
+
+    # Navigation
+    'cmd-o': 'fuzzy-finder:toggle-file-finder' # Go to class
+    'cmd-shift-o': 'fuzzy-finder:toggle-file-finder' # Go to file
+
+    # Editing
+    # ETC
+
+# 에디터 안에서만 발생
+'.platform-darwin atom-workspace atom-text-editor:not([mini])':
+    # General
+
+    # Search / Replace
+    'cmd-r': 'find-and-replace:show'
+    'ctrl-g': 'find-and-replace:select-next' # Add Selection for Next Occurence
+    'ctrl-shift-g': 'find-and-replace:select-undo' # Unselect Occurence
+
+    # Navigation
+    'ctrl-right': 'pane:show-next-item' # Go to next editor tab
+    'ctrl-left': 'pane:show-previous-item' # Go to previous editor tab
+    'cmd-l': 'go-to-line:toggle' # Go to line
+    'cmd-e': 'fuzzy-finder:toggle-buffer-finder' # Recent files popup
+    'cmd-ctrl-s': 'tree-view:reveal-active-file'
+    'cmd-f3': 'bookmarks:view-all' # Show bookmarks
+    'f3': 'bookmarks:toggle-bookmark' # Toggle bookmark
+
+    # Editing
+    'cmd-d': 'editor:duplicate-lines' # Duplicate current line or selected block
+    'alt-up': 'editor:select-to-next-subword-boundary' # Select successively increasing code blocks
+    'alt-down': 'editor:select-to-previous-subword-boundary' # Decrease current selection to previous state
+    'cmd-backspace': 'editor:delete-line' # Delete line at caret
+    'cmd-shift-up': 'editor:move-line-up' # Move line up
+    'cmd-shift-down': 'editor:move-line-down' # Move line down
+    'alt-shift-up': 'editor:move-line-up' # Move line up
+    'alt-shift-down': 'editor:move-line-down' # Move line down
+    'cmd-alt-l': 'atom-beautify:beautify-editor'
+
+    # Live Templates
+    'cmd-j': 'snippets:available' # Insert live templates
+
+# '.platform-darwin':
+
+# tree-vew keybinding
+'.platform-darwin .tree-view':
+    # General
+    'left': 'tree-view:collapse-directory'
+    'right': 'tree-view:expand-item'
+    'enter': 'tree-view:open-selected-entry'
+    'cmd-n': 'tree-view:add-file'
+
+    # Search / Replace
+
+    # Navigation
+    'cmd-1': 'tree-view:toggle' # Open corresponding tool window
+
+    # Editing
+    'cmd-c': 'tree-view:copy'
+    'cmd-shift-c': 'tree-view:copy-full-path'
+    'cmd-x': 'tree-view:cut'
+    'cmd-v': 'tree-view:paste'
+    'cmd-r': 'tree-view:move'
+    'f6': 'tree-view:move'
+    'shift-f6': 'tree-view:move'
+    'delete': 'tree-view:remove'
+    'backspace': 'tree-view:remove'
+
+    # ETC

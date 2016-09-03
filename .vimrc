@@ -97,6 +97,7 @@ Plugin 'ascenator/L9', {'name': 'newL9'}
 " My Bundles here:
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()
 filetype plugin indent on 
@@ -110,3 +111,13 @@ let g:airline_theme='powerlineish theme'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline_section_y = '%{strftime("%H:%M")}'
+
+" gitgutter
+let g:gitgutter_enabled = 1
+let g:gitgutter_highlight_lines = 1
+let g:gitgutter_sign_modified = '*'
+let g:gitgutter_sign_removed = '-'
+highlight clear SignColumn
+let g:gitgutter_avoid_cmd_prompt_on_windows = 0
+set updatetime=250

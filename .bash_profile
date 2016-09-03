@@ -135,7 +135,7 @@ alias grh='git reset --hard'
 alias st='open -a "Sublime Text"'
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
-alias ip='ifconfig | grep \"inet \" | grep -v 127.0.0.1 | awk \"{print $2}\"'
+alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
 
 # Hello Message --------------------------------------------
 #echo -e "Kernal Information: " `uname -smr`
