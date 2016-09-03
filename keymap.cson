@@ -56,7 +56,7 @@
     'cmd-shift-down': 'editor:move-line-down' # Move line down
     'alt-shift-up': 'editor:move-line-up' # Move line up
     'alt-shift-down': 'editor:move-line-down' # Move line down
-    'cmd-alt-l': 'atom-beautify:beautify-editor'
+    'cmd-alt-l': 'atom-beautify:beautify-editor' # Reformat code
 
     # Live Templates
     'cmd-j': 'snippets:available' # Insert live templates
