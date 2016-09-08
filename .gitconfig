@@ -1,4 +1,5 @@
 [user]
+
 	email = 5036939+wicksome@users.noreply.github.com
 	name = Yeongjun.Kim
 
@@ -15,3 +16,4 @@
 	diff = diff-highlight | less
 [core]
 	autocrlf = input
+	editor = /usr/bin/vim
