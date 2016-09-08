@@ -22,5 +22,7 @@
 - pigments
 - git-plus
 - tree-view-git-status
+- project-manager
+- atom-terminal
 
 ## change key map
