@@ -82,6 +82,11 @@ set showcmd		" display incomplete commands
 "filetype indent on " 파일 종류에 따른 구문강조  
 
 " -----------------------------------------------------------------------------
+" 단축키
+map <F9> <ESC>:set paste<CR>
+map <F10> <ESC>:set nopaste<CR>
+
+" -----------------------------------------------------------------------------
 " Vundle config
 set nocompatible
 filetype off " required
