@@ -148,3 +148,5 @@ alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9
 
 # ----------------------------------------------------------
 source "$HOME/.bash_other"
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

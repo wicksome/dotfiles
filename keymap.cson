@@ -1,7 +1,7 @@
 # intellij-idea-keymap
 
 # Disable keynindings
-## tree-view, bookmarks
+## tree-view, bookmarks, atom-terminal
 
 'body':
     'ctrl-shift-tab ^ctrl': 'unset!'
@@ -28,6 +28,8 @@
 
     # Editing
     # ETC
+    'alt-f12': 'atom-terminal:open-project-root'
+    # 'alt-f12': 'atom-terminal:open'
 
 # 에디터 안에서만 발생
 '.platform-darwin atom-workspace atom-text-editor:not([mini])':
