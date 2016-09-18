@@ -110,3 +110,23 @@ $ mkdir -p ~/.vim/bundle/
 $ cd ~/.vim/bundle
 $ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
+
+**mas-cli**
+
+A simple command line interface for the Mac App Store.
+
+```sh
+$ brew install mas
+```
+
+**mac-cli**
+
+> 받을지말지 고민중
+
+**tmux**
+
+.tmux.conf [링크](https://github.com/gpakosz/.tmux)
+
+```sh
+$ brew install tmux
+```
