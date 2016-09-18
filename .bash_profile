@@ -133,6 +133,7 @@ alias gri='git rebase -i'
 alias grh='git reset --hard'
 
 alias st='open -a "Sublime Text"'
+alias typo='open -a Typora'
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
 alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
