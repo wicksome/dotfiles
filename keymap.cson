@@ -1,22 +1,25 @@
 # intellij-idea-keymap
 
 # Disable keynindings
-## tree-view, bookmarks, atom-terminal
+## bookmarks, atom-terminal
 
 'body':
     'ctrl-shift-tab ^ctrl': 'unset!'
 
     # window
-    'cmd-shift-]': 'pane:show-next-item' # Select Next Tab
-    'cmd-shift-[': 'pane:show-previous-item' # Select Previous Tab
     'alt-tab': 'window:focus-next-pane' # Goto Next Splitter
     'alt-shift-tab': 'window:focus-previous-pane' # Goto Splitter Splitter
+
+'.platform-darwin':
+    # Navigation
+    'cmd-1': 'tree-view:toggle' # Open corresponding tool window
+    'cmd-\\': 'unset!' # cancel the tree-view shortcut
+    'cmd-k cmd-b': 'unset!' # cancel the tree-view shortcut
 
 # 전체 발생
 '.platform-darwin atom-workspace':
     # General
     'cmd-shift-a': 'command-palette:toggle' # Find action
-    'cmd-1': 'tree-view:toggle' # Open corresponding tool window
 
     # Search / Replace
     'cmd-shift-f': 'project-find:show' # Find in path
@@ -28,8 +31,6 @@
 
     # Editing
     # ETC
-    'alt-f12': 'atom-terminal:open-project-root'
-    # 'alt-f12': 'atom-terminal:open'
 
 # 에디터 안에서만 발생
 '.platform-darwin atom-workspace atom-text-editor:not([mini])':
@@ -63,30 +64,19 @@
     # Live Templates
     'cmd-j': 'snippets:available' # Insert live templates
 
-# '.platform-darwin':
-
 # tree-vew keybinding
 '.platform-darwin .tree-view':
     # General
-    'left': 'tree-view:collapse-directory'
-    'right': 'tree-view:expand-item'
-    'enter': 'tree-view:open-selected-entry'
+    'a': 'unset!'
     'cmd-n': 'tree-view:add-file'
-
-    # Search / Replace
 
     # Navigation
     'cmd-1': 'tree-view:toggle' # Open corresponding tool window
 
-    # Editing
-    'cmd-c': 'tree-view:copy'
+    # Editing'.tree-view':
+    'ctrl-shift-C': 'unset!'
     'cmd-shift-c': 'tree-view:copy-full-path'
-    'cmd-x': 'tree-view:cut'
-    'cmd-v': 'tree-view:paste'
+    'f2': 'unset!'
     'cmd-r': 'tree-view:move'
     'f6': 'tree-view:move'
     'shift-f6': 'tree-view:move'
-    'delete': 'tree-view:remove'
-    'backspace': 'tree-view:remove'
-
-    # ETC
