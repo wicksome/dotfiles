@@ -137,6 +137,7 @@ alias typo='open -a Typora'
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
 alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
+alias stime='last reboot | head -2'
 
 # Hello Message --------------------------------------------
 #echo -e "Kernal Information: " `uname -smr`
@@ -151,3 +152,4 @@ alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9
 source "$HOME/work/config/bash_work"
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
