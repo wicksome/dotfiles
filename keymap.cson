@@ -4,7 +4,7 @@
 ## bookmarks, atom-terminal
 
 'body':
-    'ctrl-shift-tab ^ctrl': 'unset!'
+    # 'ctrl-shift-tab ^ctrl': 'unset!'
 
     # window
     'alt-tab': 'window:focus-next-pane' # Goto Next Splitter
@@ -13,8 +13,8 @@
 '.platform-darwin':
     # Navigation
     'cmd-1': 'tree-view:toggle' # Open corresponding tool window
-    'cmd-\\': 'unset!' # cancel the tree-view shortcut
-    'cmd-k cmd-b': 'unset!' # cancel the tree-view shortcut
+    # 'cmd-\\': 'unset!' # cancel the tree-view shortcut
+    # 'cmd-k cmd-b': 'unset!' # cancel the tree-view shortcut
 
 # 전체 발생
 '.platform-darwin atom-workspace':
@@ -74,9 +74,9 @@
     'cmd-1': 'tree-view:toggle' # Open corresponding tool window
 
     # Editing'.tree-view':
-    'ctrl-shift-C': 'unset!'
+    # 'ctrl-shift-C': 'unset!'
     'cmd-shift-c': 'tree-view:copy-full-path'
-    'f2': 'unset!'
+    # 'f2': 'unset!'
     'cmd-r': 'tree-view:move'
     'f6': 'tree-view:move'
     'shift-f6': 'tree-view:move'
