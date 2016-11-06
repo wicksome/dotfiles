@@ -54,6 +54,7 @@
 
 **Fluid**: 웹사이트를 앱으로 변환하는 앱, [정식-사이트](http://fluidapp.com/)
 
+**GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
 
 
 
@@ -68,8 +69,6 @@
 **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 
 **FileZilla**: FTP
-
-파일질라:
 
 **Parallels**(유료): 가상머신
 
