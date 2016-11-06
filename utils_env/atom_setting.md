@@ -16,6 +16,10 @@
 - autoclose-html
 - highlight-selected
 - linter
+- linter-jshint
+- linter-csslint
+- atom-runner
+- atom-ternjs
 - minimap
 - minimap-cursorline
 - minimap-highlight-selected
