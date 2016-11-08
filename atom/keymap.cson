@@ -1,18 +1,32 @@
-# intellij-idea-keymap
+# intellij-idea-keymap for OSX
 
-# Disable keynindings
-## bookmarks, atom-terminal
+################################################################################
+# Requirement Plugins
+################################################################################
+# Community Packages
+# - atom-beautify
+# - atom-runner
+# - atom-ternjs
+# - bookmarks
+# - last-cursor-position
+# - expand-region
+# Core Packages
+# - command-palette
+# - find-and-replace
+# - fuzzy-finder
+# - tree-view
 
 'body':
     # window
     'alt-tab': 'window:focus-next-pane' # Goto Next Splitter
     'alt-shift-tab': 'window:focus-previous-pane' # Goto Splitter Splitter
+    'alt-up': 'core:select-to-top'
 
 '.platform-darwin':
     # Navigation
     'cmd-1': 'tree-view:toggle' # Open corresponding tool window
 
-# 전체 발생
+# in workspace
 '.platform-darwin atom-workspace':
     # General
     'cmd-shift-a': 'command-palette:toggle' # Find action
@@ -26,15 +40,19 @@
     'cmd-shift-o': 'fuzzy-finder:toggle-file-finder' # Go to file
 
     # Editing
+    'alt-cmd-left': 'last-cursor-position:previous'
+    'alt-cmd-right': 'last-cursor-position:next'
+
     # ETC
 
-    # runner
+    # Run
     'cmd-F2': 'run:stop' # runner stop
 
-# 에디터 안에서만 발생
+# in edit
 '.platform-darwin atom-workspace atom-text-editor:not([mini])':
     # General
     'cmd-space': 'atom-ternjs:startCompletion'
+    'f1': 'atom-ternjs:documentation' # view documentation in nodejs
 
     # Search / Replace
     'cmd-r': 'find-and-replace:show'
@@ -49,17 +67,20 @@
     'cmd-ctrl-s': 'tree-view:reveal-active-file'
     'cmd-f3': 'bookmarks:view-all' # Show bookmarks
     'f3': 'bookmarks:toggle-bookmark' # Toggle bookmark
+    'cmd-b': 'atom-ternjs:definition' # Go to definition
 
     # Editing
     'cmd-d': 'editor:duplicate-lines' # Duplicate current line or selected block
-    'alt-up': 'editor:select-to-next-subword-boundary' # Select successively increasing code blocks
-    'alt-down': 'editor:select-to-previous-subword-boundary' # Decrease current selection to previous state
+    'alt-up': 'expand-region:expand'
+    'alt-down': 'expand-region:shrink'
     'cmd-backspace': 'editor:delete-line' # Delete line at caret
     'cmd-shift-up': 'editor:move-line-up' # Move line up
     'cmd-shift-down': 'editor:move-line-down' # Move line down
     'alt-shift-up': 'editor:move-line-up' # Move line up
     'alt-shift-down': 'editor:move-line-down' # Move line down
     'cmd-alt-l': 'atom-beautify:beautify-editor' # Reformat code
+    'shift-f6': 'atom-ternjs:rename' # rename in nodejs
+    'shift-enter': 'editor:newline-below' # Start new line below
 
     # Live Templates
     'cmd-j': 'snippets:available' # Insert live templates

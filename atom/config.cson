@@ -1,0 +1,58 @@
+"*":
+  "atom-beautify":
+    general:
+      _analyticsUserId: "73ed68d3-49a8-4f68-b0d7-8949b8ff482e"
+  "atom-runner":
+    paneSplitDirection: "Down"
+  "atom-terminal":
+    app: "iTerm.app"
+  "atom-ternjs":
+    excludeLowerPriorityProviders: true
+  core:
+    packagesWithKeymapsDisabled: [
+      "fuzzy-finder"
+      "git-plus"
+      "terminal-plus"
+      "atom-terminal"
+    ]
+    telemetryConsent: "no"
+    themes: [
+      "seti-ui"
+      "seti-syntax"
+    ]
+  editor:
+    fontFamily: "LiterationMonoPowerline"
+    fontSize: 12
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "67f37477-978c-9c59-ce6d-7c254ec530be"
+  "expand-region": {}
+  "file-icon-supplement": {}
+  "file-icons":
+    forceShow: true
+  "highlight-selected": {}
+  "linter-jshint":
+    disableWhenNoJshintrcFileInPath: true
+  minimap:
+    absoluteMode: true
+    displayCodeHighlights: false
+    plugins:
+      cursorline: true
+      cursorlineDecorationsZIndex: 0
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+  runner:
+    extensions:
+      "spec.js": "mocha",
+      "test.js": "mocha"
+    scopes:
+      js: "node"
+  "seti-syntax":
+    themeColor: "Steel"
+  "seti-ui":
+    compactView: true
+    themeColor: "Steel"
+  "tree-view": {}
+  "tree-view-git-status": {}
+  welcome:
+    showOnStartup: false
