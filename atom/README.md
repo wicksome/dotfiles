@@ -20,6 +20,7 @@
 - linter-csslint
 - atom-runner
 - atom-ternjs
+- autocomplete-js-import
 - minimap
 - minimap-cursorline
 - minimap-highlight-selected
