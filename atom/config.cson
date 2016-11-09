@@ -43,7 +43,7 @@
       "highlight-selectedDecorationsZIndex": 0
   runner:
     extensions:
-      "spec.js": "mocha",
+      "spec.js": "mocha"
       "test.js": "mocha"
     scopes:
       js: "node"
