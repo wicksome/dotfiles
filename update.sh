@@ -17,7 +17,9 @@ cp -v $git_config ./git/
 # atom
 atom_config="$HOME/.atom/config.cson"
 atom_keymap="$HOME/.atom/keymap.cson"
+atom_init="$HOMT/init.coffee"
 cp -v $atom_config ./atom/
 cp -v $atom_keymap ./atom/
+cp -v $atom_init ./atom/
 
 # intellij

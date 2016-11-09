@@ -6,7 +6,7 @@
 - CodeGlance
 - Git Flow Integration
 - GitToolBox
-- Grep Comsole
+- Grep Console
 - Handlebars/Mustache
 - JavaDoc
 - Lombok plugin

@@ -46,7 +46,7 @@
     # ETC
 
     # Run
-    'cmd-F2': 'run:stop' # runner stop
+    'cmd-f2': 'run:stop' # runner stop
 
 # in edit
 '.platform-darwin atom-workspace atom-text-editor:not([mini])':
