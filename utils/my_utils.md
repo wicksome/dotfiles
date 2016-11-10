@@ -14,6 +14,8 @@
 
 ## Essential App
 
+:star::star::star:
+
 **iterm**: 터미널 프로그램, [정식-사이트](https://www.iterm2.com/index.html)
 
 **Evernote**: 생산성
@@ -28,6 +30,14 @@
 
 **CheatSheet**: Mac 명령어 보기, [정식-사이트](https://www.mediaatelier.com/CheatSheet/)
 
+**AppCleaner**: 앱 삭제 프로그램, [정식-사이트](http://freemacsoft.net/appcleaner/)
+
+**GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
+
+**Magnet**(유료): 화면 분리
+
+**MindNode**(유료): 마인드맵
+
 **iCanHazShortcut**: 터미널 명령어를 단축키로 만들기, [github](https://github.com/deseven/icanhazshortcut)
 
 **Just Focus**: 뽀모도르 앱, [정식-사이트](http://climstudio.com/justfocus/)
@@ -40,21 +50,21 @@
 
 **Typora**: markdown 에디터, [정식-사이트](http://www.typora.io/)
 
+​:star:​​:star:​
+
+**AirServer**(유료): 디바이스 미러링
+
 **XtreFinder**: Finder 확장, [정식-사이트](http://www.trankynam.com/xtrafinder/)
 
 **Anvil**: Pow 관리해주는 GUI 앱, [정식-사이트](http://anvilformac.com/index.html)
 
-**AppCleaner**: 앱 삭제 프로그램, [정식-사이트](http://freemacsoft.net/appcleaner/)
+**karabiner**: 키 맵핑, [특정-장치만-변경방법](http://algobomyun.tistory.com/348)
 
-**AirServer**(유료): 디바이스 미러링
+:star:
 
 **BeardedSpice**: 스트리밍 음악 사이트를 메뉴바로 보는 앱, [정식-사이트](http://doctypeht.ml/44)
 
-**karabiner**: 키 맵핑, [특정-장치만-변경방법](http://algobomyun.tistory.com/348)
-
 **Fluid**: 웹사이트를 앱으로 변환하는 앱, [정식-사이트](http://fluidapp.com/)
-
-**GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
 
 
 
@@ -62,11 +72,15 @@
 
 **IntelliJ IDEA**: 필수
 
+**Atom**: 에디터
+
 **Sublime Text**: 텍스트 에디터
 
 **Sequel Pro**: 맥용 sql client,  [다운로드-사이트](http://www.sequelpro.com/)
 
 **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+
+**MeisterTask**: 태스크 분리, 관리(chrome)
 
 **FileZilla**: FTP
 
