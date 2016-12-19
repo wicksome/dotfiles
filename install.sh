@@ -1,6 +1,4 @@
 #!/bin/bash
-echo "TODO: update install.sh"
-
 ALERT_COLOR="\033[38;5;087m"
 DEFAULT_COLOR="\033[00m"
 INFO="${ALERT_COLOR}[INFO]${DEFAULT_COLOR}"
@@ -12,7 +10,7 @@ bashProfile=".bash_profile"
 bashFiglet=".bash_figlet"
 # git
 gitconfig=".gitconfig"
-gitIgnoreConf=".gitignore"
+gitignore=".gitignore"
 # vim
 vimrc=".vimrc"
 # atom
@@ -35,18 +33,18 @@ fi
 echo -e "${INFO} BACKUP ENV/CONF: $backupDir"
 mkdir -v $backupDir
 mkdir -v $backupDir/bash
-cp -v $HOME/$bashrc             $backupDir/bash/$bashrc
-cp -v $HOME/$bashProfile        $backupDir/bash/$bashProfile
-cp -v $HOME/$bashFiglet         $backupDir/bash/$bashFiglet
+cp -v $HOME/$bashrc             $backupDir/bash/
+cp -v $HOME/$bashProfile        $backupDir/bash/
+cp -v $HOME/$bashFiglet         $backupDir/bash/
 mkdir -v $backupDir/git
-cp -v $HOME/$gitconfig		    $backupDir/git/$gitconfig
-cp -v $HOME/$gitignore		    $backupDir/git/$gitignore
+cp -v $HOME/$gitconfig		    $backupDir/git/
+cp -v $HOME/$gitignore		    $backupDir/git/
 mkdir -v $backupDir/vim
-cp -v $HOME/$vimrc              $backupDir/vim/$vimrc
+cp -v $HOME/$vimrc              $backupDir/vim/
 mkdir -v $backupDir/atom
-cp -v $HOME/.atom/$atomKeymap	$backupDir/atom/$atomKeymap
-cp -v $HOME/.atom/$atomInit     $backupDir/atom/$atomInit
-cp -v $HOME/.atom/$atomConfig	$backupDir/atom/$atomConfig
+cp -v $HOME/.atom/$atomKeymap	$backupDir/atom/
+cp -v $HOME/.atom/$atomInit     $backupDir/atom/
+cp -v $HOME/.atom/$atomConfig	$backupDir/atom/
 
 # copy to local
 echo -e "${INFO} copy to local"
@@ -61,4 +59,5 @@ cp -v ./atom/$atomInit          $HOME/.atom/
 cp -v ./atom/$atomConfig        $HOME/.atom/
 
 echo -e "${INFO} apply bash"
+clear
 source ~/.bash_profile
