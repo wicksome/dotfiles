@@ -22,8 +22,9 @@
     ]
   editor:
     fontFamily: "LiterationMonoPowerline"
-    fontSize: 12
+    fontSize: 13
     showIndentGuide: true
+    tabLength: 4
   "exception-reporting":
     userId: "67f37477-978c-9c59-ce6d-7c254ec530be"
   "expand-region": {}
@@ -39,7 +40,7 @@
     plugins:
       cursorline: true
       cursorlineDecorationsZIndex: 0
-      "highlight-selected": true
+      "highlight-selected": false
       "highlight-selectedDecorationsZIndex": 0
   runner:
     extensions:
