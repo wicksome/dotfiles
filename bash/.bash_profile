@@ -1,5 +1,4 @@
 ####### .bash_profile
-source ''
 
 ###### General
 export LANGUAGE=ko_KR.UTF-8
