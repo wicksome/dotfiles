@@ -1,5 +1,7 @@
 # my_env
 
+![local_prompt](https://cloud.githubusercontent.com/assets/5036939/21316522/7985108a-c644-11e6-8a54-561de5d4dc2a.png)
+
 ## Requirements
 
 - vcprompt 설치
