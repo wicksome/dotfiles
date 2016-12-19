@@ -1,54 +1,64 @@
 #!/bin/bash
 echo "TODO: update install.sh"
+
+ALERT_COLOR="\033[38;5;087m"
+DEFAULT_COLOR="\033[00m"
+INFO="${ALERT_COLOR}[INFO]${DEFAULT_COLOR}"
+
 # variablea--------------------------------
-# file
-# f_bashrc=".bashrc"
-# f_bash_profile=".bash_profile"
-# f_gitconfig=".gitconfig"
-# f_vimrc=".vimrc"
-# f_atom_keymap="keymap.cson"
-#
-# # source path
-# s_bashrc="./$f_bashrc"
-# s_bash_profile="./$f_bash_profile"
-# s_gitconfig="./$f_gitconfig"
-# s_vimrc="./$f_vimrc"
-# s_atom_keymap="./$f_atom_keymap"
-#
-# # destination path
-# d_bashrc="$HOME/$f_bashrc"
-# d_bash_profile="$HOME/$f_bash_profile"
-# d_gitconfig="$HOME/$f_gitconfig"
-# d_vimrc="$HOME/$f_vimrc"
-# d_atom_keymap="$HOME/.atom/$_atom_keymap"
-#
-# # etc
-# dir_backup_base="$HOME/.myenv"
-# dir_backup="$dir_backup_base/$(date +'%Y%m%d-%H%M%S')"
-#
-# # logic ----------------------------------
-# # create base backup directory
-# if [ ! -d "$dir_backup_base" ]; then
-# 	echo "[INFO] CREATE .myenv"
-# 	mkdir -v $dir_backup_base
-# fi
-#
-# # backup current env file
-# echo "[INFO] BACKUP ENV: $dir_backup"
-# mkdir -v $dir_backup
-# cp -v $d_bashrc			$dir_backup/$f_bashrc
-# cp -v $d_bash_profile	$dir_backup/$f_bash_profile
-# cp -v $d_gitconfig		$dir_backup/$f_gitconfig
-# cp -v $d_vimrc			$dir_backup/$f_vimrc
-# cp -v $d_atom_keymap	$dir_backup/$f_atom_keymap
-#
-# # copy to local
-# echo "[INFO] copy to local"
-# cp -v $s_bashrc			$HOME/
-# cp -v $s_bash_profile	$HOME/
-# cp -v $s_gitconfig		$HOME/
-# cp -v $s_vimrc			$HOME/
-# cp -v $s_atom_keymap	$HOME/
-#
-# echo "[INFO] apply bash"
-# source ~/.bash_profile
+# bash
+bashrc=".bashrc"
+bashProfile=".bash_profile"
+bashFiglet=".bash_figlet"
+# git
+gitconfig=".gitconfig"
+gitIgnoreConf=".gitignore"
+# vim
+vimrc=".vimrc"
+# atom
+atomKeymap="keymap.cson"
+atomInit="init.coffee"
+atomConfig="config.cson"
+
+# backup
+backupBase="$HOME/.myenv"
+backupDir="$backupBase/$(date +'%Y%m%d-%H%M%S')"
+
+# logic ----------------------------------
+# create base backup directory
+if [ ! -d "$backupBase" ]; then
+	echo -e "${INFO} create folder. ${backupBase}"
+	mkdir -v $backupBase
+fi
+
+# backup current env file
+echo -e "${INFO} BACKUP ENV/CONF: $backupDir"
+mkdir -v $backupDir
+mkdir -v $backupDir/bash
+cp -v $HOME/$bashrc             $backupDir/bash/$bashrc
+cp -v $HOME/$bashProfile        $backupDir/bash/$bashProfile
+cp -v $HOME/$bashFiglet         $backupDir/bash/$bashFiglet
+mkdir -v $backupDir/git
+cp -v $HOME/$gitconfig		    $backupDir/git/$gitconfig
+cp -v $HOME/$gitignore		    $backupDir/git/$gitignore
+mkdir -v $backupDir/vim
+cp -v $HOME/$vimrc              $backupDir/vim/$vimrc
+mkdir -v $backupDir/atom
+cp -v $HOME/.atom/$atomKeymap	$backupDir/atom/$atomKeymap
+cp -v $HOME/.atom/$atomInit     $backupDir/atom/$atomInit
+cp -v $HOME/.atom/$atomConfig	$backupDir/atom/$atomConfig
+
+# copy to local
+echo -e "${INFO} copy to local"
+cp -v ./bash/$bashrc            $HOME/
+cp -v ./bash/$bashProfile       $HOME/
+cp -v ./bash/$bashFiglet        $HOME/
+cp -v ./git/$gitconfig          $HOME/
+cp -v ./git/$gitignore          $HOME/
+cp -v ./vim/$vimrc              $HOME/
+cp -v ./atom/$atomKeymap        $HOME/.atom/
+cp -v ./atom/$atomInit          $HOME/.atom/
+cp -v ./atom/$atomConfig        $HOME/.atom/
+
+echo -e "${INFO} apply bash"
+source ~/.bash_profile
