@@ -17,12 +17,11 @@
     ]
     telemetryConsent: "no"
     themes: [
-      "seti-ui"
-      "seti-syntax"
+      "nord-atom-ui"
+      "nord-atom-syntax"
     ]
   editor:
     fontFamily: "LiterationMonoPowerline"
-    fontSize: 13
     showIndentGuide: true
     tabLength: 4
   "exception-reporting":
@@ -31,9 +30,17 @@
   "file-icon-supplement": {}
   "file-icons":
     forceShow: true
+    onChanges: true
+    strategies: {}
+  "git-plus":
+    general:
+      _analyticsUserId: "4048f457-88e5-4042-a10c-afc5ad3dbd89"
   "highlight-selected": {}
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
+    lintInlineJavaScript: true
+  "linter-pug":
+    onlyRunWhenConfig: true
   minimap:
     absoluteMode: true
     displayCodeHighlights: false
@@ -42,6 +49,9 @@
       cursorlineDecorationsZIndex: 0
       "highlight-selected": false
       "highlight-selectedDecorationsZIndex": 0
+  "nord-atom-ui":
+    darkerFormFocusEffect: true
+    tabSizing: false
   runner:
     extensions:
       "spec.js": "mocha"

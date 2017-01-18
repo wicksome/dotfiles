@@ -4,10 +4,12 @@
 
 **UI Theme**
 
+- Nord atom
 - Seti
 
 **Syntax Theme**
 
+- Nord atom
 - Seti
 
 ## package
@@ -29,5 +31,17 @@
 - tree-view-git-status
 - project-manager
 - atom-terminal
+- sublime-style-column-selection
+
+### dev
+
+- linter-pug
+- language-pug
+- source-preview
+- source-preview-pug
+- atom-html-preview
+- node-debugger
+
+
 
 ## change key map
