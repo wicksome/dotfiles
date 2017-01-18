@@ -50,6 +50,10 @@
 
 **Typora**: markdown 에디터, [정식-사이트](http://www.typora.io/)
 
+**Spark**: Mail Client
+
+**duet**(유료): ipad로 듀얼모니터 만들기
+
 ​:star:​​:star:​
 
 **AirServer**(유료): 디바이스 미러링
@@ -80,7 +84,7 @@
 
 **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 
-**MeisterTask**: 태스크 분리, 관리(chrome)
+**App for Trello**(유료): 트렐로
 
 **FileZilla**: FTP
 

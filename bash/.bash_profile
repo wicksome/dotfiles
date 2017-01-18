@@ -150,7 +150,7 @@ alias stime='last reboot | head -2'
 #echo -e "`bash --version`"
 #echo -ne "Uptime: "; uptime
 #echo -ne "Server time is: "; date
-source "$HOME/.bash_figlet"
+#source "$HOME/.bash_figlet"
 
 # ----------------------------------------------------------
 source "$HOME/work/config/bash_work"
