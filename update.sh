@@ -25,3 +25,11 @@ cp -v $atom_keymap ./atom/
 cp -v $atom_init ./atom/
 
 # intellij
+
+
+
+# git commit
+
+git add -A
+git commit -m "updated. `date`"
+

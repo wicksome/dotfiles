@@ -32,6 +32,8 @@
 - project-manager
 - atom-terminal
 - sublime-style-column-selection
+- sort-lines
+- clipboard-plus
 
 ### dev
 
