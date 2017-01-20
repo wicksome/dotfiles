@@ -15,6 +15,7 @@
 # - find-and-replace
 # - fuzzy-finder
 # - tree-view
+# - clipboard-plus
 
 'body':
     # window
@@ -53,6 +54,7 @@
     # General
     'cmd-space': 'atom-ternjs:startCompletion'
     'f1': 'atom-ternjs:documentation' # view documentation in nodejs
+    'cmd-shift-v': 'clipboard-plus:toggle'
 
     # Search / Replace
     'cmd-r': 'find-and-replace:show'
