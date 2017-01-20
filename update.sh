@@ -31,5 +31,5 @@ cp -v $atom_init ./atom/
 # git commit
 
 git add -A
-git commit -m "updated. `date`"
+git commit -m "updated. `date +\"%Y-%m-%d\"`"
 
