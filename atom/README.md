@@ -43,6 +43,7 @@
 - source-preview-pug
 - atom-html-preview
 - node-debugger
+- language-vue
 
 
 

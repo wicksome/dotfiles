@@ -102,6 +102,12 @@ OS X용 패키지 관리자
 
 [다운로드-사이트](http://brew.sh/index_ko.html)
 
+(+) Homebrew-cask [홈페이지](https://caskroom.github.io/)
+
+```bash
+$ brew tap caskroom/cask
+```
+
 **htop**
 
 모니터링
@@ -146,4 +152,17 @@ $ brew install mas
 
 ```sh
 $ brew install tmux
+```
+
+**Keycastr**
+
+입력한 키 보여주는 앱
+
+https://github.com/keycastr/keycastrkk
+
+**autojump**
+
+```sh
+$ brew update && brew install bash # bash 4
+$ brew install autojump
 ```
