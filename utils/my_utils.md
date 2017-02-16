@@ -48,7 +48,11 @@
 
 **The Unarchiver**: 압축 프로그램, [다운로드-사이트](http://unarchiver.c3.cx/unarchiver)
 
+**MacDown**: markdown 에디터, [정식-사이트](http://macdown.uranusjr.com/)
+
 **Typora**: markdown 에디터, [정식-사이트](http://www.typora.io/)
+
+> 2017.02.07. 오류가 너무 많아서 MacDown으로 변경
 
 **Spark**: Mail Client
 

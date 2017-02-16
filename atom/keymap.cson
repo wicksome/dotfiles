@@ -7,7 +7,7 @@
 # - atom-beautify
 # - atom-runner
 # - atom-ternjs
-# - bookmarks
+# - bookmarks: keybindins disable
 # - last-cursor-position
 # - expand-region
 # Core Packages
@@ -44,10 +44,20 @@
     'alt-cmd-left': 'last-cursor-position:previous'
     'alt-cmd-right': 'last-cursor-position:next'
 
+    # Debug
+    'ctrl-d': 'node-debugger:start-resume'
+    'ctrl-shift-d': 'node-debugger:start-active-file'
+    'cmd-f8': 'node-debugger:toggle-breakpoint'
+    'alt-cmd-r': 'node-debugger:step-next'
+    # 'cmd-f2': 'node-debugger:stop'
+
     # ETC
 
     # Run
     'cmd-f2': 'run:stop' # runner stop
+
+'.platform-darwin atom-text-editor':
+    'f3': 'bookmarks:toggle-bookmark' # Toggle bookmark
 
 # in edit
 '.platform-darwin atom-workspace atom-text-editor:not([mini])':
@@ -68,7 +78,7 @@
     'cmd-e': 'fuzzy-finder:toggle-buffer-finder' # Recent files popup
     'cmd-ctrl-s': 'tree-view:reveal-active-file'
     'cmd-f3': 'bookmarks:view-all' # Show bookmarks
-    'f3': 'bookmarks:toggle-bookmark' # Toggle bookmark
+    # 'f3': 'bookmarks:toggle-bookmark' # Toggle bookmark
     'cmd-b': 'atom-ternjs:definition' # Go to definition
 
     # Editing
