@@ -14,37 +14,33 @@
 
 ## package
 
+- advanced-open-file
 - atom-beautify
+- atom-runner
+- atom-ternjs
+- atom-terminal
+- atom-html-preview
+- autocomplete-js-import
 - autoclose-html
+- clipboard-plus
+- git-plus
 - highlight-selected
 - linter
 - linter-jshint
 - linter-csslint
-- atom-runner
-- atom-ternjs
-- autocomplete-js-import
+- linter-pug
+- language-pug
+- language-vue
 - minimap
 - minimap-cursorline
 - minimap-highlight-selected
+- node-debugger
 - pigments
-- git-plus
-- tree-view-git-status
 - project-manager
-- atom-terminal
 - sublime-style-column-selection
 - sort-lines
-- clipboard-plus
-
-### dev
-
-- linter-pug
-- language-pug
 - source-preview
 - source-preview-pug
-- atom-html-preview
-- node-debugger
-- language-vue
-
-
+- tree-view-git-status
 
 ## change key map
