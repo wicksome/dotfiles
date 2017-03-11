@@ -137,10 +137,13 @@ alias gca='git commit --amend'
 alias gr='git rebase'
 alias gri='git rebase -i'
 alias grh='git reset --hard'
+alias gff='git flow feature'
 
 alias st='open -a "Sublime Text"'
 alias typo='open -a Typora'
 alias md='open -a MacDown'
+alias ahd='sudo ahd'
+
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
 alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
