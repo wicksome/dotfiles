@@ -24,7 +24,9 @@
 
 **BetterTouchTool**(유료): 입력기능 확장 프로그램, [정식-사이트](http://www.boastr.net/)
 
-**Itsycal**: 메뉴바 캘린더 아이콘 앱, [정식-사이트](https://www.mowglii.com/itsycal/), [소개-링크](http://macnews.tistory.com/3023)
+~~**Itsycal**: 메뉴바 캘린더 아이콘 앱, [정식-사이트](https://www.mowglii.com/itsycal/), [소개-링크](http://macnews.tistory.com/3023)~~ fantastical로 변경
+
+**fantastical 2**(유료): 캘린더 앱
 
 **Macs Fan Control**: Fan RPM, 온도 체크 앱, [정식-사이트](http://www.crystalidea.com/products?source=fancontrol_mac)
 
@@ -48,11 +50,9 @@
 
 **The Unarchiver**: 압축 프로그램, [다운로드-사이트](http://unarchiver.c3.cx/unarchiver)
 
+~~**Typora**: markdown 에디터, [정식-사이트](http://www.typora.io/)~~ MacDown으로 변경
+
 **MacDown**: markdown 에디터, [정식-사이트](http://macdown.uranusjr.com/)
-
-**Typora**: markdown 에디터, [정식-사이트](http://www.typora.io/)
-
-> 2017.02.07. 오류가 너무 많아서 MacDown으로 변경
 
 **Spark**: Mail Client
 

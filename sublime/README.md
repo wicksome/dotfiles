@@ -1,3 +1,7 @@
+- Package Control 설치
+
+https://packagecontrol.io/installation
+
 1. Boxy theme 설치
 2. package control 설치
 	- GitGutter
@@ -9,3 +13,9 @@
 	- gist
 	- AngularJS
 	- Sublime CodeIntel
+
+
+
+
+
+## Plugins
