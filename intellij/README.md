@@ -12,4 +12,5 @@
 - Lombok plugin
 - Power Mode II
 - Scroll From Source
-- NodeJs
+- NodeJS
+- SonarLint
