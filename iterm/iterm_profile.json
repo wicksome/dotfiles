@@ -1,4 +1,5 @@
 {
+  "Set Local Environment Vars" : true,
   "Working Directory" : "\/Users\/yeongjun",
   "Prompt Before Closing 2" : 0,
   "Selected Text Color" : {
@@ -14,9 +15,11 @@
   },
   "Use Italic Font" : true,
   "Foreground Color" : {
-    "Green Component" : 0.5096293,
-    "Red Component" : 0.4405802,
-    "Blue Component" : 0.516858
+    "Red Component" : 0.5175860524177551,
+    "Color Space" : "Calibrated",
+    "Blue Component" : 0.6083031892776489,
+    "Alpha Component" : 1,
+    "Green Component" : 0.5997028946876526
   },
   "Right Option Key Sends" : 0,
   "Character Encoding" : 4,
@@ -120,6 +123,7 @@
     "Red Component" : 0.9764706,
     "Blue Component" : 0.1019608
   },
+  "Use Non-ASCII Font" : true,
   "Shortcut" : "",
   "Bold Color" : {
     "Green Component" : 0.5648584,
@@ -371,7 +375,7 @@
     "Red Component" : 0.7417626,
     "Blue Component" : 0.07353044
   },
-  "Use Bold Font" : false,
+  "Use Bold Font" : true,
   "Silence Bell" : false,
   "Ansi 12 Color" : {
     "Green Component" : 0.5096293,
@@ -415,13 +419,13 @@
   "Automatically Log" : false,
   "Smart Cursor Color" : true,
   "Semantic History" : {
-    "text" : "",
     "action" : "best editor",
+    "text" : "",
     "editor" : "com.sublimetext.3"
   },
   "Ambiguous Double Width" : false,
   "Blur Radius" : 2.368121352562538,
-  "Cursor Type" : 2,
+  "Cursor Type" : 1,
   "Ansi 0 Color" : {
     "Green Component" : 0.189103,
     "Red Component" : 0.1886689,
@@ -429,8 +433,8 @@
   },
   "AWDS Pane Directory" : "",
   "Blur" : false,
-  "Normal Font" : "LiterationMonoPowerline 12",
-  "Vertical Spacing" : 1,
+  "Normal Font" : "InconsolataForPowerline-g 12",
+  "Vertical Spacing" : 0.9962820030120483,
   "Disable Printing" : false,
   "Ansi 7 Color" : {
     "Green Component" : 0.8900124,
@@ -458,7 +462,7 @@
     "Red Component" : 0.1254902,
     "Blue Component" : 0.7843137
   },
-  "Transparency" : 0.1160780320065261,
+  "Transparency" : 0.0529840046396622,
   "Initial Text" : "",
   "Background Color" : {
     "Green Component" : 0.06457715,
@@ -470,7 +474,7 @@
   "Bound Hosts" : [
 
   ],
-  "Non Ascii Font" : "LiterationMonoPowerline 11",
+  "Non Ascii Font" : "InconsolataForPowerline 12",
   "Ansi 13 Color" : {
     "Green Component" : 0.2753342,
     "Red Component" : 0.6913925,
@@ -484,5 +488,5 @@
     "Red Component" : 0.3490196,
     "Blue Component" : 0.4117647
   },
-  "Set Local Environment Vars" : true
+  "Thin Strokes" : 1
 }
