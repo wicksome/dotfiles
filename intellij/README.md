@@ -1,3 +1,7 @@
+# config
+
+- font: Inconsolate-g for Powerline / size: 12 / Line spacing: 0.83
+
 # plugins
 
 - .ignore
