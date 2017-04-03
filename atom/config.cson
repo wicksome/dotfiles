@@ -22,7 +22,8 @@
       "nord-atom-syntax"
     ]
   editor:
-    fontFamily: "LiterationMonoPowerline"
+    fontFamily: "InconsolataForPowerline-g"
+    fontSize: 12
     showIndentGuide: true
     tabLength: 4
   "exception-reporting":
