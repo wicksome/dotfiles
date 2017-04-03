@@ -150,11 +150,7 @@ alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9
 alias stime='last reboot | head -2'
 
 # Hello Message --------------------------------------------
-#echo -e "Kernal Information: " `uname -smr`
-#echo -e "`bash --version`"
-#echo -ne "Uptime: "; uptime
-#echo -ne "Server time is: "; date
-#source "$HOME/.bash_figlet"
+source "$HOME/.bash_figlet"
 
 # ----------------------------------------------------------
 source "$HOME/work/config/bash_work"
