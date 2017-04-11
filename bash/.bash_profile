@@ -142,7 +142,7 @@ alias gff='git flow feature'
 alias st='open -a "Sublime Text"'
 alias typo='open -a Typora'
 alias md='open -a MacDown'
-alias ahd='sudo ahd'
+alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
 
