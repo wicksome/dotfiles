@@ -74,15 +74,76 @@ function DISPLAY_GIT_REPOSITORY {
 	local brach_icon=""
 	local separator=""
 
-	local DVCS_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a "
-	local DVCS_TYPE="${b_cyan}${t_bold}${t_green}${separator}${b_cyan}${t_bold}${t_white} %s "
-	local DVCS_HASH="${b_blue}${b_bold}${t_cyan}${separator}${b_blue}${b_bold}${t_white} @%h "
-	local DVCS_SEPARATOR="${c_clean}${t_base}${b_bold}${t_blue}${separator}${c_clean}${t_base}${t_bold}${t_magenta}${c_reverse}${c_clean}"
+	local GIT_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a ${b_cyan}${t_bold}${t_green}${separator}"
+	local GIT_TYPE="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}${separator}"
+	local GIT_HASH="${b_blue}${b_bold}${t_white} @%h ${c_clean}${t_base}${b_bold}${t_blue}${separator}"
+	local GIT_SEPARATOR="${c_clean}${t_base}${t_bold}${t_magenta}${c_reverse}${separator}${c_clean}"
 
-	echo -e "$(VCPROMPT_FORMAT=${DVCS_BRANCH}${DVCS_TYPE}${DVCS_HASH}${DVCS_SEPARATOR} vcprompt)"
+	echo -e "$(VCPROMPT_FORMAT=${GIT_BRANCH}${GIT_TYPE}${GIT_HASH}${GIT_SEPARATOR} vcprompt)"
 }
 
-export PS1='\n$(DISPLAY_GIT_REPOSITORY)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+function ptompt_user {
+	local separator=""
+
+	local user="\033[45;1;37m $USER \033[41;1;35m${separator}" # \u
+	local host="\033[41;1;37m $(hostname|awk -v FS='.' '{print $1}') \033[43;1;31m${separator}" # \h
+
+	# customizing...
+	# local user="\033[48;5;098;37m $USER \033[41;38;5;098m${separator}" # \u
+	# local host="\033[48;5;105;37m $(hostname|awk -v FS='.' '{print $1}') \033[41;38;5;105m${separator}" # \h
+
+	echo -e "${user}${host}"
+}
+
+export PS1='\n$(DISPLAY_GIT_REPOSITORY)$(ptompt_user) \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+# export PS1='\n$(DISPLAY_GIT_REPOSITORY)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+
+# custom prompt example
+function DISPLAY_PROMPT {
+	local p="\033[01;38;5;52m"
+    local l="\033[01;38;5;124m"
+    local a="\033[01;38;5;196m"
+    local s="\033[01;38;5;202m"
+    local m="\033[01;38;5;208m"
+    local a2="\033[01;38;5;214m"
+    local r="\033[01;38;5;220m"
+    local o="\033[01;38;5;226m"
+    local b="\033[01;38;5;228m"
+
+	echo -e "${p} \u ${l}l${a}a${s}s${m}m${a2}a${r}r${o}o${b}b"
+}
+
+function colorgrid( ) {
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;$(echo $iter)m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;$(echo $second)m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;$(echo $third)m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;$(echo $four)m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;$(echo $five)m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;$(echo $six)m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;$(echo $seven)m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
+}
 
 # -----------------------------------------------------------------------------
 # ALIASES
