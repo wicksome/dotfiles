@@ -1,4 +1,4 @@
-curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-성남시}"?0
+#curl -H "Accept-Language: ${LANG%_*}" wttr.in/"${1:-성남시}"?0
 
 BOLD="\033[1m"
 DEFAULT="\033[0m"
