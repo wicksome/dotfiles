@@ -31,6 +31,7 @@
 '.platform-darwin atom-workspace':
     # General
     'cmd-shift-a': 'command-palette:toggle' # Find action
+    'alt-f12': 'platformio-ide-terminal:toggle'
 
     # Search / Replace
     'cmd-shift-f': 'project-find:show' # Find in path
