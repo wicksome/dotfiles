@@ -54,6 +54,8 @@
   "nord-atom-ui":
     darkerFormFocusEffect: true
     tabSizing: false
+  "platformio-ide-terminal":
+    core: {}
   runner:
     extensions:
       "spec.js": "mocha"
@@ -65,6 +67,10 @@
   "seti-ui":
     compactView: true
     themeColor: "Steel"
+  "terminal-plus":
+    core:
+      autoRunCommand: "alt-f12"
+    toggles: {}
   "tree-view": {}
   "tree-view-git-status": {}
   welcome:

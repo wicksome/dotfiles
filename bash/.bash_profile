@@ -192,6 +192,7 @@ alias gd='git diff'
 alias st='open -a "Sublime Text"'
 alias typo='open -a Typora'
 alias md='open -a MacDown'
+alias hosts='grep '^[0-9]' /etc/hosts'
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 
 alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'

@@ -42,5 +42,7 @@
 - source-preview
 - source-preview-pug
 - tree-view-git-status
+- go-plus
+- platformio-ide-terminal
 
 ## change key map
