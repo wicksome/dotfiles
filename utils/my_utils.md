@@ -74,7 +74,9 @@
 
 **Fluid**: 웹사이트를 앱으로 변환하는 앱, [정식-사이트](http://fluidapp.com/)
 
+**fliqlo**: 화면보호기, [정식-사이트](http://fliqlo.com)
 
+**PopClip**: 맥 확장기
 
 ## Dev App
 
@@ -96,6 +98,7 @@
 
 **Charles**(유료): HTTP proxy
 
+**Dash**: documentation app for developer
 
 
 ## Terminal utils

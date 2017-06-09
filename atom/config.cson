@@ -1,4 +1,6 @@
 "*":
+  "asciidoc-preview":
+    scrollMode: false
   "atom-beautify":
     general:
       _analyticsUserId: "73ed68d3-49a8-4f68-b0d7-8949b8ff482e"
@@ -15,6 +17,7 @@
       "terminal-plus"
       "atom-terminal"
       "bookmarks"
+      "asciidoc-preview"
     ]
     telemetryConsent: "no"
     themes: [
@@ -49,7 +52,7 @@
     plugins:
       cursorline: true
       cursorlineDecorationsZIndex: 0
-      "highlight-selected": false
+      "highlight-selected": true
       "highlight-selectedDecorationsZIndex": 0
   "nord-atom-ui":
     darkerFormFocusEffect: true

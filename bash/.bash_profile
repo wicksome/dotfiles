@@ -52,6 +52,7 @@ function DISPLAY_GIT_REPOSITORY {
 	## color setting
 	local c_clean="\033[0m"
 	local c_reverse="\033[07m"
+
 	local b_block="\033[40"
 	local b_red="\033[41"
 	local b_green="\033[42"
@@ -60,6 +61,7 @@ function DISPLAY_GIT_REPOSITORY {
 	local b_magenta="\033[45"
 	local b_cyan="\033[46"
 	local b_white="\033[47"
+
 	local t_base="\033["
 	local t_block=";30m"
 	local t_red=";31m"
@@ -69,10 +71,16 @@ function DISPLAY_GIT_REPOSITORY {
 	local t_magenta=";35m"
 	local t_cyan=";36m"
 	local t_white=";37m"
+	
 	local t_bold=";1"
 
 	local brach_icon=""
 	local separator=""
+
+	# local GIT_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a ${b_cyan}${t_bold}${t_green}${separator}"
+	# local GIT_TYPE="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}${separator}"
+	# local GIT_HASH="${b_blue}${b_bold}${t_white} @%h ${c_clean}${t_base}${b_bold}${t_blue}${separator}"
+	# local GIT_SEPARATOR="${c_clean}${t_base}${t_bold}${t_magenta}${c_reverse}${separator}${c_clean}"
 
 	local GIT_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a ${b_cyan}${t_bold}${t_green}${separator}"
 	local GIT_TYPE="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}${separator}"
@@ -95,11 +103,13 @@ function ptompt_user {
 	echo -e "${user}${host}"
 }
 
-export PS1='\n$(DISPLAY_GIT_REPOSITORY)$(ptompt_user) \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+export PS1='\n$(DISPLAY_GIT_REPOSITORY)$(ptompt_user)\033[43;1;37m \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
 # export PS1='\n$(DISPLAY_GIT_REPOSITORY)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
 
 # custom prompt example
 function DISPLAY_PROMPT {
+	#local p="\033[배경;38;5;글자색m"
+
 	local p="\033[01;38;5;52m"
     local l="\033[01;38;5;124m"
     local a="\033[01;38;5;196m"
@@ -110,39 +120,7 @@ function DISPLAY_PROMPT {
     local o="\033[01;38;5;226m"
     local b="\033[01;38;5;228m"
 
-	echo -e "${p} \u ${l}l${a}a${s}s${m}m${a2}a${r}r${o}o${b}b"
-}
-
-function colorgrid( ) {
-    iter=16
-    while [ $iter -lt 52 ]
-    do
-        second=$[$iter+36]
-        third=$[$second+36]
-        four=$[$third+36]
-        five=$[$four+36]
-        six=$[$five+36]
-        seven=$[$six+36]
-        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
-
-        echo -en "\033[38;5;$(echo $iter)m█ "
-        printf "%03d" $iter
-        echo -en "   \033[38;5;$(echo $second)m█ "
-        printf "%03d" $second
-        echo -en "   \033[38;5;$(echo $third)m█ "
-        printf "%03d" $third
-        echo -en "   \033[38;5;$(echo $four)m█ "
-        printf "%03d" $four
-        echo -en "   \033[38;5;$(echo $five)m█ "
-        printf "%03d" $five
-        echo -en "   \033[38;5;$(echo $six)m█ "
-        printf "%03d" $six
-        echo -en "   \033[38;5;$(echo $seven)m█ "
-        printf "%03d" $seven
-
-        iter=$[$iter+1]
-        printf '\r\n'
-    done
+	echo -e "${p}p${l}l${a}a${s}s${m}m${a2}a${r}r${o}o${b}b"
 }
 
 # -----------------------------------------------------------------------------
@@ -190,6 +168,7 @@ alias gd='git diff'
 # alias gff='git flow feature'
 
 alias st='open -a "Sublime Text"'
+alias atom='open -a Atom'
 alias typo='open -a Typora'
 alias md='open -a MacDown'
 alias hosts='grep '^[0-9]' /etc/hosts'

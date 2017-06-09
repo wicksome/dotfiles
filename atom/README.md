@@ -44,5 +44,11 @@
 - tree-view-git-status
 - go-plus
 - platformio-ide-terminal
+- editorconfig
+- asciidoc-preview
+- language-asciidoc
+- autocomplete-asciidoc
 
 ## change key map
+
+

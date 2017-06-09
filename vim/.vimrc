@@ -1,128 +1,200 @@
-" .vimrc config
-" by yeongjun.kim
+" .vimrc Config - yeongjun.kim
 
-""""""""""""""""BASE CONFIG""""""""""""""""
-set t_Co=256
+:let s:darwin = has('mac')
 
-" 백업파일 정지
-set nobackup
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Plugins!
+"                            Managed with vim-plug
+"                     https://github.com/junegunn/vim-plug
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 한글 인코딩
-set encoding=utf-8
-set fileencodings=utf-8
+call plug#begin('~/.vim/plugged')
 
-" 들여쓰기
-set autoindent	" 자동 들여쓰기
-set cindent	" C 자동 들여쓰기
-set smartindent	" 스마트 들여쓰기
-set shiftwidth=4 " 들여쓰기 여백
-" set expandtab " 탭 대신 스페이스 사용
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree',          { 'on':  'NERDTreeToggle' }
+Plug 'junegunn/fzf',                 { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
-" tab setting
-set tabstop=4
+" Colors
+Plug 'noahfrederick/vim-hemisu'
 
-" 줄 번호 설정
-set number
+" Edit
+Plug 'terryma/vim-multiple-cursors'
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !./install.py --clang-completer --gocode-completer
+  endif
+endfunction
+Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
+
+" Browsing
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+autocmd! User indentLine doautocmd indentLine Syntax
+
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+augroup nerd_loader
+  autocmd!
+  autocmd VimEnter * silent! autocmd! FileExplorer
+  autocmd BufEnter,BufNew *
+        \  if isdirectory(expand('<amatch>'))
+        \|   call plug#load('nerdtree')
+        \|   execute 'autocmd! nerd_loader'
+        \| endif
+augroup END
+
+if v:version >= 703
+  "Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle'      }
+endif
+
+" Git
+"Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+if v:version >= 703
+  Plug 'mhinz/vim-signify'
+endif
+
+" Lang
+Plug 'nsf/gocode',                   { 'tag': 'v.20150303', 'rtp': 'vim' }
+Plug 'fatih/vim-go',                 { 'tag': '*' }
+Plug 'plasticboy/vim-markdown'
+Plug 'rizzatti/dash.vim'
+
+" Lint
+Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
+"Plug 'scrooloose/syntastic'
+
+call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              BASIC SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set number                                                " show absolute line number of the current line
+set autoindent smartindent
+set shiftwidth=4 tabstop=4 softtabstop=4 
+set expandtab smarttab
+set laststatus=2                                          " always show status bar
+set showcmd
+set visualbell
+set backspace=indent,eol,start
+set encoding=utf-8 fileencodings=utf-8                    " encoding
+set nobackup nowritebackup noswapfile                     " no backup or swap
+set hlsearch incsearch ignorecase smartcase               " search
+set ruler                                                 " show cursor position in status bar
+set history=500                                           " history size
+set showmatch                                             " 자동 괄호맞쳐주기
+set title
+set showmode	                                          " show current mode
+set ai
+set nocursorline
+
 highlight LineNr ctermfg=white ctermbg=234
 
-" 한줄 최대 길이
-"set textwidth=120
-
-" 커서 라인 설정
-hi CursorLine cterm=bold term=bold ctermfg=NONE guibg=NONE guifg=NONE
-set cursorline
-
-" 구문강조, 테마 사용
 syntax on
-set background=dark	" 하이라이팅
-"colorscheme solarized " vi 테마 설정
+set background=dark
+set t_Co=256
 
-" 검색 설정
-set hlsearch
-let g:MultipleSearchMaxColors=8 
-hi Search0 ctermbg=blue guibg=blue ctermfg=white guifg=white 
-hi Search1 ctermbg=green guibg=green ctermfg=black guifg=black 
-hi Search2 ctermbg=magenta guibg=magenta ctermfg=white guifg=white 
-hi Search3 ctermbg=cyan guibg=cyan ctermfg=black guifg=black 
-hi Search4 ctermbg=brown guibg=brown ctermfg=white guifg=white 
-hi Search5 ctermbg=gray guibg=gray ctermfg=black guifg=black 
+" search options
+let g:MultipleSearchMaxColors=8
+hi Search0 ctermbg=blue guibg=blue ctermfg=white guifg=white
+hi Search1 ctermbg=green guibg=green ctermfg=black guifg=black
+hi Search2 ctermbg=magenta guibg=magenta ctermfg=white guifg=white
+hi Search3 ctermbg=cyan guibg=cyan ctermfg=black guifg=black
+hi Search4 ctermbg=brown guibg=brown ctermfg=white guifg=white
+hi Search5 ctermbg=gray guibg=gray ctermfg=black guifg=black
 hi Search6 ctermbg=red guibg=red ctermfg=white guifg=white
 
-" 화면 표시
-set title
-set showmode	" 현재 모드 표시
-set ruler	" 커서 줄, 칸 위치 표시
+" Setting cursor, cursor line
+"set cursorline
+if $TERM_PROGRAM =~ "iTerm"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+    "let &t_ti.="\<Esc>]1337;HighlightCursorLine=true\x7"
+    "let &t_te.="\<Esc>]1337;HighlightCursorLine=false\x7"
+endif
 
-" 편집기록 갯수 설정
-set history=500
+" For MacVim
+set noimd
+set imi=1
+set ims=-1
 
-" 잘못 눌렀을 때 화면 깜박이기
-set visualbell
+" ctags
+set tags=./tags;/
 
-"백스페이스 사용
-set bs=indent,eol,start 
+" mouse
+silent! set ttymouse=xterm2
+set mouse=a
+set nomousehide                                           " don't hide the mouse cursor while typing
+set mousemodel=popup                                      " right-click pops up context menu
 
-" 자동 괄호맞쳐주기
-set showmatch  " (set sm) 
-
-" 마우스 스크롤 활성
-set mouse=nicr
-
-" 80 라인 표시하기
-"set colorcolumn=80
-":match ErrorMsg '\%>80v.\+'
-
-" 기타
-set ai
-set showmatch   " 자동 괄호맞춰주기  (set sm) 
-set showcmd		" display incomplete commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Formatting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " 파일 타입 관련 설정
 "filetype plugin on
-"filetype indent on " 파일 종류에 따른 구문강조  
+"filetype indent on " 파일 종류에 따른 구문강조
 
-" -----------------------------------------------------------------------------
-" 단축키
-map <F9> <ESC>:set paste<CR>
-map <F10> <ESC>:set nopaste<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" -----------------------------------------------------------------------------
-" Vundle config
-set nocompatible
-filetype off " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-"Plugin 'git://git.wincent.com/command-t.git'
-"Plugin 'file:///home/gmarik/path/to/plugin'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'ascenator/L9', {'name': 'newL9'}
+" Save
+inoremap <C-s>     <C-O>:update<cr>
+nnoremap <C-s>     :update<cr>
+nnoremap <leader>s :update<cr>
+nnoremap <leader>w :update<cr>
 
-" My Bundles here:
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
+" <F10> | NERD Tree
+nnoremap <F10> :NERDTreeToggle<cr>
 
-call vundle#end()
-filetype plugin indent on 
+" <F11> | Tagbar
+if v:version >= 703
+  inoremap <F11> <esc>:TagbarToggle<cr>
+  nnoremap <F11> :TagbarToggle<cr>
+  let g:tagbar_sort = 0
+endif
 
-" airline config
-set laststatus=2
-let g:airline_powerline_fonts = 1
-"g:airline_symbols
-let g:airline_theme='simple'
-"let g:airline_theme='solarized dark'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                             Plugin Configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme hemisu
+hi Normal ctermbg=none
+
+let g:vim_markdown_folding_disabled = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline_section_y = '%{strftime("%H:%M")}'
 
-" gitgutter
-let g:gitgutter_enabled = 1
-let g:gitgutter_highlight_lines = 1
-let g:gitgutter_sign_modified = '*'
-let g:gitgutter_sign_removed = '-'
-highlight clear SignColumn
-let g:gitgutter_avoid_cmd_prompt_on_windows = 0
-set updatetime=250
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" ----------------------------------------------------------------------------
+" vim-fugitive
+" ----------------------------------------------------------------------------
+nmap     <Leader>g :Gstatus<CR>gg<c-n>
+nnoremap <Leader>d :Gdiff<CR>
+
+" NERDTree
+let NERDTreeWinPos='left'
+noremap <c-\> :NERDTreeToggle<cr>
+noremap \nf :NERDTreeFind<cr>
+
+" FZF
+nmap <c-p> :FZF<cr>
+
+" vim-test
+nmap <silent> <leader>tt :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>ts :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
+let g:test#strategy = 'tslime'
+let g:test#preserve_screen = 1
+
+" Don't prompt to load ycm_extra_conf.py for YouCompleteMe; just load it.
+let g:ycm_confirm_extra_conf = 0
