@@ -173,9 +173,7 @@ let g:airline_theme='bubblegum'
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 
-" ----------------------------------------------------------------------------
 " vim-fugitive
-" ----------------------------------------------------------------------------
 nmap     <Leader>g :Gstatus<CR>gg<c-n>
 nnoremap <Leader>d :Gdiff<CR>
 
