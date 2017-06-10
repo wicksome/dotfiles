@@ -44,84 +44,79 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 source "$HOME/.bash_figlet"
 source "$HOME/work/config/bash_work"
 
-# -----------------------------------------------------------------------------
-# PROMPT
-# -----------------------------------------------------------------------------
+################################################################################
+# PROMPT SETTING
+# color reference:
+#   http://misc.flogisoft.com/bash/tip_colors_and_formatting
+# see:
+#   http://linux.101hacks.com/ps1-examples/prompt-color-using-tput/
+################################################################################
 
-function DISPLAY_GIT_REPOSITORY {
-	## color setting
-	local c_clean="\033[0m"
-	local c_reverse="\033[07m"
+function prompt_custom_git {
+    local c0=15      # font
+    local c1=25      # branch
+    local c2=236     # hash
+    local c3=55      # gap
+    local c4=5       # user
+    local red=1      # git status
 
-	local b_block="\033[40"
-	local b_red="\033[41"
-	local b_green="\033[42"
-	local b_yello="\033[43"
-	local b_blue="\033[44"
-	local b_magenta="\033[45"
-	local b_cyan="\033[46"
-	local b_white="\033[47"
+    local branch="$(tput setab $c1)$(tput setaf $c0)$(tput bold)  %b $(tput setaf $red)%m%u%a $(tput setab $c2)$(tput setaf $c1)$(tput sgr0)"
+    # I unuse anything other than GIT.
+	# local type="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}"
+    local hash="$(tput setab $c2)$(tput setaf $c0) @%h $(tput sgr0)$(tput setab $c3)$(tput setaf $c2)$(tput sgr0)"
+    local separator="$(tput setab $c4)$(tput setaf $c3)$(tput sgr0)"
 
-	local t_base="\033["
-	local t_block=";30m"
-	local t_red=";31m"
-	local t_green=";32m"
-	local t_yello=";33m"
-	local t_blue=";34m"
-	local t_magenta=";35m"
-	local t_cyan=";36m"
-	local t_white=";37m"
-	
-	local t_bold=";1"
-
-	local brach_icon=""
-	local separator=""
-
-	# local GIT_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a ${b_cyan}${t_bold}${t_green}${separator}"
-	# local GIT_TYPE="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}${separator}"
-	# local GIT_HASH="${b_blue}${b_bold}${t_white} @%h ${c_clean}${t_base}${b_bold}${t_blue}${separator}"
-	# local GIT_SEPARATOR="${c_clean}${t_base}${t_bold}${t_magenta}${c_reverse}${separator}${c_clean}"
-
-	local GIT_BRANCH="${b_green}${b_bold}${t_block} ${brach_icon} %b ${b_green}${b_bold}${t_red}%m%u%a ${b_cyan}${t_bold}${t_green}${separator}"
-	local GIT_TYPE="${b_cyan}${t_bold}${t_white} %s ${b_blue}${b_bold}${t_cyan}${separator}"
-	local GIT_HASH="${b_blue}${b_bold}${t_white} @%h ${c_clean}${t_base}${b_bold}${t_blue}${separator}"
-	local GIT_SEPARATOR="${c_clean}${t_base}${t_bold}${t_magenta}${c_reverse}${separator}${c_clean}"
-
-	echo -e "$(VCPROMPT_FORMAT=${GIT_BRANCH}${GIT_TYPE}${GIT_HASH}${GIT_SEPARATOR} vcprompt)"
+	echo -e "$(VCPROMPT_FORMAT=${branch}${type}${hash}${separator} vcprompt)"
 }
 
-function ptompt_user {
-	local separator=""
+# show current status(user, dir path)
+function prompt_custom_status {
+    # style common
+    local reset=$(tput sgr0) # same "${s}0${e}"
+    local bold=$(tput bold)  # same "${s}1${e}"
 
-	local user="\033[45;1;37m $USER \033[41;1;35m${separator}" # \u
-	local host="\033[41;1;37m $(hostname|awk -v FS='.' '{print $1}') \033[43;1;31m${separator}" # \h
+    local s="\033["          # start
+    local e="m"              # end
 
-	# customizing...
-	# local user="\033[48;5;098;37m $USER \033[41;38;5;098m${separator}" # \u
-	# local host="\033[48;5;105;37m $(hostname|awk -v FS='.' '{print $1}') \033[41;38;5;105m${separator}" # \h
+    local bg="48;5;"         # background
+    local fg="38;5;"         # foreground
 
-	echo -e "${user}${host}"
+    # color code
+    local white=15
+    local purple=5
+    local gray=238
+
+    # background color
+    local bg_purple="${s}${bg}${purple}${e}"
+    local bg_gray="${s}${bg}${gray}${e}"
+
+    # text color
+    local fg_purple="${s}${fg}${purple}${e}"
+    local fg_white="${s}${fg}${white}${e}"
+    local fg_gray="${s}${fg}${gray}${e}"
+
+    # customizing
+    local user="${bg_purple}${fg_white}${bold} $USER 🌺  ${reset}$(tput setab 55)$(tput setaf $purple)$(tput setab $gray)$(tput setaf 55)"
+    local path="${bg_gray}${fg_white} $(dirs -0) ${reset}${fg_gray}${reset}"
+
+	echo -e "${user}${path}"
 }
 
-export PS1='\n$(DISPLAY_GIT_REPOSITORY)$(ptompt_user)\033[43;1;37m \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
-# export PS1='\n$(DISPLAY_GIT_REPOSITORY)\[\033[45;1;37m\] \u \[\033[41;1;35m\]\[\033[41;1;37m\] \h \[\033[43;1;31m\]\[\033[43;1;30m\] \w \[\033[0m\[\033[1;33m\]\033[0m \n\[\033[40;1;33m\] ⚡ \[\033[0m\]\[\033[1;30m\]\[\033[0m\] '
+# 사용자 입력 받는 부분.
+# color 설정하는 부분의 brackets을 prompt 길이 계산하는데 제외하기 위해서 분리.
+# see:
+#   https://askubuntu.com/a/24422/444925
+#   http://mywiki.wooledge.org/BashFAQ/053
+#   https://unix.stackexchange.com/questions/306773/prompt-line-is-deleted-by-switching-through-commands
+function prompt_custom_command {
+    local bg_gray=$(tput setab 238)
+    local fg_gray=$(tput setaf 238)
+    local reset=$(tput sgr0)
 
-# custom prompt example
-function DISPLAY_PROMPT {
-	#local p="\033[배경;38;5;글자색m"
-
-	local p="\033[01;38;5;52m"
-    local l="\033[01;38;5;124m"
-    local a="\033[01;38;5;196m"
-    local s="\033[01;38;5;202m"
-    local m="\033[01;38;5;208m"
-    local a2="\033[01;38;5;214m"
-    local r="\033[01;38;5;220m"
-    local o="\033[01;38;5;226m"
-    local b="\033[01;38;5;228m"
-
-	echo -e "${p}p${l}l${a}a${s}s${m}m${a2}a${r}r${o}o${b}b"
+    printf '\001%s\002%s\001%s\002%s\001%s\002' "$bg_gray" " ⚡  " "$reset$fg_gray" " " "$reset"
 }
+
+export PS1='\n$(prompt_custom_git)$(prompt_custom_status)\n$(prompt_custom_command)'
 
 # -----------------------------------------------------------------------------
 # ALIASES
@@ -167,6 +162,7 @@ alias gd='git diff'
 # alias grh='git reset --hard'
 # alias gff='git flow feature'
 
+# Open Application
 alias st='open -a "Sublime Text"'
 alias atom='open -a Atom'
 alias typo='open -a Typora'
@@ -184,5 +180,6 @@ alias stime='last reboot | head -2'
 # ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# autojump
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
  [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
