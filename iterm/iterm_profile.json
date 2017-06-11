@@ -1,13 +1,22 @@
 {
 "Profiles": [
 {
+  "Ansi 5 Color" : {
+    "Red Component" : 0.5632004141807556,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.8546246886253357,
+    "Alpha Component" : 1,
+    "Green Component" : 0.435739278793335
+  },
   "Thin Strokes" : 1,
   "Working Directory" : "\/Users\/yeongjun",
   "Prompt Before Closing 2" : 0,
   "Selected Text Color" : {
-    "Green Component" : 0.8078431487083435,
-    "Red Component" : 0.7921568751335144,
-    "Blue Component" : 0.8039215803146362
+    "Red Component" : 1,
+    "Color Space" : "sRGB",
+    "Blue Component" : 1,
+    "Alpha Component" : 1,
+    "Green Component" : 1
   },
   "Rows" : 25,
   "Ansi 11 Color" : {
@@ -17,16 +26,20 @@
   },
   "Use Italic Font" : true,
   "Foreground Color" : {
-    "Green Component" : 0.8078431487083435,
-    "Red Component" : 0.7921568751335144,
-    "Blue Component" : 0.8039215803146362
+    "Red Component" : 0.6832950222862816,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.697239818659471,
+    "Alpha Component" : 1,
+    "Green Component" : 0.697239818659471
   },
   "Right Option Key Sends" : 0,
   "Character Encoding" : 4,
   "Selection Color" : {
-    "Green Component" : 0.196078434586525,
-    "Red Component" : 0.1882352977991104,
-    "Blue Component" : 0.2000000029802322
+    "Red Component" : 0.3049441301324843,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.5791223534030618,
+    "Alpha Component" : 1,
+    "Green Component" : 0.1082848391377493
   },
   "Triggers" : [
     {
@@ -139,17 +152,19 @@
   "BM Growl" : true,
   "AWDS Window Directory" : "",
   "Ansi 3 Color" : {
-    "Green Component" : 0.7764706015586853,
-    "Red Component" : 0.8784313797950745,
-    "Blue Component" : 0.3098039329051971
-  },
-  "Use Non-ASCII Font" : true,
-  "Link Color" : {
-    "Red Component" : 0,
+    "Red Component" : 0.8883884703557108,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.734233021736145,
+    "Blue Component" : 0.3844286256287953,
     "Alpha Component" : 1,
-    "Green Component" : 0.3591606020927429
+    "Green Component" : 0.7984245266006746
+  },
+  "Use Non-ASCII Font" : false,
+  "Link Color" : {
+    "Red Component" : 0.9527130126953125,
+    "Color Space" : "sRGB",
+    "Blue Component" : 1,
+    "Alpha Component" : 1,
+    "Green Component" : 0.6402130126953125
   },
   "Shortcut" : "",
   "Bold Color" : {
@@ -420,9 +435,11 @@
   },
   "Default Bookmark" : "No",
   "Cursor Color" : {
-    "Green Component" : 0.7471747398376465,
-    "Red Component" : 0.8895719051361084,
-    "Blue Component" : 0.1298138946294785
+    "Red Component" : 0.5684158225799795,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.9624757124352331,
+    "Alpha Component" : 1,
+    "Green Component" : 0.2158647509149513
   },
   "Disable Smcup Rmcup" : false,
   "Name" : "yeongjun",
@@ -452,14 +469,14 @@
     "Green Component" : 0.1491314172744751
   },
   "Automatically Log" : false,
-  "Smart Cursor Color" : true,
+  "Smart Cursor Color" : false,
   "Semantic History" : {
     "editor" : "com.sublimetext.3",
     "action" : "best editor",
     "text" : ""
   },
   "Ambiguous Double Width" : false,
-  "Blur Radius" : 2.4,
+  "Blur Radius" : 4.069543147208122,
   "Ansi 0 Color" : {
     "Green Component" : 0.196078431372549,
     "Red Component" : 0.196078431372549,
@@ -467,7 +484,7 @@
   },
   "Cursor Type" : 1,
   "AWDS Pane Directory" : "",
-  "Blur" : false,
+  "Blur" : true,
   "Normal Font" : "InconsolataForPowerline-g 12",
   "Vertical Spacing" : 0.9962820030120483,
   "Disable Printing" : false,
@@ -492,19 +509,20 @@
     "Red Component" : 1,
     "Blue Component" : 1
   },
+  "Unicode Version" : 8,
   "Ansi 6 Color" : {
     "Green Component" : 0.7686274647712708,
     "Red Component" : 0.5568627715110779,
     "Blue Component" : 0.239215686917305
   },
-  "Transparency" : 0.06625083484796421,
+  "Transparency" : 0.02513408357892866,
   "Initial Text" : "",
   "Background Color" : {
-    "Red Component" : 0.1,
+    "Red Component" : 0.1001050034970683,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.1,
+    "Blue Component" : 0.1146258275589177,
     "Alpha Component" : 1,
-    "Green Component" : 0.1
+    "Green Component" : 0.05006797532559619
   },
   "Screen" : -1,
   "AWDS Window Option" : "No",
@@ -520,15 +538,10 @@
     "Green Component" : 0.3333333333333333
   },
   "Columns" : 80,
+  "Unicode Normalization" : 0,
   "Visual Bell" : true,
+  "ASCII Ligatures" : true,
   "Custom Directory" : "No",
-  "Ansi 5 Color" : {
-    "Red Component" : 0.5632004141807556,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.8546246886253357,
-    "Alpha Component" : 1,
-    "Green Component" : 0.435739278793335
-  },
   "Set Local Environment Vars" : true
 },
 {
