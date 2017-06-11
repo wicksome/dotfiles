@@ -10,13 +10,15 @@
 
 call plug#begin('~/.vim/plugged')
 
+" Interface
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree',          { 'on':  'NERDTreeToggle' }
 Plug 'junegunn/fzf',                 { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
 " Colors
 Plug 'noahfrederick/vim-hemisu'
+Plug 'atelierbram/Base2Tone-vim'
+Plug 'owickstrom/vim-colors-paramount'
 
 " Edit
 Plug 'terryma/vim-multiple-cursors'
@@ -60,6 +62,7 @@ Plug 'nsf/gocode',                   { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'fatih/vim-go',                 { 'tag': '*' }
 Plug 'plasticboy/vim-markdown'
 Plug 'rizzatti/dash.vim'
+Plug 'jelera/vim-javascript-syntax'
 
 " Lint
 Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
@@ -88,13 +91,11 @@ set showmatch                                             " 자동 괄호맞쳐�
 set title
 set showmode	                                          " show current mode
 set ai
-set nocursorline
-
-highlight LineNr ctermfg=white ctermbg=234
-
-syntax on
-set background=dark
+"set nocursorline
+set cursorline
 set t_Co=256
+
+"highlight LineNr ctermfg=white ctermbg=234
 
 " search options
 let g:MultipleSearchMaxColors=8
@@ -107,7 +108,6 @@ hi Search5 ctermbg=gray guibg=gray ctermfg=black guifg=black
 hi Search6 ctermbg=red guibg=red ctermfg=white guifg=white
 
 " Setting cursor, cursor line
-"set cursorline
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
@@ -128,14 +128,6 @@ silent! set ttymouse=xterm2
 set mouse=a
 set nomousehide                                           " don't hide the mouse cursor while typing
 set mousemodel=popup                                      " right-click pops up context menu
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                  Formatting
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 파일 타입 관련 설정
-"filetype plugin on
-"filetype indent on " 파일 종류에 따른 구문강조
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings
@@ -161,8 +153,12 @@ endif
 "                             Plugin Configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme hemisu
-hi Normal ctermbg=none
+syntax enable
+set background=dark
+"colorscheme hemisu
+colorscheme paramount
+"colorscheme Base2Tone_EveningDark
+hi Normal ctermbg=none " set custom background color
 
 let g:vim_markdown_folding_disabled = 1
 let g:airline#extensions#tabline#enabled = 1
