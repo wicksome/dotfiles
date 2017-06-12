@@ -126,6 +126,20 @@ export PS1='\n$(prompt_custom_git)$(prompt_custom_status)\n$(prompt_custom_comma
 # ALIASES
 # -----------------------------------------------------------------------------
 
+alias ..="cd .."
+alias ...="cd ../../"
+alias l="ls -l ${colorflag}"
+alias ll="ls -la ${colorflag}"
+alias lsd='ls -l ${colorflag} | grep "^d"'
+alias ls="command ls ${colorflag}"
+alias gs='git status'
+alias gd='git diff'
+alias gl='git lg1'
+alias gl2='git lg2'
+alias top-commands="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
+alias vi='mvim -v'
+alias vim='vi'
+
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
@@ -133,53 +147,18 @@ else # OS X `ls`
 	colorflag="-G"
 fi
 
-alias top_commands="history | awk '{print \$2}' | awk 'BEGIN{FS=\"|\"}{print \$1}' | sort | uniq -c | sort -n | tail -n 20 | sort -nr"
-
-alias l="ls -l ${colorflag}"
-alias ll="ls -la ${colorflag}"
-alias lsd='ls -l ${colorflag} | grep "^d"'
-alias ls="command ls ${colorflag}"
-
-alias ..="cd .."
-alias ...="cd ../../"
-
 alias htop="sudo htop"
 alias top='top -o cpu'
-alias update-prompt="source ~/.bashrc"
+alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
+alias stime='last reboot | head -2'
 
-alias gs='git status'
-alias gl='git lg1'
-alias gl2='git lg2'
-alias gd='git diff'
-# alias gm='git mg'
-# alias gf='git fc'
-# alias gb='git br'
-# alias gc='git co'
-# alias gcb='git co -b'
-# alias gp='git push'
-# alias gpf='git push -f'
-# alias gbd='git br -D'
-# alias gcm='git commit -m'
-# alias gca='git commit --amend'
-# alias gr='git rebase'
-# alias gri='git rebase -i'
-# alias grh='git reset --hard'
-# alias gff='git flow feature'
-
-# Open Application
+# alias apps
 alias st='open -a "Sublime Text"'
 alias atom='open -a Atom'
-alias typo='open -a Typora'
 alias md='open -a MacDown'
 alias hosts='grep '^[0-9]' /etc/hosts'
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 alias td='$HOME/go/bin/td'
-
-alias chm-ajax='open /Applications/Google\ Chrome.app/ -n --args --allow-file-access-from-files'
-
-alias ip='ifconfig en4 | awk "{ print $2}" | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}"'
-alias stime='last reboot | head -2'
-
 
 # -----------------------------------------------------------------------------
 # ruby
