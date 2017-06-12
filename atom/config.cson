@@ -11,6 +11,9 @@
   "atom-ternjs":
     excludeLowerPriorityProviders: true
   core:
+    disabledPackages: [
+      "language-gfm"
+    ]
     packagesWithKeymapsDisabled: [
       "fuzzy-finder"
       "git-plus"
@@ -41,11 +44,15 @@
     general:
       _analyticsUserId: "4048f457-88e5-4042-a10c-afc5ad3dbd89"
   "highlight-selected": {}
+  "language-markdown":
+    addListItems: false
   "linter-jshint":
     disableWhenNoJshintrcFileInPath: true
     lintInlineJavaScript: true
   "linter-pug":
     onlyRunWhenConfig: true
+  "markdown-preview":
+    useGitHubStyle: true
   minimap:
     absoluteMode: true
     displayCodeHighlights: false

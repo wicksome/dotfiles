@@ -31,7 +31,7 @@ endfunction
 Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 
 " Browsing
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+Plug 'Yggdroot/indentLine', "{ 'on': 'IndentLinesEnable' }
 autocmd! User indentLine doautocmd indentLine Syntax
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -132,6 +132,7 @@ set mousemodel=popup                                      " right-click pops up 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Mappings
+" see: http://blog.naver.com/PostView.nhn?blogId=nfwscho&logNo=220407221737
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Save
@@ -139,6 +140,8 @@ inoremap <C-s>     <C-O>:update<cr>
 nnoremap <C-s>     :update<cr>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w :update<cr>
+
+vnoremap <leader><c> "*y
 
 " <F10> | NERD Tree
 nnoremap <F10> :NERDTreeToggle<cr>
