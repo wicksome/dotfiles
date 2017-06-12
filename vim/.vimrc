@@ -86,14 +86,15 @@ set encoding=utf-8 fileencodings=utf-8                    " encoding
 set nobackup nowritebackup noswapfile                     " no backup or swap
 set hlsearch incsearch ignorecase smartcase               " search
 set ruler                                                 " show cursor position in status bar
+set cursorline
+"set nocursorline
 set history=500                                           " history size
 set showmatch                                             " 자동 괄호맞쳐주기
 set title
 set showmode	                                          " show current mode
 set ai
-"set nocursorline
-set cursorline
 set t_Co=256
+set clipboard=unnamed                                     " copy to clipboard
 
 "highlight LineNr ctermfg=white ctermbg=234
 
