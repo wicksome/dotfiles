@@ -8,6 +8,10 @@
 "                     https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" ============================================================================
+" VIM-PLUG BLOCK {{{
+" ============================================================================
+
 call plug#begin('~/.vim/plugged')
 
 " Interface
@@ -21,11 +25,19 @@ Plug 'atelierbram/Base2Tone-vim'
 Plug 'owickstrom/vim-colors-paramount'
 
 " Edit
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-commentary',        { 'on': '<Plug>Commentary' }
+Plug 'sjl/gundo.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'junegunn/vim-easy-align'
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
-    !./install.py --clang-completer --gocode-completer
+    !./install.py --tern-completer --gocode-completer
   endif
 endfunction
 Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
@@ -50,7 +62,6 @@ if v:version >= 703
 endif
 
 " Git
-"Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 if v:version >= 703
@@ -61,8 +72,10 @@ endif
 Plug 'nsf/gocode',                   { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'fatih/vim-go',                 { 'tag': '*' }
 Plug 'plasticboy/vim-markdown'
+Plug 'elzr/vim-json'
 Plug 'rizzatti/dash.vim'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
 
 " Lint
 Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
@@ -70,6 +83,7 @@ Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
 
 call plug#end()
 
+" }}}
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                              BASIC SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,7 +155,19 @@ nnoremap <C-s>     :update<cr>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w :update<cr>
 
-vnoremap <leader><c> "*y
+" Quit
+inoremap <C-Q>     <esc>:q<cr>
+nnoremap <C-Q>     :q<cr>
+vnoremap <C-Q>     <esc>
+nnoremap <Leader>q :q<cr>
+nnoremap <Leader>Q :qa!<cr>
+
+
+vnoremap <leader>c "*y
+
+" fomatting
+" :%!python -m json.tool
+
 
 " <F10> | NERD Tree
 nnoremap <F10> :NERDTreeToggle<cr>
@@ -152,6 +178,16 @@ if v:version >= 703
   nnoremap <F11> :TagbarToggle<cr>
   let g:tagbar_sort = 0
 endif
+
+" ESC키를 누르면 한글 모드가 해제 "
+" 입력모드에서 이전 언어 설정 모드 유지 "
+inoremap <ESC> <ESC>:set imdisable<CR>
+nnoremap i :set noimd<CR>i
+nnoremap I :set noimd<CR>I
+nnoremap a :set noimd<CR>a
+nnoremap A :set noimd<CR>A
+nnoremap o :set noimd<CR>o
+nnoremap O :set noimd<CR>O    
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Plugin Configuration
@@ -165,11 +201,12 @@ colorscheme paramount
 hi Normal ctermbg=none " set custom background color
 
 let g:vim_markdown_folding_disabled = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:vim_markdown_conceal = 0
+let g:vim_json_syntax_conceal = 0
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
-"let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
 

@@ -10,4 +10,12 @@ alias vi='mvim -v'
 alias vim='mvim -v'
 ```
 
+youcompleteme 설치
+
+```sh
+$ cd ~/.vim/plugged/youcompleteme
+$ ./install.py --gocode-completer
+$ ./install.py --tern-completer
+```
+
 sss
