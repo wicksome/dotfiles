@@ -2,16 +2,17 @@
 
 :let s:darwin = has('mac')
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                   Plugins!
 "                            Managed with vim-plug
 "                     https://github.com/junegunn/vim-plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" ============================================================================
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM-PLUG BLOCK {{{
-" ============================================================================
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 call plug#begin('~/.vim/plugged')
 
 " Interface
@@ -109,6 +110,11 @@ set showmode	                                          " show current mode
 set ai
 set t_Co=256
 set clipboard=unnamed                                     " copy to clipboard
+set foldmethod=marker
+
+set nocompatible
+set nocp
+
 
 "highlight LineNr ctermfg=white ctermbg=234
 
@@ -155,14 +161,6 @@ nnoremap <C-s>     :update<cr>
 nnoremap <leader>s :update<cr>
 nnoremap <leader>w :update<cr>
 
-" Quit
-inoremap <C-Q>     <esc>:q<cr>
-nnoremap <C-Q>     :q<cr>
-vnoremap <C-Q>     <esc>
-nnoremap <Leader>q :q<cr>
-nnoremap <Leader>Q :qa!<cr>
-
-
 vnoremap <leader>c "*y
 
 " fomatting
@@ -178,16 +176,6 @@ if v:version >= 703
   nnoremap <F11> :TagbarToggle<cr>
   let g:tagbar_sort = 0
 endif
-
-" ESC키를 누르면 한글 모드가 해제 "
-" 입력모드에서 이전 언어 설정 모드 유지 "
-inoremap <ESC> <ESC>:set imdisable<CR>
-nnoremap i :set noimd<CR>i
-nnoremap I :set noimd<CR>I
-nnoremap a :set noimd<CR>a
-nnoremap A :set noimd<CR>A
-nnoremap o :set noimd<CR>o
-nnoremap O :set noimd<CR>O    
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Plugin Configuration
