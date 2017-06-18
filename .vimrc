@@ -1,31 +1,27 @@
-" .vimrc Config - yeongjun.kim
+" vim: set foldmethod=marker foldlevel=0 nomodeline:   " zr(open), zm(close)
+" ============================================================================
+" .vimrc of Yeongjun Kim {{{
+" ============================================================================
 
 :let s:darwin = has('mac')
+let os=substitute(system('uname'), '\n', '', '')
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                   Plugins!
-"                            Managed with vim-plug
-"                     https://github.com/junegunn/vim-plug
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM-PLUG BLOCK {{{
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
 " =============================================================================
+" VIM-PLUG BLOCK {{{
+" =============================================================================
+"
 call plug#begin('~/.vim/plugged')
 
-" Interface
+" Colors
+Plug 'owickstrom/vim-colors-paramount'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'junegunn/fzf',                 { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-
-" Colors
-Plug 'noahfrederick/vim-hemisu'
-Plug 'atelierbram/Base2Tone-vim'
-Plug 'owickstrom/vim-colors-paramount'
 
 " Edit
+Plug 'benmills/vimux' " vim과 tmux 연동하기 위한 플러그인
+Plug 'junegunn/fzf', { 'do': './install --all' }
+Plug 'junegunn/fzf.vim' "스페이스바 2번 누르면 실행되고 아직 이해 못함
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
@@ -35,6 +31,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/vim-easy-align'
+Plug 'beloglazov/vim-online-thesaurus' " 영영 사전 ons
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -74,9 +71,12 @@ Plug 'nsf/gocode',                   { 'tag': 'v.20150303', 'rtp': 'vim' }
 Plug 'fatih/vim-go',                 { 'tag': '*' }
 Plug 'plasticboy/vim-markdown'
 Plug 'elzr/vim-json'
-Plug 'rizzatti/dash.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
+
+if os == 'Darwin'
+  Plug 'rizzatti/dash.vim',  { 'on': 'Dash' } " Dash와 연동
+endif
 
 " Lint
 Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
@@ -85,9 +85,9 @@ Plug 'w0rp/ale', { 'on': 'ALEEnable', 'for': ['ruby', 'sh'] }
 call plug#end()
 
 " }}}
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 "                              BASIC SETTINGS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 
 set number                                                " show absolute line number of the current line
 set autoindent smartindent
@@ -110,11 +110,6 @@ set showmode	                                          " show current mode
 set ai
 set t_Co=256
 set clipboard=unnamed                                     " copy to clipboard
-set foldmethod=marker
-
-set nocompatible
-set nocp
-
 
 "highlight LineNr ctermfg=white ctermbg=234
 
@@ -183,9 +178,7 @@ endif
 
 syntax enable
 set background=dark
-"colorscheme hemisu
 colorscheme paramount
-"colorscheme Base2Tone_EveningDark
 hi Normal ctermbg=none " set custom background color
 
 let g:vim_markdown_folding_disabled = 1
@@ -206,6 +199,7 @@ nnoremap <Leader>d :Gdiff<CR>
 let NERDTreeWinPos='left'
 noremap <c-\> :NERDTreeToggle<cr>
 noremap \nf :NERDTreeFind<cr>
+let NERDTreeShowHidden=1
 
 " FZF
 nmap <c-p> :FZF<cr>
