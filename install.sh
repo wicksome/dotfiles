@@ -1,63 +1,52 @@
-#!/bin/bash
-ALERT_COLOR="\033[38;5;087m"
-DEFAULT_COLOR="\033[00m"
-INFO="${ALERT_COLOR}[INFO]${DEFAULT_COLOR}"
+#!/usr/bin/env bash
 
-# variablea--------------------------------
-# bash
-bashrc=".bashrc"
-bashProfile=".bash_profile"
-bashFiglet=".bash_figlet"
-# git
-gitconfig=".gitconfig"
-gitignore=".gitignore"
-# vim
-vimrc=".vimrc"
-# atom
-atomKeymap="keymap.cson"
-atomInit="init.coffee"
-atomConfig="config.cson"
+export DOTFILES_DIR
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# backup
-backupBase="$HOME/.myenv"
-backupDir="$backupBase/$(date +'%Y%m%d-%H%M%S')"
+confirm() {
+    echo -e "$(tput bold)dotfiles root dir: $(tput setab 16)$(tput setaf 2) $DOTFILES_DIR $(tput sgr0)"
+    read -r -p "Are you sure? [y/n] " response
+    if [[ "$response" =~ ^(yes|y)$ ]]; then
+        return 0 # true
+    else
+        return 1 # false 
+    fi
+}
+confirm || exit 1
 
-# logic ----------------------------------
-# create base backup directory
-if [ ! -d "$backupBase" ]; then
-	echo -e "${INFO} create folder. ${backupBase}"
-	mkdir -v $backupBase
+# Common functions
+
+. "$DOTFILES_DIR/system/.function"
+
+# Update dotfiles itself first
+
+#if is-executable 
+
+# Brunch of symlinks
+
+alert() {
+    local LINE='================================='
+    printf "$(tput setaf 2)$(tput bold)%s %s %s$(tput sgr0)\n" "=============" $1 "${LINE:${#1}}"
+}
+
+alert "git"
+ln -sfv "$DOTFILES_DIR/.gitconfig" ~
+ln -sfv "$DOTFILES_DIR/.gitignore_global" ~
+
+# Package managers & packages
+
+
+alert "brew" && . "$DOTFILES_DIR/install/brew.sh"
+alert "bash" && . "$DOTFILES_DIR/install/bash.sh"
+alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
+
+alert "other"
+ln -sfv "$DOTFILES_DIR/.npmrc" ~
+ln -sfv "$DOTFILES_DIR/.tmux.conf" ~
+
+if [ "$(uname)" == "Darwin" ]; then
+    alert "macos"
+    . "$DOTFILES_DIR/install/brew-cask.sh"
+    ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
+    ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
-
-# backup current env file
-echo -e "${INFO} BACKUP ENV/CONF: $backupDir"
-mkdir -v $backupDir
-mkdir -v $backupDir/bash
-cp -v $HOME/$bashrc             $backupDir/bash/
-cp -v $HOME/$bashProfile        $backupDir/bash/
-cp -v $HOME/$bashFiglet         $backupDir/bash/
-mkdir -v $backupDir/git
-cp -v $HOME/$gitconfig		    $backupDir/git/
-cp -v $HOME/$gitignore		    $backupDir/git/
-mkdir -v $backupDir/vim
-cp -v $HOME/$vimrc              $backupDir/vim/
-mkdir -v $backupDir/atom
-cp -v $HOME/.atom/$atomKeymap	$backupDir/atom/
-cp -v $HOME/.atom/$atomInit     $backupDir/atom/
-cp -v $HOME/.atom/$atomConfig	$backupDir/atom/
-
-# copy to local
-echo -e "${INFO} copy to local"
-cp -v ./bash/$bashrc            $HOME/
-cp -v ./bash/$bashProfile       $HOME/
-cp -v ./bash/$bashFiglet        $HOME/
-cp -v ./git/$gitconfig          $HOME/
-cp -v ./git/$gitignore          $HOME/
-cp -v ./vim/$vimrc              $HOME/
-cp -v ./atom/$atomKeymap        $HOME/.atom/
-cp -v ./atom/$atomInit          $HOME/.atom/
-cp -v ./atom/$atomConfig        $HOME/.atom/
-
-echo -e "${INFO} apply bash"
-clear
-source ~/.bash_profile

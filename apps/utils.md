@@ -1,0 +1,57 @@
+## Mac Setting
+
+- **caps lock 키 control로 변경하기**: [링크](http://macnews.tistory.com/2240)
+- **돋보기 활성화**
+- **시간 영문 표기**: [링크](http://macnews.tistory.com/988)
+- **호스트 변경**: [링크](http://exifeedi.tistory.com/240)
+- **메뉴바에 기본 메뉴 사라졌을 경우**: [링크](http://iprize.tistory.com/574)
+
+## Essential App
+
+### Installed
+
+> brew cast install 외 새로 받아야 할 프로그램들
+
+- **BetterTouchTool**(유료): 입력기능 확장 프로그램, [정식-사이트](http://www.boastr.net/)
+- **Charles**(유료): HTTP proxy
+- **GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
+- **IntelliJ IDEA**: 필수
+- **Just Focus**: 뽀모도르 앱, [정식-사이트](http://climstudio.com/justfocus/)
+- **Macs Fan Control**: Fan RPM, 온도 체크 앱, [정식-사이트](http://www.crystalidea.com/products?source=fancontrol_mac)
+- **Magnet**(유료): 화면 분리
+- **MenuBar Stats**(유료): 시스템 모니터링 앱, [다운로드-링크](https://itunes.apple.com/kr/app/id714196447?mt=12)
+- **MindNode**(유료): 마인드맵
+- **Modern Translator**: 맥용 구글 번역기
+- **MoneyWiz**: 가계부
+- **Parallels**(유료): 가상머신
+- **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
+- **Sequel Pro**: 맥용 sql client,  [다운로드-사이트](http://www.sequelpro.com/)
+- **Serenity**: 자연 소리
+- **Spark**: Mail Client
+- **StarUML**
+- **The Unarchiver**: 압축 프로그램, [다운로드-사이트](http://unarchiver.c3.cx/unarchiver)
+- **insomniaX**: 맥북 닫아도 잠자기 상태로 들어가지 않게 해주는 앱, [소개-링트](http://macnews.tistory.com/131)
+- **iterm**: 터미널 프로그램, [정식-사이트](https://www.iterm2.com/index.html)
+- **near lock**: ios - macos 자동 잠금해제 앱
+- **벅스 플레이어**
+- *Calendar*
+    - **Plain Today Calendar**: 캘린더 위젯
+    - ~~**Agenda Widget+**~~
+    - ~~**Itsycal**: 메뉴바 캘린더 아이콘 앱, [정식-사이트](https://www.mowglii.com/itsycal/), [소개-링크](http://macnews.tistory.com/3023)~~
+
+### Not yet installed
+
+- **AirServer**(유료): 디바이스 미러링
+- **Anvil**: Pow 관리해주는 GUI 앱, [정식-사이트](http://anvilformac.com/index.html)
+- **Marp**: 마크다운으로 ppt 만드는 앱
+- **karabiner**: 키 맵핑, [특정-장치만-변경방법](http://algobomyun.tistory.com/348)
+
+### Hold
+
+- **XtreFinder**: Finder 확장, [정식-사이트](http://www.trankynam.com/xtrafinder/)
+
+## CLI(Command Line Interface) app
+
+### Installed
+
+- **tmux**: .tmux.conf [링크](https://github.com/gpakosz/.tmux), `$ brew install tmux`
