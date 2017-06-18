@@ -1,6 +1,6 @@
-# my_env
+# .files
 
-> wicked awesome
+> These are my dotfiles. Take anything you want, but at your own risk.
 
 ![local_prompt](https://user-images.githubusercontent.com/5036939/27002254-f4435aba-4e17-11e7-8237-10a7f5bdccc7.png)
 
