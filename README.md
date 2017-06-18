@@ -38,3 +38,8 @@
 - 프롬프트 색상값의 의미: https://www.lesstif.com/pages/viewpage.action?pageId=12943439
 - 더 확인해볼 구분자: https://github.com/ryanoasis/powerline-extra-symbols
 - 깃 설정: http://stackoverflow.com/questions/1057564/pretty-git-branch-graphs
+
+# 참고
+
+https://github.com/webpro/dotfiles
+
