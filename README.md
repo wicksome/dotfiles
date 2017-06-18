@@ -4,6 +4,16 @@
 
 ![local_prompt](https://user-images.githubusercontent.com/5036939/27002254-f4435aba-4e17-11e7-8237-10a7f5bdccc7.png)
 
+## Package overview
+
+- Core
+  - Bash
+  - Homebrew, homebrew-cask
+  - Node.js + npm
+- Dev
+- macOS: Hammerspoon, Mackup, Quick Look plugins
+- macOS apps
+
 ## Requirements
 
 - vcprompt 설치
