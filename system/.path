@@ -7,6 +7,9 @@
 
 # Prepend new items to path (if directory exists)
 
+
+prepend-path "/Library/Java/JavaVirtualMachines/1.8.0_73.jdk/Contents/Home/bin"
+
 #prepend-path "/bin"
 #prepend-path "/usr/bin"
 #prepend-path "/usr/local/bin"
@@ -19,18 +22,15 @@
 #prepend-path "$HOME/.rvm/bin"
 #prepend-path "/usr/local/share/git-core/contrib/diff-highlight"
 
-#prepend-path "/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home"
-
-
 
 # Remove duplicates (preserving prepended items)
 # Source: http://unix.stackexchange.com/a/40755
 
-#PATH=`echo -n $PATH | awk -v RS=: '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}'`
+PATH=`echo -n $PATH | awk -v RS=: '{ if (!arr[$0]++) {printf("%s%s",!ln++?"":":",$0)}}'`
 
 # Wrap up
 
-#export PATH
+export PATH
 
 
 echo "TODO :: setting .path"

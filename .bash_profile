@@ -44,7 +44,7 @@ CURRENT_SCRIPT=$($READLINK -f "$SOURCE")
 export DOTFILES_DIR=$(dirname "$CURRENT_SCRIPT")
 
 # Finally we can source the dotfiles (order matters)
-for DOTFILE in "$DOTFILES_DIR"/system/.{function,path,env,alias,grep,prompt}; do
+for DOTFILE in "$DOTFILES_DIR"/system/.{function,function_*,path,env,alias,completion,grep,prompt,fzf}; do
   [ -f "$DOTFILE" ] && . "$DOTFILE"
 done
 
