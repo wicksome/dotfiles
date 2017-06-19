@@ -47,6 +47,8 @@ brew install gradle
 brew install elasticsearch
 
 # Install other useful binaries.
+brew install the_silver_searcher
+brew install fzf
 brew install autojump   
 brew install git
 brew install git-flow
