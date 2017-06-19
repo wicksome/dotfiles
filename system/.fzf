@@ -32,7 +32,7 @@ fshow() {
 }
 
 _fzf_complete_ahd() {
-  _fzf_complete "--multi --reverse" "$@" < <(
+  _fzf_complete "--reverse" "$@" < <(
     ls ~/.ahd
   )
 }
