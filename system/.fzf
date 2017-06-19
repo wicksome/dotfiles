@@ -28,5 +28,12 @@ fshow() {
                 (grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {}
-FZF-EOF"
+    FZF-EOF"
 }
+
+_fzf_complete_ahd() {
+  _fzf_complete "--multi --reverse" "$@" < <(
+    ls ~/.ahd
+  )
+}
+[ -n "$BASH" ] && complete -F _fzf_complete_ahd -o default -o bashdefault ahd
