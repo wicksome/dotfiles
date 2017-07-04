@@ -1,26 +1,4 @@
 #!/bin/bash
-# -----------------------------------------------------------------------------
-# General
-# -----------------------------------------------------------------------------
-
-# path ---------------------------------------------------
-export M2_HOME=/Users/yeongjun/apps/apache-maven-3.3.9
-export M2=$M2_HOME/bin
-export PATH=$M2:$PATH
-
-export JAVA_6=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
-export JAVA_7=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-export JAVA_8=/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home
-export JAVA_HOME=$JAVA_8
-export PATH=$JAVA_HOME/bin:$PATH
-
-# homebrews should always take precedence
-export PATH=/usr/local/bin:$PATH
-
-# todo
-export TODO_DB_PATH=$HOME/Dropbox/todo.json
-
-################################################################################
 
 source "$HOME/.bash_figlet"
 . "$HOME/work/config/bash_work" # .(dot) == source
