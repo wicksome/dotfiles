@@ -59,6 +59,7 @@ brew install mas
 brew install rename
 brew install tmuxinator-completion
 brew install tree
+brew install mc
 
 # Install Mac applications.
 which cask || brew tap caskroom/cask

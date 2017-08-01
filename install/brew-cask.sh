@@ -30,6 +30,7 @@ apps=(
   slack
   sublime-text
   vlc
+  now
 )
 
 brew cask install "${apps[@]}"
