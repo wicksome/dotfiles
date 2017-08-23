@@ -64,7 +64,7 @@ calc() {
 
 # Weather
 
-meteo() {
+weather() {
   local CITY=${1:-성남시}
   curl -H "Accept-Language: ${LANG%_*}" -4 wttr.in/"$CITY"
   # show only current weather
