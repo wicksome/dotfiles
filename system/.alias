@@ -38,3 +38,13 @@ alias md='open -a MacDown'
 alias hosts='grep '^[0-9]' /etc/hosts'
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 alias td='$HOME/go/bin/td'
+
+# alias web
+function http-status() { 
+    local url="https://developer.mozilla.org/ko/docs/Web/HTTP/Status/";
+    local status_code=$1
+    if [ -n "$status_code" ]; then
+        url=$url$1
+    fi
+    open $url
+}
