@@ -4,13 +4,11 @@
 
 **UI Theme**
 
-- Nord atom
-- Seti
+- Pristine
 
 **Syntax Theme**
 
-- Nord atom
-- Seti
+- Pure
 
 ## package
 
@@ -48,6 +46,10 @@
 - asciidoc-preview
 - language-asciidoc
 - autocomplete-asciidoc
+- react
+- linter-eslint
+- plantuml-preview
+- language-plantuml
 
 ## change key map
 
