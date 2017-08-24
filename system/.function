@@ -55,18 +55,3 @@ colors() {
   echo -e ${o:${#o}-3:3} $(tput setaf $i;tput setab $i)${Y// /=}$X;
   done
 }
-
-# Calculator
-
-calc() {
-  echo "$*" | bc -l;
-}
-
-# Weather
-
-weather() {
-  local CITY=${1:-성남시}
-  curl -H "Accept-Language: ${LANG%_*}" -4 wttr.in/"$CITY"
-  # show only current weather
-  # curl -H "Accept-Language: ${LANG%_*}" -4 wttr.in/"$CITY"?0
-}
