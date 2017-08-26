@@ -4,21 +4,20 @@
 
 ***.alias***
 
-|               command               |          description           | example |
-| ----------------------------------- | ------------------------------ | ------- |
-| `..`                                | `cd ..`                        |         |
-| `...`                               | `cd ../../`                    |         |
-| `l [file ...]`                      | `ls -l`                        |         |
-| `ll [file ...]`                     | `ls -al`                       |         |
-| `lsd [file ...]`                    | show only directory list       |         |
-| `ip`                                | show current ip list           |         |
-| `stime`                             | show boot-time                 |         |
-| <code>st [file &#124; dir]</code>   | open sublime text              |         |
-| <code>atom [file &#124; dir]</code> | open atom                      |         |
-| <code>vs [file &#124; dir]</code>   | open vs code                   |         |
-| <code>md [file &#124; dir]</code>   | open macdown                   |         |
-| `hosts`                             | show enable hosts              |         |
-| `http-status [status-code]`         | open document http-status-code |         |
+|               command               |       description        | example |
+| ----------------------------------- | ------------------------ | ------- |
+| `..`                                | `cd ..`                  |         |
+| `...`                               | `cd ../../`              |         |
+| `l [file ...]`                      | `ls -l`                  |         |
+| `ll [file ...]`                     | `ls -al`                 |         |
+| `lsd [file ...]`                    | show only directory list |         |
+| `ip`                                | show current ip list     |         |
+| `stime`                             | show boot-time           |         |
+| <code>st [file &#124; dir]</code>   | open sublime text        |         |
+| <code>atom [file &#124; dir]</code> | open atom                |         |
+| <code>vs [file &#124; dir]</code>   | open vs code             |         |
+| <code>md [file &#124; dir]</code>   | open macdown             |         |
+| `hosts`                             | show enable hosts        |         |
 
 ***.function***
 
@@ -38,10 +37,12 @@
 
 ***.function_network***
 
-|      command      |               description                |
-| ----------------- | ---------------------------------------- |
-| `hostname2ip`     | get ip of hostname                       |
-| `transfer [file]` | easy file sharing - https://transfer.sh/ |
+|           command            |               description                |     |
+| ---------------------------- | ---------------------------------------- | --- |
+| `hostname2ip`                | get ip of hostname                       |     |
+| `transfer [file]`            | easy file sharing - https://transfer.sh/ |     |
+| `http-status [status-code]`  | open document http-status-code           |     |
+| `user-agent [-f] user_agent` | get user-agent                           |     |
 
 
 ## Issue
