@@ -12,13 +12,3 @@ weather() {
   # show only current weather
   # curl -H "Accept-Language: ${LANG%_*}" -4 wttr.in/"$CITY"?0
 }
-
-# Open HTTP-STATUS description
-function http-status() { 
-    local url="https://developer.mozilla.org/ko/docs/Web/HTTP/Status/";
-    local status_code=$1
-    if [ -n "$status_code" ]; then
-        url=$url$1
-    fi
-    open $url
-}
