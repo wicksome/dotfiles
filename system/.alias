@@ -37,9 +37,11 @@ alias st='open -a "Sublime Text"'
 alias atom='open -a Atom'
 alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
-alias hosts='grep '^[0-9]' /etc/hosts'
+#alias hosts='grep '^[0-9]' /etc/hosts'
+alias hosts='grep '^[0-9]' /etc/hosts | grep -v "^127\.0\.0\.1"'
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 alias td='$HOME/go/bin/td'
 alias trash='$HOME/git/trash-cli/trash'
+alias rm='trash'
 
 
