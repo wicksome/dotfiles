@@ -1,3 +1,5 @@
+#!/usr/local/bin/bash
+
 # Get IP from hostname
 
 hostname2ip() {
@@ -12,4 +14,73 @@ transfer() {
   curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) >> $tmpfile;
   cat $tmpfile;
   rm -f $tmpfile;
+}
+
+# Open HTTP-STATUS description
+
+function http-status() { 
+    local url="https://developer.mozilla.org/ko/docs/Web/HTTP/Status/";
+    local status_code=$1
+    if [ -n "$status_code" ]; then
+        url=$url$1
+    fi
+    open "$url"
+}
+# Get user agent
+# dependency: https://stedolan.github.io/jq/
+# see: https://developers.whatismybrowser.com/useragents/parse/?analyse-my-user-agent=yes
+
+user-agent() {
+    # parsing option
+    local OPTIND
+    local full_output_flag=0
+    while getopts "f" option; do
+        case $option in
+            f)
+                full_output_flag=1;;
+            \?)
+                echo "Usage: user-agent [-f] user_agent" 1>&2;
+                return;;
+        esac
+    done
+
+    # get user_agent
+    shift $(expr $OPTIND - 1)
+    local user_agent="$1"
+
+    if [ -z "$user_agent" ]; then
+        read user_agent
+        if [ -z "$user_agent" ]; then
+            echo "empty user_agent" 1>&2
+            return
+        fi
+    fi
+
+    # Requset user-agent to whatismybrowser.com
+    local API_URL="https://api.whatismybrowser.com/api/v2/user_agent_parse"
+    local response=$(curl $API_URL \
+        -XPOST \
+        -H "Accept: application/json" \
+        -H "Content-Type: application/json" \
+        -H "x-api-key:${USER_AGENT_API_KEY}" \
+        --data "{\"user_agent\":\"${user_agent}\"}" \
+        --silent
+        )
+
+    # Check success/fail
+    local result_status=$(echo $response | jq --raw-output .result.code)
+    if [ "$result_status" == "error" ] || [ "$result_status" == "null" ]; then
+        echo $response
+        return
+    fi
+
+    # Print result
+    local result
+    if [ $full_output_flag -eq 0 ]; then
+        result=$(echo $response | jq --raw-output '.parse.simple_major')
+    else
+        result=$(echo $response | python -m json.tool)
+    fi
+
+    echo -e "$(tput setaf 2)$result$(tput sgr0)"
 }
