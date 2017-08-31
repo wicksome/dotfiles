@@ -41,6 +41,7 @@ alias md='open -a MacDown'
 alias hosts='grep '^[0-9]' /etc/hosts | grep -v "^127\.0\.0\.1"'
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
 alias td='$HOME/go/bin/td'
+alias vpn='$HOME/git/vpn/vpn.sh'
 alias trash='$HOME/git/trash-cli/trash'
 alias rm='trash'
 
