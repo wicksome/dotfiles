@@ -53,6 +53,7 @@ brew install autojump
 brew install git
 brew install git-flow
 brew install git-lfs
+brew install gist
 brew install htop
 brew install httpie
 brew install mas
