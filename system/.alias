@@ -43,4 +43,6 @@ alias vpn='$HOME/git/vpn/vpn'
 alias trash='$HOME/git/trash-cli/trash'
 alias rm='trash'
 
+# https://apple.stackexchange.com/a/103633
 alias byebye="osascript -e 'tell app \"loginwindow\" to «event aevtrsdn»'"
+alias reboot="osascript -e 'tell app \"loginwindow\" to «event aevtrrst»'"
