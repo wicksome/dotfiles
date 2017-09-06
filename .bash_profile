@@ -1,7 +1,8 @@
 #!/bin/bash
 
 source "$HOME/.bash_figlet"
-. "$HOME/.bash_profile.private" # .(dot) == source
+. "$HOME/.bash_profile.private"
+. "$HOME/.bash_profile.workspace"
 
 
 # If not running interactively, don't do anything
