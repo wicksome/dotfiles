@@ -158,6 +158,11 @@ nnoremap <leader>w :update<cr>
 
 vnoremap <leader>c "*y
 
+" Disable copy when delete character
+nnoremap x "_x
+nnoremap d "_d
+vnoremap d "_d
+
 " fomatting
 " :%!python -m json.tool
 
