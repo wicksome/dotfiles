@@ -41,8 +41,9 @@ endfunction
 Plug 'valloric/youcompleteme', { 'for': ['c', 'cpp'], 'do': function('BuildYCM') }
 
 " Browsing
-Plug 'Yggdroot/indentLine', "{ 'on': 'IndentLinesEnable' }
-autocmd! User indentLine doautocmd indentLine Syntax
+"Plug 'Yggdroot/indentLine', "{ 'on': 'IndentLinesEnable' }
+"autocmd! User indentLine doautocmd indentLine Syntax
+Plug 'nathanaelkane/vim-indent-guides'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 augroup nerd_loader
@@ -73,6 +74,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'elzr/vim-json'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
+Plug 'shmup/vim-sql-syntax'
 
 if os == 'Darwin'
   Plug 'rizzatti/dash.vim',  { 'on': 'Dash' } " Dash와 연동
@@ -95,13 +97,14 @@ set shiftwidth=4 tabstop=4 softtabstop=4
 set expandtab smarttab
 set laststatus=2                                          " always show status bar
 set showcmd
-set visualbell
+" set visualbell
 set backspace=indent,eol,start
 set encoding=utf-8 fileencodings=utf-8                    " encoding
 set nobackup nowritebackup noswapfile                     " no backup or swap
 set hlsearch incsearch ignorecase smartcase               " search
 set ruler                                                 " show cursor position in status bar
 set cursorline
+"set cursorcolumn
 "set nocursorline
 set history=500                                           " history size
 set showmatch                                             " 자동 괄호맞쳐주기
@@ -220,3 +223,9 @@ let g:test#preserve_screen = 1
 
 " Don't prompt to load ycm_extra_conf.py for YouCompleteMe; just load it.
 let g:ycm_confirm_extra_conf = 0
+
+let g:indent_guides_enable_on_vim_startup = 1
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
