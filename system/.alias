@@ -48,7 +48,7 @@ alias trash='$HOME/git/trash-cli/trash'
 alias rm='trash'
 
 # open app
-alias st='open -a "Sublime Text"'
+alias subl='open -a "Sublime Text"'
 alias atom='open -a Atom'
 alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
