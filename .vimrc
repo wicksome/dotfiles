@@ -22,6 +22,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'benmills/vimux' " vim과 tmux 연동하기 위한 플러그인
 Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'junegunn/fzf.vim' "스페이스바 2번 누르면 실행되고 아직 이해 못함
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-endwise'
@@ -75,6 +76,7 @@ Plug 'elzr/vim-json'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'shmup/vim-sql-syntax'
+Plug 'rizzatti/dash.vim'
 
 if os == 'Darwin'
   Plug 'rizzatti/dash.vim',  { 'on': 'Dash' } " Dash와 연동
@@ -211,6 +213,13 @@ let NERDTreeShowHidden=1
 
 " FZF
 nmap <c-p> :FZF<cr>
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlig
 
 " vim-test
 nmap <silent> <leader>tt :TestNearest<CR>
