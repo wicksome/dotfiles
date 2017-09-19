@@ -10,17 +10,35 @@ R | Reload config
 
 Key | App
 ---|---
-C | Google Chrome
-D | Dash
-F | Finder
-G | SourceTree (Git)
-M | Mail
-P | System Preferences
-S | Spotify
-T | Terminal
-W | WebStorm
+,                     | System Preferences
+A ()                  |
+B (Browser)           | Google Chrome
+C (Calender)          | Fantastical 2
+D (Documentation)     | Dash
+E (Editor)            | VS code
+F ()                  |
+G ()                  |
+H (HouseKeeping book) | MoneyWiz
+I ()                  |
+J ()                  |
+K ()                  |
+L ()                  | x
+M (Mail)              | Spark
+N (Note)              | Evernote
+O ()                  |
+P (Productivity)      | MindNode
+Q ()                  |
+R ()                  | x
+S (Source code)       | Quiver
+T (Terminal)          | iTerm 2
+U ()                  |
+V ()                  |
+W ()                  |
+X ()                  |
+Y ()                  |
+Z ()                  |
 
-## Window Management
+## ~~Window Management~~
 
 Key | Action
 ---|---
