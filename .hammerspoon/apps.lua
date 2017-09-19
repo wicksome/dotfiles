@@ -9,17 +9,48 @@ local mash = {"cmd", "shift", "ctrl"}
 
 hotkeys = {}
 -- launch and focus applications with below shortkey
-hotkeys["a"] = function() toggle_application("Atom") end
-hotkeys["c"] = function() toggle_application("Fantastical 2") end
-hotkeys["d"] = function() toggle_application("Dash") end
-hotkeys["e"] = function() toggle_application("Evernote") end
-hotkeys["h"] = function() toggle_application("MoneyWiz Premium") end
-hotkeys["m"] = function() toggle_application("MindNode") end
-hotkeys["p"] = function() toggle_application("System Preferences") end
-hotkeys['t'] = function() toggle_application("iTerm2") end
+-- hotkeys["a"] = function() toggle_application("Atom") end
+-- hotkeys["c"] = function() toggle_application("Fantastical 2") end
+-- hotkeys["d"] = function() toggle_application("Dash") end
+-- hotkeys["e"] = function() toggle_application("Evernote") end
+-- hotkeys["h"] = function() toggle_application("MoneyWiz Premium") end
+-- hotkeys["m"] = function() toggle_application("MindNode") end
+-- hotkeys["p"] = function() toggle_application("System Preferences") end
+-- hotkeys['t'] = function() toggle_application("iTerm2") end
 
-for _hotkey, _fn in pairs(hotkeys) do
-    hs.hotkey.bind(mash, _hotkey, _fn)
+hotkeys[","] = "System Preferences"
+hotkeys["A"] = ""
+hotkeys["B"] = "Google Chrome"
+hotkeys["C"] = "Fantastical 2"
+hotkeys["D"] = "Dash"
+hotkeys["E"] = "Visual Studio Code"
+hotkeys["F"] = ""
+hotkeys["G"] = ""
+hotkeys["H"] = "MoneyWiz"
+hotkeys["I"] = ""
+hotkeys["J"] = ""
+hotkeys["K"] = ""
+-- hotkeys["L"] = "" -- print runnign apps for debuging
+hotkeys["M"] = "Spark"
+hotkeys["N"] = "Evernote"
+hotkeys["O"] = ""
+hotkeys["P"] = "MindNode"
+hotkeys["Q"] = ""
+-- hotkeys["R"] = "" -- reload conf
+hotkeys["S"] = "Quiver"
+hotkeys["T"] = "iTerm 2"
+hotkeys["U"] = ""
+hotkeys["V"] = ""
+hotkeys["W"] = ""
+hotkeys["X"] = ""
+hotkeys["Y"] = ""
+hotkeys["Z"] = ""
+
+-- setting toggle application hotkeys
+for _hotkey, _app in pairs(hotkeys) do
+  if _app ~= nil and _app ~= "" then
+    hs.hotkey.bind(mash, _hotkey, function() toggle_application(_app) end)
+  end
 end
 
 hs.hotkey.bind({"⌘", "⌥"}, "f12", function() hs.caffeinate.lockScreen(); end)
