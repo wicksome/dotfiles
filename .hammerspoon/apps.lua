@@ -30,9 +30,8 @@ hs.hotkey.bind({"⌘", "⌥"}, "f12", function() hs.caffeinate.lockScreen(); end
 function toggle_application(_app)
   local app = hs.appfinder.appFromName(_app)
   if not app then
-    -- FIXME: This should really launch _app
-    hs.application.launchOrFocus(_app)
     hs.alert("Running... " .. _app)
+    hs.application.launchOrFocus(_app)
     return
   end
 
@@ -48,40 +47,10 @@ function toggle_application(_app)
     end
   else
     -- otherwise send cmd-n to create new window
-    -- todo: focus app
-    hs.eventtap.keyStroke({'cmd'}, 'n')
+    if app:isRunning() then
+      hs.application.launchOrFocus(_app)
+      -- hs.application.launchOrFocusByBundleID(app:bundleID())
+      -- hs.eventtap.keyStroke({'cmd'}, 'n')
+    end
   end
 end
-
-
--- https://github.com/szymonkaliski/Dotfiles/blob/b5a640336efc9fde1e8048c2894529427746076f/Dotfiles/hammerspoon/init.lua#L411-L440
--- function ext.app.forceLaunchOrFocus(appName)
---   -- first focus with hammerspoon
---   hs.application.launchOrFocus(appName)
-
---   -- clear timer if exists
---   if ext.cache.launchTimer then ext.cache.launchTimer:stop() end
-
---   -- wait 500ms for window to appear and try hard to show the window
---   ext.cache.launchTimer = hs.timer.doAfter(0.5, function()
---     local frontmostApp     = hs.application.frontmostApplication()
---     local frontmostWindows = hs.fnutils.filter(frontmostApp:allWindows(), function(win) return win:isStandard() end)
-
---     -- break if this app is not frontmost (when/why?)
---     if frontmostApp:title() ~= appName then
---       print('Expected app in front: ' .. appName .. ' got: ' .. frontmostApp:title())
---       return
---     end
-
---     if #frontmostWindows == 0 then
---       -- check if there's app name in window menu (Calendar, Messages, etc...)
---       if frontmostApp:findMenuItem({ 'Window', appName }) then
---         -- select it, usually moves to space with this window
---         frontmostApp:selectMenuItem({ 'Window', appName })
---       else
---         -- otherwise send cmd-n to create new window
---         hs.eventtap.keyStroke({ 'cmd' }, 'n')
---       end
---     end
---   end)
--- end
