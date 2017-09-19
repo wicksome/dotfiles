@@ -17,6 +17,6 @@ local function print_table(t)
 end
 
 -- for debug
-hs.hotkey.bind(mash, "l", function() print_table(hs.application.runningApplications()); end )
+hs.hotkey.bind(mash, "/", function() print_table(hs.application.runningApplications()); end )
 
 hs.alert("Hammerspoon config loaded")

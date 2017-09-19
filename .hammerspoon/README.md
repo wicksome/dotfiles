@@ -22,7 +22,7 @@ H (HouseKeeping book) | MoneyWiz
 I ()                  |
 J ()                  |
 K ()                  |
-L ()                  | x
+L (Languages)         | Miya Translate
 M (Mail)              | Spark
 N (Note)              | Evernote
 O ()                  |
