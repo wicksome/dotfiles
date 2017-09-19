@@ -4,6 +4,7 @@
 -------------------------------------------------------------------------------
 -- variable config
 hs.window.animationDuration = 0
+hs.application.enableSpotlightForNameSearches(true)
 
 local mash = {"cmd", "shift", "ctrl"}
 
@@ -30,7 +31,7 @@ hotkeys["H"] = "MoneyWiz Premium"
 hotkeys["I"] = ""
 hotkeys["J"] = ""
 hotkeys["K"] = ""
--- hotkeys["L"] = "" -- print runnign apps for debuging
+hotkeys["L"] = "Miya Translate"
 hotkeys["M"] = "Spark"
 hotkeys["N"] = "Evernote"
 hotkeys["O"] = ""
