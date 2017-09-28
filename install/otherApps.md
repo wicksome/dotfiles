@@ -4,6 +4,7 @@
 
 - copied
 - quiver
+- yubisitch(for works) - https://github.com/pallotron/yubiswitch
 
 ## App Store
 
