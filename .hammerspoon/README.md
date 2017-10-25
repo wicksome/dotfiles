@@ -11,11 +11,13 @@ R | Reload config
 Key | App
 ---|---
 ,                     | System Preferences
+\\                    | 1Password
+=                     | Things
 A ()                  |
-B (Browser)           | Google Chrome
+B ()                  | 
 C (Calender)          | Fantastical 2
 D (Documentation)     | Dash
-E (Editor)            | VS code
+E                     | 
 F ()                  |
 G ()                  |
 H (HouseKeeping book) | MoneyWiz
