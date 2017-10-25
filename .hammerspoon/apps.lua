@@ -20,11 +20,13 @@ hotkeys = {}
 -- hotkeys['t'] = function() toggle_application("iTerm2") end
 
 hotkeys[","] = "System Preferences"
+hotkeys["\\"] = "1Password"
+hotkeys["="] = "Things"
 hotkeys["A"] = ""
-hotkeys["B"] = "Google Chrome"
+hotkeys["B"] = ""
 hotkeys["C"] = "Fantastical 2"
 hotkeys["D"] = "Dash"
-hotkeys["E"] = "Visual Studio Code"
+hotkeys["E"] = ""
 hotkeys["F"] = ""
 hotkeys["G"] = ""
 hotkeys["H"] = "MoneyWiz Premium"
