@@ -32,8 +32,9 @@
 - **The Unarchiver**: 압축 프로그램, [다운로드-사이트](http://unarchiver.c3.cx/unarchiver)
 - **insomniaX**: 맥북 닫아도 잠자기 상태로 들어가지 않게 해주는 앱, [소개-링트](http://macnews.tistory.com/131)
 - **iterm**: 터미널 프로그램, [정식-사이트](https://www.iterm2.com/index.html)
-- **near lock**: ios - macos 자동 잠금해제 앱
 - **벅스 플레이어**
+- Workflow Timer
+- PDFExpert
 - *Calendar*
     - **Plain Today Calendar**: 캘린더 위젯
     - ~~**Agenda Widget+**~~
