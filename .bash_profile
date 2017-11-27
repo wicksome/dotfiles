@@ -47,5 +47,6 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 # Run app when open terminal
 ################################################################################
 
-td
+#$HOME/git/todo-cli/bin/todo
+
 
