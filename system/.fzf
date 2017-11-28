@@ -31,9 +31,21 @@ fshow() {
     FZF-EOF"
 }
 
+# ahd
 _fzf_complete_ahd() {
   _fzf_complete "--reverse" "$@" < <(
     ls ~/.ahd
   )
 }
 [ -n "$BASH" ] && complete -F _fzf_complete_ahd -o default -o bashdefault ahd
+
+# TEST: 목록에는 리스트뷰 보여주고 입력은 다른 값 넘겨주기
+_fzf_complete_doge() {
+  _fzf_complete "--multi --reverse" "$@" < <(
+    ahd l
+  )
+}
+_fzf_complete_doge_post() {
+  awk '{print "test"}'
+}
+[ -n "$BASH" ] && complete -F _fzf_complete_doge -o default -o bashdefault doge
