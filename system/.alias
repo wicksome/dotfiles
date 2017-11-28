@@ -37,8 +37,13 @@ alias stime='last reboot | head -2'
 # https://apple.stackexchange.com/a/103633
 alias byebye="osascript -e 'tell app \"loginwindow\" to «event aevtrsdn»'"
 alias reboot="osascript -e 'tell app \"loginwindow\" to «event aevtrrst»'"
+# /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
 #alias hosts='grep '^[0-9]' /etc/hosts'
 alias hosts='grep '^[0-9]' /etc/hosts | grep -Ev "^(127.0.0.1|255.255.255.255)"'
+function port() {
+    lsof -i :"$1"
+}
+alias port='port $@'
 
 # app by me
 alias ahd='sudo /Users/yeongjun/git/ahd/bin/ahd'
@@ -52,3 +57,8 @@ alias subl='open -a "Sublime Text"'
 alias atom='open -a Atom'
 alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
+
+# for dev
+function todo() { (cd $HOME/git/todo-cli && yarn start $@) }
+alias todo='todo $@'
+

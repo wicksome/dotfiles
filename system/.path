@@ -7,34 +7,20 @@
 
 # Prepend new items to path (if directory exists)
 
-
 prepend-path "/Library/Java/JavaVirtualMachines/1.8.0_73.jdk/Contents/Home/bin"
 
-#prepend-path "/bin"
-#prepend-path "/usr/bin"
-#prepend-path "/usr/local/bin"
 #is-executable brew && prepend-path "$BREW_PREFIX_COREUTILS/libexec/gnubin"
-#prepend-path "$DOTFILES_DIR/bin"
-#prepend-path "$HOME/bin"
-#prepend-path "/sbin"
-#prepend-path "/usr/sbin"
-#prepend-path "/usr/local/sbin"
-#prepend-path "$HOME/.rvm/bin"
-#prepend-path "/usr/local/share/git-core/contrib/diff-highlight"
 
-export M2_HOME=/Users/yeongjun/apps/apache-maven-3.3.9
-export M2=$M2_HOME/bin
-export PATH=$M2:$PATH
+prepend-path "/Users/yeongjun/apps/apache-maven-3.3.9/bin"
 
 export JAVA_6=/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 export JAVA_7=/Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
-#export JAVA_8=/Library/Java/JavaVirtualMachines/jdk1.8.0_73.jdk/Contents/Home
 export JAVA_8=/Library/Java/Home
 export JAVA_HOME=$JAVA_8
 export PATH=$JAVA_HOME/bin:$PATH
 
 # homebrews should always take precedence
-export PATH=/usr/local/bin:$PATH
+prepend-path "/usr/local/bin"
 
 # todo
 export TODO_DB_PATH=$HOME/Dropbox/todo.json
