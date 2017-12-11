@@ -13,6 +13,7 @@ apps=(
   allcleaner
   atom
   bartender
+  bettertouchtool
   cheatsheet
   dash2
   dropbox
