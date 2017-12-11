@@ -9,7 +9,7 @@ brew tap caskroom/versions
 # Install packages
 
 apps=(
-  java
+  caskroom/versions/java8
   allcleaner
   atom
   bartender
