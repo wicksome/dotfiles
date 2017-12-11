@@ -14,7 +14,14 @@
 - macOS: Hammerspoon, Mackup, Quick Look plugins
 - macOS apps
 
+## Installation
+1. java 1.8
+1. Install Homebrew
+2. Install vcprompt
+3. Install powerline font
+
 ## Requirements
+
 
 - vcprompt 설치
   - `https://github.com/djl/vcprompt`에서 vcprompt 받고 bin에 이동
@@ -35,21 +42,9 @@
     $ git clone https://github.com/powerline/fonts.git
     ```
 
-# 기타 설치해야할 것들
-
-https://github.com/powerline/fonts
-https://github.com/Swatto/td
-https://github.com/junegunn/vim-plug
-
-
 # vim
 
 ## Installation
-
-```sh
-alias vi='mvim -v'
-alias vim='mvim -v'
-```
 
 youcompleteme 설치
 
@@ -59,11 +54,7 @@ $ ./install.py --gocode-completer
 $ ./install.py --tern-completer
 ```
 
-sss
-
-
-
-# 참고
+# References
 
 https://github.com/webpro/dotfiles
 
