@@ -10,7 +10,7 @@ brew tap caskroom/versions
 
 apps=(
   caskroom/versions/java8
-  allcleaner
+  appcleaner
   atom
   bartender
   bettertouchtool
