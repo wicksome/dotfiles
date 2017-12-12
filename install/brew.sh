@@ -50,6 +50,8 @@ brew install gradle
 brew install elasticsearch
 
 # Install other useful binaries.
+brew install tmux
+brew install tmuxinator-completion
 brew install the_silver_searcher
 brew install fzf
 brew install autojump   
@@ -62,7 +64,6 @@ brew install htop
 brew install httpie
 brew install mas
 brew install rename
-brew install tmuxinator-completion
 brew install tree
 brew install plantuml
 brew install jq
