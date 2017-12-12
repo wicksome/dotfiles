@@ -1,8 +1,8 @@
 #!/bin/bash
 
-source "$HOME/.bash_figlet"
-. "$HOME/.bash_profile.private"
-. "$HOME/.bash_profile.workspace"
+test -e "$HOME/.bash_figlet" && source "$HOME/.bash_figlet"
+test -e "$HOME/.bash_profile.private" && . "$HOME/.bash_profile.private"
+test -e "$HOME/.bash_profile.workspace" && . "$HOME/.bash_profile.workspace"
 
 
 # If not running interactively, don't do anything
