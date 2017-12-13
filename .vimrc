@@ -77,6 +77,7 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'shmup/vim-sql-syntax'
 Plug 'rizzatti/dash.vim'
+Plug 'dearrrfish/vim-applescript'
 
 if os == 'Darwin'
   Plug 'rizzatti/dash.vim',  { 'on': 'Dash' } " Dash와 연동
