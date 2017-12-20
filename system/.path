@@ -22,6 +22,9 @@ export PATH=$JAVA_HOME/bin:$PATH
 # homebrews should always take precedence
 prepend-path "/usr/local/bin"
 
+GOPATH=$HOME/go
+prepend-path "${GOPATH}/bin"
+
 # todo
 export TODO_DB_PATH=$HOME/Dropbox/todo.json
 
