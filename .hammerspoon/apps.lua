@@ -56,7 +56,8 @@ for _hotkey, _app in pairs(hotkeys) do
   end
 end
 
-hs.hotkey.bind({"⌘", "⌥"}, "f12", function() hs.caffeinate.lockScreen(); end)
+hs.hotkey.bind({"⌘", "⌥"}, "f12", function() os.execute("pmset displaysleepnow"); end)
+-- hs.hotkey.bind({"⌘", "⌥"}, "f12", function() hs.caffeinate.lockScreen(); end)
 
 -- functions below
 

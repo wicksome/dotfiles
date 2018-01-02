@@ -57,7 +57,6 @@ alias subl='open -a "Sublime Text"'
 alias atom='open -a Atom'
 alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
-alias works-server='/Users/user/go/src/oss.navercorp.com/yeongjun-kim/works-server/works-server/bin/works-server/works-server'
 
 # for dev
 function todo() { (cd $HOME/git/todo-cli && yarn start $@) }
