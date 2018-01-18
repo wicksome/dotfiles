@@ -14,6 +14,7 @@
 
 - **BetterTouchTool**(유료): 입력기능 확장 프로그램, [정식-사이트](http://www.boastr.net/)
 - **Charles**(유료): HTTP proxy
+- **Command-Tab Plug**
 - **GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
 - **IntelliJ IDEA**: 필수
 - **Just Focus**: 뽀모도르 앱, [정식-사이트](http://climstudio.com/justfocus/)
