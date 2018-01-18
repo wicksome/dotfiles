@@ -58,6 +58,9 @@ alias atom='open -a Atom'
 alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
 
+# coin
+alias eos='http GET https://api.bithumb.com/public/ticker/EOS | jq ".data.closing_price"'
+
 # for dev
 function todo() { (cd $HOME/git/todo-cli && yarn start $@) }
 alias todo='todo $@'
