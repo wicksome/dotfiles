@@ -56,3 +56,4 @@
 ### Installed
 
 - **tmux**: .tmux.conf [링크](https://github.com/gpakosz/.tmux), `$ brew install tmux`
+- **toggleAirport**: 자동으로 랜/와이파이 토글시키기 [link](https://gist.github.com/albertbori/1798d88a93175b9da00b)

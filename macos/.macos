@@ -1,2 +1,10 @@
 # Finder: allow text selection in Quick Look
 defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Disable animation when whitching screen lock
+defaults write com.apple.dock expose-animation-duration -int 0; killall Dock
+# defaults delete com.apple.dock expose-animation-duration; killall Dock
+
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool NO
+# defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool YES
+
