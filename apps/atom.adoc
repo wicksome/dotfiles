@@ -1,0 +1,4 @@
+= Atom settings
+
+* https://atom.io/packages/sync-settings
+* https://gist.github.com/wicksome/d8f1ae427334fbbc3e342baef938974f
