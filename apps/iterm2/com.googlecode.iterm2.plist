@@ -1123,15 +1123,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-1055 311 606 469 -1200 -150 1200 1898 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>99 851 958 451 0 0 2560 1418 </string>
+	<string>100 748 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame com.apple.typography_panel_InconsolataForPowerline-g</key>
 	<string>479 737 260 42 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1184 148 1179 1376 -1200 -150 1200 1898 </string>
+	<string>1280 48 1277 1130 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1466 898 570 401 0 0 2560 1418 </string>
+	<string>1247 39 1277 1370 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>1336 117 570 451 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1145,13 +1145,13 @@
 	<key>NSWindow Frame iTerm Window 15</key>
 	<string>291 291 570 452 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1116 216 1046 1012 0 0 2560 1418 </string>
+	<string>57 790 570 401 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>701 523 574 483 0 0 2560 1418 </string>
+	<string>824 269 1543 1097 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>0 72 1634 1346 0 0 2560 1418 </string>
+	<string>146 117 1473 1301 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>0 85 1277 1333 0 0 2560 1418 </string>
+	<string>0 778 941 638 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
 	<string>45 909 590 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
@@ -5096,7 +5096,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-11T02:22:41Z</date>
+	<date>2018-01-29T01:57:28Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
