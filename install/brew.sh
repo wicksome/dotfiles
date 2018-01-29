@@ -68,6 +68,11 @@ brew install tree
 brew install plantuml
 brew install jq
 
+# Install apps for documentation.
+brew install asciidoctor
+brew install asciidoc
+brew install pandoc
+
 # Install Mac applications.
 which cask || brew tap caskroom/cask
 
