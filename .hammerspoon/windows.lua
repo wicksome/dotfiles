@@ -3,8 +3,6 @@ module = {}
 -- Configuration --
 -------------------
 
-local mash = {"alt", "ctrl"}
-
 local resizeing_scale = 20 -- px
 
 -- Margins --
