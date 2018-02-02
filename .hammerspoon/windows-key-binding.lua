@@ -3,7 +3,6 @@ local wm = require "windows"
 
 local mash = {"ctrl", "alt"}
 
-
 hk.bind(mash, "return", wm.maximize)
 hk.bind(mash, "delete", wm.snapback)
 hk.bind(mash, "c", wm.move_to_center)
