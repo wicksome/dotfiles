@@ -31,7 +31,7 @@ local quarter_screen_partitions = {
 -- Public API --
 ----------------
 
-module.send_window_left = function()
+module.move_half_window_to_left = function()
     local s = screen()
     local ssp = split_screen_partitions
     local g = gutter()
@@ -43,7 +43,7 @@ module.send_window_left = function()
     })
 end
 
-module.send_window_right = function()
+module.move_half_window_to_right = function()
     local s = screen()
     local ssp = split_screen_partitions
     local g = gutter()
@@ -55,7 +55,7 @@ module.send_window_right = function()
     })
 end
 
-module.send_window_up = function()
+module.move_half_window_to_up = function()
     local s = screen()
     local ssp = split_screen_partitions
     local g = gutter()
@@ -67,7 +67,7 @@ module.send_window_up = function()
     })
 end
 
-module.send_window_down = function()
+module.move_half_window_to_down = function()
     local s = screen()
     local ssp = split_screen_partitions
     local g = gutter()
@@ -79,7 +79,51 @@ module.send_window_down = function()
     })
 end
 
-module.send_window_upper_left = function()
+module.move_window_to_left = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Move left", {
+        x = unit.x - resizeing_scale,
+        y = unit.y,
+        w = unit.w,
+        h = unit.h
+    })
+end
+
+module.move_window_to_right = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Move right", {
+        x = unit.x + resizeing_scale,
+        y = unit.y,
+        w = unit.w,
+        h = unit.h
+    })
+end
+
+module.move_window_to_up = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Move up", {
+        x = unit.x,
+        y = unit.y + resizeing_scale,
+        w = unit.w,
+        h = unit.h
+    })
+end
+
+module.move_window_to_down = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Move down", {
+        x = unit.x,
+        y = unit.y - resizeing_scale,
+        w = unit.w,
+        h = unit.h
+    })
+end
+
+module.move_window_upper_left = function()
     local s = screen()
     local qsp = quarter_screen_partitions
     local g = gutter()
@@ -91,7 +135,7 @@ module.send_window_upper_left = function()
     })
 end
 
-module.send_window_upper_right = function()
+module.move_window_upper_right = function()
     local s = screen()
     local qsp = quarter_screen_partitions
     local g = gutter()
@@ -103,7 +147,7 @@ module.send_window_upper_right = function()
     })
 end
 
-module.send_window_lower_left = function()
+module.move_window_lower_left = function()
     local s = screen()
     local qsp = quarter_screen_partitions
     local g = gutter()
@@ -115,7 +159,7 @@ module.send_window_lower_left = function()
     })
 end
 
-module.send_window_lower_right = function()
+module.move_window_lower_right = function()
     local s = screen()
     local qsp = quarter_screen_partitions
     local g = gutter()
@@ -237,7 +281,7 @@ function win ()
 end
 -- display title, save state and move win to unit
 function set_frame(title, unit)
-    hs.alert.show(title)
+    print(title)
     local win = win()
     module.snapback_window_state[win:id()] = win:frame()
     return win:setFrame(unit)
