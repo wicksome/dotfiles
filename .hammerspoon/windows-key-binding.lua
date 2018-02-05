@@ -18,17 +18,16 @@ hk.bind(mash, "l", wm.move_half_window_to_right)
 hk.bind(mash, "k", wm.move_half_window_to_up)
 hk.bind(mash, "j", wm.move_half_window_to_down)
 
-hk.bind(mash, "y", wm.move_window_to_left, nil, wm.move_window_to_left)
-hk.bind(mash, "o", wm.move_window_to_right, nil, wm.move_window_to_right)
-hk.bind(mash, "i", wm.move_window_to_up, nil, wm.move_window_to_up)
-hk.bind(mash, "u", wm.move_window_to_down, nil, wm.move_window_to_down)
+hk.bind(mash, "left", wm.move_window_to_left, nil, wm.move_window_to_left)
+hk.bind(mash, "right", wm.move_window_to_right, nil, wm.move_window_to_right)
+hk.bind(mash, "up", wm.move_window_to_up, nil, wm.move_window_to_up)
+hk.bind(mash, "down", wm.move_window_to_down, nil, wm.move_window_to_down)
 
 -- (mash, key, 눌렀을 때, 놓았을 때, 눌린 상태)
 hk.bind(mash, "[", wm.size_down, nil, wm.size_down)
 hk.bind(mash, "]", wm.size_up, nil, wm.size_up)
 
-hk.bind(mash, "left", wm.send_window_prev_monitor)
-hk.bind(mash, "right", wm.send_window_next_monitor)
+hk.bind(mash, "n", wm.send_window_next_monitor)
 
 hk.bind(mash, "1", wm.move_window_upper_left)
 hk.bind(mash, "2", wm.move_window_upper_right)
