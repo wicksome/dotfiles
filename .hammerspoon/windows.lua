@@ -106,7 +106,7 @@ module.move_window_to_up = function()
     local s = screen()
     set_frame("Move up", {
         x = unit.x,
-        y = unit.y + resizeing_scale,
+        y = unit.y - resizeing_scale,
         w = unit.w,
         h = unit.h
     })
@@ -117,7 +117,7 @@ module.move_window_to_down = function()
     local s = screen()
     set_frame("Move down", {
         x = unit.x,
-        y = unit.y - resizeing_scale,
+        y = unit.y + resizeing_scale,
         w = unit.w,
         h = unit.h
     })

@@ -68,6 +68,8 @@ brew install tree
 brew install plantuml
 brew install jq
 
+brew install uncrustify # for atom-extension
+
 # Install apps for documentation.
 brew install asciidoctor
 brew install asciidoc
