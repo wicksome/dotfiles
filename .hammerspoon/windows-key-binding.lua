@@ -8,7 +8,7 @@ local mash = {"ctrl", "alt"}
 hk.bind(mash, "return", wm.maximize)
 hk.bind(mash, "delete", wm.snapback)
 hk.bind(mash, "c", wm.move_to_center)
-hk.bind(mash, "w", function ()
+hk.bind(mash, "m", function ()
     -- wm.move_to_center_absolute({w = 800, h = 600})
     wm.move_to_center_relative({w = 0.75, h = 0.75})
 end)
