@@ -246,7 +246,7 @@ end
 module.size_up = function()
     local unit = win():frame()
     local s = screen()
-    set_frame("Center", {
+    set_frame("Size Up", {
         x = unit.x - (resizeing_scale / 2),
         y = unit.y - (resizeing_scale / 2),
         w = unit.w + resizeing_scale,
@@ -257,7 +257,7 @@ end
 module.size_down = function()
     local unit = win():frame()
     local s = screen()
-    set_frame("Center", {
+    set_frame("Size Down", {
         x = unit.x + (resizeing_scale / 2),
         y = unit.y + (resizeing_scale / 2),
         w = unit.w - resizeing_scale,
@@ -265,6 +265,49 @@ module.size_down = function()
     })
 end
 
+module.size_up_vertical = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Size Up(vertical)", {
+        x = unit.x,
+        y = unit.y,
+        w = unit.w,
+        h = unit.h + resizeing_scale
+    })
+end
+
+module.size_down_vertical = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Size Down(vertical)", {
+        x = unit.x,
+        y = unit.y,
+        w = unit.w,
+        h = unit.h - resizeing_scale
+    })
+end
+
+module.size_up_horizontal = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Size Up(horizontal)", {
+        x = unit.x,
+        y = unit.y,
+        w = unit.w + resizeing_scale,
+        h = unit.h
+    })
+end
+
+module.size_down_horizontal = function()
+    local unit = win():frame()
+    local s = screen()
+    set_frame("Size Down(horizontal)", {
+        x = unit.x,
+        y = unit.y,
+        w = unit.w - resizeing_scale,
+        h = unit.h
+    })
+end
 
 
 ------------------
