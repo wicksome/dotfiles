@@ -24,8 +24,13 @@ hk.bind(mash, "up", wm.move_window_to_up, nil, wm.move_window_to_up)
 hk.bind(mash, "down", wm.move_window_to_down, nil, wm.move_window_to_down)
 
 -- (mash, key, 눌렀을 때, 놓았을 때, 눌린 상태)
-hk.bind(mash, "[", wm.size_down, nil, wm.size_down)
-hk.bind(mash, "]", wm.size_up, nil, wm.size_up)
+hk.bind(mash, "-", wm.size_down, nil, wm.size_down)
+hk.bind(mash, "=", wm.size_up, nil, wm.size_up)
+
+hk.bind(mash, "q", wm.size_down_vertical, nil, wm.size_down_vertical)
+hk.bind(mash, "w", wm.size_up_vertical, nil, wm.size_up_vertical)
+hk.bind(mash, "a", wm.size_down_horizontal, nil, wm.size_down_horizontal)
+hk.bind(mash, "s", wm.size_up_horizontal, nil, wm.size_up_horizontal)
 
 hk.bind(mash, "n", wm.send_window_next_monitor)
 
