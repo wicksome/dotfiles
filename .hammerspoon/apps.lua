@@ -8,42 +8,32 @@ hs.application.enableSpotlightForNameSearches(true)
 local mash = {"cmd", "shift", "ctrl"}
 
 hotkeys = {}
--- launch and focus applications with below shortkey
--- hotkeys["a"] = function() toggle_application("Atom") end
--- hotkeys["c"] = function() toggle_application("Fantastical 2") end
--- hotkeys["d"] = function() toggle_application("Dash") end
--- hotkeys["e"] = function() toggle_application("Evernote") end
--- hotkeys["h"] = function() toggle_application("MoneyWiz Premium") end
--- hotkeys["m"] = function() toggle_application("MindNode") end
--- hotkeys["p"] = function() toggle_application("System Preferences") end
--- hotkeys['t'] = function() toggle_application("iTerm2") end
-
 hotkeys[","] = "System Preferences"
 hotkeys["\\"] = "1Password"
 hotkeys["="] = ""
 hotkeys["A"] = ""
 hotkeys["B"] = ""
 hotkeys["C"] = "Fantastical 2"
-hotkeys["D"] = "Dash"
-hotkeys["E"] = ""
+hotkeys["D"] = ""
+hotkeys["E"] = "Evernote"
 hotkeys["F"] = ""
 hotkeys["G"] = ""
-hotkeys["H"] = "MoneyWiz Premium"
+hotkeys["H"] = ""
 hotkeys["I"] = ""
 hotkeys["J"] = ""
 hotkeys["K"] = ""
-hotkeys["L"] = "Miya Translate"
+hotkeys["L"] = ""
 hotkeys["M"] = "Spark"
-hotkeys["N"] = "Evernote"
+hotkeys["N"] = ""
 hotkeys["O"] = ""
 hotkeys["P"] = "MindNode"
 hotkeys["Q"] = ""
--- hotkeys["R"] = "" -- reload conf
-hotkeys["S"] = "Quiver"
+-- hotkeys["R"] = "" -- already setting in init.lua
+hotkeys["S"] = ""
 hotkeys["T"] = "iTerm2"
 hotkeys["U"] = ""
 hotkeys["V"] = ""
-hotkeys["W"] = "Cloud Outliner Pro"
+hotkeys["W"] = ""
 hotkeys["X"] = ""
 hotkeys["Y"] = ""
 hotkeys["Z"] = ""
