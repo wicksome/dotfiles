@@ -1,46 +1,26 @@
 # Hammerspoon Configuration
 
-The hyper key is defined as ⌘ + ⌥ + ⌃ (ctrl + alt + cmd). Press this plus the defined key:
-
 Key | Action
 ---|---
-R | Reload config
+<kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>R</kbd> | Reload config
 
 ## Launch Apps
 
-Key | App
----|---
-,                     | System Preferences
-\\                    | 1Password
-=                     | Things
-A ()                  |
-B ()                  | 
-C (Calender)          | Fantastical 2
-D (Documentation)     | Dash
-E                     | 
-F ()                  |
-G ()                  |
-H (HouseKeeping book) | MoneyWiz
-I ()                  |
-J ()                  |
-K ()                  |
-L (Languages)         | Miya Translate
-M (Mail)              | Spark
-N (Note)              | Evernote
-O ()                  |
-P (Productivity)      | MindNode
-Q ()                  |
-R ()                  | x
-S (Source code)       | Quiver
-T (Terminal)          | iTerm 2
-U ()                  |
-V ()                  |
-W ()                  |
-X ()                  |
-Y ()                  |
-Z ()                  |
+<kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + Key
 
-## ~~Window Management~~
+Key | App | Desc
+---|---|---
+,  | System Preferences |
+\\ | 1Password |
+C  | Fantastical 2 | **C**alender
+E  | **E**vernote |
+M  | Spark | **M**ail Client
+P  | MindNode | **P**roductivity
+T  | iTerm 2 | **T**erminal
+
+## Window Management
+
+<kbd>⌥</kbd> + <kbd>⌃</kbd> + key
 
 Key | Action
 ---|---

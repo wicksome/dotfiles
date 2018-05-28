@@ -1084,6 +1084,11 @@
 	<false/>
 	<key>NSScrollViewShouldScrollUnderTitlebar</key>
 	<false/>
+	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
+	<array>
+		<string>0.000000, 0.000000, 224.000000, 272.000000, NO, NO</string>
+		<string>0.000000, 273.000000, 224.000000, 43.000000, NO, NO</string>
+	</array>
 	<key>NSTableView Columns v2 KeyBingingTable</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGNjdYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -1118,20 +1123,22 @@
 	<string>1602 394 791 302 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>905 716 606 456 0 0 1920 1177 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>1080 981 400 129 0 0 2560 1418 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>930 597 700 622 0 0 2560 1418 </string>
+	<string>930 609 700 622 0 0 2560 1418 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
-	<string>-1055 311 606 469 -1200 -150 1200 1898 </string>
+	<string>477 306 606 469 0 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>100 748 796 473 0 0 2560 1418 </string>
+	<string>922 476 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame com.apple.typography_panel_InconsolataForPowerline-g</key>
 	<string>479 737 260 42 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 48 1277 1130 0 0 1920 1178 </string>
+	<string>471 493 570 401 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1247 39 1277 1370 0 0 2560 1418 </string>
+	<string>320 180 1914 1061 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>1336 117 570 451 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1145,15 +1152,15 @@
 	<key>NSWindow Frame iTerm Window 15</key>
 	<string>291 291 570 452 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>57 790 570 401 0 0 2560 1418 </string>
+	<string>208 432 920 746 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>824 269 1543 1097 0 0 2560 1418 </string>
+	<string>262 991 570 401 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>146 117 1473 1301 0 0 2560 1418 </string>
+	<string>429 1016 570 401 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>0 778 941 638 0 0 2560 1418 </string>
+	<string>1159 233 1144 1001 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>45 909 590 473 0 0 2560 1418 </string>
+	<string>0 357 1508 1061 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
 	<string>-648 891 590 473 -1200 -150 1200 1898 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
@@ -2178,6 +2185,12 @@
 					<string>SLOW!!</string>
 					<key>regex</key>
 					<string>\[TIME\].+([2-9]\d{3,}|\d{5,})ms( |)$</string>
+				</dict>
+				<dict>
+					<key>action</key>
+					<string>SendTextTrigger</string>
+					<key>regex</key>
+					<string></string>
 				</dict>
 			</array>
 			<key>Unicode Normalization</key>
@@ -5072,7 +5085,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/yeongjun/git/dotfiles/apps/iterm</string>
+	<string>/Users/yeongjun/git/dotfiles/apps/iterm2</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>ProfilesWindowJoinsActiveSpace</key>
@@ -5096,7 +5109,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-01-29T01:57:28Z</date>
+	<date>2018-03-20T01:55:15Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -13506,7 +13519,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.5.beta.2</string>
+	<string>3.1.6beta4</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
