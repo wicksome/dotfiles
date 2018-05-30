@@ -9,7 +9,7 @@ local mash = {"cmd", "shift", "ctrl"}
 
 hotkeys = {}
 hotkeys[","] = "System Preferences"
-hotkeys["\\"] = "1Password"
+hotkeys["\\"] = "1Password 7"
 hotkeys["="] = ""
 hotkeys["A"] = ""
 hotkeys["B"] = ""
