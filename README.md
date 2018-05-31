@@ -15,10 +15,12 @@
 - macOS apps
 
 ## Installation
-1. java 1.8
+
 1. Install [Homebrew](https://brew.sh/index_ko)
-2. Install vcprompt
-3. Install powerline font
+2. Install [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
+3. Install [vcprompt](https://github.com/djl/vcprompt)
+4. Install [powerline font](https://github.com/powerline/fonts.git)
+5. `git clone https://github.com/wicksome/dotfiles.git`
 
 ## Requirements
 
