@@ -17,14 +17,19 @@
 ## Installation
 
 1. Install apps
-  - [Homebrew](https://brew.sh/index_ko)
-  - [vcprompt](https://github.com/djl/vcprompt)
-  - [powerline font](https://github.com/powerline/fonts.git)
-  - [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
-2. `git clone https://github.com/wicksome/dotfiles.git`
+    - [Homebrew](https://brew.sh/index_ko)
+    - [vcprompt](https://github.com/djl/vcprompt)
+    - [powerline font](https://github.com/powerline/fonts.git)
+    - [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
+2. Install dotfiles
+    ```
+    $ git clone https://github.com/wicksome/dotfiles.git
+    $ cd dotfiles && ./install.sh
+    ```
 3. Setting other apps config
-  - atom: [sync-settings](https://atom.io/packages/sync-settings)
-  - iterm2
+    - atom: [sync-settings](https://atom.io/packages/sync-settings)
+    - iterm2
+    - intelliJ
 
 ## Requirements
 
