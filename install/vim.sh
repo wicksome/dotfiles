@@ -11,3 +11,7 @@ curl --insecure -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vi
 # vimrc
 ln -sf $DOTFILES_DIR/.vimrc ~/.vimrc
 vim +PlugInstall +qall
+
+# install completers
+~/.vim/plugged/youcompleteme/install.py --tern-completer
+#~/.vim/plugged/youcompleteme/install.py --gocode-completer
