@@ -22,6 +22,9 @@
   - [powerline font](https://github.com/powerline/fonts.git)
   - [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
 2. `git clone https://github.com/wicksome/dotfiles.git`
+3. Setting other apps config
+  - atom: [sync-settings](https://atom.io/packages/sync-settings)
+  - iterm2
 
 ## Requirements
 
