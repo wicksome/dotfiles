@@ -44,6 +44,7 @@ brew install gpg
 brew install pass
 
 # Install applications for develop.
+brew install jenv
 brew install node
 brew install go
 brew install gradle
