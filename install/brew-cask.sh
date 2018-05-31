@@ -37,16 +37,16 @@ brew cask install --appdir="/Applications" firefox
 brew cask install --appdir="/Applications" fliqlo
 brew cask install --appdir="/Applications" glimmerblocker
 brew cask install --appdir="/Applications" google-chrome
-brew cask install --appdir="/Applications" google-chrome-canary
+# brew cask install --appdir="/Applications" google-chrome-canary
 brew cask install --appdir="/Applications" keycastr
 brew cask install --appdir="/Applications" hammerspoon
-brew cask install --appdir="/Applications" macdown
-brew cask install --appdir="/Applications" popclip
+# brew cask install --appdir="/Applications" macdown
+# brew cask install --appdir="/Applications" popclip
 brew cask install --appdir="/Applications" slack
-brew cask install --appdir="/Applications" sublime-text
+# brew cask install --appdir="/Applications" sublime-text
 brew cask install --appdir="/Applications" vlc
-brew cask install --appdir="/Applications" now
-brew cask install --appdir="/Applications" 1password
+# brew cask install --appdir="/Applications" now
+# brew cask install --appdir="/Applications" 1password
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
