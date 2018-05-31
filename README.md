@@ -16,11 +16,12 @@
 
 ## Installation
 
-1. Install [Homebrew](https://brew.sh/index_ko)
-2. Install [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
-3. Install [vcprompt](https://github.com/djl/vcprompt)
-4. Install [powerline font](https://github.com/powerline/fonts.git)
-5. `git clone https://github.com/wicksome/dotfiles.git`
+1. Install apps
+  - [Homebrew](https://brew.sh/index_ko)
+  - [vcprompt](https://github.com/djl/vcprompt)
+  - [powerline font](https://github.com/powerline/fonts.git)
+  - [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
+2. `git clone https://github.com/wicksome/dotfiles.git`
 
 ## Requirements
 
@@ -36,14 +37,7 @@
     - 참고사이트
         - http://blog.outsider.ne.kr/737
         - https://github.com/insanehong/bash_env
-
-- 폰트 설치
-  - install powerline font
-
-    ```bash
-    $ git clone https://github.com/powerline/fonts.git
-    ```
-
+        
 # vim
 
 ## Installation
@@ -58,5 +52,5 @@ $ ./install.py --tern-completer
 
 # References
 
-https://github.com/webpro/dotfiles
+- https://github.com/webpro/dotfiles
 

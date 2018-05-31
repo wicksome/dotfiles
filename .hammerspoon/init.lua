@@ -2,6 +2,7 @@ require "apps"
 
 require "windows-key-binding"
 require "windows"
+require "window-move-resize-with-mouse"
 
 -------------------------------------------------------------------------------
 -- reload configuration
