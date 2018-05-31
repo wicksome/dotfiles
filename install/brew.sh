@@ -30,7 +30,7 @@ if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
 fi;
 
 # mac backup
-brew isntall mackup
+brew install mackup
 
 # Install `wget` with IRI support.
 brew install wget --with-iri
