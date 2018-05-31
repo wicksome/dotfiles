@@ -46,9 +46,9 @@ brew install pass
 # Install applications for develop.
 brew install jenv
 brew install node
-brew install go
-brew install gradle
-brew install elasticsearch
+#brew install go
+#brew install gradle
+#brew install elasticsearch
 
 # Install other useful binaries.
 brew install tmux
@@ -60,11 +60,11 @@ brew install git
 brew install git-flow
 brew install git-lfs
 brew install gist
-brew install tig
+#brew install tig
 brew install htop
-brew install httpie
-brew install mas
-brew install rename
+#brew install httpie
+#brew install mas
+#brew install rename
 brew install tree
 brew install plantuml
 brew install jq
