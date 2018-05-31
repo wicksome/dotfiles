@@ -19,6 +19,11 @@
 1. Install apps
     - [Homebrew](https://brew.sh/index_ko)
     - [vcprompt](https://github.com/djl/vcprompt)
+        ```
+        $ $PATH # check path
+        -bash: /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin: No such file or directory
+        $ mv ./vcprompt /usr/local/bin/
+        ```
     - [powerline font](https://github.com/powerline/fonts.git)
     - [java](https://stackoverflow.com/questions/24342886/how-to-install-java-8-on-mac)
 2. Install dotfiles
@@ -30,35 +35,13 @@
     - atom: [sync-settings](https://atom.io/packages/sync-settings)
     - iterm2
     - intelliJ
-
-## Requirements
-
-
-- vcprompt 설치
-  - `https://github.com/djl/vcprompt`에서 vcprompt 받고 bin에 이동
-
-    ```bash
-    $ $PATH
-    -bash: /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin: No such file or directory
-    $ mv ./vcprompt /usr/local/bin/
+4. get mackup directory in dropbox and restore mackup
     ```
-    - 참고사이트
-        - http://blog.outsider.ne.kr/737
-        - https://github.com/insanehong/bash_env
-        
-# vim
+    $ mackup restore
+    ```
 
-## Installation
-
-youcompleteme 설치
-
-```sh
-$ cd ~/.vim/plugged/youcompleteme
-$ ./install.py --gocode-completer
-$ ./install.py --tern-completer
-```
-
-# References
+## References
 
 - https://github.com/webpro/dotfiles
-
+- http://blog.outsider.ne.kr/737
+- https://github.com/insanehong/bash_env
