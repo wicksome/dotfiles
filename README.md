@@ -16,7 +16,7 @@
 
 ## Installation
 1. java 1.8
-1. Install Homebrew
+1. Install [Homebrew](https://brew.sh/index_ko)
 2. Install vcprompt
 3. Install powerline font
 
