@@ -23,9 +23,10 @@ alias vim='vi'
 # git
 alias gs='git status'
 alias gd='git diff'
+alias gb='git branch'
 alias gl='git lg1'
-alias gl2='git lg2'
 alias gpom="git push origin master"
+alias git-find-branches='~/git/dotfiles/system/utils/git-find-branches'
 
 alias htop="sudo htop"
 alias top='top -o cpu'
