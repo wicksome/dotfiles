@@ -3,3 +3,5 @@
 node_modules
 bower_components
 npm-debug.log
+
+src/test/java/com/worksmobile/contact/web/_local/
