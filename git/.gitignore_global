@@ -3,5 +3,7 @@
 node_modules
 bower_components
 npm-debug.log
+*.iml
 
+src/test/java/com/worksmobile/contact/core/_local/
 src/test/java/com/worksmobile/contact/web/_local/
