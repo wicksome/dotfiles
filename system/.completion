@@ -4,10 +4,13 @@ is-executable brew && [ -f $(brew --prefix)/share/bash-completion/bash_completio
 
 # Dotfiles
 
-_dotfiles_completions() {
-  local cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=( $(compgen -W '`dotfiles completion`' -- $cur ) );
-}
+#_dotfiles_completions() {
+#  local cur="${COMP_WORDS[COMP_CWORD]}"
+#  COMPREPLY=( $(compgen -W '`dotfiles completion`' -- $cur ) );
+#}
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+. $(brew --prefix)/etc/bash_completion
+fi
 
 # Homebrew
 
