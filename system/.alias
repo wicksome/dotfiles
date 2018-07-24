@@ -56,7 +56,8 @@ alias rm='trash'
 # open app
 alias subl='open -a "Sublime Text"'
 alias atom='open -a Atom'
-alias vs='open -a "visual Studio code"'
+# Run command in VS Code -> shell command: install 'code' command in PATH
+# alias vs='open -a "visual Studio code"'
 alias md='open -a MacDown'
 
 # coin

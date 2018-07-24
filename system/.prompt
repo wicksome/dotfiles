@@ -13,13 +13,44 @@ export VCPROMPT_STAGED="⚙"
 export VCPROMPT_MODIFIED="±"
 export VCPROMPT_UNTRACKED="✘"
 
+# style common
+reset=$(tput sgr0) # same "${s}0${e}"
+bold=$(tput bold)  # same "${s}1${e}"
+
+s="\033["          # start
+e="m"              # end
+
+bg="48;5;"         # background
+fg="38;5;"         # foreground
+
+# color code
+white=15
+gray=238
+purple=5
+green=29
+green2=22
+
+# background color
+bg_gray="${s}${bg}${gray}${e}"
+bg_green="${s}${bg}${green}${e}"
+bg_purple="${s}${bg}${purple}${e}"
+
+# text color
+fg_white="${s}${fg}${white}${e}"
+fg_gray="${s}${fg}${gray}${e}"
+fg_purple="${s}${fg}${purple}${e}"
+fg_green="${s}${fg}${green}${e}"
+
+
 # functions
 function prompt_custom_git {
     local c0=15      # font
     local c1=25      # branch
     local c2=236     # hash
-    local c3=55      # gap
-    local c4=5       # user
+    #local c3=55      # gap
+    local c3=22      # gap
+    #local c4=5       # user
+    local c4=29       # user
     local red=1      # git status
 
     local branch="$(tput setab $c1)$(tput setaf $c0)$(tput bold)  %b $(tput setaf $red)%m%u%a $(tput setab $c2)$(tput setaf $c1)$(tput sgr0)"
@@ -33,32 +64,9 @@ function prompt_custom_git {
 
 # show current status(user, dir path)
 function prompt_custom_status {
-    # style common
-    local reset=$(tput sgr0) # same "${s}0${e}"
-    local bold=$(tput bold)  # same "${s}1${e}"
-
-    local s="\033["          # start
-    local e="m"              # end
-
-    local bg="48;5;"         # background
-    local fg="38;5;"         # foreground
-
-    # color code
-    local white=15
-    local purple=5
-    local gray=238
-
-    # background color
-    local bg_purple="${s}${bg}${purple}${e}"
-    local bg_gray="${s}${bg}${gray}${e}"
-
-    # text color
-    local fg_purple="${s}${fg}${purple}${e}"
-    local fg_white="${s}${fg}${white}${e}"
-    local fg_gray="${s}${fg}${gray}${e}"
-
     # customizing
-    local user="${bg_purple}${fg_white}${bold} $USER 🌺  ${reset}$(tput setab 55)$(tput setaf $purple)$(tput setab $gray)$(tput setaf 55)"
+    #local user="${bg_purple}${fg_white}${bold} $USER 🌺  ${reset}$(tput setab 55)$(tput setaf $purple)$(tput setab $gray)$(tput setaf 55)"
+    local user="${bg_green}${fg_white}${bold} $USER ⛰  ${reset}$(tput setab $green2)$(tput setaf $green)$(tput setab $gray)$(tput setaf $green2)"
     local path="${bg_gray}${fg_white} $(dirs -0) ${reset}${fg_gray}${reset}"
 
 	echo -e "${user}${path}"
@@ -71,11 +79,12 @@ function prompt_custom_status {
 #   http://mywiki.wooledge.org/BashFAQ/053
 #   https://unix.stackexchange.com/questions/306773/prompt-line-is-deleted-by-switching-through-commands
 function prompt_custom_command {
-    local bg_gray=$(tput setab 238)
-    local fg_gray=$(tput setaf 238)
+    local bg_gray=$(tput setab $gray)
+    local fg_gray=$(tput setaf $gray)
     local reset=$(tput sgr0)
 
-    printf '\001%s\002%s\001%s\002%s\001%s\002' "$bg_gray" " ⚡  " "$reset$fg_gray" " " "$reset"
+    #printf '\001%s\002%s\001%s\002%s\001%s\002' "$bg_gray" " ⚡  " "$reset$fg_gray" " " "$reset"
+    printf '\001%s\002%s\001%s\002%s\001%s\002' "${bg_gray} ${reset}${fg_gray}" " " "${reset}"
 }
 
 export PS1='\n$(prompt_custom_git)$(prompt_custom_status)\n$(prompt_custom_command)'

@@ -68,6 +68,7 @@ brew install htop
 brew install tree
 brew install plantuml
 brew install jq
+brew install asciinema
 
 brew install uncrustify # for atom-extension
 
