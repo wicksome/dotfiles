@@ -24,11 +24,11 @@ brew cask install caskroom/versions/java8
 
 # Software
 brew cask install --appdir="/Applications" appcleaner
-brew cask install --appdir="/Applications" atom
+# brew cask install --appdir="/Applications" atom
 brew cask install --appdir="/Applications" bartender
 brew cask install --appdir="/Applications" bettertouchtool
-brew cask install --appdir="/Applications" cheatsheet
-brew cask install --appdir="/Applications" dash2
+# brew cask install --appdir="/Applications" cheatsheet
+# brew cask install --appdir="/Applications" dash2
 brew cask install --appdir="/Applications" dropbox
 brew cask install --appdir="/Applications" duet
 brew cask install --appdir="/Applications" evernote
@@ -36,7 +36,6 @@ brew cask install --appdir="/Applications" fantastical
 brew cask install --appdir="/Applications" fliqlo
 brew cask install --appdir="/Applications" glimmerblocker
 brew cask install --appdir="/Applications" google-chrome
-# brew cask install --appdir="/Applications" google-chrome-canary
 brew cask install --appdir="/Applications" keycastr
 brew cask install --appdir="/Applications" hammerspoon
 brew cask install --appdir="/Applications" vlc
