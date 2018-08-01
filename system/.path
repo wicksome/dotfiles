@@ -19,6 +19,9 @@ export JAVA_8=/Library/Java/Home
 export JAVA_HOME=$JAVA_8
 export PATH=$JAVA_HOME/bin:$PATH
 
+# https://docs.npmjs.com/getting-started/fixing-npm-permissions
+prepend-path "$HOME/.npm-global/bin"
+
 # homebrews should always take precedence
 prepend-path "/usr/local/bin"
 
