@@ -38,3 +38,24 @@ hk.bind(mash, "1", wm.move_window_upper_left)
 hk.bind(mash, "2", wm.move_window_upper_right)
 hk.bind(mash, "3", wm.move_window_lower_left)
 hk.bind(mash, "4", wm.move_window_lower_right)
+
+-- Custom working layout
+hk.bind(mash, "f1", function ()
+    local app1 = { app = "IntelliJ IDEA", r = 0.73 }
+    local app2 = { app = "iTerm2", r = 0.37 }
+    wm.set_working_layout({ app1, app2 })
+end)
+
+hk.bind(mash, "f2", function ()
+    local firstAppName = hs.application.frontmostApplication():name()
+    if firstAppName == "iTerm2" then
+        hs.alert("Not working if both art iTerm2")
+        return
+    end
+
+    local app1 = { app = firstAppName, r = 0.73 }
+    local app2 = { app = "iTerm2", r = 0.37 }
+    wm.set_working_layout({ app1, app2 })
+end)
+
+hk.bind(mash, "0", wm.print_locations)

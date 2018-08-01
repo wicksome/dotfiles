@@ -81,7 +81,6 @@ end
 
 module.move_window_to_left = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Move left", {
         x = unit.x - resizeing_scale,
         y = unit.y,
@@ -92,7 +91,6 @@ end
 
 module.move_window_to_right = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Move right", {
         x = unit.x + resizeing_scale,
         y = unit.y,
@@ -103,7 +101,6 @@ end
 
 module.move_window_to_up = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Move up", {
         x = unit.x,
         y = unit.y - resizeing_scale,
@@ -114,7 +111,6 @@ end
 
 module.move_window_to_down = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Move down", {
         x = unit.x,
         y = unit.y + resizeing_scale,
@@ -245,7 +241,6 @@ end
 
 module.size_up = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Up", {
         x = unit.x - (resizeing_scale / 2),
         y = unit.y - (resizeing_scale / 2),
@@ -256,7 +251,6 @@ end
 
 module.size_down = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Down", {
         x = unit.x + (resizeing_scale / 2),
         y = unit.y + (resizeing_scale / 2),
@@ -267,7 +261,6 @@ end
 
 module.size_up_vertical = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Up(vertical)", {
         x = unit.x,
         y = unit.y,
@@ -278,7 +271,6 @@ end
 
 module.size_down_vertical = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Down(vertical)", {
         x = unit.x,
         y = unit.y,
@@ -289,7 +281,6 @@ end
 
 module.size_up_horizontal = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Up(horizontal)", {
         x = unit.x,
         y = unit.y,
@@ -300,7 +291,6 @@ end
 
 module.size_down_horizontal = function()
     local unit = win():frame()
-    local s = screen()
     set_frame("Size Down(horizontal)", {
         x = unit.x,
         y = unit.y,
@@ -309,6 +299,61 @@ module.size_down_horizontal = function()
     })
 end
 
+--- set_working_layout_horizontal(apps)
+--- Method
+--- resizes the window to the the fit on the given portion of the screen given in pixels.
+--- Example: win:set_working_layout_horizontal({{app="code",r=0.5}, {app="iTerm",r=0.5}})
+module.set_working_layout_horizontal = function(apps)
+    local s = screen() -- window
+
+    local location = s.x
+    for i = 1, #apps do
+        hs.application.launchOrFocus(apps[i].app)
+        set_frame("Resize layout:" .. apps[i].app, {
+            x = location,
+            y = s.y,
+            w = s.w * apps[i].r,
+            h = s.h
+        })
+        location = location + win():frame().w
+    end
+end
+
+module.set_working_layout_vertical = function(apps)
+    local s = screen() -- window
+
+    local location = s.y
+    for i = 1, #apps do
+        hs.application.launchOrFocus(apps[i].app)
+        set_frame("Resize layout:" .. apps[i].app, {
+            x = s.x,
+            y = location,
+            w = s.w,
+            h = s.h * apps[i].r
+        })
+        location = location + win():frame().h
+    end
+end
+
+module.set_working_layout = function(apps)
+    local s = screen() -- window
+    if s.w > s.h then 
+        print("horizontal")
+        module.set_working_layout_horizontal(apps)
+    else 
+        print("vertical")
+        module.set_working_layout_vertical(apps)
+    end
+end
+
+-- log app, screen location and size 
+module.print_locations = function()
+    local format = "%s = x:%.2f y:%.2f w:%.2f h:%.2f"
+    local s = screen() -- window
+    print(string.format(format, "win", s.x, s.y, s.w, s.h))
+    local unit = win():frame() -- app
+    print(string.format(format, "app", unit.x, unit.y, unit.w, unit.h))
+end
 
 ------------------
 -- Internal API --
