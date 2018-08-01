@@ -7,3 +7,4 @@ npm-debug.log
 
 src/test/java/com/company/contact/core/_local/
 src/test/java/com/company/contact/web/_local/
+target/
