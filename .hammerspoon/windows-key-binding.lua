@@ -41,12 +41,6 @@ hk.bind(mash, "4", wm.move_window_lower_right)
 
 -- Custom working layout
 hk.bind(mash, "f1", function ()
-    local app1 = { app = "IntelliJ IDEA", r = 0.73 }
-    local app2 = { app = "iTerm2", r = 0.37 }
-    wm.set_working_layout({ app1, app2 })
-end)
-
-hk.bind(mash, "f2", function ()
     local firstAppName = hs.application.frontmostApplication():name()
     if firstAppName == "iTerm2" then
         hs.alert("Not working if both art iTerm2")
@@ -54,6 +48,12 @@ hk.bind(mash, "f2", function ()
     end
 
     local app1 = { app = firstAppName, r = 0.73 }
+    local app2 = { app = "iTerm2", r = 0.37 }
+    wm.set_working_layout({ app1, app2 })
+end)
+
+hk.bind(mash, "f2", function ()
+    local app1 = { app = "IntelliJ IDEA", r = 0.73 }
     local app2 = { app = "iTerm2", r = 0.37 }
     wm.set_working_layout({ app1, app2 })
 end)
