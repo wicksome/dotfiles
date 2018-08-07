@@ -41,21 +41,41 @@ hk.bind(mash, "4", wm.move_window_lower_right)
 
 -- Custom working layout
 hk.bind(mash, "f1", function ()
-    local firstAppName = hs.application.frontmostApplication():name()
-    if firstAppName == "iTerm2" then
-        hs.alert("Not working if both art iTerm2")
-        return
-    end
-
-    local app1 = { app = firstAppName, r = 0.73 }
-    local app2 = { app = "iTerm2", r = 0.37 }
+    local app = getCurrentFocusedApplication("iTerm2")
+        
+    hs.alert("Set working layout with iTerm")
+    local app1 = { app = app:name(), r = 0.73 }
+    local app2 = { app = "iTerm2", r = 0.27 }
     wm.set_working_layout({ app1, app2 })
 end)
 
 hk.bind(mash, "f2", function ()
-    local app1 = { app = "IntelliJ IDEA", r = 0.73 }
-    local app2 = { app = "iTerm2", r = 0.37 }
+    local focusedApp = hs.application.frontmostApplication()
+    if focusedApp:name() == "Code" then
+        return -- excluded VSCode
+    end
+
+    local app = getCurrentFocusedApplication("Totoist")
+    
+    hs.alert("Set working layout with Todoist 📝")
+    local app1 = { app = app:name(), r = 0.80 }
+    local app2 = { app = "Todoist", r = 0.20 }
+    wm.set_working_layout({ app2, app1 })
+end)
+
+hk.bind(mash, "f3", function ()
+    local app1 = { app = "IntelliJ IDEA", r = 0.75 }
+    local app2 = { app = "iTerm2", r = 0.25 }
     wm.set_working_layout({ app1, app2 })
 end)
 
 hk.bind(mash, "0", wm.print_locations)
+
+function getCurrentFocusedApplication(unwantedAppName)
+    local focusedApp = hs.application.frontmostApplication()
+    if focusedApp:name() == unwantedAppName then
+        hs.alert("Not working if both art " .. unwantedAppName)
+        error("Not working if both art " .. unwantedAppName)
+    end
+    return focusedApp
+end
