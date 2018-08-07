@@ -1,41 +1,47 @@
 # Hammerspoon Configuration
 
-Key | Action
----|---
-<kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>R</kbd> | Reload config
+| Key                                                       | Action        |
+| --------------------------------------------------------- | ------------- |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>R</kbd> | Reload config |
 
 ## Launch Apps
 
-<kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + Key
-
-Key | App | Desc
----|---|---
-,  | System Preferences |
-\\ | 1Password |
-C  | Fantastical 2 | **C**alender
-E  | **E**vernote |
-M  | Spark | **M**ail Client
-P  | MindNode | **P**roductivity
-T  | iTerm 2 | **T**erminal
+| Key                                                        | Application        |
+| ---------------------------------------------------------- | ------------------ |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>,</kbd>  | System Preferences |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>\\</kbd> | 1Password          |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>C</kbd>  | Fantastical 2      |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>E</kbd>  | **E**vernote       |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>M</kbd>  | Spark              |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>P</kbd>  | MindNode           |
+| <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>T</kbd>  | iTerm 2            |
 
 ## Window Management
 
-<kbd>⌥</kbd> + <kbd>⌃</kbd> + key
+| Key                                             | Action            |
+| ----------------------------------------------- | ----------------- |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>←</kbd>      | Move window left  |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>→</kbd>      | Move window right |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>↑</kbd>      | Move window up    |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>↓</kbd>      | Move window down  |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>q</kbd>      | Decrease height   |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>w</kbd>      | Increase height   |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>a</kbd>      | Decrease width    |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>s</kbd>      | Increase width    |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>1</kbd>      | Set 2x2 grid      |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>2</kbd>      | Set 2x2 grid      |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>3</kbd>      | Set 3x3 grid      |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>4</kbd>      | Set 4x4 grid      |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>n</kbd>      | To next screen    |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>,</kbd>      | Snap to grid      |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>enter</kbd>  | Maximize window   |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>delete</kbd> | undo              |
 
-Key | Action
----|---
-← | Move window left
-→ | Move window right
-↑ | Move window up
-↓ | Move window down
-i | Decrease height
-k | Increase height
-j | Decrease width
-l | Increase width
-2 | Set 2x2 grid
-3 | Set 3x3 grid
-4 | Set 4x4 grid
-/ | To next screen
-, | Snap to grid
-(space) | Maximize window
-. | Minimize window
+## Other applications
+
+### Workflow Timer
+
+| Key                                        | Action                |
+| ------------------------------------------ | --------------------- |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>o</kbd> | start work session    |
+| <kbd>⌥</kbd> + <kbd>⌃</kbd> + <kbd>p</kbd> | pause current session |

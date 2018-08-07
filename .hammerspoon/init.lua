@@ -23,4 +23,4 @@ end
 hs.hotkey.bind({"cmd", "shift", "ctrl"}, "/", function() print_table(hs.application.runningApplications()); end )
 
 -- start hammerspoon
-hs.alert("Hammerspoon config loaded")
+hs.alert("Hammerspoon config loaded")hs.alert("Hammerspoon config loaded")
