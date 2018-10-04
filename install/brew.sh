@@ -51,8 +51,8 @@ brew install node
 #brew install elasticsearch
 
 # Install other useful binaries.
-brew install tmux
-brew install tmuxinator-completion
+# brew install tmux
+# brew install tmuxinator-completion
 brew install the_silver_searcher
 brew install fzf
 brew install autojump   
@@ -66,16 +66,16 @@ brew install htop
 #brew install mas
 #brew install rename
 brew install tree
-brew install plantuml
+# brew install plantuml
 brew install jq
-brew install asciinema
+# brew install asciinema
 
 brew install uncrustify # for atom-extension
 
 # Install apps for documentation.
-brew install asciidoctor
-brew install asciidoc
-brew install pandoc
+# brew install asciidoctor
+# brew install asciidoc
+# brew install pandoc
 
 # Install Mac applications.
 which cask || brew tap caskroom/cask
