@@ -16,9 +16,10 @@ cd dotfiles
 ./install.sh
 ```
 
-1. init [macos](https://github.com/wicksome/dotfiles/tree/master/macos) env
-2. install [iterm](https://www.iterm2.com)
-3. isntall [zsh](https://ohmyz.sh)
+1. install [chrome](https://www.google.com/chrome/)
+2. init [macos](https://github.com/wicksome/dotfiles/tree/master/macos) env
+3. install [iterm](https://www.iterm2.com)
+4. isntall [zsh](https://ohmyz.sh)
 
 
 ## Package overview
