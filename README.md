@@ -16,6 +16,10 @@ cd dotfiles
 ./install.sh
 ```
 
+1. init [macos](https://github.com/wicksome/dotfiles/tree/master/macos) env
+2. install [iterm](https://www.iterm2.com)
+3. isntall [zsh](https://ohmyz.sh)
+
 
 ## Package overview
 
