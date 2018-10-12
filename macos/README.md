@@ -16,3 +16,8 @@
 ![](https://user-images.githubusercontent.com/5036939/46842344-fe8e1600-cd81-11e8-91e0-ba87fb4136ed.png)
 ## Delete Guest
 ![](https://user-images.githubusercontent.com/5036939/46842347-00f07000-cd82-11e8-8df1-3940eb40b2b4.png)
+
+## Remove all apps in Dock
+```
+defaults write com.apple.dock persistent-apps -array
+```
