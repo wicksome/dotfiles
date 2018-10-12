@@ -4,6 +4,19 @@
 
 ![local_prompt](https://user-images.githubusercontent.com/5036939/27002254-f4435aba-4e17-11e7-8237-10a7f5bdccc7.png)
 
+
+## Install(NEW)
+
+```bash
+cd
+mkdir workspace
+cd workspace
+git clone https://github.com/wicksome/dotfiles
+cd dotfiles
+./install.sh
+```
+
+
 ## Package overview
 
 - Core
