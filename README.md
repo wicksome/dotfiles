@@ -20,7 +20,8 @@ cd dotfiles
 ```
 4. install [zsh](https://ohmyz.sh)
 5. isntall 1password(appstore)
-
+6. install mindnode(appstore)
+7. install [notion](https://www.notion.so/desktop)
 
 ## Package overview
 
