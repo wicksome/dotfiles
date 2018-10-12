@@ -8,6 +8,8 @@
 ![](https://user-images.githubusercontent.com/5036939/46842334-f7ff9e80-cd81-11e8-83f0-9efcd0c3ad98.png)
 ## Change shortcut to Switch Input Source
 ![](https://user-images.githubusercontent.com/5036939/46842320-e7e7bf00-cd81-11e8-8cbb-c9e445866ceb.png)
+## Change other shortcut
+![](https://user-images.githubusercontent.com/5036939/46843053-d86a7500-cd85-11e8-91d2-8ef42d135702.png)
 ## Change Caps lock to Control
 ![](https://user-images.githubusercontent.com/5036939/46842322-eae2af80-cd81-11e8-91c2-7c3ff2b382db.png)
 ## Resizing the Dock
