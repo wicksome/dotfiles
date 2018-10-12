@@ -12,6 +12,11 @@
 ![](https://user-images.githubusercontent.com/5036939/46842322-eae2af80-cd81-11e8-91c2-7c3ff2b382db.png)
 ## Resizing the Dock
 ![](https://user-images.githubusercontent.com/5036939/46842330-f46c1780-cd81-11e8-8114-c77ab045c8c7.png)
+```
+defaults write com.apple.dock tilesize -int 36
+killall Dock
+```
+
 ## Show Battery Percentage
 ![](https://user-images.githubusercontent.com/5036939/46842344-fe8e1600-cd81-11e8-91e0-ba87fb4136ed.png)
 ## Delete Guest
@@ -20,4 +25,5 @@
 ## Remove all apps in Dock
 ```
 defaults write com.apple.dock persistent-apps -array
+killall Dock
 ```
