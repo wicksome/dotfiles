@@ -1,3 +1,9 @@
+# Installation
+
+```bash
+
+```
+
 # Hammerspoon Configuration
 
 | Key                                                       | Action        |
