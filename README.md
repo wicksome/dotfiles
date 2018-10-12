@@ -18,7 +18,8 @@ git clone https://github.com/wicksome/dotfiles
 cd dotfiles
 ./install.sh
 ```
-4. isntall [zsh](https://ohmyz.sh)
+4. install [zsh](https://ohmyz.sh)
+5. isntall 1password(appstore)
 
 
 ## Package overview
