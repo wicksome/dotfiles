@@ -12,7 +12,6 @@ fi
 brew tap cashroom/cask
 brew cask install --appdir="/Applications" hammerspoon
 
-
 cd $(dirname $BASH_SOURCE)
 BASE=$(dirname $(pwd))
 [ -d ~/.hammerspoon ] || ln -sfv "$BASE/.hammerspoon/" ~
