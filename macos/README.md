@@ -10,8 +10,10 @@
 ![](https://user-images.githubusercontent.com/5036939/46842320-e7e7bf00-cd81-11e8-8cbb-c9e445866ceb.png)
 ## Change other shortcut
 ![](https://user-images.githubusercontent.com/5036939/46843053-d86a7500-cd85-11e8-91d2-8ef42d135702.png)
-## Change Caps lock to Control
+## Change <kbd>Caps lock</kbd> to Control
 ![](https://user-images.githubusercontent.com/5036939/46842322-eae2af80-cd81-11e8-91c2-7c3ff2b382db.png)
+## Change <kbd>F1</kbd>, <kbd>F2</kbd> to standared
+![](https://user-images.githubusercontent.com/5036939/46843121-18315c80-cd86-11e8-94c4-ed10470ed146.png)
 ## Resizing the Dock
 ![](https://user-images.githubusercontent.com/5036939/46842330-f46c1780-cd81-11e8-8114-c77ab045c8c7.png)
 OR
