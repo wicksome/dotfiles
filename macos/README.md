@@ -5,7 +5,7 @@
 ## Hide Siri in menu bar
 ![](https://user-images.githubusercontent.com/5036939/46842317-e3bba180-cd81-11e8-8374-43e3a3ac3c72.png)
 ## Change shortcut to Show Spotlight.
-![image](https://user-images.githubusercontent.com/5036939/46925447-d09d2000-d066-11e8-810d-765a6fd869b5.png)
+![image](https://user-images.githubusercontent.com/5036939/46842334-f7ff9e80-cd81-11e8-83f0-9efcd0c3ad98.png)
 ## Change shortcut to Switch Input Source
 ![](https://user-images.githubusercontent.com/5036939/46842320-e7e7bf00-cd81-11e8-8cbb-c9e445866ceb.png)
 ## Change other shortcut
