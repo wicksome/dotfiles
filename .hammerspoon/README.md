@@ -1,3 +1,11 @@
+# ⚠️ _Not working on Mojave_
+
+# Installation
+
+```bash
+./install.sh
+```
+
 # Hammerspoon Configuration
 
 | Key                                                       | Action        |
