@@ -1123,6 +1123,8 @@
 	<string>1602 394 791 302 0 0 2560 1418 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>905 716 606 456 0 0 1920 1177 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>972 933 616 174 0 0 2560 1418 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1080 981 400 129 0 0 2560 1418 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -1130,15 +1132,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-806 330 606 469 -1200 -150 1200 1898 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>387 581 796 486 0 0 2560 1418 </string>
+	<string>548 607 796 486 0 0 1920 1178 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame com.apple.typography_panel_InconsolataForPowerline-g</key>
 	<string>479 737 260 42 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1621 511 780 611 0 0 2560 1418 </string>
+	<string>278 359 955 971 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>443 1017 570 401 0 0 2560 1418 </string>
+	<string>1177 362 941 971 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>1336 117 570 451 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1152,9 +1154,9 @@
 	<key>NSWindow Frame iTerm Window 15</key>
 	<string>291 291 570 452 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>1520 1017 570 401 0 0 2560 1418 </string>
+	<string>216 0 1144 1418 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>757 591 570 401 0 0 2560 1418 </string>
+	<string>1280 0 1277 1418 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>84 656 570 401 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
@@ -5145,7 +5147,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-07-24T02:42:02Z</date>
+	<date>2018-09-12T02:33:17Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -5153,7 +5155,7 @@
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -13555,7 +13557,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.0beta7</string>
+	<string>3.2.1beta2</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
