@@ -95,8 +95,8 @@ call plug#end()
 " =============================================================================
 
 set number                                                " show absolute line number of the current line
-set autoindent smartindent
-set shiftwidth=4 tabstop=4 softtabstop=4 
+set ai smartindent
+set sw=4 ts=4 softtabstop=4 
 set expandtab smarttab
 set laststatus=2                                          " always show status bar
 set showcmd
@@ -113,7 +113,6 @@ set history=500                                           " history size
 set showmatch                                             " 자동 괄호맞쳐주기
 set title
 set showmode	                                          " show current mode
-set ai
 set t_Co=256
 set clipboard=unnamed                                     " copy to clipboard
 
