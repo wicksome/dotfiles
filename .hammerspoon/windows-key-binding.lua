@@ -28,9 +28,9 @@ hk.bind(mash, "-", wm.size_down, nil, wm.size_down)
 hk.bind(mash, "=", wm.size_up, nil, wm.size_up)
 
 hk.bind(mash, "q", wm.size_down_vertical, nil, wm.size_down_vertical)
-hk.bind(mash, "w", wm.size_up_vertical, nil, wm.size_up_vertical)
+hk.bind(mash, "s", wm.size_up_vertical, nil, wm.size_up_vertical)
 hk.bind(mash, "a", wm.size_down_horizontal, nil, wm.size_down_horizontal)
-hk.bind(mash, "s", wm.size_up_horizontal, nil, wm.size_up_horizontal)
+hk.bind(mash, "w", wm.size_up_horizontal, nil, wm.size_up_horizontal)
 
 hk.bind(mash, "n", wm.send_window_next_monitor)
 
