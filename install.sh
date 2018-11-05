@@ -8,8 +8,7 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ########################################
 # Check directory path of the dotfiles.
 ########################################
-echo -e "📦 Base Directory Path: $(tput bold)$DOTFILES_DIR$(tput sgr0)"
-# echo -e "📦 $(tput bold)dotfiles root dir: $(tput setab 16)$(tput setaf 2) $DOTFILES_DIR $(tput sgr0)"
+echo -e "📦 DOTFILES_DIR: $(tput bold)$DOTFILES_DIR$(tput sgr0)"
 read -r -p "❓ Are you sure? [y/n] " response
 if ! [[ "$response" =~ ^(yes|y)$ ]]; then
   exit 1 
@@ -56,3 +55,4 @@ if [ "$(uname)" == "Darwin" ]; then
     # ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
 
+unset DOTFILES_DIR

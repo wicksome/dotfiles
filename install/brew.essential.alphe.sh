@@ -26,8 +26,8 @@ echo "copied"
 # brew cask install --appdir="/Applications" copied
 # brew cask install --appdir="/Applications" mindnode # 따로 받아야 최신버전 받
 
-# Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+echo "yubisitch(for works) - https://github.com/pallotron/yubiswitch"
 
-
-
+echo "intellij IDEA"
+echo "sourcetree"
+echo "ybk-store"

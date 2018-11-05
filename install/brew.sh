@@ -36,12 +36,6 @@ brew install openconnect
 brew install gpg
 brew install pass
 
-# Install applications for develop.
-
-#brew install go
-#brew install gradle
-#brew install elasticsearch
-
 # Install other useful binaries.
 # brew install tmux
 # brew install tmuxinator-completion
@@ -52,17 +46,12 @@ brew install git
 brew install git-flow
 brew install git-lfs
 brew install gist
-#brew install tig
 brew install htop
-#brew install httpie
-#brew install mas
-#brew install rename
 brew install tree
-# brew install plantuml
 brew install jq
-# brew install asciinema
 
-# Install apps for documentation.
+# brew install plantuml
+# brew install asciinema
 # brew install asciidoctor
 # brew install asciidoc
 # brew install pandoc
