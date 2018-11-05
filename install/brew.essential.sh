@@ -20,41 +20,20 @@ brew tap caskroom/cask
 brew tap caskroom/versions
 
 # Development
+brew install jenv
+brew install node
 brew cask install caskroom/versions/java8
 
 # Software
 brew cask install --appdir="/Applications" appcleaner
-# brew cask install --appdir="/Applications" atom
 brew cask install --appdir="/Applications" bartender
 brew cask install --appdir="/Applications" bettertouchtool
-# brew cask install --appdir="/Applications" cheatsheet
-# brew cask install --appdir="/Applications" dash2
-# brew cask install --appdir="/Applications" dropbox
-# brew cask install --appdir="/Applications" duet
-brew cask install --appdir="/Applications" evernote
 brew cask install --appdir="/Applications" fantastical
-brew cask install --appdir="/Applications" fliqlo
-brew cask install --appdir="/Applications" glimmerblocker
-# brew cask install --appdir="/Applications" google-chrome
-# brew cask install --appdir="/Applications" keycastr
+brew cask install --appdir="/Applications" visual-studio-code
+brew cask install --appdir="/Applications" dropbox
 brew cask install --appdir="/Applications" hammerspoon
 brew cask install --appdir="/Applications" vlc
 # brew cask install --appdir="/Applications" 1password
 
-# brew cask install --appdir="/Applications" now
-# brew cask install --appdir="/Applications" macdown
-# brew cask install --appdir="/Applications" popclip
-# brew cask install --appdir="/Applications" slack
-# brew cask install --appdir="/Applications" sublime-text
-
-
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
-
-# Link Hammerspoon config
-cd $(dirname $BASH_SOURCE)
-BASE=$(dirname $(pwd))
-
-[ -d ~/.hammerspoon ] || ln -sfv "$BASE/.hammerspoon/" ~
-
-unset BASE
