@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
+echo Install command-line tools uring Homebrew.
+read -p "Press any key to continue... " -n1 -s
+echo ""
+
+if test ! $(which brew)
+then
+  echo "  Installing Homebrew for you."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" > /tmp/homebrew-install.log
+fi
 
 # Make sure we’re using the latest Homebrew.
 brew update
@@ -16,27 +24,12 @@ brew install coreutils
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
-# Install Bash 4.
-# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
-# running `chsh`. To do so, run `sudo chsh -s /usr/local/bin/bash`.
-brew install bash
-brew tap homebrew/versions
-brew install bash-completion2
-
-# Switch to using brew-installed bash as default shell
-if ! fgrep -q '/usr/local/bin/bash' /etc/shells; then
-  echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/bash;
-fi;
 
 # mac backup
-brew install mackup
+# brew install mackup
 
 # Install `wget` with IRI support.
 brew install wget --with-iri
-
-# Install VIM of macOS tools.
-brew install macvim --with-override-system-vi
 
 # Install VPN.
 brew install openconnect
@@ -44,8 +37,7 @@ brew install gpg
 brew install pass
 
 # Install applications for develop.
-brew install jenv
-brew install node
+
 #brew install go
 #brew install gradle
 #brew install elasticsearch
@@ -69,8 +61,6 @@ brew install tree
 # brew install plantuml
 brew install jq
 # brew install asciinema
-
-brew install uncrustify # for atom-extension
 
 # Install apps for documentation.
 # brew install asciidoctor
