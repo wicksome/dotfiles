@@ -36,9 +36,8 @@ alias stime='last reboot | head -2'
 
 # system
 # https://apple.stackexchange.com/a/103633
-alias byebye="osascript -e 'tell app \"loginwindow\" to «event aevtrsdn»'"
-alias reboot="osascript -e 'tell app \"loginwindow\" to «event aevtrrst»'"
-# /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine
+# alias byebye="osascript -e 'tell app \"loginwindow\" to «event aevtrsdn»'"
+# alias reboot="osascript -e 'tell app \"loginwindow\" to «event aevtrrst»'"
 #alias hosts='grep '^[0-9]' /etc/hosts'
 alias hosts='grep '^[0-9]' /etc/hosts | grep -Ev "^(127.0.0.1|255.255.255.255)"'
 function port() {
@@ -54,16 +53,5 @@ alias trash='$HOME/git/trash-cli/trash'
 alias rm='trash'
 
 # open app
-alias subl='open -a "Sublime Text"'
-alias atom='open -a Atom'
 # Run command in VS Code -> shell command: install 'code' command in PATH
 # alias vs='open -a "visual Studio code"'
-alias md='open -a MacDown'
-
-# coin
-alias eos='http GET https://api.bithumb.com/public/ticker/EOS | jq ".data.closing_price"'
-
-# for dev
-function todo() { (cd $HOME/git/todo-cli && yarn start $@) }
-alias todo='todo $@'
-
