@@ -1132,15 +1132,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-806 330 606 469 -1200 -150 1200 1898 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>548 607 796 486 0 0 1920 1178 </string>
+	<string>548 647 796 486 0 0 1920 1177 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame com.apple.typography_panel_InconsolataForPowerline-g</key>
 	<string>479 737 260 42 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>278 359 955 971 0 0 2560 1418 </string>
+	<string>577 41 906 1136 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1177 362 941 971 0 0 2560 1418 </string>
+	<string>1280 0 1277 1417 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>1336 117 570 451 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1154,15 +1154,15 @@
 	<key>NSWindow Frame iTerm Window 15</key>
 	<string>291 291 570 452 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>216 0 1144 1418 0 0 2560 1418 </string>
+	<string>216 1016 570 401 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>1280 0 1277 1418 0 0 2560 1418 </string>
+	<string>64 190 570 401 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>84 656 570 401 0 0 1920 1178 </string>
+	<string>151 59 1179 416 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>499 535 570 401 0 0 2560 1418 </string>
+	<string>265 181 955 971 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>0 62 2560 671 0 0 2560 1418 </string>
+	<string>1001 369 780 956 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
 	<string>-648 891 590 473 -1200 -150 1200 1898 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
@@ -5147,7 +5147,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-09-12T02:33:17Z</date>
+	<date>2018-11-04T23:52:05Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -13557,7 +13557,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.1beta2</string>
+	<string>3.2.5beta1</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
