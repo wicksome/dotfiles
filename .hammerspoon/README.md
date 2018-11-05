@@ -1,5 +1,3 @@
-# ⚠️ _Not working on Mojave_
-
 # Installation
 
 ```bash
