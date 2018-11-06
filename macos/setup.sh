@@ -11,6 +11,7 @@ osascript -e 'tell application "System Preferences" to quit'
 
 # Disable the crash reporter
 defaults write com.apple.CrashReporter DialogType -string "none"
+defaults write NSGlobalDomain KeyRepeat -int 0
 
 ###############################################################################
 # Dock                                                                        #
