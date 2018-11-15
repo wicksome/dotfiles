@@ -49,6 +49,7 @@ brew install gist
 brew install htop
 brew install tree
 brew install jq
+brew install python-yq
 
 # brew install plantuml
 # brew install asciinema

@@ -76,7 +76,6 @@ Plug 'elzr/vim-json'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'shmup/vim-sql-syntax'
-Plug 'rizzatti/dash.vim'
 Plug 'dearrrfish/vim-applescript'
 
 if os == 'Darwin'
@@ -220,15 +219,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlig
-
-" vim-test
-nmap <silent> <leader>tt :TestNearest<CR>
-nmap <silent> <leader>tf :TestFile<CR>
-nmap <silent> <leader>ts :TestSuite<CR>
-nmap <silent> <leader>tl :TestLast<CR>
-nmap <silent> <leader>tv :TestVisit<CR>
-let g:test#strategy = 'tslime'
-let g:test#preserve_screen = 1
 
 " Don't prompt to load ycm_extra_conf.py for YouCompleteMe; just load it.
 let g:ycm_confirm_extra_conf = 0
