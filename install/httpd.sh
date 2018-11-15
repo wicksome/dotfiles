@@ -12,3 +12,5 @@ brew install httpd
 
 # Configure httpd service to be auto-started on system boot.
 sudo brew services start httpd
+
+sudo chmod 666 /usr/local/var/log/httpd/access_log /usr/local/var/log/httpd/error_log
