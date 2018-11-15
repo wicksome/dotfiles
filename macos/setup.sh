@@ -43,6 +43,10 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Hide recent application in Dock
 defaults write com.apple.dock show-recents -bool false
 
+# for idea vi plugin
+defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool 0
+
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################

@@ -21,13 +21,13 @@ brew cask install --appdir="/Applications" duet
 # brew cask install --appdir="/Applications" dash2
 # brew cask install --appdir="/Applications" fliqlo
 
-# App Store
+# 앱 스토어
 echo "copied"
-# brew cask install --appdir="/Applications" copied
 # brew cask install --appdir="/Applications" mindnode # 따로 받아야 최신버전 받
 
-echo "yubisitch(for works) - https://github.com/pallotron/yubiswitch"
-
+# 각 사이트에서 다운로드 받아야 하는 애플리케이션
 echo "intellij IDEA"
-echo "sourcetree"
+echo "postman"
+
+echo "yubisitch - https://github.com/pallotron/yubiswitch"
 echo "ybk-store"
