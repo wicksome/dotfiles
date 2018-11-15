@@ -18,6 +18,7 @@ nnoremap <leader>clear :action CloseAllEditors<cr>
 nnoremap <leader>sp :action SplitVertically<cr>
 nnoremap <leader>hsp :action SplitHorizontally<cr>
 nnoremap <leader>vsp :action SplitVertically<cr>
+nnoremap <leader>haw :action <cr>
 
 " Git
 nnoremap <leader>gh :action LocalHistory.ShowHistory<cr>
