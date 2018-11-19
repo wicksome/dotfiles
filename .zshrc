@@ -2,11 +2,11 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.npm-global/bin:$PATH
 
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
 
-export TERM=xterm-256color
+export TERM="xterm-256color"
 export LS_COLORS='di=32:ln=36:so=35:pi=33:ex=31:bd=0:cd=0:su=31;47:sg=31;47:tw=32;47:ow=32;47'
 
 ########################################################################
@@ -90,8 +90,8 @@ P9K_VI_MODE_NORMAL_FOREGROUND='black'
 # ETC(plugins)
 
 ZLE_RPROMPT_INDENT=0
-
-
+P9K_CURSOR_SHAPE="true"
+P9K_CURSOR_NOBLINK="true"
 
 # for vi-mode
 function zle-keymap-select zle-line-init {
