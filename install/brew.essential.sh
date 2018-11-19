@@ -39,5 +39,8 @@ brew cask install --appdir="/Applications" visual-studio-code
 brew cask install --appdir="/Applications" vlc
 # brew cask install --appdir="/Applications" 1password
 
+# terminal record
+brew install asciinema
+
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
