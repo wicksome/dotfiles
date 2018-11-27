@@ -188,6 +188,7 @@ endif
 syntax enable
 set background=dark
 colorscheme paramount
+
 hi Normal ctermbg=none " set custom background color
 
 let g:vim_markdown_folding_disabled = 1

@@ -1110,23 +1110,23 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>901 186 702 356 0 0 2880 1597 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>2970 869 620 392 2560 -739 1440 2537 </string>
+	<string>970 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1189 232 796 486 0 0 2560 1417 </string>
+	<string>1404 186 796 486 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>305 601 570 401 0 0 2560 1417 </string>
+	<string>314 364 1095 1046 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>728 337 997 986 0 0 2560 1417 </string>
+	<string>1083 1052 570 401 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>379 646 570 401 0 0 2560 1417 </string>
+	<string>146 132 1158 1316 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>164 387 619 416 0 0 2560 1417 </string>
+	<string>1440 0 1130 1597 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>562 388 885 581 0 0 2560 1417 </string>
+	<string>253 0 983 1597 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>923 602 570 401 0 0 2560 1417 </string>
+	<string>554 282 766 1241 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>7 892 570 401 0 0 2560 1417 </string>
+	<string>629 603 570 401 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
 	<string>529 994 570 401 0 0 2560 1417 </string>
 	<key>NavigatePanesInReadingOrder</key>
@@ -1767,7 +1767,7 @@
 			<key>Non-ASCII Ligatures</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>DejaVuSansMonoPowerline 12</string>
+			<string>HackNerdFontComplete-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<true/>
 			<key>Open Toolbelt</key>
@@ -2196,7 +2196,7 @@
 			<key>Unicode Normalization</key>
 			<integer>0</integer>
 			<key>Unicode Version</key>
-			<integer>8</integer>
+			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -2317,7 +2317,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-11-15T21:58:53Z</date>
+	<date>2018-11-26T23:32:36Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -10725,7 +10725,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.2.6beta3</string>
+	<string>3.2.6beta4</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
