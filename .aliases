@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias l="ls -l"
 alias ll="ls -al"
 alias gs="git status"
@@ -55,3 +57,5 @@ function git_find_branches()
 }
 
 alias git_find_branches "$@"
+
+alias sl='~/workspace/works-contact-server/sl'
