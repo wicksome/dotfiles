@@ -27,6 +27,7 @@ fi
 brew install jenv
 brew install node
 brew cask install caskroom/versions/java8
+brew cask install ngrok
 
 # Software
 brew cask install --appdir="/Applications" appcleaner
