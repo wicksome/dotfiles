@@ -1064,6 +1064,8 @@
 	<integer>7</integer>
 	<key>LeftOption</key>
 	<integer>2</integer>
+	<key>LeftTabBarWidth</key>
+	<real>273.2578125</real>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>MaxVertically</key>
@@ -1126,7 +1128,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2909 554 928 394 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2677 -563 990 489 2560 -681 1440 2537 </string>
+	<string>2686 -446 1025 1182 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>599 682 570 422 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
@@ -2066,22 +2068,58 @@
 					</dict>
 					<dict>
 						<key>class</key>
-						<string>iTermStatusBarUsernameComponent</string>
+						<string>iTermStatusBarActionComponent</string>
 						<key>configuration</key>
 						<dict>
 							<key>knobs</key>
 							<dict>
-								<key>base: compression resistance</key>
-								<integer>1</integer>
-								<key>base: priority</key>
-								<real>5</real>
-								<key>path</key>
-								<string>username</string>
+								<key>action</key>
+								<dict>
+									<key>action</key>
+									<integer>25</integer>
+									<key>parameter</key>
+									<string>SendIncrementNumber.scpt
+/Users/yeongjun/Library/ApplicationSupport/iTerm2/Scripts/SendIncrementNumber.scpt</string>
+									<key>title</key>
+									<string>서버번호입력</string>
+								</dict>
+								<key>maxwidth</key>
+								<real>+infinity</real>
+								<key>minwidth</key>
+								<string>30</string>
 							</dict>
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
 								<key>algorithm</key>
 								<integer>1</integer>
+								<key>background color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>1</real>
+									<key>Blue Component</key>
+									<real>0.0</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.0</real>
+									<key>Red Component</key>
+									<real>0.0</real>
+								</dict>
+								<key>font</key>
+								<string>.AppleSystemUIFont 12</string>
+								<key>separator color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>0.25</real>
+									<key>Blue Component</key>
+									<real>0.0</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.0</real>
+									<key>Red Component</key>
+									<real>0.0</real>
+								</dict>
 							</dict>
 						</dict>
 					</dict>
@@ -2092,12 +2130,6 @@
 						<dict>
 							<key>knobs</key>
 							<dict>
-								<key>base: compression resistance</key>
-								<integer>1</integer>
-								<key>base: priority</key>
-								<real>5</real>
-								<key>iTermStatusBarSpringComponentSizeMultipleKey</key>
-								<integer>1</integer>
 								<key>iTermStatusBarSpringComponentSpringConstantKey</key>
 								<real>0.01</real>
 							</dict>
@@ -2143,8 +2175,6 @@
 						<dict>
 							<key>knobs</key>
 							<dict>
-								<key>base: compression resistance</key>
-								<integer>1</integer>
 								<key>base: priority</key>
 								<real>5</real>
 							</dict>
@@ -2190,8 +2220,6 @@
 						<dict>
 							<key>knobs</key>
 							<dict>
-								<key>base: compression resistance</key>
-								<integer>1</integer>
 								<key>base: priority</key>
 								<real>5</real>
 							</dict>
@@ -2243,7 +2271,7 @@
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 			<key>Title Components</key>
-			<integer>68</integer>
+			<integer>3</integer>
 			<key>Transparency</key>
 			<real>0.14000757659923324</real>
 			<key>Triggers</key>
@@ -2544,9 +2572,9 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{2560, -681}, {1440, 2560}}</string>
+		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{2785, 701}</string>
+		<string>{1015, 1238}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
@@ -3172,7 +3200,7 @@
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>0</integer>
 	<key>PerPaneBackgroundImage</key>
-	<true/>
+	<false/>
 	<key>PerformDictionaryLookupOnQuickLook</key>
 	<true/>
 	<key>PointerActions</key>
@@ -3245,11 +3273,11 @@
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
-	<true/>
+	<false/>
 	<key>ShowSessionRestoredBanner</key>
 	<true/>
 	<key>SmartPlacement</key>
@@ -3271,7 +3299,7 @@
 	<key>TabStyleWithAutomaticOption</key>
 	<integer>5</integer>
 	<key>TabViewType</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>TerminalVMargin</key>
 	<integer>2</integer>
 	<key>ThreeFingerEmulates</key>
@@ -11639,7 +11667,7 @@
 		</array>
 	</dict>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>WindowStyle</key>
 	<integer>0</integer>
 	<key>WordCharacters</key>
