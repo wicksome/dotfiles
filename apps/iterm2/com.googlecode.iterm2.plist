@@ -1037,7 +1037,7 @@
 	<key>HideTab</key>
 	<true/>
 	<key>HideTabCloseButton</key>
-	<false/>
+	<true/>
 	<key>HideTabNumber</key>
 	<false/>
 	<key>HighlightTabLabels</key>
@@ -1115,6 +1115,8 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 134 224 275 0 0 2560 1417 </string>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>901 186 702 356 0 0 2880 1597 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
@@ -1124,7 +1126,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2909 554 928 394 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1269 131 738 662 0 0 2560 1417 </string>
+	<string>2677 -563 990 489 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>599 682 570 422 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
@@ -3208,6 +3210,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>~/workspace/dotfiles/apps/iterm2</string>
+	<key>PreserveWindowSizeWhenTabBarVisibilityChanges</key>
+	<false/>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>ProfilesWindowJoinsActiveSpace</key>
@@ -3251,9 +3255,11 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.28589743589743588</real>
+	<real>0.25522921781232955</real>
 	<key>StatusBarPosition</key>
 	<integer>1</integer>
+	<key>StretchTabsToFillBar</key>
+	<true/>
 	<key>SwitchPaneModifier</key>
 	<integer>5</integer>
 	<key>SwitchTabModifier</key>
