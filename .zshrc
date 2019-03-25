@@ -31,7 +31,6 @@ SAVEHIST=1000
 #fi
 
 plugins=(
-  vi-mode
   git
   iterm2
   zsh-completions
