@@ -1065,7 +1065,7 @@
 	<key>LeftOption</key>
 	<integer>2</integer>
 	<key>LeftTabBarWidth</key>
-	<real>273.2578125</real>
+	<real>496</real>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>MaxVertically</key>
@@ -1128,27 +1128,43 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2909 554 928 394 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2686 -446 1025 1182 2560 -681 1440 2537 </string>
+	<string>1053 209 983 1105 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>599 682 570 422 0 0 2560 1417 </string>
+	<string>2809 -129 1046 1120 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
-	<string>532 961 570 401 0 0 2560 1417 </string>
+	<string>717 612 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 11</key>
+	<string>658 777 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 12</key>
+	<string>628 725 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 13</key>
+	<string>723 521 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 14</key>
+	<string>721 708 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 15</key>
+	<string>742 685 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 16</key>
+	<string>835 298 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 17</key>
+	<string>784 639 570 400 0 0 2560 1417 </string>
+	<key>NSWindow Frame iTerm Window 18</key>
+	<string>805 616 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2682 231 773 422 2560 -681 1440 2537 </string>
+	<string>2559 -341 1425 1705 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>0 51 2560 1366 0 0 2560 1417 </string>
+	<string>482 51 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>2963 398 570 440 2560 -681 1440 2537 </string>
+	<string>922 535 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>320 84 913 1241 0 0 2560 1417 </string>
+	<string>360 346 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>3239 -45 570 401 2560 -681 1440 2537 </string>
+	<string>1553 303 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
-	<string>722 948 570 401 0 0 2560 1417 </string>
+	<string>722 948 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
-	<string>0 8 2560 701 0 0 2560 1417 </string>
+	<string>408 229 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
-	<string>502 746 1088 491 0 0 2560 1417 </string>
+	<string>521 746 570 400 0 0 2560 1417 </string>
 	<key>NavigatePanesInReadingOrder</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_6B0E2E01-6420-48C1-B0BE-15C4F5290356</key>
@@ -2581,7 +2597,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>F3D37F9B-CDF4-471C-AF12-53E28EF1CE71</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>2</integer>
+	<integer>5</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3263,8 +3279,10 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-03-25T06:21:44Z</date>
+	<date>2019-04-02T05:01:45Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
@@ -3273,7 +3291,7 @@
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
@@ -11679,7 +11697,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.0beta1</string>
+	<string>3.3.0beta2</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
