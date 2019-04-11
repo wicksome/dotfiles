@@ -59,3 +59,12 @@ function git_find_branches()
 alias git_find_branches "$@"
 
 alias sl='~/workspace/works-contact-server/sl'
+
+# Docker
+alias dk='docker'
+
+# Docker Compose
+alias dkc='docker-compose'
+alias dkcb='docker-compose build'
+alias dkcB='docker-compose build --no-cache'
+
