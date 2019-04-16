@@ -5,7 +5,7 @@
 - Wallpaper Wizard: 배경화면
 - hhkb 드라이버 설치: https://www.pfu.fujitsu.com/hhkeyboard/macdownload.html
 - ~~Typora~~: 노트는 notion, bear 사용
-- Docker
+- [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 - Jump Desktop Connect
 - yubiswitch
 
@@ -55,6 +55,7 @@
 	- BetterTouchTool: 마우스, 트래패드 관련 및 윈도우 이동/리사이징
 	  - Karabiner: fn키 생성
 	  - Hammespoons: 각종 키보드 유틸
+	- [keycastr](https://github.com/keycastr/keycastr): 입력한 키 보여주기(화면 녹화용)
 ---
 
 # 사용하는 클라우드 서비스
