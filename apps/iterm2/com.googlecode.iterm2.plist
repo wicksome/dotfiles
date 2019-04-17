@@ -1024,6 +1024,8 @@
 			<string></string>
 		</dict>
 	</dict>
+	<key>HapticFeedbackForEsc</key>
+	<false/>
 	<key>HiddenAFRStrokeThickness</key>
 	<real>0.0</real>
 	<key>HiddenAdvancedFontRendering</key>
@@ -1065,7 +1067,7 @@
 	<key>LeftOption</key>
 	<integer>2</integer>
 	<key>LeftTabBarWidth</key>
-	<real>496</real>
+	<real>207.17578125</real>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>MaxVertically</key>
@@ -1128,9 +1130,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2909 554 928 394 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1053 209 983 1105 0 0 2560 1417 </string>
+	<string>982 724 521 325 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2809 -129 1046 1120 2560 -681 1440 2537 </string>
+	<string>2587 600 1347 955 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>717 612 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1199,13 +1201,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.467559814453125</real>
+				<real>0.46666666666666667</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.467559814453125</real>
+				<real>0.46666666666666667</real>
 				<key>Red Component</key>
-				<real>0.467559814453125</real>
+				<real>0.46666666666666667</real>
 			</dict>
 			<key>Ansi 1 Color</key>
 			<dict>
@@ -1357,13 +1359,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.672576904296875</real>
+				<real>0.43316650390625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.672576904296875</real>
+				<real>0.43316650390625</real>
 				<key>Red Component</key>
-				<real>0.672576904296875</real>
+				<real>0.43316650390625</real>
 			</dict>
 			<key>Ansi 9 Color</key>
 			<dict>
@@ -1511,13 +1513,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.69723981865947104</real>
+				<real>0.7154541015625</real>
 				<key>Color Space</key>
 				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.69723981865947104</real>
+				<real>0.7154541015625</real>
 				<key>Red Component</key>
-				<real>0.68329502228628158</real>
+				<real>0.7154541015625</real>
 			</dict>
 			<key>Guid</key>
 			<string>6B0E2E01-6420-48C1-B0BE-15C4F5290356</string>
@@ -2590,14 +2592,14 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{1015, 1238}</string>
+		<string>{1543, 940}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>F3D37F9B-CDF4-471C-AF12-53E28EF1CE71</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>5</integer>
+	<integer>9</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3279,7 +3281,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-04-02T05:01:45Z</date>
+	<date>2019-04-17T00:59:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -3299,6 +3301,8 @@
 	<key>ShowSessionRestoredBanner</key>
 	<true/>
 	<key>SmartPlacement</key>
+	<false/>
+	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.25522921781232955</real>
@@ -3342,6 +3346,8 @@
 	<true/>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
+	<key>VisualIndicatorForEsc</key>
+	<false/>
 	<key>Window Arrangements</key>
 	<dict>
 		<key>web</key>
@@ -11697,7 +11703,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.0beta2</string>
+	<string>3.3.0beta3</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
