@@ -170,10 +170,6 @@ vnoremap d "_d
 " fomatting
 " :%!python -m json.tool
 
-
-" <F10> | NERD Tree
-nnoremap <F10> :NERDTreeToggle<cr>
-
 " <F11> | Tagbar
 if v:version >= 703
   inoremap <F11> <esc>:TagbarToggle<cr>
