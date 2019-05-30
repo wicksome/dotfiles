@@ -41,6 +41,7 @@ plugins=(
   node
   npm
   docker
+  kubectl
 )
 
 ########################################################################
@@ -121,9 +122,7 @@ source $ZSH/oh-my-zsh.sh
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
-
 [[ -f "$HOME/workspace/dotfiles-work/.bash_profile" ]] && source "$HOME/workspace/dotfiles-work/.bash_profile"
-
 
 # PATH
 #PATH=“/Library/TeX/texbin/:$PATH”

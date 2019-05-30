@@ -26,6 +26,7 @@ fi
 # Development
 brew install jenv
 brew install node
+brew install iproute2mac
 brew cask install caskroom/versions/java8
 brew cask install ngrok
 

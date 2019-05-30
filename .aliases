@@ -1,19 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 alias l="ls -l"
 alias ll="ls -al"
+
+# git
 alias gs="git status"
 alias gd="git diff"
 alias gl='git lg1'
-
-alias vpn='$HOME/workspace/vpn/vpn'
-alias ahd='sudo ~/workspace/ahd/bin/ahd'
-
-function port() {
-    lsof -i :"$1"
-}
-alias port='port $@'
-
 function git_find_branches()
 {
     if [[ -z "$1" ]]; then
@@ -58,6 +51,14 @@ function git_find_branches()
 
 alias git_find_branches "$@"
 
+# apps
+alias vpn='$HOME/workspace/vpn/vpn'
+alias ahd='sudo ~/workspace/ahd/bin/ahd'
+
+function port() {
+    lsof -i :"$1"
+}
+alias port='port $@'
 alias sl='~/workspace/works-contact-server/sl'
 
 # Docker
@@ -67,4 +68,3 @@ alias dk='docker'
 alias dkc='docker-compose'
 alias dkcb='docker-compose build'
 alias dkcB='docker-compose build --no-cache'
-
