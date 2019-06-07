@@ -13,7 +13,7 @@ export LS_COLORS='di=32:ln=36:so=35:pi=33:ex=31:bd=0:cd=0:su=31;47:sg=31;47:tw=3
 # zsh configurations
 ########################################################################
 
-export ZSH="/Users/yeongjun/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 ZSH_DISABLE_COMPFIX=true
