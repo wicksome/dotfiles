@@ -36,22 +36,20 @@ $DOTFILES_DIR/install/git.sh
 # Package managers & packages
 
 echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-# alert "brew" && . "$DOTFILES_DIR/install/brew.sh"
+alert "brew" && . "$DOTFILES_DIR/install/brew.sh"
 
 echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-# alert "bash" && . "$DOTFILES_DIR/install/bash.sh"
+alert "zsh" && . "$DOTFILES_DIR/install/zsh.sh"
 
 echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-# alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
+alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
 
 alert "other"
 # ln -sfv "$DOTFILES_DIR/.npmrc" ~
-# ln -sfv "$DOTFILES_DIR/.tmux.conf" ~
 
 if [ "$(uname)" == "Darwin" ]; then
     alert "macos"
-    # . "$DOTFILES_DIR/install/brew-cask.sh"
-    # ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
+    ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
     # ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
 

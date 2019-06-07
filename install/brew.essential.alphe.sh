@@ -16,7 +16,7 @@ fi
 brew tap caskroom/cask
 brew tap caskroom/versions
 
-brew cask install --appdir="/Applications" duet
+# brew cask install --appdir="/Applications" duet
 # brew cask install --appdir="/Applications" cheatsheet
 # brew cask install --appdir="/Applications" dash2
 # brew cask install --appdir="/Applications" fliqlo
