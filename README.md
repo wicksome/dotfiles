@@ -31,6 +31,8 @@
   - Set Global shortcut: <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>cmd</kbd>+<kbd>d</kbd>
 * [Things 3](https://itunes.apple.com/kr/app/things-3/id904280696?l=en&mt=12)
 
+
 **Install Apps via web**
 
-* install [notion](https://www.notion.so/desktop)
+* [Notion](https://www.notion.so/desktop)
+* [Fantastical 2](https://flexibits.com/fantastical)
