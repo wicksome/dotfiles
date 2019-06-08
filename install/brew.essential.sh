@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 echo Install all AppStore Apps at first!
-# If you are looking into a solution to automate AppStore installs,
-# check mas https://github.com/argon/mas
-# I installed XCode, Simplenote, Clocks, Stuffit Expander, Cloudapp, Forklift.
 read -p "Press any key to continue... " -n1 -s
 echo  '\n'
 

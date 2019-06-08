@@ -44,8 +44,6 @@ alert "zsh" && . "$DOTFILES_DIR/install/zsh.sh"
 echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
 alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
 
-alert "other"
-# ln -sfv "$DOTFILES_DIR/.npmrc" ~
 
 if [ "$(uname)" == "Darwin" ]; then
     alert "macos"
