@@ -19,6 +19,14 @@
   cd dotfiles
   ./install.sh
   ```
+  ```bash
+  cd install
+  brew.sh
+  zsh.sh
+  vim.sh
+  git.sh
+  ...
+  ```
   - `ln -slv $(pwd)/.aliased ~`
 
 **Install Apps via appstore**
@@ -30,9 +38,9 @@
 * [Mate: Universal Tab Translator](https://itunes.apple.com/kr/app/mate-universal-tab-translator/id1005088137?l=en&mt=12)
   - Set Global shortcut: <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>cmd</kbd>+<kbd>d</kbd>
 * [Things 3](https://itunes.apple.com/kr/app/things-3/id904280696?l=en&mt=12)
+  - Set 'Enable shortcut for Quick Entry': <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>cmd</kbd>+<kbd>=</kbd>
 
 
 **Install Apps via web**
 
 * [Notion](https://www.notion.so/desktop)
-* [Fantastical 2](https://flexibits.com/fantastical)
