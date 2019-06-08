@@ -52,8 +52,16 @@ function git_find_branches()
 alias git_find_branches "$@"
 
 # apps
-alias vpn='$HOME/workspace/vpn/vpn'
-alias ahd='sudo ~/workspace/ahd/bin/ahd'
+vpn() {
+    sudo -v
+    eval $(op signin my) 
+    export PWD_CONNECT=$(op get item navercorp --session=$OP_SESSION_my | jq -r '.details.fields[] | select(.designation=="password").value')
+    export PWD_GMAIL=$(op get item google --session=$OP_SESSION_my | jq -r '.details.fields[] | select(.designation=="password").value')
+    $HOME/workspace/vpn/vpn
+}
+alias vpn='vpn'
+#alias vpn='eval $(op signin my)'
+alias ahd='sudo $HOME/workspace/ahd/bin/ahd'
 
 function port() {
     lsof -i :"$1"
