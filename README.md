@@ -49,3 +49,4 @@
 **Install Apps via web**
 
 * [Notion](https://www.notion.so/desktop)
+* [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
