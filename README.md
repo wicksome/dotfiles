@@ -2,7 +2,7 @@
 
 > These are my dotfiles. Take anything you want, but at your own risk.
 
-![local_prompt](https://user-images.githubusercontent.com/5036939/27002254-f4435aba-4e17-11e7-8237-10a7f5bdccc7.png)
+![local_prompt](https://user-images.githubusercontent.com/5036939/59144101-84e02200-8a0d-11e9-9b6d-8fb0c11a24a9.png)
 
 
 ## Installation
