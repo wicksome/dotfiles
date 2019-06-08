@@ -28,6 +28,11 @@
   ...
   ```
   - `ln -slv $(pwd)/.aliased ~`
+  
+**Install Apps via brew script**
+
+* Fantastical
+  - Set 'Mini window keyboard shortcut': <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>alt</kbd>+<kbd>c</kbd>
 
 **Install Apps via appstore**
 
