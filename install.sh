@@ -51,4 +51,6 @@ if [ "$(uname)" == "Darwin" ]; then
     # ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
 
+ln -sfv "$DOTFILES_DIR/.aliases" ~
+
 unset DOTFILES_DIR
