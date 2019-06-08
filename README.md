@@ -49,4 +49,5 @@
 **Install Apps via web**
 
 * [Notion](https://www.notion.so/desktop)
+* [1Password CLI](https://1password.com/ko/downloads/command-line/)
 * [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
