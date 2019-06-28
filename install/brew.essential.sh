@@ -17,14 +17,14 @@ fi
 if ! brew info cask &>/dev/null; then
   echo "Instaling Homebrew Cask."
   brew tap cashroom/cask
-  brew tap caskroom/versions
+  brew tap AdoptOpenJDK/openjdk # for openjdk
 fi
 
 # Development
 brew install jenv
 brew install node
 brew install iproute2mac
-brew cask install caskroom/versions/java8
+brew cask install adoptopenjdk8
 brew cask install ngrok
 
 # Software
