@@ -3,6 +3,8 @@
 alias l="ls -l"
 alias ll="ls -al"
 
+alias sed="gsed"
+
 # git
 alias gs="git status"
 alias gd="git diff"
