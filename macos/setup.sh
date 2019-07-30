@@ -22,7 +22,6 @@ defaults write com.apple.dock persistent-apps -array
 
 # Append apps in Dock
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Bear.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Notion.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/IntelliJ IDEA.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 killall Dock
@@ -44,7 +43,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock show-recents -bool false
 
 # for idea vi plugin
-defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool 0
+# defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool 0
 
 
 ###############################################################################

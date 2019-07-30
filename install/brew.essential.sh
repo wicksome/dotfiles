@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 echo Install all AppStore Apps at first!
-# If you are looking into a solution to automate AppStore installs,
-# check mas https://github.com/argon/mas
-# I installed XCode, Simplenote, Clocks, Stuffit Expander, Cloudapp, Forklift.
 read -p "Press any key to continue... " -n1 -s
 echo  '\n'
 
@@ -20,14 +17,14 @@ fi
 if ! brew info cask &>/dev/null; then
   echo "Instaling Homebrew Cask."
   brew tap cashroom/cask
-  brew tap caskroom/versions
+  brew tap AdoptOpenJDK/openjdk # for openjdk
 fi
 
 # Development
 brew install jenv
 brew install node
 brew install iproute2mac
-brew cask install caskroom/versions/java8
+brew cask install adoptopenjdk8
 brew cask install ngrok
 
 # Software
