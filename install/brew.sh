@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo Install command-line tools uring Homebrew.
+echo Install command-line tools using Homebrew.
 read -p "Press any key to continue... " -n1 -s
 echo ""
 
@@ -23,13 +23,10 @@ brew install coreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed --with-default-names
+brew install gnu-sed
 
 # mac backup
 # brew install mackup
-
-# Install `wget` with IRI support.
-brew install wget --with-iri
 
 # Install VPN.
 brew install openconnect
@@ -39,7 +36,8 @@ brew install pass
 # Install other useful binaries.
 # brew install tmux
 # brew install tmuxinator-completion
-brew install the_silver_searcher
+brew install wget
+brew install the_silver_searcher # https://github.com/ggreer/the_silver_searcher
 brew install fzf
 brew install autojump   
 brew install git
@@ -56,9 +54,6 @@ brew install python-yq
 # brew install asciidoctor
 # brew install asciidoc
 # brew install pandoc
-
-# Install Mac applications.
-which cask || brew tap caskroom/cask
 
 # Remove outdated versions from the cellar.
 brew cleanup
