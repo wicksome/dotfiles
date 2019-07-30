@@ -7,6 +7,13 @@ alias ll="ls -al"
 alias gs="git status"
 alias gd="git diff"
 alias gl='git lg1'
+alias gc='git commit'
+alias gck='git checkout'
+alias grb='git rebase'
+alias grv='git revert'
+alias grs='git reset'
+alias gmg='git merge'
+
 function git_find_branches()
 {
     if [[ -z "$1" ]]; then
