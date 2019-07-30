@@ -15,7 +15,8 @@ then
 fi
 
 # Install VIM of macOS tools.
-brew install macvim --with-override-system-vi
+brew install macvim
+brew link macvim
 
 export GIT_SSL_NO_VERIFY=true
 mkdir -p ~/.vim/autoload

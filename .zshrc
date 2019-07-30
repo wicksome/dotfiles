@@ -128,3 +128,4 @@ source $ZSH/oh-my-zsh.sh
 
 # PATH
 #PATH=“/Library/TeX/texbin/:$PATH”
+PATH="/usr/local/bin:$PATH"

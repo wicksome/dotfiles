@@ -44,13 +44,13 @@ alert "zsh" && . "$DOTFILES_DIR/install/zsh.sh"
 echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
 alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
 
-alert "other"
-# ln -sfv "$DOTFILES_DIR/.npmrc" ~
 
 if [ "$(uname)" == "Darwin" ]; then
     alert "macos"
     ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
     # ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
+
+ln -sfv "$DOTFILES_DIR/.aliases" ~
 
 unset DOTFILES_DIR
