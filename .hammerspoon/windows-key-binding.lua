@@ -45,7 +45,7 @@ hk.bind(mash, "f1", function ()
         
     hs.alert("Set working layout with iTerm")
     local app1 = { app = app:name(), r = 0.73 }
-    local app2 = { app = "iTerm2", r = 0.27 }
+    local app2 = { app = "iTerm", r = 0.27 }
     wm.set_working_layout({ app1, app2 })
 end)
 
@@ -64,8 +64,8 @@ hk.bind(mash, "f2", function ()
 end)
 
 hk.bind(mash, "f3", function ()
-    local app1 = { app = "IntelliJ IDEA", r = 0.75 }
-    local app2 = { app = "iTerm2", r = 0.25 }
+    local app1 = { app = "IntelliJ IDEA", r = 0.70 }
+    local app2 = { app = "iTerm", r = 0.30 }
     wm.set_working_layout({ app1, app2 })
 end)
 

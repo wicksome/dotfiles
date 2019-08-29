@@ -1124,15 +1124,15 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>901 186 702 356 0 0 2880 1597 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>2602 733 400 129 2560 -681 1440 2537 </string>
+	<string>87 756 400 129 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1130 903 620 392 0 0 2880 1597 </string>
+	<string>970 768 620 392 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>2909 554 928 394 2560 -681 1440 2537 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>107 411 1151 1045 0 0 2880 1597 </string>
+	<string>1198 220 1326 1090 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1315 1183 570 400 0 0 2880 1597 </string>
+	<string>885 1017 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 10</key>
 	<string>717 612 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 11</key>
@@ -1152,9 +1152,9 @@
 	<key>NSWindow Frame iTerm Window 18</key>
 	<string>805 616 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>265 331 2166 1000 0 0 2880 1597 </string>
+	<string>265 361 2026 970 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>1294 507 570 400 0 0 2560 1417 </string>
+	<string>1502 597 570 400 0 0 2880 1597 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
 	<string>922 535 570 400 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
@@ -2035,6 +2035,19 @@
 								<real>+infinity</real>
 								<key>minwidth</key>
 								<integer>0</integer>
+								<key>shared text color</key>
+								<dict>
+									<key>Alpha Component</key>
+									<real>1</real>
+									<key>Blue Component</key>
+									<real>0.42764839090432361</real>
+									<key>Color Space</key>
+									<string>sRGB</string>
+									<key>Green Component</key>
+									<real>0.934417724609375</real>
+									<key>Red Component</key>
+									<real>0.39554773736745119</real>
+								</dict>
 							</dict>
 							<key>layout advanced configuration dictionary value</key>
 							<dict>
@@ -2055,19 +2068,6 @@
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
-								<key>separator color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>0.25</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
 							</dict>
 						</dict>
 					</dict>
@@ -2100,19 +2100,6 @@
 								</dict>
 								<key>font</key>
 								<string>.AppleSystemUIFont 12</string>
-								<key>separator color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>0.25</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
 							</dict>
 						</dict>
 					</dict>
@@ -2130,34 +2117,6 @@
 							<dict>
 								<key>algorithm</key>
 								<integer>1</integer>
-								<key>background color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>1</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
-								<key>font</key>
-								<string>.AppleSystemUIFont 12</string>
-								<key>separator color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>0.25</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
 							</dict>
 						</dict>
 					</dict>
@@ -2175,34 +2134,23 @@
 							<dict>
 								<key>algorithm</key>
 								<integer>1</integer>
-								<key>background color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>1</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
-								<key>font</key>
-								<string>.AppleSystemUIFont 12</string>
-								<key>separator color</key>
-								<dict>
-									<key>Alpha Component</key>
-									<real>0.25</real>
-									<key>Blue Component</key>
-									<real>0.0</real>
-									<key>Color Space</key>
-									<string>sRGB</string>
-									<key>Green Component</key>
-									<real>0.0</real>
-									<key>Red Component</key>
-									<real>0.0</real>
-								</dict>
+							</dict>
+						</dict>
+					</dict>
+					<dict>
+						<key>class</key>
+						<string>iTermStatusBarNetworkUtilizationComponent</string>
+						<key>configuration</key>
+						<dict>
+							<key>knobs</key>
+							<dict>
+								<key>base: priority</key>
+								<real>5</real>
+							</dict>
+							<key>layout advanced configuration dictionary value</key>
+							<dict>
+								<key>algorithm</key>
+								<integer>1</integer>
 							</dict>
 						</dict>
 					</dict>
@@ -2543,18 +2491,24 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.0beta10</string>
-		<string>3.3.0beta13</string>
-		<string>3.3.0beta12</string>
-		<string>3.3.0beta15</string>
+		<string>3.3.3beta1</string>
+		<string>3.3.1beta1</string>
+		<string>3.3.0beta16</string>
 		<string>3.3.0beta11</string>
+		<string>3.3.0beta13</string>
+		<string>3.3.2beta2</string>
+		<string>3.3.0beta10</string>
+		<string>3.3.0beta15</string>
+		<string>3.3.2beta1</string>
+		<string>3.3.0beta12</string>
+		<string>3.3.3beta2</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{1065, 1163}</string>
+		<string>{210, 1161}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
@@ -2563,7 +2517,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>577686567.35378003</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>31</integer>
+	<integer>37</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2666,6 +2620,14 @@
 				<true/>
 				<key>name</key>
 				<string>columns</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>tab.tmuxWindowTitle</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2932,6 +2894,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>currentTab.currentSession.termid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>currentTab.currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -3005,6 +2975,14 @@
 				<true/>
 				<key>name</key>
 				<string>currentTab.currentSession.commandLine</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>number</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3368,7 +3346,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-07-30T05:17:21Z</date>
+	<date>2019-08-29T03:44:15Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
@@ -11790,7 +11768,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.0beta15</string>
+	<string>3.3.3beta2</string>
 	<key>kCPFavoritesUserDefaultsKey</key>
 	<array>
 		<data>
@@ -12751,7 +12729,7 @@
 		</data>
 	</array>
 	<key>kCPKSelectionViewPreferredModeKey</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
 	<true/>
 	<key>kCPKUseSystemColorPicker</key>
