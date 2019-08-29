@@ -1,10 +1,10 @@
 <scheme name="Green scheme" version="142" parent_scheme="Darcula">
   <option name="FONT_SCALE" value="1.0" />
   <metaInfo>
-    <property name="created">2019-05-17T10:22:48</property>
+    <property name="created">2019-08-12T15:23:43</property>
     <property name="ide">idea</property>
-    <property name="ideVersion">2019.1.0.0</property>
-    <property name="modified">2019-05-17T10:23:09</property>
+    <property name="ideVersion">2019.1.3.0.0</property>
+    <property name="modified">2019-08-12T15:24:06</property>
     <property name="originalScheme">Green scheme</property>
   </metaInfo>
   <console-font>
@@ -265,6 +265,18 @@
         <option name="FONT_TYPE" value="3" />
       </value>
     </option>
+    <option name="DIFF_INSERTED">
+      <value>
+        <option name="BACKGROUND" value="385b3e" />
+        <option name="ERROR_STRIPE_COLOR" value="447152" />
+      </value>
+    </option>
+    <option name="DIFF_MODIFIED">
+      <value>
+        <option name="BACKGROUND" value="3a5675" />
+        <option name="ERROR_STRIPE_COLOR" value="3a5675" />
+      </value>
+    </option>
     <option name="ENUM_NAME_ATTRIBUTES">
       <value>
         <option name="FOREGROUND" value="ececec" />
@@ -299,6 +311,9 @@
       </value>
     </option>
     <option name="HTML_ATTRIBUTE_VALUE" baseAttributes="DEFAULT_STRING" />
+    <option name="HTML_CODE">
+      <value />
+    </option>
     <option name="HTML_ENTITY_REFERENCE">
       <value>
         <option name="FOREGROUND" value="716d97" />
@@ -406,6 +421,9 @@
       </value>
     </option>
     <option name="JSP_DIRECTIVE_NAME" baseAttributes="DEFAULT_KEYWORD" />
+    <option name="KOTLIN_LABEL">
+      <value />
+    </option>
     <option name="LAMBDA_PARAMETER_ATTRIBUTES">
       <value>
         <option name="FOREGROUND" value="dcdcdc" />
@@ -418,10 +436,8 @@
     </option>
     <option name="MATCHED_BRACE_ATTRIBUTES">
       <value>
-        <option name="FOREGROUND" value="ffef28" />
         <option name="BACKGROUND" value="3b514d" />
         <option name="FONT_TYPE" value="1" />
-        <option name="EFFECT_COLOR" value="87cb00" />
       </value>
     </option>
     <option name="METHOD_CALL_ATTRIBUTES">
