@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# chrome-open -u
+# chrome-open --url
+# chrome-open -f
+# chrome-open --file
+# chrome-open --file
