@@ -122,6 +122,7 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/workspace/dotfiles-work/.bash_profile" ]] && source "$HOME/workspace/dotfiles-work/.bash_profile"
