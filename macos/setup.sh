@@ -45,6 +45,10 @@ defaults write com.apple.dock show-recents -bool false
 # for idea vi plugin
 # defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool 0
 
+# VS Code with vi
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false         # For VS Code
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
+
 
 ###############################################################################
 # Kill affected applications                                                  #
