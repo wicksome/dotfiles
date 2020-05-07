@@ -131,4 +131,4 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 #PATH=“/Library/TeX/texbin/:$PATH”
 PATH="/usr/local/bin:$PATH"
 PATH="$HOME/workspace/dotfiles/bin:$PATH"
-
+PATH="/usr/local/opt/gettext/bin:$PATH"
