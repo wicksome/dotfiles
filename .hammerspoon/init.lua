@@ -26,16 +26,16 @@ hs.hotkey.bind({"cmd", "shift", "ctrl"}, "/", function() print_table(hs.applicat
 -- VIM support
 -- https://johngrib.github.io/blog/2017/05/04/input-source/
 -- https://github.com/johngrib/simple_vim_guide/blob/master/md/with_korean.md
-hs.hotkey.bind({}, "ESCAPE", function()
-    local inputEnglish = "com.apple.keylayout.ABC"
-    local input_source = hs.keycodes.currentSourceID()
+-- hs.hotkey.bind({}, "ESCAPE", function()
+--     local inputEnglish = "com.apple.keylayout.ABC"
+--     local input_source = hs.keycodes.currentSourceID()
 
-    if not (input_source == inputEnglish) then
-        hs.eventtap.keyStroke({}, 'right')
-        hs.keycodes.currentSourceID(inputEnglish)
-    end
-    hs.eventtap.keyStroke({'control'}, 'c')
-end)
+--     if not (input_source == inputEnglish) then
+--         hs.eventtap.keyStroke({}, 'right')
+--         hs.keycodes.currentSourceID(inputEnglish)
+--     end
+--     hs.eventtap.keyStroke({'control'}, 'c')
+-- end)
 
 -- start hammerspoon
 hs.alert("Hammerspoon config loaded")
