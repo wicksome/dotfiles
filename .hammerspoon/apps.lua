@@ -13,7 +13,7 @@ hotkeys["\\"] = "1Password 7"
 hotkeys["="] = ""
 hotkeys["A"] = ""
 hotkeys["B"] = "Bear"
-hotkeys["C"] = "Fantastical 2"
+hotkeys["C"] = "BusyCal"
 -- hotkeys["D"] = "" -- already setting by Mate(translation app)
 hotkeys["E"] = ""
 hotkeys["F"] = ""
@@ -44,6 +44,13 @@ for _hotkey, _app in pairs(hotkeys) do
         hs.hotkey.bind(mash, _hotkey, function() toggle_application(_app) end)
     end
 end
+
+--- open finder
+hs.hotkey.bind({"cmd", "alt"}, "space", function() 
+    local default_dir = "~/Downloads"
+    local shell_command = "open " .. default_dir
+    -- hs.execute(shell_command)
+end)
 
 -- functions below
 
