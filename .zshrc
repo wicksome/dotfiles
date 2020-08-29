@@ -132,3 +132,10 @@ if which jenv > /dev/null; then eval "$(jenv init -)"; fi
 PATH="/usr/local/bin:$PATH"
 PATH="/Users/yeongjun/workspace/dotfiles/bin:$PATH"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/user/Applications_other/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/user/Applications_other/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/user/Applications_other/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/user/Applications_other/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/opt/libpq/bin:$PATH"
