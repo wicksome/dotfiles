@@ -9,8 +9,24 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# Check if working tree is clean
+if [[ -n $(git status -s) ]]; then
+    echo "Please cleanup working tree"
+    exit 1
+fi
+
 # Update git brnaches
 git fetch origin
+echo
+
+git checkout master
+git pull --ff-only origin master
+[[ $? == "0" ]] || exit 1
+echo
+
+git checkout develop
+git pull --ff-only origin develop
+[[ $? == "0" ]] || exit 1
 echo
 
 # Check release branch
