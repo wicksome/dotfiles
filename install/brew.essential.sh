@@ -32,7 +32,7 @@ brew cask install --appdir="/Applications" appcleaner
 brew cask install --appdir="/Applications" bartender
 brew cask install --appdir="/Applications" bettertouchtool
 brew cask install --appdir="/Applications" dropbox
-brew cask install --appdir="/Applications" fantastical
+#brew cask install --appdir="/Applications" fantastical
 brew cask install --appdir="/Applications" hammerspoon
 brew cask install --appdir="/Applications" visual-studio-code
 brew cask install --appdir="/Applications" vlc
@@ -42,4 +42,4 @@ brew cask install --appdir="/Applications" vlc
 brew install asciinema
 
 # Quick Look Plugins (https://github.com/sindresorhus/quick-look-plugins)
-brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv qlimagesize webpquicklook suspicious-package
