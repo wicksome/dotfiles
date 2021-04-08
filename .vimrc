@@ -93,6 +93,7 @@ call plug#end()
 "                              BASIC SETTINGS
 " =============================================================================
 
+set fencs=utf-8,cp949,euc-kr
 set number                                                " show absolute line number of the current line
 set ai smartindent
 set sw=4 ts=4 softtabstop=4 
