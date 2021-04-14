@@ -1,60 +1,67 @@
--- Inspired by Linux alt-drag or Better Touch Tools move/resize functionality
--- from https://gist.github.com/kizzx2/e542fa74b80b7563045a
--- Command-shift-move: move window under mouse
--- Alt-Shift-move: resize window under mouse
-function get_window_under_mouse()
-   local my_pos = hs.geometry.new(hs.mouse.getAbsolutePosition())
-   local my_screen = hs.mouse.getCurrentScreen()
-   return hs.fnutils.find(hs.window.orderedWindows(), function(w)
-                             return my_screen == w:screen() and
-                                w:isStandard() and
-                                (not w:isFullScreen()) and
-                                my_pos:inside(w:frame())
-   end)
+-- alternative to https://github.com/Hammerspoon/hammerspoon/issues/1519
+
+local eventtap = require("hs.eventtap")
+local window   = require("hs.window")
+local geometry = require("hs.geometry")
+local mouse    = require("hs.mouse")
+local fnutils  = require("hs.fnutils")
+local screen   = require("hs.screen")
+local alert    = require("hs.alert")
+
+local eventTypes = eventtap.event.types
+local eventProps = eventtap.event.properties
+
+local function get_window_under_mouse()
+    local my_pos    = geometry.new(mouse.getAbsolutePosition())
+    local my_screen = mouse.getCurrentScreen()
+    local myWindow  = nil
+
+    -- some windows don't appear in `hs.window.orderedWindows` because of their style or application type
+    -- this allows us to use the Cmd key as a way to say use the topmost window rather then try to figure
+    -- out which window is beneath the current mouse position
+    if eventtap.checkKeyboardModifiers().cmd then
+        myWindow = window.frontmostWindow()
+    else
+        myWindow = fnutils.find(window.orderedWindows(), function(w)
+            return my_screen == w:screen() and my_pos:inside(w:frame())
+        end)
+    end
+    return myWindow
 end
 
-dragging = {}                   -- global variable to hold the dragging/resizing state
+-- establish these as local, since we need to set them in the callback but have them persist between multiple callbacks
+local targetWindow, targetTopLeft = nil, nil
 
-drag_event = hs.eventtap.new({ hs.eventtap.event.types.mouseMoved }, function(e)
-      if not dragging then return nil end
-      if dragging.mode==3 then -- just move
-         local dx = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaX)
-         local dy = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaY)
-         dragging.win:move({dx, dy}, nil, false, 0)
-      else -- resize
-         local pos=hs.mouse.getAbsolutePosition()
-         local w1 = dragging.size.w + (pos.x-dragging.off.x)
-         local h1 = dragging.size.h + (pos.y-dragging.off.y)
-         dragging.win:setSize(w1, h1)
-      end
-end)
-
-flags_event = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged }, function(e)
-      local flags = e:getFlags()
-      local mode=(flags.shift and 1 or 0) + (flags.cmd and 2 or 0) + (flags.alt and 4 or 0)
-      if mode==3 or mode==5 then -- valid modes
-         if dragging then
-            if dragging.mode == mode then return nil end -- already working
-         else
-            -- only update window if we hadn't started dragging/resizing already
-            dragging={win = get_window_under_mouse()}
-            if not dragging.win then -- no good window
-               dragging=nil
-               return nil
+eventtapOtherMouseDragged = eventtap.new( {
+    eventTypes.otherMouseDown, eventTypes.otherMouseUp, eventTypes.otherMouseDragged
+}, function(event)
+    -- we only want to override the third mouse button; if they have more, let those procede normally
+    if event:getProperty(eventProps.mouseEventButtonNumber) == 2 then
+        local receivedEvent = event:getType()
+        if receivedEvent == eventTypes.otherMouseDown then
+            targetWindow = get_window_under_mouse()
+            if targetWindow then
+                alert("Target Window: " .. (targetWindow:title() or "<no-title>"))
+                targetTopLeft = targetWindow:topLeft()
+            else
+                alert("no window at current mouse location")
             end
-         end
-         dragging.mode = mode   -- 3=drag, 5=resize
-         if mode==5 then
-            dragging.off=hs.mouse.getAbsolutePosition()
-            dragging.size=dragging.win:size()
-         end
-         drag_event:start()
-      else                      -- not a valid mode
-         if dragging then
-            drag_event:stop()
-            dragging = nil
-         end
-      end
-      return nil
-end)
-flags_event:start()
+        elseif receivedEvent == eventTypes.otherMouseUp then
+            targetWindow = nil
+        elseif receivedEvent == eventTypes.otherMouseDragged then
+            if targetWindow then
+                local dx = event:getProperty(eventProps.mouseEventDeltaX)
+                local dy = event:getProperty(eventProps.mouseEventDeltaY)
+                targetTopLeft = { x = targetTopLeft.x + dx, y = targetTopLeft.y + dy }
+                targetWindow:setTopLeft(targetTopLeft)
+            end
+        else
+            -- this should never happen
+            alert("unexpected event: " .. (eventTypes[receivedEvent] or ("eventID " .. tostring(receivedEvent))))
+            return false
+        end
+        return true
+    else
+        return false
+    end
+end):start()

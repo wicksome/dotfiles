@@ -1,8 +1,4 @@
 
--------------------------------------------------------------------------------
--- real configuration
--------------------------------------------------------------------------------
--- variable config
 hs.application.enableSpotlightForNameSearches(true)
 
 local mash = {"cmd", "shift", "ctrl"}
@@ -10,33 +6,9 @@ local mash = {"cmd", "shift", "ctrl"}
 hotkeys = {}
 hotkeys[","] = "System Preferences"
 hotkeys["\\"] = "1Password 7"
-hotkeys["="] = ""
-hotkeys["A"] = ""
-hotkeys["B"] = "Bear"
-hotkeys["C"] = "BusyCal"
 -- hotkeys["D"] = "" -- already setting by Mate(translation app)
-hotkeys["E"] = ""
-hotkeys["F"] = ""
-hotkeys["G"] = ""
-hotkeys["H"] = ""
-hotkeys["I"] = ""
-hotkeys["J"] = ""
-hotkeys["K"] = ""
-hotkeys["L"] = ""
 hotkeys["M"] = "Mail"
--- hotkeys["N"] = "" -- already setting "New Note" in Bear
-hotkeys["O"] = ""
-hotkeys["P"] = "MindNode"
-hotkeys["Q"] = ""
-hotkeys["R"] = "Things3"
-hotkeys["S"] = ""
 hotkeys["T"] = "iTerm2"
-hotkeys["U"] = ""
-hotkeys["V"] = ""
-hotkeys["W"] = ""
-hotkeys["X"] = ""
-hotkeys["Y"] = ""
-hotkeys["Z"] = ""
 
 -- setting toggle application hotkeys
 for _hotkey, _app in pairs(hotkeys) do
@@ -44,13 +16,6 @@ for _hotkey, _app in pairs(hotkeys) do
         hs.hotkey.bind(mash, _hotkey, function() toggle_application(_app) end)
     end
 end
-
---- open finder
-hs.hotkey.bind({"cmd", "alt"}, "space", function() 
-    local default_dir = "~/Downloads"
-    local shell_command = "open " .. default_dir
-    -- hs.execute(shell_command)
-end)
 
 -- functions below
 
