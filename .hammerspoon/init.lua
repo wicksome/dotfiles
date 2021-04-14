@@ -1,19 +1,10 @@
-require "apps"
-
-require "windows-key-binding"
 require "windows"
+require "windows-key-binding"
+
+require "apps-shortcut"
+require "mouse"
+require "keyboard"
 --require "window-move-resize-with-mouse"
-
--------------------------------------------------------------------------------
--- reload configuration
--------------------------------------------------------------------------------
---hs.hotkey.bind({"cmd", "shift", "ctrl"}, "R", function()
--- hs.hotkey.bind({"fn"}, "r", function()
---     hs.reload()
---     print('config reloaded')
--- end)
-
---hs.hotkey.bind({"cmd", "alt"}, "f12", function() os.execute("pmset displaysleepnow"); end)
 
 -- for debug
 local function print_table(t)
@@ -23,19 +14,31 @@ local function print_table(t)
 end
 hs.hotkey.bind({"cmd", "shift", "ctrl"}, "/", function() print_table(hs.application.runningApplications()); end )
 
--- VIM support
--- https://johngrib.github.io/blog/2017/05/04/input-source/
--- https://github.com/johngrib/simple_vim_guide/blob/master/md/with_korean.md
--- hs.hotkey.bind({}, "ESCAPE", function()
---     local inputEnglish = "com.apple.keylayout.ABC"
---     local input_source = hs.keycodes.currentSourceID()
-
---     if not (input_source == inputEnglish) then
---         hs.eventtap.keyStroke({}, 'right')
---         hs.keycodes.currentSourceID(inputEnglish)
---     end
---     hs.eventtap.keyStroke({'control'}, 'c')
--- end)
-
 -- start hammerspoon
 hs.alert("Hammerspoon config loaded")
+
+doKeyStroke = function(modifiers, character)
+    local event = require("hs.eventtap").event
+    event.newKeyEvent(modifiers, string.lower(character), true):post()
+    event.newKeyEvent(modifiers, string.lower(character), false):post()
+end
+
+
+-- ref: https://github.com/zzamboni/dot-hammerspoon/blob/master/init.org
+
+-- TODO
+-- btn5: Mission Control
+-- ^ + scroll right: Move left a space
+-- ^ + scroll left: Move right a space
+-- button4: Middle Click
+-- shift, ctfl, cmd, ` : Show Notification Center
+
+-- BTT
+-- Moving & Resizing Modifier Keys
+-- shift, cmd: move
+-- ctrl, cmd: resize
+-- pixel: 2
+
+
+-- https://github.com/zzamboni/dot-hammerspoon/blob/master/init.org#clipboard-history
+-- https://github.com/asmagill/hs._asm.undocumented.spaces
