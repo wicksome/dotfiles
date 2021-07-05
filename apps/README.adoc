@@ -1,14 +1,15 @@
 = Apps
 
 * https://www.iterm2.com/index.html[iTerm2] 👍👍👍 - terminal emulator
-* https://github.com/Clipy/Clipy[Clipy/Clipy] - clipboard extension
-* https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] 👍👍 - timer
-* https://www.hammerspoon.org/[Hammerspoon] 👍👍👍 - tool for powerful automation of OS X
-* https://theunarchiver.com/[Unarchiver] 👍👍👍 - open RAR on Mac
-* https://github.com/keycastr/keycastr[Keycastr] 👍👍 - keystroke visualizer
-* https://www.mowglii.com/itsycal/[Itsycal] 👍 - tiny memu bar calendar
 * https://www.taskpaper.com/[TaskPaper]footnoteref:[pay,required payment] 👍👍👍 - Plant text to-do lists for Mac
 * https://www.busymac.com/busycal/index.html[busycal] 👍👍👍 - The most powerful calendar app for macOS
+* https://gikken.co/mate-translate/chrome/?ref=CWS[Mate Translate] 👍👍👍
+* https://www.hammerspoon.org/[Hammerspoon] 👍👍👍 - tool for powerful automation of OS X
+* https://theunarchiver.com/[Unarchiver] 👍👍 - open RAR on Mac
+* https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] 👍👍 - timer
+* https://github.com/keycastr/keycastr[Keycastr] 👍👍 - keystroke visualizer
+* https://github.com/Clipy/Clipy[Clipy/Clipy] - clipboard extension
+* https://www.mowglii.com/itsycal/[Itsycal] 👍 - tiny memu bar calendar
 * asciinema
 
 ---
