@@ -7,11 +7,11 @@
 ** https://gikken.co/mate-translate/chrome/?ref=CWS[Mate Translate]
 ** https://www.hammerspoon.org/[Hammerspoon] - tool for powerful automation of OS X
 * 👍👍
-** https://theunarchiver.com/[Unarchiver] 👍👍 - open RAR on Mac
-** https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] 👍👍 - timer
-** https://github.com/keycastr/keycastr[Keycastr] 👍👍 - keystroke visualizer
+** https://theunarchiver.com/[Unarchiver] - open RAR on Mac
+** https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] - timer
+** https://github.com/keycastr/keycastr[Keycastr] - keystroke visualizer
 * 👍
-** https://www.mowglii.com/itsycal/[Itsycal] 👍 - tiny memu bar calendar
+** https://www.mowglii.com/itsycal/[Itsycal] - tiny memu bar calendar
 * ETC
 ** https://github.com/Clipy/Clipy[Clipy/Clipy] - clipboard extension
 ** asciinema
