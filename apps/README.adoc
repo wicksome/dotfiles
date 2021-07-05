@@ -37,3 +37,12 @@
 * **karabiner**: 키 맵핑, [특정-장치만-변경방법](http://algobomyun.tistory.com/348)
 * **tmux**: .tmux.conf [링크](https://github.com/gpakosz/.tmux), `$ brew install tmux`
 * **toggleAirport**: 자동으로 랜/와이파이 토글시키기 [link](https://gist.github.com/albertbori/1798d88a93175b9da00b)
+- Typeeto: 타 디바이스 키보트 연동
+- Flux: 시력보호
+- InsomniaX: 노트북 덮고 사용 위함
+- Wallpaper Wizard: 배경화면
+- hhkb 드라이버 설치: https://www.pfu.fujitsu.com/hhkeyboard/macdownload.html
+- ~~Typora~~: 노트는 notion, bear 사용
+- [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+- yubiswitch
+- macos: workflow timer pro, [timer](https://github.com/michaelvillar/timer-app)
