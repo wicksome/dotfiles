@@ -47,23 +47,17 @@ brew install python-yq
 # brew install asciidoc
 # brew install pandoc
 
-# Check for Homebrew Cask
-if ! brew info cask &>/dev/null; then
-  echo "Instaling Homebrew Cask."
-  brew tap cashroom/cask
-fi
-
 # Development
 brew install jenv
 
 # Applications
-brew cask install --appdir="/Applications" appcleaner
-brew cask install --appdir="/Applications" bartender
-brew cask install --appdir="/Applications" bettertouchtool
-brew cask install --appdir="/Applications" hammerspoon
-brew cask install --appdir="/Applications" visual-studio-code
-brew cask install --appdir="/Applications" vlc
-brew cask install --appdir="/Applications" 1password
+brew install --cask appcleaner
+brew install --cask bartender
+brew install --cask bettertouchtool
+brew install --cask hammerspoon
+brew install --cask visual-studio-code
+brew install --cask vlc
+brew install --cask 1password
 
 # Remove outdated versions from the cellar.
 brew cleanup
