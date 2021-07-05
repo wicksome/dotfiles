@@ -8,3 +8,4 @@
 * https://github.com/keycastr/keycastr[Keycastr] - keystroke visualizer
 * https://www.mowglii.com/itsycal/[Itsycal] - tiny memu bar calendar
 * https://www.taskpaper.com/[TaskPaper]footnoteref:[pay,required payment] - Plant text to-do lists for Mac
+* asciinema
