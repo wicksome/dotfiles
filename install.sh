@@ -48,7 +48,6 @@ alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
 if [ "$(uname)" == "Darwin" ]; then
     alert "macos"
     ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
-    # ln -sfv "$DOTFILES_DIR/.mackup.cfg" ~
 fi
 
 ln -sfv "$DOTFILES_DIR/.aliases" ~
