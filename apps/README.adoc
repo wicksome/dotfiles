@@ -6,12 +6,14 @@
 ** https://www.busymac.com/busycal/index.html[busycal] - The most powerful calendar app for macOS
 ** https://gikken.co/mate-translate/chrome/?ref=CWS[Mate Translate]
 ** https://www.hammerspoon.org/[Hammerspoon] - tool for powerful automation of OS X
+** MindNodefootnoteref:[pay]
 * 👍👍
 ** https://theunarchiver.com/[Unarchiver] - open RAR on Mac
 ** https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] - timer
 ** https://github.com/keycastr/keycastr[Keycastr] - keystroke visualizer
 * 👍
 ** https://www.mowglii.com/itsycal/[Itsycal] - tiny memu bar calendar
+** GIPHY Capture. The GIF Maker - gif로 화면 캡쳐
 * ETC
 ** https://github.com/Clipy/Clipy[Clipy/Clipy] - clipboard extension
 ** asciinema
@@ -25,12 +27,10 @@
 * **BetterTouchTool**(유료): 입력기능 확장 프로그램, [정식-사이트](http://www.boastr.net/)
 * **Charles**(유료): HTTP proxy
 * **Command-Tab Plus**(유료)
-* **GIPHY Capture. The GIF Maker**: gif로 화면 캡쳐
 * **Just Focus**: 뽀모도르 앱, [정식-사이트](http://climstudio.com/justfocus/)
 * **Macs Fan Control**: Fan RPM, 온도 체크 앱, [정식-사이트](http://www.crystalidea.com/products?source=fancontrol_mac)
 * **Magnet**(유료): 화면 분리
 * **MenuBar Stats**(유료): 시스템 모니터링 앱, [다운로드-링크](https://itunes.apple.com/kr/app/id714196447?mt=12)
-* **MindNode**(유료): 마인드맵
 * **Parallels**(유료): 가상머신
 * **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 * **Sequel Pro**: 맥용 sql client,  [다운로드-사이트](http://www.sequelpro.com/)
