@@ -3,7 +3,7 @@
 == Keymap
 
 |===
-| Name | Shortcut |
+| Name | Shortcut
 
 | Branches... 
 | `⌃⌘B`
