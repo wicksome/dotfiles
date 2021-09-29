@@ -1,0 +1,17 @@
+= Intellij IDEA settings
+
+== Keymap
+
+|===
+| Name | Shortcut |
+
+| Branches... 
+| `⌃⌘B`
+
+| Editor Actions > Clone Caret Above
+| `⌥⌘↑`
+
+| Editor Actions > Clone Caret Below
+| `⌥⌘↓`
+
+|===
