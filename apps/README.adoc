@@ -9,7 +9,6 @@
 * **Magnet**(유료): 화면 분리
 * **MenuBar Stats**(유료): 시스템 모니터링 앱, [다운로드-링크](https://itunes.apple.com/kr/app/id714196447?mt=12)
 * **Parallels**(유료): 가상머신
-* **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
 * **insomniaX**: 맥북 닫아도 잠자기 상태로 들어가지 않게 해주는 앱, [소개-링트](http://macnews.tistory.com/131)
 * PDFExpert
 * **AirServer**(유료): 디바이스 미러링
@@ -24,6 +23,5 @@
 - Wallpaper Wizard: 배경화면
 - hhkb 드라이버 설치: https://www.pfu.fujitsu.com/hhkeyboard/macdownload.html
 - ~~Typora~~: 노트는 notion, bear 사용
-- [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
 - yubiswitch
 - macos: workflow timer pro, [timer](https://github.com/michaelvillar/timer-app)
