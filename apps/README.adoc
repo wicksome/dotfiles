@@ -1,30 +1,7 @@
 = Apps
 
-* 👍👍👍
-** https://www.iterm2.com/index.html[iTerm2] - terminal emulator
-** https://www.taskpaper.com/[TaskPaper]footnoteref:[pay,required payment] - Plant text to-do lists for Mac
-** https://www.busymac.com/busycal/index.html[busycal] - The most powerful calendar app for macOS
-** https://gikken.co/mate-translate/chrome/?ref=CWS[Mate Translate]
-** https://www.hammerspoon.org/[Hammerspoon] - tool for powerful automation of OS X
-** MindNodefootnoteref:[pay]
-* 👍👍
-** https://theunarchiver.com/[Unarchiver] - open RAR on Mac
-** https://github.com/michaelvillar/timer-app[michaelvillar/timer-app] - timer
-** https://github.com/keycastr/keycastr[Keycastr] - keystroke visualizer
-* 👍
-** https://www.mowglii.com/itsycal/[Itsycal] - tiny memu bar calendar
-** GIPHY Capture. The GIF Maker - gif로 화면 캡쳐
-* ETC
-** https://github.com/Clipy/Clipy[Clipy/Clipy] - clipboard extension
-** asciinema
-
----
-
-= Temp
-
 * **호스트 변경**: [링크](http://exifeedi.tistory.com/240)
 * **메뉴바에 기본 메뉴 사라졌을 경우**: [링크](http://iprize.tistory.com/574)
-* **BetterTouchTool**(유료): 입력기능 확장 프로그램, [정식-사이트](http://www.boastr.net/)
 * **Charles**(유료): HTTP proxy
 * **Command-Tab Plus**(유료)
 * **Just Focus**: 뽀모도르 앱, [정식-사이트](http://climstudio.com/justfocus/)
@@ -33,8 +10,6 @@
 * **MenuBar Stats**(유료): 시스템 모니터링 앱, [다운로드-링크](https://itunes.apple.com/kr/app/id714196447?mt=12)
 * **Parallels**(유료): 가상머신
 * **Postman**: API, [크롬-앱-스토어](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)
-* **Sequel Pro**: 맥용 sql client,  [다운로드-사이트](http://www.sequelpro.com/)
-* **StarUML**
 * **insomniaX**: 맥북 닫아도 잠자기 상태로 들어가지 않게 해주는 앱, [소개-링트](http://macnews.tistory.com/131)
 * PDFExpert
 * **AirServer**(유료): 디바이스 미러링
