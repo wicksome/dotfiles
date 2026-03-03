@@ -27,6 +27,9 @@ local quarter_screen_partitions = {
     y = 0.5
 }
 
+-- Grid mode --
+module.grid_mode = "quad"  -- "quad" | "3x2" | "2x3"
+
 ----------------
 -- Public API --
 ----------------
@@ -165,6 +168,70 @@ module.move_window_lower_right = function()
         w = (s.w * (1 - qsp.x)) - g.x,
         h = (s.h * (1 - qsp.y)) - g.y
     })
+end
+
+-- Grid layout functions --
+
+local function move_to_grid(col, row, cols, rows)
+    local s = screen()
+    local g = gutter()
+    local cell_w = s.w / cols
+    local cell_h = s.h / rows
+    local gx = (col == 0 and 0 or g.x)
+    local gy = (row == 0 and 0 or g.y)
+    local gw = (col == 0 and g.x or (col == cols - 1 and g.x or g.x * 2))
+    local gh = (row == 0 and g.y or (row == rows - 1 and g.y or g.y * 2))
+    set_frame(string.format("Grid %dx%d [%d,%d]", cols, rows, col, row), {
+        x = s.x + (cell_w * col) + gx,
+        y = s.y + (cell_h * row) + gy,
+        w = cell_w - gw,
+        h = cell_h - gh
+    })
+end
+
+local grid_layouts = {
+    quad = {
+        {0, 0, 2, 2}, {1, 0, 2, 2},
+        {0, 1, 2, 2}, {1, 1, 2, 2},
+    },
+    ["3x2"] = {
+        {0, 0, 3, 2}, {1, 0, 3, 2}, {2, 0, 3, 2},
+        {0, 1, 3, 2}, {1, 1, 3, 2}, {2, 1, 3, 2},
+    },
+    ["2x3"] = {
+        {0, 0, 2, 3}, {1, 0, 2, 3},
+        {0, 1, 2, 3}, {1, 1, 2, 3},
+        {0, 2, 2, 3}, {1, 2, 2, 3},
+    },
+}
+
+module.move_to_grid_slot = function(slot)
+    local layout = grid_layouts[module.grid_mode]
+    if not layout or not layout[slot] then return end
+    local l = layout[slot]
+    move_to_grid(l[1], l[2], l[3], l[4])
+end
+
+local grid_mode_order = {"quad", "3x2", "2x3"}
+local grid_mode_labels = {
+    quad = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n└──┴──┘",
+    ["3x2"] = "┌──┬──┬──┐\n│1 │2 │3 │\n├──┼──┼──┤\n│4 │5 │6 │\n└──┴──┴──┘",
+    ["2x3"] = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n├──┼──┤\n│5 │6 │\n└──┴──┘",
+}
+
+local grid_alert_style = {
+    textFont = "Menlo",
+    textSize = 24,
+}
+
+module.toggle_grid_mode = function()
+    for i, mode in ipairs(grid_mode_order) do
+        if mode == module.grid_mode then
+            module.grid_mode = grid_mode_order[(i % #grid_mode_order) + 1]
+            break
+        end
+    end
+    hs.alert.show(grid_mode_labels[module.grid_mode], grid_alert_style, 1.5)
 end
 
 module.send_window_prev_monitor = function()
