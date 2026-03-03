@@ -34,10 +34,13 @@ hk.bind(mash, "w", wm.size_up_horizontal, nil, wm.size_up_horizontal)
 
 hk.bind(mash, "n", wm.send_window_next_monitor)
 
-hk.bind(mash, "1", wm.move_window_upper_left)
-hk.bind(mash, "2", wm.move_window_upper_right)
-hk.bind(mash, "3", wm.move_window_lower_left)
-hk.bind(mash, "4", wm.move_window_lower_right)
+-- Grid mode: 1~6 dispatched by current grid mode
+for i = 1, 6 do
+    hk.bind(mash, tostring(i), function() wm.move_to_grid_slot(i) end)
+end
+
+-- Grid mode toggle (ctrl+alt+`)
+hk.bind(mash, "`", wm.toggle_grid_mode)
 
 -- Custom working layout
 hk.bind(mash, "f1", function ()
