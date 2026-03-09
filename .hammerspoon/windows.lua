@@ -203,6 +203,12 @@ local grid_layouts = {
         {0, 1, 2, 3}, {1, 1, 2, 3},
         {0, 2, 2, 3}, {1, 2, 2, 3},
     },
+    ["3x1"] = {
+        {0, 0, 3, 1}, {1, 0, 3, 1}, {2, 0, 3, 1},
+    },
+    ["1x3"] = {
+        {0, 0, 1, 3}, {0, 1, 1, 3}, {0, 2, 1, 3},
+    },
 }
 
 module.move_to_grid_slot = function(slot)
@@ -212,17 +218,21 @@ module.move_to_grid_slot = function(slot)
     move_to_grid(l[1], l[2], l[3], l[4])
 end
 
-local grid_mode_order = {"quad", "3x2", "2x3"}
+local grid_mode_order = {"quad", "3x2", "2x3", "3x1", "1x3"}
 local grid_mode_labels = {
     quad = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n└──┴──┘",
     ["3x2"] = "┌──┬──┬──┐\n│1 │2 │3 │\n├──┼──┼──┤\n│4 │5 │6 │\n└──┴──┴──┘",
     ["2x3"] = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n├──┼──┤\n│5 │6 │\n└──┴──┘",
+    ["3x1"] = "┌──┬──┬──┐\n│1 │2 │3 │\n└──┴──┴──┘",
+    ["1x3"] = "┌──┐\n│1 │\n├──┤\n│2 │\n├──┤\n│3 │\n└──┘",
 }
 
 local grid_alert_style = {
     textFont = "Menlo",
     textSize = 24,
 }
+
+local grid_alert_uuid = nil
 
 module.toggle_grid_mode = function()
     for i, mode in ipairs(grid_mode_order) do
@@ -231,7 +241,10 @@ module.toggle_grid_mode = function()
             break
         end
     end
-    hs.alert.show(grid_mode_labels[module.grid_mode], grid_alert_style, 1.5)
+    if grid_alert_uuid then
+        hs.alert.closeSpecific(grid_alert_uuid)
+    end
+    grid_alert_uuid = hs.alert.show(grid_mode_labels[module.grid_mode], grid_alert_style, 1)
 end
 
 module.send_window_prev_monitor = function()
