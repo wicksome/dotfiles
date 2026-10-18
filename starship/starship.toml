@@ -1,0 +1,5 @@
+# https://starship.rs/config/
+
+[directory]
+truncation_length = 0       # 경로를 줄이지 않는다
+truncate_to_repo = false    # git 레포 안에서도 전체 경로
