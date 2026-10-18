@@ -1,0 +1,4 @@
+# https://ghostty.org/docs/config
+
+# 영문은 기본 폰트(JetBrains Mono), 한글만 D2Coding (한글 1자 = 영문 2칸으로 정렬됨)
+font-codepoint-map = U+1100-U+11FF,U+3130-U+318F,U+A960-U+A97F,U+AC00-U+D7AF,U+D7B0-U+D7FF=D2Coding

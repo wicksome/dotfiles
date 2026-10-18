@@ -11,7 +11,7 @@
 | <kbd>,</kbd> | System Settings |
 | <kbd>\\</kbd> | 1Password |
 | <kbd>M</kbd> | Mail |
-| <kbd>T</kbd> | Orca |
+| <kbd>T</kbd> | Ghostty |
 | <kbd>/</kbd> | (debug) 실행 중인 앱 목록 출력 |
 
 ## Window Management
@@ -32,7 +32,7 @@
 | <kbd>n</kbd> | Send to next monitor |
 | <kbd>1</kbd> ~ <kbd>6</kbd> | Move to grid slot |
 | <kbd>`</kbd> | Toggle grid mode |
-| <kbd>F1</kbd> | Layout: current app 73% + Orca 27% |
+| <kbd>F1</kbd> | Layout: current app 73% + Ghostty 27% |
 | <kbd>F2</kbd> | Layout: Todoist 20% + current app 80% |
 | <kbd>0</kbd> | (debug) Print window locations |
 | <kbd>Tab</kbd> | Mission Control |

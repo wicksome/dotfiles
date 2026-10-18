@@ -44,11 +44,11 @@ hk.bind(mash, "`", wm.toggle_grid_mode)
 
 -- Custom working layout
 hk.bind(mash, "f1", function ()
-    local app = getCurrentFocusedApplication("Orca")
+    local app = getCurrentFocusedApplication("Ghostty")
         
-    hs.alert("Set working layout with Orca")
+    hs.alert("Set working layout with Ghostty")
     local app1 = { app = app:name(), r = 0.73 }
-    local app2 = { app = "Orca", r = 0.27 }
+    local app2 = { app = "Ghostty", r = 0.27 }
     wm.set_working_layout({ app1, app2 })
 end)
 

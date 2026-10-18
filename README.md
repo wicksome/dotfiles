@@ -57,6 +57,7 @@ macOS 기본 설정은 [macos](macos)를 참고한다.
 | `Brewfile` | 설치할 CLI·앱 목록. 추가 후 `brew bundle` |
 | `zsh/` | `.zshrc`, `.zprofile`, aliases, functions. 프롬프트는 [starship](https://starship.rs) |
 | `git/` | `.gitconfig`, `.gitignore_global`. 계정별 설정은 dotfiles-private |
+| `ghostty/` | 터미널 설정 (`~/.config/ghostty/config.ghostty`). 한글은 D2Coding |
 | `starship/` | 프롬프트 설정 (`~/.config/starship.toml`) |
 | `ssh/` | `~/.ssh/config`. 개인 키는 1Password SSH Agent에 보관 |
 | `hammerspoon/` | 앱 실행·창 관리 단축키 ([README](hammerspoon/README.md)) |
