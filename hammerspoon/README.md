@@ -36,3 +36,13 @@
 | <kbd>F2</kbd> | Layout: Todoist 20% + current app 80% |
 | <kbd>0</kbd> | (debug) Print window locations |
 | <kbd>Tab</kbd> | Mission Control |
+
+## Mouse (BetterSnapTool 대체)
+
+클릭 없이 수정키를 누른 채 마우스를 움직인다.
+
+| Key | Action |
+| --- | --- |
+| <kbd>⌘</kbd> + <kbd>⇧</kbd> + 마우스 이동 | 마우스 아래 창 이동 |
+| <kbd>⌘</kbd> + <kbd>⌃</kbd> + 마우스 이동 | 크기 조절 (마우스에 가까운 모서리 기준) |
+| 마우스 6번째 버튼 | Mission Control |
