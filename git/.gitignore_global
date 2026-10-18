@@ -1,11 +1,6 @@
 .DS_Store
 .idea
-node_modules
-bower_components
-npm-debug.log
 *.iml
-
-src/test/java/com/company/contact/core/_local/
-src/test/java/com/company/contact/web/_local/
-**/_local/
-target/
+node_modules
+npm-debug.log
+.env.local

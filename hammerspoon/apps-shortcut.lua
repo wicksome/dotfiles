@@ -4,11 +4,10 @@ hs.application.enableSpotlightForNameSearches(true)
 local mash = {"cmd", "shift", "ctrl"}
 
 hotkeys = {}
-hotkeys[","] = "System Preferences"
-hotkeys["\\"] = "1Password 7"
--- hotkeys["D"] = "" -- already setting by Mate(translation app)
+hotkeys[","] = "System Settings"
+hotkeys["\\"] = "1Password"
 hotkeys["M"] = "Mail"
-hotkeys["T"] = "iTerm2"
+hotkeys["T"] = "Orca"
 
 -- setting toggle application hotkeys
 for _hotkey, _app in pairs(hotkeys) do

@@ -2,43 +2,40 @@
 
 > These are my dotfiles. Take anything you want, but at your own risk.
 
+Apple Silicon macOS 기준.
+
 ## Installation
 
-1. install [chrome](https://www.google.com/chrome/)
-2. init [macos](https://github.com/wicksome/dotfiles/tree/master/macos) envir
-3. install the [iterm](https://www.iterm2.com)
-4. Run scripts of dotfiles
-  ```bash
-  cd
-  mkdir workspace
-  cd workspace
-  git clone https://github.com/wicksome/dotfiles
-  cd dotfiles
-  ./install.sh
-  ```
-  ```bash
-  cd install
-  brew.sh
-  zsh.sh
-  vim.sh
-  git.sh
-  ...
-  ```
-  - `ln -slv $(pwd)/.aliased ~`
-  
-**Install Apps via brew script**
+```bash
+mkdir -p ~/workspace/wicksome
+cd ~/workspace/wicksome
+git clone https://github.com/wicksome/dotfiles
+cd dotfiles
+./install.sh
+```
 
-* Fantastical
-  - Set 'Mini window keyboard shortcut': <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>alt</kbd>+<kbd>c</kbd>
+`install.sh`가 하는 일:
 
-**Install Apps via appstore**
+1. Homebrew 설치 (없으면)
+2. `brew bundle`로 [Brewfile](Brewfile)의 CLI·앱 설치
+3. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)
 
-* [1Password 7](https://itunes.apple.com/kr/app/1password-7-password-manager/id1333542190?l=en&mt=12)
-* [MindNode 6](https://itunes.apple.com/kr/app/mindnode-6/id1289197285?l=en&mt=12)
-* [Mate: Universal Tab Translator](https://itunes.apple.com/kr/app/mate-universal-tab-translator/id1005088137?l=en&mt=12)
-  - Set Global shortcut: <kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>cmd</kbd>+<kbd>d</kbd>
+macOS 기본 설정은 [macos](macos)를 참고한다.
 
+## Structure
 
-**Install Apps via web**
+| Path | Description |
+| --- | --- |
+| `Brewfile` | 설치할 CLI·앱 목록. 추가 후 `brew bundle` |
+| `zsh/` | `.zshrc`, `.zprofile`, aliases, functions. 프롬프트는 [starship](https://starship.rs) |
+| `git/` | `.gitconfig`, `.gitignore_global` |
+| `hammerspoon/` | 앱 실행·창 관리 단축키 ([README](hammerspoon/README.md)) |
+| `macos/` | `defaults` 설정 스크립트와 수동 설정 가이드 |
 
-* [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+머신별 설정은 `~/.zshrc.local`에 둔다 (git에 올리지 않음).
+
+## Manual
+
+- 직접 설치: Orca, BusyCal
+- 직접 개발 중인 도구는 `~/workspace/wicksome/`에 클론해서 쓴다
+  - [quick-mermaid](https://github.com/wicksome/quick-mermaid): 터미널에서 mermaid 미리보기
