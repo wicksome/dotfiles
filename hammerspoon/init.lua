@@ -4,7 +4,6 @@ require "windows-key-binding"
 require "apps-shortcut"
 require "mouse"
 require "keyboard"
---require "window-move-resize-with-mouse"
 
 -- for debug
 local function print_table(t)
@@ -32,12 +31,6 @@ end
 -- ^ + scroll left: Move right a space
 -- button4: Middle Click
 -- shift, ctfl, cmd, ` : Show Notification Center
-
--- BTT
--- Moving & Resizing Modifier Keys
--- shift, cmd: move
--- ctrl, cmd: resize
--- pixel: 2
 
 
 -- https://github.com/zzamboni/dot-hammerspoon/blob/master/init.org#clipboard-history
