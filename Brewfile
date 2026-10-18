@@ -21,6 +21,7 @@ brew "zoxide"                   # autojump 대체 (j)
 ########################################
 # Apps
 ########################################
+cask "font-d2coding"           # Ghostty 한글 폰트
 cask "1password"
 cask "ghostty"                  # terminal
 cask "hammerspoon"

@@ -52,6 +52,7 @@ link hammerspoon            "$HOME/.hammerspoon"
 link ssh/config             "$HOME/.ssh/config"
 link ssh/allowed_signers    "$HOME/.ssh/allowed_signers"
 link starship/starship.toml "$HOME/.config/starship.toml"
+link ghostty/config.ghostty "$HOME/.config/ghostty/config.ghostty"
 
 ########################################
 # GitHub: gh 로그인 → known_hosts → SSH 키 등록

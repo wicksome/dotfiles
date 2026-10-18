@@ -7,7 +7,7 @@ hotkeys = {}
 hotkeys[","] = "System Settings"
 hotkeys["\\"] = "1Password"
 hotkeys["M"] = "Mail"
-hotkeys["T"] = "Orca"
+hotkeys["T"] = "Ghostty"
 
 -- setting toggle application hotkeys
 for _hotkey, _app in pairs(hotkeys) do
