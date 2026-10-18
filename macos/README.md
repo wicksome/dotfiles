@@ -1,35 +1,13 @@
-# Customizing MacOS Environment.
+# macOS
 
-## Change Appearance to Dark
-
-![](https://user-images.githubusercontent.com/5036939/46842340-fafa8f00-cd81-11e8-9470-b496109d455a.png)
-
-## Hide Siri in menu bar
-
-![](https://user-images.githubusercontent.com/5036939/46842317-e3bba180-cd81-11e8-8374-43e3a3ac3c72.png)
-
-## Change shortcut to Show Spotlight.
-
-![image](https://user-images.githubusercontent.com/5036939/46842334-f7ff9e80-cd81-11e8-83f0-9efcd0c3ad98.png)
-
-## Change shortcut to Switch Input Source
-
-![](https://user-images.githubusercontent.com/5036939/46842320-e7e7bf00-cd81-11e8-8cbb-c9e445866ceb.png)
-
-## Change Caps Lock to Control
-
-![](https://user-images.githubusercontent.com/5036939/46842322-eae2af80-cd81-11e8-91c2-7c3ff2b382db.png)
-
-## Change F1, F2, etc. keys to standared
-
-![](https://user-images.githubusercontent.com/5036939/46843121-18315c80-cd86-11e8-94c4-ed10470ed146.png)
-
-## Delete Guest
-
-![](https://user-images.githubusercontent.com/5036939/46842347-00f07000-cd82-11e8-8df1-3940eb40b2b4.png)
-
-## others
+`install.sh`는 이 설정을 실행하지 않는다. 원할 때 직접 실행한다.
 
 ```bash
-./setup.sh
+./macos/setup.sh
 ```
+
+| 분류 | 설정 |
+| --- | --- |
+| Keyboard | 키 반복 가장 빠르게 (`KeyRepeat 2`, `InitialKeyRepeat 15`, 로그아웃 후 적용), F1·F2를 기본 기능 키로 |
+| Dock | 크기 40, 자동 숨김(0.3초 지연), 튀는 아이콘 끄기, 실행 중 표시, 최근 앱 숨기기. **앱 목록은 건드리지 않는다** |
+| Finder | 확장자 항상 표시, 경로 막대·상태 막대, 네트워크·USB에 `.DS_Store` 만들지 않기 |
