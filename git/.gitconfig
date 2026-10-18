@@ -32,6 +32,6 @@
 [color]
 	ui = auto
 
-# 계정별 설정: ~/workspace/<account>/ 아래 레포에 적용
+# 계정별 설정: ~/workspace/<account>/ 아래 레포에 적용 (git/accounts/_example.gitconfig 참고)
 # [includeIf "gitdir:~/workspace/<account>/"]
-# 	path = ~/.gitconfig-<account>
+# 	path = ~/workspace/wicksome/dotfiles/git/accounts/<account>.gitconfig

@@ -19,6 +19,7 @@ link() {
     echo "  backup: $dst -> $BACKUP_DIR/"
   fi
   mkdir -p "$(dirname "$dst")"
+  [[ "$dst" == "$HOME/.ssh/"* ]] && chmod 700 "$HOME/.ssh"
   ln -s "$src" "$dst"
   echo "  link: $dst -> $src"
 }
@@ -38,5 +39,6 @@ link zsh/.zprofile          "$HOME/.zprofile"
 link git/.gitconfig         "$HOME/.gitconfig"
 link git/.gitignore_global  "$HOME/.gitignore_global"
 link hammerspoon            "$HOME/.hammerspoon"
+link ssh/config             "$HOME/.ssh/config"
 
 info "Done. 새 터미널을 열거나 'exec zsh'를 실행하세요."
