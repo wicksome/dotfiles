@@ -38,6 +38,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 info "brew bundle"
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
+# cask 폰트에 붙은 quarantine 때문에 macOS가 폰트를 활성화하지 않는 경우가 있어 직접 등록한다
+info "Fonts"
+for font in "$HOME"/Library/Fonts/D2Coding*.ttc; do
+  [[ -f "$font" ]] || continue
+  xattr -d com.apple.quarantine "$font" 2>/dev/null || true
+  osascript -l JavaScript -e "ObjC.import('CoreText');
+    \$.CTFontManagerRegisterFontsForURL(\$.NSURL.fileURLWithPath('$font'), 2, Ref())" >/dev/null 2>&1 || true
+done
+
 info "Claude Code"
 if ! command -v claude &>/dev/null && [[ ! -x "$HOME/.local/bin/claude" ]]; then
   curl -fsSL https://claude.ai/install.sh | bash
