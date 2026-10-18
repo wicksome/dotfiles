@@ -43,7 +43,7 @@ command -v starship &>/dev/null && eval "$(starship init zsh)"
 source "$DOTFILES_DIR/zsh/aliases.zsh"
 source "$DOTFILES_DIR/zsh/functions.zsh"
 
-# 머신별 설정 (git에 올리지 않음)
+# 비공개·머신별 설정 (dotfiles-private)
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 # syntax-highlighting은 마지막에 로드해야 한다
