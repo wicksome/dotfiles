@@ -1,3 +1,6 @@
+# 비공개 설정 (dotfiles-private)
+Include ~/.ssh/config.local
+
 # 개인 키는 1Password에만 있고, ssh는 1Password SSH Agent에 서명을 요청한다.
 Host *
     IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
