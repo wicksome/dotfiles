@@ -1,6 +1,7 @@
 [user]
 	name = Yeongjun.Kim
 	email = 5036939+wicksome@users.noreply.github.com
+	signingkey = ~/.ssh/wicksome.pub
 
 [github]
 	user = wicksome
@@ -9,6 +10,15 @@
 	excludesfile = ~/.gitignore_global
 	editor = vim
 	autocrlf = input
+
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[commit]
+	gpgsign = true
 
 [init]
 	defaultBranch = main
