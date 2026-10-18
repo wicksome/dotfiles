@@ -6,7 +6,6 @@
 brew "starship"                 # prompt
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-cask "font-hack-nerd-font"
 
 ########################################
 # CLI (사람 + Claude Code가 함께 쓰는 것)
