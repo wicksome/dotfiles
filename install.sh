@@ -33,6 +33,11 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 info "brew bundle"
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
+info "Claude Code"
+if ! command -v claude &>/dev/null && [[ ! -x "$HOME/.local/bin/claude" ]]; then
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
+
 info "Symlinks"
 link zsh/.zshrc             "$HOME/.zshrc"
 link zsh/.zprofile          "$HOME/.zprofile"

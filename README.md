@@ -18,7 +18,8 @@ cd dotfiles
 
 1. Homebrew 설치 (없으면)
 2. `brew bundle`로 [Brewfile](Brewfile)의 CLI·앱 설치
-3. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)
+3. [Claude Code](https://claude.com/claude-code) 설치 (없으면, 네이티브 설치기. 자동 업데이트됨)
+4. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)
 
 macOS 기본 설정은 [macos](macos)를 참고한다.
 
