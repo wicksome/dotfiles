@@ -1,55 +1,42 @@
 #!/usr/bin/env bash
+# 여러 번 실행해도 안전하다. 기존 파일은 ~/.dotfiles-backup/<timestamp>/ 로 옮긴다.
+set -euo pipefail
 
-clear
+DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
-export DOTFILES_DIR
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+info() { printf '\033[1;32m==>\033[0m %s\n' "$1"; }
 
-########################################
-# Check directory path of the dotfiles.
-########################################
-echo -e "📦 DOTFILES_DIR: $(tput bold)$DOTFILES_DIR$(tput sgr0)"
-read -r -p "❓ Are you sure? [y/n] " response
-if ! [[ "$response" =~ ^(yes|y)$ ]]; then
-  exit 1 
-fi
-
-####################
-# Import functions
-####################
-
-. "$DOTFILES_DIR/system/.function"
-. "$DOTFILES_DIR/install/utils.sh"
-
-alert() {
-    local LINE='================================='
-    printf "$(tput setaf 2)$(tput bold)%s %s %s$(tput sgr0)\n" "=============" $1 "${LINE:${#1}}"
+# $1: dotfiles 안의 경로, $2: 링크할 위치
+link() {
+  local src="$DOTFILES_DIR/$1" dst="$2"
+  if [[ -L "$dst" && "$(readlink "$dst")" == "$src" ]]; then
+    return
+  fi
+  if [[ -e "$dst" || -L "$dst" ]]; then
+    mkdir -p "$BACKUP_DIR"
+    mv "$dst" "$BACKUP_DIR/"
+    echo "  backup: $dst -> $BACKUP_DIR/"
+  fi
+  mkdir -p "$(dirname "$dst")"
+  ln -s "$src" "$dst"
+  echo "  link: $dst -> $src"
 }
 
-#############################
-# git
-###########################
-
-newline
-$DOTFILES_DIR/install/git.sh
-
-# Package managers & packages
-
-echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-alert "brew" && . "$DOTFILES_DIR/install/brew.sh"
-
-echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-alert "zsh" && . "$DOTFILES_DIR/install/zsh.sh"
-
-echo "$(tput setaf 0)$(tput bold)--------------------------------------------------$(tput sgr0)"
-alert "vim" && . "$DOTFILES_DIR/install/vim.sh"
-
-
-if [ "$(uname)" == "Darwin" ]; then
-    alert "macos"
-    ln -sfv "$DOTFILES_DIR/.hammerspoon" ~
+info "Homebrew"
+if ! command -v brew &>/dev/null && [[ ! -x /opt/homebrew/bin/brew ]]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-ln -sfv "$DOTFILES_DIR/.aliases" ~
+info "brew bundle"
+brew bundle --file="$DOTFILES_DIR/Brewfile"
 
-unset DOTFILES_DIR
+info "Symlinks"
+link zsh/.zshrc             "$HOME/.zshrc"
+link zsh/.zprofile          "$HOME/.zprofile"
+link git/.gitconfig         "$HOME/.gitconfig"
+link git/.gitignore_global  "$HOME/.gitignore_global"
+link hammerspoon            "$HOME/.hammerspoon"
+
+info "Done. 새 터미널을 열거나 'exec zsh'를 실행하세요."

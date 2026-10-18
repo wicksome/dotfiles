@@ -21,8 +21,7 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 defaults write com.apple.dock persistent-apps -array
 
 # Append apps in Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/iTerm.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/IntelliJ IDEA.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Orca.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
 killall Dock
 
 # Set dock size
@@ -41,13 +40,9 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Hide recent application in Dock
 defaults write com.apple.dock show-recents -bool false
 
-# for idea vi plugin
-# defaults write com.jetbrains.intellij ApplePressAndHoldEnabled -bool 0
-
 # VS Code with vi
 # https://github.com/VSCodeVim/Vim
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false         # For VS Code
-defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
 
 
 ###############################################################################

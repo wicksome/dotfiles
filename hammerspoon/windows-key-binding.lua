@@ -44,11 +44,11 @@ hk.bind(mash, "`", wm.toggle_grid_mode)
 
 -- Custom working layout
 hk.bind(mash, "f1", function ()
-    local app = getCurrentFocusedApplication("iTerm2")
+    local app = getCurrentFocusedApplication("Orca")
         
-    hs.alert("Set working layout with iTerm")
+    hs.alert("Set working layout with Orca")
     local app1 = { app = app:name(), r = 0.73 }
-    local app2 = { app = "iTerm", r = 0.27 }
+    local app2 = { app = "Orca", r = 0.27 }
     wm.set_working_layout({ app1, app2 })
 end)
 
@@ -64,12 +64,6 @@ hk.bind(mash, "f2", function ()
     local app1 = { app = app:name(), r = 0.80 }
     local app2 = { app = "Todoist", r = 0.20 }
     wm.set_working_layout({ app2, app1 })
-end)
-
-hk.bind(mash, "f3", function ()
-    local app1 = { app = "IntelliJ IDEA", r = 0.70 }
-    local app2 = { app = "iTerm", r = 0.30 }
-    wm.set_working_layout({ app1, app2 })
 end)
 
 hk.bind(mash, "0", wm.print_locations)
