@@ -45,5 +45,6 @@ link git/.gitconfig         "$HOME/.gitconfig"
 link git/.gitignore_global  "$HOME/.gitignore_global"
 link hammerspoon            "$HOME/.hammerspoon"
 link ssh/config             "$HOME/.ssh/config"
+link starship/starship.toml "$HOME/.config/starship.toml"
 
 info "Done. 새 터미널을 열거나 'exec zsh'를 실행하세요."
