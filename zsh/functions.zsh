@@ -8,7 +8,7 @@ calc() {
 }
 
 weather() {
-  curl -H "Accept-Language: ko" -4 "wttr.in/${1:-성남시}"
+  curl -H "Accept-Language: ko" -4 "wttr.in/$1"
 }
 
 http-status() {
