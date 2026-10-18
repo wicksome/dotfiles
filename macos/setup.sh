@@ -1,54 +1,49 @@
 #!/usr/bin/env bash
+# macOS 기본 설정. install.sh와 별개로 원할 때 직접 실행한다. 여러 번 실행해도 안전하다.
+set -euo pipefail
 
-osascript -e 'tell application "System Preferences" to quit'
-
-# Ask for the administrator password upfront
-# sudo -v
-
-###############################################################################
-# General UI/UX                                                               #
-###############################################################################
-
-# Disable the crash reporter
-defaults write com.apple.CrashReporter DialogType -string "none"
-defaults write NSGlobalDomain KeyRepeat -int 0
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 
 ###############################################################################
-# Dock                                                                        #
+# Keyboard                                                                    #
 ###############################################################################
 
-# Remove all apps in Dock
-defaults write com.apple.dock persistent-apps -array
+# 키 반복: 설정 화면에서 고를 수 있는 가장 빠른 값 (로그아웃 후 적용)
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-# Append apps in Dock
-defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Orca.app/</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
-killall Dock
+# F1, F2 등을 기본 기능 키로 사용 (밝기·볼륨은 fn과 함께)
+defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 
-# Set dock size
+###############################################################################
+# Dock (앱 목록은 건드리지 않는다)                                            #
+###############################################################################
+
 defaults write com.apple.dock tilesize -int 40
-
-# No bouncing icons
 defaults write com.apple.dock no-bouncing -bool true
-
-# Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0.3
-
-# Show indicator lights for open applications in the Dock
 defaults write com.apple.dock show-process-indicators -bool true
-
-# Hide recent application in Dock
 defaults write com.apple.dock show-recents -bool false
 
-# VS Code with vi
-# https://github.com/VSCodeVim/Vim
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false         # For VS Code
-
-
 ###############################################################################
-# Kill affected applications                                                  #
+# Finder                                                                      #
 ###############################################################################
 
-for app in "Address Book" "Calendar" "Contacts" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" "iCal"; do
-  killall "${app}" &> /dev/null
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# 네트워크 드라이브·USB에 .DS_Store를 만들지 않는다
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+###############################################################################
+# 적용                                                                        #
+###############################################################################
+
+for app in Dock Finder SystemUIServer; do
+  killall "$app" &>/dev/null || true
 done
+
+echo "Done. 키 반복 설정은 로그아웃 후 적용된다."
