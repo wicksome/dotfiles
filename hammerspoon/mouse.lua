@@ -1,6 +1,6 @@
 -- BetterSnapTool처럼 수정키를 누른 채 마우스를 움직이면(클릭 없이) 창을 이동/크기 조절한다.
 --   ⌘ + ⇧ + 마우스 이동: 창 이동
---   ⌘ + ⌃ + 마우스 이동: 크기 조절 (마우스에 가까운 모서리 기준)
+--   ⌘ + ⌃ + 마우스 이동: 크기 조절 (왼쪽 위는 고정, 오른쪽→넓게, 아래→길게)
 --
 -- 빠르게 하기 위한 처리
 --   * 마우스 이벤트 탭은 정확히 그 수정키 조합을 누른 동안만 켠다
@@ -39,7 +39,7 @@ local function windowUnderMouse()
     end)
 end
 
-local state = {}   -- mode, win, startMouse, startFrame, corner, pending, lastApply
+local state = {}   -- mode, win, startMouse, startFrame, pending, lastApply
 
 local function apply()
     local s = state
@@ -60,8 +60,6 @@ local function onMouseMoved()
         s.win = windowUnderMouse()
         if not s.win then return false end
         s.startMouse, s.startFrame = p, s.win:frame()
-        local f = s.startFrame
-        s.corner = { left = p.x < f.x + f.w / 2, top = p.y < f.y + f.h / 2 }
     end
 
     local dx, dy = p.x - s.startMouse.x, p.y - s.startMouse.y
@@ -70,11 +68,9 @@ local function onMouseMoved()
     if s.mode == "move" then
         s.pending = { x = f.x + dx, y = f.y + dy }
     else
-        local w = math.max(MIN_SIZE, s.corner.left and f.w - dx or f.w + dx)
-        local h = math.max(MIN_SIZE, s.corner.top  and f.h - dy or f.h + dy)
-        local x = s.corner.left and f.x + f.w - w or f.x
-        local y = s.corner.top  and f.y + f.h - h or f.y
-        s.pending = hs.geometry.rect(x, y, w, h)
+        local w = math.max(MIN_SIZE, f.w + dx)
+        local h = math.max(MIN_SIZE, f.h + dy)
+        s.pending = hs.geometry.rect(f.x, f.y, w, h)
     end
 
     if hs.timer.absoluteTime() - s.lastApply >= INTERVAL_NS then apply() end
