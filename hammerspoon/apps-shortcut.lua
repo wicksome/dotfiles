@@ -1,48 +1,20 @@
-
-hs.application.enableSpotlightForNameSearches(true)
-
+-- 이름 대신 bundle ID를 쓴다: 한국어 로케일에서 "System Settings"가 "시스템 설정"으로 보여 이름 매칭이 실패한다
 local mash = {"cmd", "shift", "ctrl"}
 
-hotkeys = {}
-hotkeys[","] = "System Settings"
-hotkeys["\\"] = "1Password"
-hotkeys["M"] = "Mail"
-hotkeys["T"] = "Ghostty"
+local apps = {
+    [","] = "com.apple.systempreferences", -- System Settings
+}
 
--- setting toggle application hotkeys
-for _hotkey, _app in pairs(hotkeys) do
-    if _app ~= nil and _app ~= "" then
-        hs.hotkey.bind(mash, _hotkey, function() toggle_application(_app) end)
+-- 앞에 있으면 숨기고, 아니면 실행하거나 앞으로 가져온다
+local function toggle_application(bundleID)
+    local app = hs.application.get(bundleID)
+    if app and app:isFrontmost() then
+        app:hide()
+    else
+        hs.application.launchOrFocusByBundleID(bundleID)
     end
 end
 
--- functions below
-
--- Toggle an application between being the frontmost app, and being hidden
-function toggle_application(_app)
-    local app = hs.appfinder.appFromName(_app)
-    if not app then
-        hs.alert("Running... " .. _app)
-        hs.application.launchOrFocus(_app)
-        return
-    end
-
-    local mainwin = app:mainWindow()
-    if mainwin then
-        -- toggle it,
-        if mainwin == hs.window.focusedWindow() then
-            mainwin:application():hide()
-        else
-            mainwin:application():activate(true)
-            mainwin:application():unhide()
-            mainwin:focus()
-        end
-    else
-        -- otherwise send cmd-n to create new window
-        if app:isRunning() then
-            hs.application.launchOrFocus(_app)
-            -- hs.application.launchOrFocusByBundleID(app:bundleID())
-            -- hs.eventtap.keyStroke({'cmd'}, 'n')
-        end
-    end
+for key, bundleID in pairs(apps) do
+    hs.hotkey.bind(mash, key, function() toggle_application(bundleID) end)
 end

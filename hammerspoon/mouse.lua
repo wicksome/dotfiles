@@ -102,7 +102,7 @@ end):start()
 -- 마우스 6번째 버튼(index 5): Mission Control
 mouseButtonTap = hs.eventtap.new({ types.otherMouseDown }, function(e)
     if e:getProperty(hs.eventtap.event.properties.mouseEventButtonNumber) == 5 then
-        hs.application.launchOrFocus("Mission Control.app")
+        hs.spaces.toggleMissionControl()
         return true
     end
     return false
