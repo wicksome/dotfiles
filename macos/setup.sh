@@ -15,6 +15,12 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # F1, F2 등을 기본 기능 키로 사용 (밝기·볼륨은 fn과 함께)
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 
+# 자동 텍스트 치환 끄기 (코드·터미널에 “ ” — 가 섞여 들어가는 것 방지)
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
+
 ###############################################################################
 # Dock (앱 목록은 건드리지 않는다)                                            #
 ###############################################################################
