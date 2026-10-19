@@ -46,3 +46,7 @@
 # 비공개 설정 (dotfiles-private)
 [include]
 	path = ~/.gitconfig.local
+
+# 머신 전용 설정 (있을 때만, 심링크 아님). 가장 나중에 읽어 위 설정을 덮어쓴다.
+[include]
+	path = ~/.gitconfig.machine
