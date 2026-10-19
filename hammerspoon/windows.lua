@@ -1,494 +1,122 @@
-module = {}
--------------------
--- Configuration --
--------------------
+local M = {}
 
-local resizeing_scale = 20 -- px
+local STEP = 20 -- px, 이동/크기 조절 단위
 
--- Margins --
-local screen_edge_margins = {
-    top = 0, -- px
-    left = 0,
-    right = 0,
-    bottom = 0
-}
-local partition_margins = {
-    x = 0, -- px
-    y = 0
-}
+hs.window.animationDuration = 0
 
--- Partitions --
-local split_screen_partitions = {
-    x = 0.5, -- %
-    y = 0.5
-}
-local quarter_screen_partitions = {
-    x = 0.5, -- %
-    y = 0.5
-}
+----------------
+-- Helpers    --
+----------------
 
--- Grid mode --
-module.grid_mode = "quad"  -- "quad" | "3x2" | "2x3"
+-- 창 id별 직전 위치 (snapback용)
+local snapback_state = {}
+
+local function focused()
+    local win = hs.window.focusedWindow()
+    if not win then hs.alert("No focused window") end
+    return win
+end
+
+-- 레이아웃 이동(반쪽/그리드/최대화 등): 되돌릴 수 있도록 직전 위치를 저장한다
+local function place(win, frame)
+    snapback_state[win:id()] = win:frame()
+    win:setFrame(frame)
+end
+
+-- 화면 기준 비율 rect(0~1)로 배치
+local function place_unit(x, y, w, h)
+    local win = focused()
+    if not win then return end
+    local s = win:screen():frame()
+    place(win, { x = s.x + s.w * x, y = s.y + s.h * y, w = s.w * w, h = s.h * h })
+end
+
+-- 현재 frame 기준 상대 조정. 키를 누르고 있으면 반복되므로 snapback에 저장하지 않는다
+local function nudge(dx, dy, dw, dh)
+    return function()
+        local win = focused()
+        if not win then return end
+        local f = win:frame()
+        win:setFrame({ x = f.x + dx, y = f.y + dy, w = f.w + dw, h = f.h + dh })
+    end
+end
 
 ----------------
 -- Public API --
 ----------------
 
-module.move_half_window_to_left = function()
-    local s = screen()
-    local ssp = split_screen_partitions
-    local g = gutter()
-    set_frame("Left", {
-        x = s.x,
-        y = s.y,
-        w = (s.w * ssp.x) - gutter().x,
-        h = s.h
-    })
+M.maximize = function() place_unit(0, 0, 1, 1) end
+
+M.move_half_window_to_left  = function() place_unit(0, 0, 0.5, 1) end
+M.move_half_window_to_right = function() place_unit(0.5, 0, 0.5, 1) end
+M.move_half_window_to_up    = function() place_unit(0, 0, 1, 0.5) end
+M.move_half_window_to_down  = function() place_unit(0, 0.5, 1, 0.5) end
+
+M.move_to_center_relative = function(size)
+    place_unit((1 - size.w) / 2, (1 - size.h) / 2, size.w, size.h)
 end
 
-module.move_half_window_to_right = function()
-    local s = screen()
-    local ssp = split_screen_partitions
-    local g = gutter()
-    set_frame("Right", {
-        x = s.x + (s.w * ssp.x) + g.x,
-        y = s.y,
-        w = (s.w * (1 - ssp.x)) - g.x,
-        h = s.h
-    })
+M.move_to_center = function()
+    local win = focused()
+    if not win then return end
+    local f, s = win:frame(), win:screen():frame()
+    place(win, { x = s.x + (s.w - f.w) / 2, y = s.y + (s.h - f.h) / 2, w = f.w, h = f.h })
 end
 
-module.move_half_window_to_up = function()
-    local s = screen()
-    local ssp = split_screen_partitions
-    local g = gutter()
-    set_frame("Up", {
-        x = s.x,
-        y = s.y,
-        w = s.w,
-        h = (s.h * ssp.y) - g.y
-    })
+M.move_window_to_left  = nudge(-STEP, 0, 0, 0)
+M.move_window_to_right = nudge(STEP, 0, 0, 0)
+M.move_window_to_up    = nudge(0, -STEP, 0, 0)
+M.move_window_to_down  = nudge(0, STEP, 0, 0)
+
+M.size_up              = nudge(-STEP / 2, -STEP / 2, STEP, STEP)
+M.size_down            = nudge(STEP / 2, STEP / 2, -STEP, -STEP)
+M.size_up_vertical     = nudge(0, 0, 0, STEP)
+M.size_down_vertical   = nudge(0, 0, 0, -STEP)
+M.size_up_horizontal   = nudge(0, 0, STEP, 0)
+M.size_down_horizontal = nudge(0, 0, -STEP, 0)
+
+-- 직전 위치로 되돌린다. 두 번 호출하면 원래 위치로 돌아온다
+M.snapback = function()
+    local win = focused()
+    if not win then return end
+    local prev = snapback_state[win:id()]
+    snapback_state[win:id()] = win:frame()
+    if prev then win:setFrame(prev) end
 end
 
-module.move_half_window_to_down = function()
-    local s = screen()
-    local ssp = split_screen_partitions
-    local g = gutter()
-    set_frame("Down", {
-        x = s.x,
-        y = s.y + (s.h * ssp.y) + g.y,
-        w = s.w,
-        h = (s.h * (1 - ssp.y)) - g.y
-    })
+M.send_window_next_monitor = function()
+    local win = focused()
+    if not win then return end
+    hs.alert.show("Next Monitor")
+    -- 내장 moveToScreen이 상대 위치/크기를 유지한다
+    win:moveToScreen(win:screen():next())
 end
 
-module.move_window_to_left = function()
-    local unit = win():frame()
-    set_frame("Move left", {
-        x = unit.x - resizeing_scale,
-        y = unit.y,
-        w = unit.w,
-        h = unit.h
-    })
-end
+-- Grid mode --
 
-module.move_window_to_right = function()
-    local unit = win():frame()
-    set_frame("Move right", {
-        x = unit.x + resizeing_scale,
-        y = unit.y,
-        w = unit.w,
-        h = unit.h
-    })
-end
-
-module.move_window_to_up = function()
-    local unit = win():frame()
-    set_frame("Move up", {
-        x = unit.x,
-        y = unit.y - resizeing_scale,
-        w = unit.w,
-        h = unit.h
-    })
-end
-
-module.move_window_to_down = function()
-    local unit = win():frame()
-    set_frame("Move down", {
-        x = unit.x,
-        y = unit.y + resizeing_scale,
-        w = unit.w,
-        h = unit.h
-    })
-end
-
-module.move_window_upper_left = function()
-    local s = screen()
-    local qsp = quarter_screen_partitions
-    local g = gutter()
-    set_frame("Upper Left", {
-        x = s.x,
-        y = s.y,
-        w = (s.w * qsp.x) - g.x,
-        h = (s.h * qsp.y) - g.y
-    })
-end
-
-module.move_window_upper_right = function()
-    local s = screen()
-    local qsp = quarter_screen_partitions
-    local g = gutter()
-    set_frame("Upper Right", {
-        x = s.x + (s.w * qsp.x) + g.x,
-        y = s.y,
-        w = (s.w * (1 - qsp.x)) - g.x,
-        h = (s.h * (qsp.y)) - g.y
-    })
-end
-
-module.move_window_lower_left = function()
-    local s = screen()
-    local qsp = quarter_screen_partitions
-    local g = gutter()
-    set_frame("Lower Left", {
-        x = s.x,
-        y = s.y + (s.h * qsp.y) + g.y,
-        w = (s.w * qsp.x) - g.x,
-        h = (s.h * (1 - qsp.y)) - g.y
-    })
-end
-
-module.move_window_lower_right = function()
-    local s = screen()
-    local qsp = quarter_screen_partitions
-    local g = gutter()
-    set_frame("Lower Right", {
-        x = s.x + (s.w * qsp.x) + g.x,
-        y = s.y + (s.h * qsp.y) + g.y,
-        w = (s.w * (1 - qsp.x)) - g.x,
-        h = (s.h * (1 - qsp.y)) - g.y
-    })
-end
-
--- Grid layout functions --
-
-local function move_to_grid(col, row, cols, rows)
-    local s = screen()
-    local g = gutter()
-    local cell_w = s.w / cols
-    local cell_h = s.h / rows
-    local gx = (col == 0 and 0 or g.x)
-    local gy = (row == 0 and 0 or g.y)
-    local gw = (col == 0 and g.x or (col == cols - 1 and g.x or g.x * 2))
-    local gh = (row == 0 and g.y or (row == rows - 1 and g.y or g.y * 2))
-    set_frame(string.format("Grid %dx%d [%d,%d]", cols, rows, col, row), {
-        x = s.x + (cell_w * col) + gx,
-        y = s.y + (cell_h * row) + gy,
-        w = cell_w - gw,
-        h = cell_h - gh
-    })
-end
-
-local grid_layouts = {
-    quad = {
-        {0, 0, 2, 2}, {1, 0, 2, 2},
-        {0, 1, 2, 2}, {1, 1, 2, 2},
-    },
-    ["3x2"] = {
-        {0, 0, 3, 2}, {1, 0, 3, 2}, {2, 0, 3, 2},
-        {0, 1, 3, 2}, {1, 1, 3, 2}, {2, 1, 3, 2},
-    },
-    ["2x3"] = {
-        {0, 0, 2, 3}, {1, 0, 2, 3},
-        {0, 1, 2, 3}, {1, 1, 2, 3},
-        {0, 2, 2, 3}, {1, 2, 2, 3},
-    },
-    ["3x1"] = {
-        {0, 0, 3, 1}, {1, 0, 3, 1}, {2, 0, 3, 1},
-    },
-    ["1x3"] = {
-        {0, 0, 1, 3}, {0, 1, 1, 3}, {0, 2, 1, 3},
-    },
+local grid_modes = {
+    { name = "quad", cols = 2, rows = 2, label = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n└──┴──┘" },
+    { name = "3x2",  cols = 3, rows = 2, label = "┌──┬──┬──┐\n│1 │2 │3 │\n├──┼──┼──┤\n│4 │5 │6 │\n└──┴──┴──┘" },
+    { name = "2x3",  cols = 2, rows = 3, label = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n├──┼──┤\n│5 │6 │\n└──┴──┘" },
+    { name = "3x1",  cols = 3, rows = 1, label = "┌──┬──┬──┐\n│1 │2 │3 │\n└──┴──┴──┘" },
+    { name = "1x3",  cols = 1, rows = 3, label = "┌──┐\n│1 │\n├──┤\n│2 │\n├──┤\n│3 │\n└──┘" },
 }
-
-module.move_to_grid_slot = function(slot)
-    local layout = grid_layouts[module.grid_mode]
-    if not layout or not layout[slot] then return end
-    local l = layout[slot]
-    move_to_grid(l[1], l[2], l[3], l[4])
-end
-
-local grid_mode_order = {"quad", "3x2", "2x3", "3x1", "1x3"}
-local grid_mode_labels = {
-    quad = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n└──┴──┘",
-    ["3x2"] = "┌──┬──┬──┐\n│1 │2 │3 │\n├──┼──┼──┤\n│4 │5 │6 │\n└──┴──┴──┘",
-    ["2x3"] = "┌──┬──┐\n│1 │2 │\n├──┼──┤\n│3 │4 │\n├──┼──┤\n│5 │6 │\n└──┴──┘",
-    ["3x1"] = "┌──┬──┬──┐\n│1 │2 │3 │\n└──┴──┴──┘",
-    ["1x3"] = "┌──┐\n│1 │\n├──┤\n│2 │\n├──┤\n│3 │\n└──┘",
-}
-
-local grid_alert_style = {
-    textFont = "Menlo",
-    textSize = 24,
-}
-
+local grid_index = 1
+local grid_alert_style = { textFont = "Menlo", textSize = 24 }
 local grid_alert_uuid = nil
 
-module.toggle_grid_mode = function()
-    for i, mode in ipairs(grid_mode_order) do
-        if mode == module.grid_mode then
-            module.grid_mode = grid_mode_order[(i % #grid_mode_order) + 1]
-            break
-        end
-    end
-    if grid_alert_uuid then
-        hs.alert.closeSpecific(grid_alert_uuid)
-    end
-    grid_alert_uuid = hs.alert.show(grid_mode_labels[module.grid_mode], grid_alert_style, 1)
+-- 슬롯 번호는 왼쪽→오른쪽, 위→아래 순서
+M.move_to_grid_slot = function(slot)
+    local g = grid_modes[grid_index]
+    if slot > g.cols * g.rows then return end
+    local col, row = (slot - 1) % g.cols, (slot - 1) // g.cols
+    place_unit(col / g.cols, row / g.rows, 1 / g.cols, 1 / g.rows)
 end
 
-module.send_window_prev_monitor = function()
-    hs.alert.show("Prev Monitor")
-    local win = hs.window.focusedWindow()
-    local nextScreen = win:screen():previous()
-    win:moveToScreen(nextScreen)
+M.toggle_grid_mode = function()
+    grid_index = grid_index % #grid_modes + 1
+    if grid_alert_uuid then hs.alert.closeSpecific(grid_alert_uuid) end
+    grid_alert_uuid = hs.alert.show(grid_modes[grid_index].label, grid_alert_style, 1)
 end
 
-module.send_window_next_monitor = function()
-    hs.alert.show("Next Monitor")
-    local win = hs.window.focusedWindow()
-    local nextScreen = win:screen():next()
-    win:moveToScreen(nextScreen)
-end
-
--- snapback return the window to its last position. calling snapback twice returns the window to its original position.
--- snapback holds state for each window, and will remember previous state even when focus is changed to another window.
-module.snapback = function()
-    local win = win()
-    local id = win:id()
-    local state = win:frame()
-    local prev_state = module.snapback_window_state[id]
-    if prev_state then
-        win:setFrame(prev_state)
-    end
-    module.snapback_window_state[id] = state
-end
-
-module.maximize = function()
-    set_frame("Full Screen", screen())
-end
-
---- move_to_center_relative(size)
---- Method
---- Centers and resizes the window to the the fit on the given portion of the screen.
---- The argument is a size with each key being between 0.0 and 1.0.
---- Example: win:move_to_center_relative(w=0.5, h=0.5) -- window is now centered and is half the width and half the height of screen
-module.move_to_center_relative = function(unit)
-    local s = screen()
-    set_frame("Center", {
-        x = s.x + (s.w * ((1 - unit.w) / 2)),
-        y = s.y + (s.h * ((1 - unit.h) / 2)),
-        w = s.w * unit.w,
-        h = s.h * unit.h
-    })
-end
-
---- move_to_center_absolute(size)
---- Method
---- Centers and resizes the window to the the fit on the given portion of the screen given in pixels.
---- Example: win:move_to_center_relative(w=800, h=600) -- window is now centered and is 800px wide and 600px high
-module.move_to_center_absolute = function(unit)
-    local s = screen()
-    set_frame("Center", {
-        x = (s.w - unit.w) / 2,
-        y = (s.h - unit.h) / 2,
-        w = unit.w,
-        h = unit.h
-    })
-end
-
---- move_to_center()
-module.move_to_center = function()
-    local unit = win():frame()
-    local s = screen()
-    set_frame("Center", {
-        x = (s.w - unit.w) / 2,
-        y = (s.h - unit.h) / 2,
-        w = unit.w,
-        h = unit.h
-    })
-end
-
-module.size_up = function()
-    local unit = win():frame()
-    set_frame("Size Up", {
-        x = unit.x - (resizeing_scale / 2),
-        y = unit.y - (resizeing_scale / 2),
-        w = unit.w + resizeing_scale,
-        h = unit.h + resizeing_scale
-    })
-end
-
-module.size_down = function()
-    local unit = win():frame()
-    set_frame("Size Down", {
-        x = unit.x + (resizeing_scale / 2),
-        y = unit.y + (resizeing_scale / 2),
-        w = unit.w - resizeing_scale,
-        h = unit.h - resizeing_scale
-    })
-end
-
-module.size_up_vertical = function()
-    local unit = win():frame()
-    set_frame("Size Up(vertical)", {
-        x = unit.x,
-        y = unit.y,
-        w = unit.w,
-        h = unit.h + resizeing_scale
-    })
-end
-
-module.size_down_vertical = function()
-    local unit = win():frame()
-    set_frame("Size Down(vertical)", {
-        x = unit.x,
-        y = unit.y,
-        w = unit.w,
-        h = unit.h - resizeing_scale
-    })
-end
-
-module.size_up_horizontal = function()
-    local unit = win():frame()
-    set_frame("Size Up(horizontal)", {
-        x = unit.x,
-        y = unit.y,
-        w = unit.w + resizeing_scale,
-        h = unit.h
-    })
-end
-
-module.size_down_horizontal = function()
-    local unit = win():frame()
-    set_frame("Size Down(horizontal)", {
-        x = unit.x,
-        y = unit.y,
-        w = unit.w - resizeing_scale,
-        h = unit.h
-    })
-end
-
---- set_working_layout_horizontal(apps)
---- Method
---- resizes the window to the the fit on the given portion of the screen given in pixels.
---- Example: win:set_working_layout_horizontal({{app="code",r=0.5}, {app="iTerm",r=0.5}})
-module.set_working_layout_horizontal = function(apps)
-    local s = screen() -- window
-
-    local location = s.x
-    for i = 1, #apps do
-        hs.application.launchOrFocus(apps[i].app)
-        set_frame("Resize layout:" .. apps[i].app, {
-            x = location,
-            y = s.y,
-            w = s.w * apps[i].r,
-            h = s.h
-        })
-        location = location + win():frame().w
-    end
-end
-
-module.set_working_layout_vertical = function(apps)
-    local s = screen() -- window
-
-    local location = s.y
-    for i = 1, #apps do
-        hs.application.launchOrFocus(apps[i].app)
-        set_frame("Resize layout:" .. apps[i].app, {
-            x = s.x,
-            y = location,
-            w = s.w,
-            h = s.h * apps[i].r
-        })
-        location = location + win():frame().h
-    end
-end
-
-module.set_working_layout = function(apps)
-    local s = screen() -- window
-    if s.w > s.h then 
-        print("horizontal")
-        module.set_working_layout_horizontal(apps)
-    else 
-        print("vertical")
-        module.set_working_layout_vertical(apps)
-    end
-end
-
--- log app, screen location and size 
-module.print_locations = function()
-    local format = "%s = x:%.2f y:%.2f w:%.2f h:%.2f"
-    local s = screen() -- window
-    print(string.format(format, "win", s.x, s.y, s.w, s.h))
-    local unit = win():frame() -- app
-    print(string.format(format, "app", unit.x, unit.y, unit.w, unit.h))
-end
-
-------------------
--- Internal API --
-------------------
-
--- module uses no animations
-hs.window.animationDuration = 0
--- Initialize Snapback state
-module.snapback_window_state = { }
--- return currently focused window
-function win ()
-    return hs.window.focusedWindow()
-end
--- display title, save state and move win to unit
-function set_frame(title, unit)
-    print(title)
-    local win = win()
-    module.snapback_window_state[win:id()] = win:frame()
-    return win:setFrame(unit)
-end
--- screen is the available rect inside the screen edge margins
-function screen()
-    local screen = win():screen():frame()
-    local sem = screen_edge_margins
-    return {
-        x = screen.x + sem.left,
-        y = screen.y + sem.top,
-        w = screen.w - (sem.left + sem.right),
-        h = screen.h - (sem.top + sem.bottom)
-    }
-end
--- gutter is the adjustment required to accomidate partition
--- margins between windows
-function gutter()
-    local pm = partition_margins
-    return {
-        x = pm.x / 2,
-        y = pm.y / 2
-    }
-end
-
---- hs.window:moveToScreen(screen)
---- Method
---- move window to the the given screen, keeping the relative proportion and position window to the original screen.
---- Example: win:moveToScreen(win:screen():next()) -- move window to next screen
-function hs.window:moveToScreen(nextScreen)
-    local currentFrame = self:frame()
-    local screenFrame = self:screen():frame()
-    local nextScreenFrame = nextScreen:frame()
-    self:setFrame({
-        x = ((((currentFrame.x - screenFrame.x) / screenFrame.w) * nextScreenFrame.w) + nextScreenFrame.x),
-        y = ((((currentFrame.y - screenFrame.y) / screenFrame.h) * nextScreenFrame.h) + nextScreenFrame.y),
-        h = ((currentFrame.h / screenFrame.h) * nextScreenFrame.h),
-        w = ((currentFrame.w / screenFrame.w) * nextScreenFrame.w)
-    })
-end
-
-return module
+return M

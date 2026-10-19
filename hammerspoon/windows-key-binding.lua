@@ -5,32 +5,32 @@ local wm = require "windows"
 
 local mash = {"ctrl", "alt"}
 
+-- 누르고 있으면 반복 실행
+local function bind_repeat(key, fn)
+    hk.bind(mash, key, fn, nil, fn)
+end
+
 hk.bind(mash, "return", wm.maximize)
 hk.bind(mash, "delete", wm.snapback)
 hk.bind(mash, "c", wm.move_to_center)
-hk.bind(mash, "m", function ()
-    -- wm.move_to_center_absolute({w = 800, h = 600})
-    wm.move_to_center_relative({w = 0.75, h = 0.75})
-end)
+hk.bind(mash, "m", function() wm.move_to_center_relative({ w = 0.75, h = 0.75 }) end)
 
 hk.bind(mash, "h", wm.move_half_window_to_left)
 hk.bind(mash, "l", wm.move_half_window_to_right)
 hk.bind(mash, "k", wm.move_half_window_to_up)
 hk.bind(mash, "j", wm.move_half_window_to_down)
 
-hk.bind(mash, "left", wm.move_window_to_left, nil, wm.move_window_to_left)
-hk.bind(mash, "right", wm.move_window_to_right, nil, wm.move_window_to_right)
-hk.bind(mash, "up", wm.move_window_to_up, nil, wm.move_window_to_up)
-hk.bind(mash, "down", wm.move_window_to_down, nil, wm.move_window_to_down)
+bind_repeat("left", wm.move_window_to_left)
+bind_repeat("right", wm.move_window_to_right)
+bind_repeat("up", wm.move_window_to_up)
+bind_repeat("down", wm.move_window_to_down)
 
--- (mash, key, 눌렀을 때, 놓았을 때, 눌린 상태)
-hk.bind(mash, "-", wm.size_down, nil, wm.size_down)
-hk.bind(mash, "=", wm.size_up, nil, wm.size_up)
-
-hk.bind(mash, "q", wm.size_down_vertical, nil, wm.size_down_vertical)
-hk.bind(mash, "s", wm.size_up_vertical, nil, wm.size_up_vertical)
-hk.bind(mash, "a", wm.size_down_horizontal, nil, wm.size_down_horizontal)
-hk.bind(mash, "w", wm.size_up_horizontal, nil, wm.size_up_horizontal)
+bind_repeat("-", wm.size_down)
+bind_repeat("=", wm.size_up)
+bind_repeat("q", wm.size_down_vertical)
+bind_repeat("s", wm.size_up_vertical)
+bind_repeat("a", wm.size_down_horizontal)
+bind_repeat("w", wm.size_up_horizontal)
 
 hk.bind(mash, "n", wm.send_window_next_monitor)
 
@@ -38,41 +38,6 @@ hk.bind(mash, "n", wm.send_window_next_monitor)
 for i = 1, 6 do
     hk.bind(mash, tostring(i), function() wm.move_to_grid_slot(i) end)
 end
-
--- Grid mode toggle (ctrl+alt+`)
 hk.bind(mash, "`", wm.toggle_grid_mode)
 
--- Custom working layout
-hk.bind(mash, "f1", function ()
-    local app = getCurrentFocusedApplication("Ghostty")
-        
-    hs.alert("Set working layout with Ghostty")
-    local app1 = { app = app:name(), r = 0.73 }
-    local app2 = { app = "Ghostty", r = 0.27 }
-    wm.set_working_layout({ app1, app2 })
-end)
-
-hk.bind(mash, "f2", function ()
-    local focusedApp = hs.application.frontmostApplication()
-    if focusedApp:name() == "Code" then
-        return -- excluded VSCode
-    end
-
-    local app = getCurrentFocusedApplication("Totoist")
-    
-    hs.alert("Set working layout with Todoist 📝")
-    local app1 = { app = app:name(), r = 0.80 }
-    local app2 = { app = "Todoist", r = 0.20 }
-    wm.set_working_layout({ app2, app1 })
-end)
-
-hk.bind(mash, "0", wm.print_locations)
-
-function getCurrentFocusedApplication(unwantedAppName)
-    local focusedApp = hs.application.frontmostApplication()
-    if focusedApp:name() == unwantedAppName then
-        hs.alert("Not working if both art " .. unwantedAppName)
-        error("Not working if both art " .. unwantedAppName)
-    end
-    return focusedApp
-end
+hk.bind(mash, "tab", hs.spaces.toggleMissionControl)
