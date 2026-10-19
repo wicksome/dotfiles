@@ -45,11 +45,31 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 ###############################################################################
+# Clipy (스니펫·히스토리는 건드리지 않는다)                                   #
+###############################################################################
+
+# 실행 중이면 종료할 때 설정을 덮어쓰므로 먼저 끈다
+osascript -e 'tell application "Clipy" to quit' 2>/dev/null || true
+
+# 단축키는 JSON을 data로 저장한다. modifiers: ⌘ 256, ⇧ 512, ⌥ 2048, ⌃ 4096
+clipy_hotkey() {
+  local json="{\"modifiers\":$2,\"key\":\"$3\",\"doubledModifiers\":false}"
+  defaults write com.clipy-app.Clipy "$1" -data "$(printf '%s' "$json" | xxd -p | tr -d '\n')"
+}
+clipy_hotkey mainKeyCombo    768  v   # ⌘⇧V 클립보드 메뉴
+clipy_hotkey historyKeyCombo 4352 v   # ⌘⌃V 히스토리
+clipy_hotkey snippetKeyCombo 768  b   # ⌘⇧B 스니펫
+
+defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 100
+defaults write com.clipy-app.Clipy kCPYBetaPastePlainText -bool true   # 서식 없이 붙여넣기
+
+###############################################################################
 # 적용                                                                        #
 ###############################################################################
 
 for app in Dock Finder SystemUIServer; do
   killall "$app" &>/dev/null || true
 done
+[ -d /Applications/Clipy.app ] && open -a Clipy
 
 echo "Done. 키 반복 설정은 로그아웃 후 적용된다."
