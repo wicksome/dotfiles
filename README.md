@@ -43,7 +43,7 @@ git remote set-url origin git@github.com:wicksome/dotfiles.git   # 처음 HTTPS�
 
 1. Homebrew 설치 (없으면)
 2. `brew bundle`로 [Brewfile](Brewfile)의 CLI·앱 설치
-3. [Claude Code](https://claude.com/claude-code) 설치 (없으면, 네이티브 설치기. 자동 업데이트됨)
+3. [Claude Code](https://claude.com/claude-code) 설치 (없으면, 네이티브 설치기. 자동 업데이트됨)와 [agent-browser](https://github.com/vercel-labs/agent-browser) CLI·브라우저 설치 (npm 전역)
 4. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)
 5. GitHub: `gh` 로그인, `known_hosts`, 1Password SSH 공개키 저장 및 등록
 6. `../dotfiles-private` 클론 후 그 레포의 `install.sh` 실행
