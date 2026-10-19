@@ -67,6 +67,6 @@ macOS 기본 설정은 [macos](macos)를 참고한다.
 
 ## Manual
 
-- 직접 설치: Orca, BusyCal
+- 직접 설치: Orca, BusyCal (App Store 유료 앱, 같은 Apple ID 로 로그인 후 받기)
 - 직접 개발 중인 도구는 `~/workspace/wicksome/`에 클론해서 쓴다
   - [quick-mermaid](https://github.com/wicksome/quick-mermaid): 터미널에서 mermaid 미리보기
