@@ -52,6 +52,15 @@ if ! command -v claude &>/dev/null && [[ ! -x "$HOME/.local/bin/claude" ]]; then
   curl -fsSL https://claude.ai/install.sh | bash
 fi
 
+# Claude Code의 agent-browser 스킬이 쓰는 헤드리스 브라우저 CLI
+info "agent-browser"
+if ! command -v agent-browser &>/dev/null; then
+  npm install -g agent-browser
+fi
+if ! compgen -G "$HOME/.agent-browser/browsers/*" >/dev/null; then
+  agent-browser install
+fi
+
 info "Symlinks"
 link zsh/.zshrc             "$HOME/.zshrc"
 link zsh/.zprofile          "$HOME/.zprofile"
