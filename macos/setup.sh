@@ -15,6 +15,10 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # F1, F2 등을 기본 기능 키로 사용 (밝기·볼륨은 fn과 함께)
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 
+# 한영 전환: ⌃Space = 이전 입력 소스 (symbolic hotkey 60). parameters = (ASCII, keycode 49 Space, ⌃ 262144)
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 \
+  '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
+
 # 자동 텍스트 치환 끄기 (코드·터미널에 “ ” — 가 섞여 들어가는 것 방지)
 defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
@@ -71,5 +75,8 @@ for app in Dock Finder SystemUIServer; do
   killall "$app" &>/dev/null || true
 done
 [ -d /Applications/Clipy.app ] && open -a Clipy
+
+# symbolichotkeys 변경을 로그아웃 없이 반영
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
 
 echo "Done. 키 반복 설정은 로그아웃 후 적용된다."
