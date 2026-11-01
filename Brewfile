@@ -24,6 +24,7 @@ brew "zoxide"                   # autojump 대체 (j)
 ########################################
 cask "font-d2coding"           # Ghostty 한글 폰트
 cask "1password"
+cask "claude"                   # Claude 데스크톱 앱 (Claude Code CLI는 install.sh가 설치)
 cask "ghostty"                  # terminal
 cask "hammerspoon"
 cask "obsidian"
