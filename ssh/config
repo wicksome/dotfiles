@@ -9,12 +9,16 @@ Include ~/.ssh/config.machine
 # 비공개 설정 (dotfiles-private)
 Include ~/.ssh/config.local
 
-# 개인 키는 1Password에만 있고, ssh는 1Password SSH Agent에 서명을 요청한다.
+# 기본: 이 머신에서 만든 디스크 키(~/.ssh/id_ed25519, install.sh 가 생성·등록).
+# 1Password 를 쓰는 머신은 install.sh --github=1password 가 config.machine 으로 덮어쓴다.
+# 패스프레이즈는 macOS 키체인에 저장해 매번 묻지 않는다.
 Host *
-    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+    IgnoreUnknown UseKeychain
+    AddKeysToAgent yes
+    UseKeychain yes
 
 # 기본 계정(wicksome). 다른 계정은 git/accounts/의 core.sshCommand로 덮어쓴다.
-# 공개키(.pub)로 1Password 안의 키를 지정한다. 없으면 agent의 키를 순서대로 시도해 엉뚱한 계정으로 인증될 수 있다.
+# 키를 지정하지 않으면 agent의 키를 순서대로 시도해 엉뚱한 계정으로 인증될 수 있다.
 Host github.com
-    IdentityFile ~/.ssh/wicksome.pub
+    IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
