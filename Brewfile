@@ -31,7 +31,10 @@ cask "visual-studio-code"       # 뷰어/가벼운 편집용
 cask "clipy"                    # clipboard
 cask "hiddenbar"                # menu bar 정리
 cask "reminders-menubar"
-cask "orbstack"                 # Docker (Docker Desktop 대체)
+# 컨테이너 런타임: install.sh --container=orbstack|docker|none (기본 orbstack)
+container = ENV.fetch("HOMEBREW_DOTFILES_CONTAINER", "orbstack")
+cask "orbstack" if container == "orbstack"
+cask "docker-desktop" if container == "docker"
 cask "stats"                    # menu bar 시스템 모니터
 
 # 이미 직접 설치함: Orca, BusyCal
