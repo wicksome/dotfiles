@@ -32,5 +32,6 @@ cask "clipy"                    # clipboard
 cask "hiddenbar"                # menu bar 정리
 cask "reminders-menubar"
 cask "orbstack"                 # Docker (Docker Desktop 대체)
+cask "stats"                    # menu bar 시스템 모니터
 
 # 이미 직접 설치함: Orca, BusyCal
