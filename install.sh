@@ -60,8 +60,12 @@ if [[ "$RECONFIGURE" == 0 ]]; then
   [[ -n "$MACHINE" ]]      || MACHINE="$(saved MACHINE || true)"
   [[ -n "$GITHUB_MODE" ]]  || GITHUB_MODE="$(saved GITHUB_MODE || true)"
   [[ -n "$CONTAINER" ]]    || CONTAINER="$(saved CONTAINER || true)"
-  [[ -n "$OVERLAY_REPO" ]] || OVERLAY_REPO="$(saved OVERLAY_REPO || true)"
-  [[ -n "$OVERLAY" ]]      || OVERLAY="$(saved OVERLAY || true)"
+  # 업무 맥 값은 업무 맥으로 다시 설치할 때만 이어 쓴다 (--machine=personal 로 바꿀 때 막히지 않게)
+  if [[ "$MACHINE" == work || -z "$MACHINE" ]]; then
+    [[ -n "$OVERLAY_REPO" ]] || OVERLAY_REPO="$(saved OVERLAY_REPO || true)"
+    [[ -n "$OVERLAY" ]]      || OVERLAY="$(saved OVERLAY || true)"
+  fi
+  [[ "$MACHINE" != personal || "$GITHUB_MODE" != account ]] || GITHUB_MODE=""
 fi
 # 예전 저장값(OVERLAY 만 있음)과 --overlay 만 준 경우는 work 로 본다
 [[ -z "$MACHINE" && -n "$OVERLAY$OVERLAY_REPO" ]] && MACHINE=work
@@ -233,12 +237,14 @@ done
 info "Orca"
 if [[ ! -d /Applications/Orca.app ]]; then
   orca_url="$(curl -fsSL https://api.github.com/repos/stablyai/orca/releases/latest |
-    jq -r '.assets[] | select(.name | test("^Orca-.*-arm64-mac\\.zip$")) | .browser_download_url' | head -1)"
+    jq -r '.assets[] | select(.name | test("^Orca-.*-arm64-mac\\.zip$")) | .browser_download_url' | head -1 || true)"
   if [[ -n "$orca_url" ]]; then
     orca_tmp="$(mktemp -d)"
-    curl -fsSL -o "$orca_tmp/orca.zip" "$orca_url" &&
-      ditto -x -k "$orca_tmp/orca.zip" /Applications &&
-      xattr -dr com.apple.quarantine /Applications/Orca.app 2>/dev/null
+    if ! { curl -fsSL -o "$orca_tmp/orca.zip" "$orca_url" &&
+           ditto -x -k "$orca_tmp/orca.zip" /Applications &&
+           xattr -dr com.apple.quarantine /Applications/Orca.app 2>/dev/null; }; then
+      rm -rf /Applications/Orca.app   # 이 단계 전에는 없던 앱이다. 반쯤 풀린 것을 남기면 다음 실행이 건너뛴다
+    fi
     rm -rf "$orca_tmp"
     if [[ -d /Applications/Orca.app ]]; then
       echo "  install: Orca ($(basename "$orca_url"))"
@@ -297,7 +303,7 @@ if [[ "$gh_status" != *"account $OP_KEY_NAME "* ]]; then
   gh auth login -h github.com -p ssh -w -s admin:public_key,admin:ssh_signing_key --skip-ssh-key
 fi
 
-if ! grep -q '^github.com ' "$HOME/.ssh/known_hosts" 2>/dev/null; then
+if ! ssh-keygen -F github.com >/dev/null 2>&1; then
   gh api meta --jq '.ssh_keys[]' | sed 's/^/github.com /' >> "$HOME/.ssh/known_hosts"
   chmod 600 "$HOME/.ssh/known_hosts"
   echo "  known_hosts: github.com"
@@ -434,10 +440,10 @@ fi
 # 이메일은 비공개 층이 정하므로 dotfiles-private 설치 뒤에 읽는다
 if [[ -n "$PUBKEY" ]]; then
   signers="$DOTFILES_DIR/ssh/allowed_signers"
-  signer_email="$(git config --global --includes user.email || true)"
+  signer_email="$(git -C "$DOTFILES_DIR" config --includes user.email || true)"
   if [[ -z "$signer_email" ]]; then
     warn "user.email 이 없어 ssh/allowed_signers 에 공개키를 추가하지 못했다. dotfiles-private 설치 후 다시 실행한다"
-  elif ! grep -qF "$(cut -d' ' -f2 "$PUBKEY")" "$signers"; then
+  elif ! grep -qF "$key_body" "$signers"; then
     echo "$signer_email $(cut -d' ' -f1,2 "$PUBKEY")" >> "$signers"
     warn "ssh/allowed_signers 에 이 머신의 공개키를 추가했다. 커밋한다."
   fi
