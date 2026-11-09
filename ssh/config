@@ -10,7 +10,6 @@ Include ~/.ssh/config.machine
 Include ~/.ssh/config.local
 
 # 기본: 이 머신에서 만든 디스크 키(~/.ssh/id_ed25519, install.sh 가 생성·등록).
-# 1Password 를 쓰는 머신은 install.sh --github=1password 가 config.machine 으로 덮어쓴다.
 # 패스프레이즈는 macOS 키체인에 저장해 매번 묻지 않는다.
 Host *
     IgnoreUnknown UseKeychain

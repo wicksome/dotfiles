@@ -7,8 +7,7 @@ PRIVATE_DIR="$(dirname "$DOTFILES_DIR")/dotfiles-private"
 PRIVATE_REPO="wicksome/dotfiles-private"
 BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 STATE_FILE="$HOME/.config/dotfiles/install.env"   # 이 머신에서 고른 옵션 (레포 밖)
-OP_AGENT_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-OP_KEY_NAME="wicksome"          # 1Password의 SSH 키 이름: "GitHub wicksome"
+GITHUB_USER="wicksome"
 LOCAL_KEY="$HOME/.ssh/id_ed25519"
 MANAGED_MARK="# managed by dotfiles/install.sh"
 
@@ -17,13 +16,12 @@ warn() { printf '\033[1;33m==>\033[0m %s\n' "$1"; }
 
 usage() {
   cat <<'EOF'
-Usage: ./install.sh [--machine=personal|work] [--github=local|1password|skip] [--container=orbstack|docker|none]
+Usage: ./install.sh [--machine=personal|work] [--github=local|skip] [--container=orbstack|docker|none]
                     [--overlay-repo=<owner/repo>] [--overlay=<dir>] [--reconfigure]
 
   --machine       personal  개인 맥 (기본)
                   work      업무 맥. 개인 설정 위에 업무 overlay 레포를 받아 얹는다
   --github        local     이 머신에 SSH 키를 만들어 GitHub 인증·서명에 쓴다 (personal 기본)
-                  1password 1Password SSH Agent의 키를 쓴다
                   skip      GitHub 설정과 dotfiles-private 설치를 건너뛴다
                   (work 는 기본 키를 만들지 않는다. 계정별 키를 dotfiles-private 과 overlay 가 만든다)
   --container     orbstack | docker (Docker Desktop) | none. 기본: personal orbstack, work docker
@@ -137,7 +135,6 @@ if [[ -z "$GITHUB_MODE" ]]; then
   GITHUB_MODE=local
   interactive && GITHUB_MODE="$(choose "GitHub SSH 키" \
     "local|이 머신에 키를 만들어 저장 (~/.ssh/id_ed25519)" \
-    "1password|1Password SSH Agent의 키 사용" \
     "skip|GitHub 설정 건너뜀 (dotfiles-private·brain·claude-config도 설치 안 함)")"
 fi
 if [[ -z "$CONTAINER" ]]; then
@@ -148,7 +145,7 @@ if [[ -z "$CONTAINER" ]]; then
     "none|설치 안 함")"
 fi
 
-case "$GITHUB_MODE" in local|1password|skip|account) ;; *) echo "잘못된 --github: $GITHUB_MODE" >&2; exit 1 ;; esac
+case "$GITHUB_MODE" in local|skip|account) ;; *) echo "잘못된 --github: $GITHUB_MODE (local|skip). 저장값이면 --reconfigure 로 다시 고른다" >&2; exit 1 ;; esac
 case "$CONTAINER" in orbstack|docker|none) ;; *) echo "잘못된 --container: $CONTAINER" >&2; exit 1 ;; esac
 
 mkdir -p "$(dirname "$STATE_FILE")"
@@ -176,20 +173,9 @@ link() {
   echo "  link: $dst -> $src"
 }
 
-# 머신 전용 파일(~/.ssh/config.machine 등)은 install.sh가 만든 것만 고치거나 지운다.
+# 머신 전용 파일(~/.ssh/config.machine 등)은 install.sh 표시가 있는 것만 지운다 (예전 --github=1password 가 만든 파일).
 # 직접 만든 파일은 건드리지 않는다.
 managed_or_absent() { [[ ! -e "$1" ]] || grep -qxF "$MANAGED_MARK" "$1"; }
-
-# $1: 경로, stdin: 내용
-write_machine_file() {
-  if managed_or_absent "$1"; then
-    { echo "$MANAGED_MARK"; cat; } > "$1"
-    echo "  write: $1"
-  else
-    cat >/dev/null
-    warn "$1 은 직접 만든 파일이라 그대로 둔다"
-  fi
-}
 
 remove_machine_file() {
   if [[ -e "$1" ]] && grep -qxF "$MANAGED_MARK" "$1"; then
@@ -299,7 +285,7 @@ info "GitHub"
 # 다른 계정이 이미 로그인돼 있어도 이 계정(wicksome)을 더한다. dotfiles-private 을 이 계정 토큰으로 받는다
 # gh auth status | grep -q 는 pipefail 에서 SIGPIPE 로 가끔 실패한다. 변수에 받아 비교한다
 gh_status="$(gh auth status -h github.com 2>&1 || true)"
-if [[ "$gh_status" != *"account $OP_KEY_NAME "* ]]; then
+if [[ "$gh_status" != *"account $GITHUB_USER "* ]]; then
   gh auth login -h github.com -p ssh -w -s admin:public_key,admin:ssh_signing_key --skip-ssh-key
 fi
 
@@ -333,38 +319,6 @@ case "$GITHUB_MODE" in
         ssh-add --apple-use-keychain "$LOCAL_KEY" || warn "ssh-agent에 키를 올리지 못했다. 첫 git 사용 때 패스프레이즈를 묻는다"
       fi
       PUBKEY="$LOCAL_KEY.pub" KEY_LABEL="local"
-    fi
-    ;;
-  1password)
-    OP_PUBKEY="$HOME/.ssh/$OP_KEY_NAME.pub"
-    if [[ ! -f "$OP_PUBKEY" && -S "$OP_AGENT_SOCK" ]]; then
-      agent_keys="$(SSH_AUTH_SOCK="$OP_AGENT_SOCK" ssh-add -L 2>/dev/null || true)"
-      if grep " GitHub $OP_KEY_NAME\$" <<<"$agent_keys" > "$OP_PUBKEY"; then
-        echo "  public key: $OP_PUBKEY"
-      else
-        rm -f "$OP_PUBKEY"
-      fi
-    fi
-    if [[ -f "$OP_PUBKEY" ]]; then
-      # ssh/config는 먼저 읽은 값이, .gitconfig는 나중에 읽은 값이 이긴다. 둘 다 기본 설정을 덮어쓴다
-      write_machine_file "$HOME/.ssh/config.machine" <<EOF
-# 1Password SSH Agent의 키로 GitHub에 인증한다 (install.sh --github=1password)
-Host *
-    IdentityAgent "$OP_AGENT_SOCK"
-Host github.com
-    IdentityFile ~/.ssh/$OP_KEY_NAME.pub
-    IdentitiesOnly yes
-EOF
-      write_machine_file "$HOME/.gitconfig.machine" <<EOF
-# 1Password로 커밋에 서명한다 (install.sh --github=1password)
-[user]
-	signingkey = ~/.ssh/$OP_KEY_NAME.pub
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
-EOF
-      PUBKEY="$OP_PUBKEY" KEY_LABEL="1Password"
-    else
-      warn "1Password SSH 키(GitHub $OP_KEY_NAME)가 없다. README의 '1Password를 쓸 때' 단계 후 다시 실행한다."
     fi
     ;;
 esac
@@ -417,12 +371,12 @@ fi
 info "dotfiles-private"
 if [[ ! -d "$PRIVATE_DIR" ]]; then
   ssh_result="$(ssh -o BatchMode=yes -T git@github.com 2>&1 || true)"
-  if grep -q "Hi $OP_KEY_NAME!" <<<"$ssh_result"; then
+  if grep -q "Hi $GITHUB_USER!" <<<"$ssh_result"; then
     git clone "git@github.com:$PRIVATE_REPO.git" "$PRIVATE_DIR"
   else
     # SSH가 아직 안 되면(overlay 머신은 이 단계에 키가 없다) 이 계정의 gh 토큰으로 HTTPS 클론.
     # gh 활성 계정이 다른 계정일 수 있어 GH_TOKEN 으로 계정을 지정한다 (gh 의 credential helper 가 이 값을 쓴다)
-    GH_TOKEN="$(gh auth token -h github.com -u "$OP_KEY_NAME")" git -c credential.helper= \
+    GH_TOKEN="$(gh auth token -h github.com -u "$GITHUB_USER")" git -c credential.helper= \
       -c credential.helper='!gh auth git-credential' clone "https://github.com/$PRIVATE_REPO.git" "$PRIVATE_DIR"
   fi
 fi

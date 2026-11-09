@@ -20,7 +20,7 @@ git clone https://github.com/wicksome/dotfiles ~/workspace/wicksome/dotfiles
 | 질문 | 개인 맥 (`personal`) | 업무 맥 (`work`) |
 | --- | --- | --- |
 | 이 맥 | `personal` (기본) | `work` |
-| GitHub SSH 키 | `local` 이 머신에 키 생성 · `1password` · `skip` | 묻지 않는다. 기본 키 없이 계정별 키만 둔다 |
+| GitHub SSH 키 | `local` 이 머신에 키 생성 · `skip` | 묻지 않는다. 기본 키 없이 계정별 키만 둔다 |
 | 업무 overlay 레포 | - | `owner/repo` 와 업무 레포 루트. overlay 는 `<루트>/<owner>/<repo>` 에 받는다 |
 | 컨테이너 런타임 | `orbstack` (기본) · `docker` · `none` | `docker` (기본, OrbStack 은 회사 업무에 유료) · `none` · `orbstack` |
 
@@ -39,12 +39,6 @@ git clone https://github.com/wicksome/dotfiles ~/workspace/wicksome/dotfiles
 
 처음 HTTPS 로 클론했으면 install.sh 가 마지막에 SSH 접속을 확인하고 remote 를 SSH 로 바꾼다.
 
-### 1Password를 쓸 때 (`--github=1password`)
-
-1. 1Password 로그인 → 설정 → 개발자 → **SSH 에이전트 사용**
-2. 새 항목 → SSH 키 → 이름 **`GitHub wicksome`**, 종류 Ed25519
-3. `./install.sh --github=1password` — 공개키를 `~/.ssh/wicksome.pub`로 저장하고, `~/.ssh/config.machine`·`~/.gitconfig.machine`을 만들어 인증·서명을 1Password로 돌린다
-
 `--github=skip`이면 GitHub 설정과 함께 dotfiles-private(brain·claude-config 포함)도 설치하지 않는다.
 
 ### 업무 맥 (`--machine=work`)
@@ -61,7 +55,7 @@ git clone https://github.com/wicksome/dotfiles ~/workspace/wicksome/dotfiles
 4. [Claude Code](https://claude.com/claude-code) 설치 (없으면, 네이티브 설치기. 자동 업데이트됨)와 [agent-browser](https://github.com/vercel-labs/agent-browser) CLI·브라우저 설치 (npm 전역)
    - 폰트 등록, App Store 앱(`mas`), Orca(GitHub 릴리즈) 설치
 5. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)하고 vim 플러그인 설치
-6. GitHub: `gh` 로그인, `known_hosts`, SSH 키 준비(`local`: 생성 / `1password`: 공개키 저장 / `work`: 건너뜀) 및 등록
+6. GitHub: `gh` 로그인, `known_hosts`, SSH 키 준비(`local`: 생성 / `work`: 건너뜀) 및 등록
 7. `work` 면 overlay 클론 (없을 때만)
 8. `../dotfiles-private` 클론 후 그 레포의 `install.sh` 실행 (`work` 면 프로필 work 로, 그 끝에서 overlay 의 `install.sh`)
 9. 이 머신의 서명 공개키를 `ssh/allowed_signers` 에 더한다 (이메일은 비공개 층이 정해서 그 뒤에 한다)
@@ -69,7 +63,7 @@ git clone https://github.com/wicksome/dotfiles ~/workspace/wicksome/dotfiles
 
 어느 단계부터 다시 실행해도 된다. 각 단계는 링크를 덮어쓰거나(기존 파일은 백업), 없는 것만 만들거나, 저장된 선택을 다시 쓴다.
 
-머신 전용 파일(`~/.ssh/config.machine`, `~/.gitconfig.machine`)은 install.sh가 만든 것만 고치거나 지운다. 직접 만든 파일은 그대로 두고, `local`이면 키 생성도 건너뛴다.
+머신 전용 파일(`~/.ssh/config.machine`, `~/.gitconfig.machine`)은 직접 만든다. install.sh 는 이 파일을 그대로 두고, `~/.ssh/config.machine` 이 있으면 `local` 키 생성도 건너뛴다. 예전 `--github=1password` 가 만든 파일은 `local` 로 다시 실행할 때 지운다.
 
 macOS 기본 설정은 [macos](macos)를 참고한다.
 
@@ -83,7 +77,7 @@ macOS 기본 설정은 [macos](macos)를 참고한다.
 | `vim/` | `~/.vimrc`. vim-plug 와 플러그인 15개(airline·fugitive·signify·fzf·NERDTree·surround·commentary 등)를 처음 열 때 받는다. install.sh 도 미리 받는다. 추가 설정은 `~/.vimrc.local` |
 | `ghostty/` | 터미널 설정 (`~/.config/ghostty/config.ghostty`). 한글은 D2Coding |
 | `starship/` | 프롬프트 설정 (`~/.config/starship.toml`) |
-| `ssh/` | `~/.ssh/config`, `allowed_signers`. 개인 키는 머신마다 `~/.ssh/id_ed25519` (또는 1Password) |
+| `ssh/` | `~/.ssh/config`, `allowed_signers`. 개인 키는 머신마다 `~/.ssh/id_ed25519` |
 | `hammerspoon/` | 앱 실행·창 관리 단축키 ([README](hammerspoon/README.md)) |
 | `macos/` | `defaults` 설정 스크립트와 수동 설정 가이드 |
 

@@ -10,7 +10,7 @@
 [gpg]
 	format = ssh
 
-# 서명은 ssh-keygen(기본). 1Password 머신은 ~/.gitconfig.machine 이 op-ssh-sign 으로 덮어쓴다
+# 서명은 ssh-keygen(기본). 머신마다 다르게 하려면 ~/.gitconfig.machine 에서 덮어쓴다
 [gpg "ssh"]
 	allowedSignersFile = ~/.ssh/allowed_signers
 

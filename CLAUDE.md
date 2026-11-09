@@ -9,7 +9,7 @@
 | 공개 | 이 레포 | 누구나 | 누구에게 보여도 되는 설정, 비공개 층을 불러오는 자리 |
 | 비공개 | `../dotfiles-private` → `~/.zshrc.local`, `~/.gitconfig.local`, `~/.ssh/config.local` | 본인만 | 공개하고 싶지 않은 **설정** (실제 이메일, 회사 계정, 개인 서버 Host) |
 | 머신 | `~/.gitconfig.machine`, `~/.ssh/config.machine` (심링크 아님, 레포 밖) | 그 머신만 | 한 머신에만 해당하는 값 |
-| 비밀값 | 1Password (`op read`, SSH Agent) | - | 토큰, 비밀번호, 개인 키 |
+| 비밀값 | 1Password (`op read`) | - | 토큰, 비밀번호, 개인 키 |
 
 비밀값은 비공개 레포에도 커밋하지 않는다.
 
