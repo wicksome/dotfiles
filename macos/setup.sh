@@ -15,6 +15,12 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 15
 # F1, F2 등을 기본 기능 키로 사용 (밝기·볼륨은 fn과 함께)
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true
 
+# 내장 키보드 Caps Lock(한/영 키)을 Control 로 바꾼다 (로그아웃 후 적용). 한영 전환은 아래 ⌃Space 로 한다
+# 설정 > 키보드 > 보조 키와 같은 값이다. 키 이름 0-0-0 은 내장 키보드(VendorID 0, ProductID 0)다
+# HID usage: Caps Lock 0x700000039 → Right Control 0x7000000E4
+defaults -currentHost write NSGlobalDomain com.apple.keyboard.modifiermapping.0-0-0 -array \
+  '<dict><key>HIDKeyboardModifierMappingDst</key><integer>30064771300</integer><key>HIDKeyboardModifierMappingSrc</key><integer>30064771129</integer></dict>'
+
 # 한영 전환: ⌃Space = 이전 입력 소스 (symbolic hotkey 60). parameters = (ASCII, keycode 49 Space, ⌃ 262144)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 60 \
   '{ enabled = 1; value = { parameters = (32, 49, 262144); type = standard; }; }'
@@ -79,4 +85,4 @@ done
 # symbolichotkeys 변경을 로그아웃 없이 반영
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u 2>/dev/null || true
 
-echo "Done. 키 반복 설정은 로그아웃 후 적용된다."
+echo "Done. 키 반복·Caps Lock 설정은 로그아웃 후 적용된다."
