@@ -35,7 +35,7 @@ defaults write NSGlobalDomain NSAutomaticTextCompletionEnabled -bool false
 # Dock (앱 목록은 건드리지 않는다)                                            #
 ###############################################################################
 
-defaults write com.apple.dock tilesize -int 40
+defaults write com.apple.dock tilesize -int 56
 defaults write com.apple.dock no-bouncing -bool true
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0.3
