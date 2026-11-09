@@ -1,10 +1,6 @@
+# identity(name·email)는 비공개 층이 정한다. 여기는 이 레포 install.sh 가 만드는 서명 키 경로만 둔다
 [user]
-	name = Yeongjun.Kim
-	email = 5036939+wicksome@users.noreply.github.com
 	signingkey = ~/.ssh/id_ed25519.pub
-
-[github]
-	user = wicksome
 
 [core]
 	excludesfile = ~/.gitignore_global
@@ -27,6 +23,18 @@
 [pull]
 	ff = only
 
+[help]
+	autocorrect = prompt
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[column]
+	ui = auto
+
 [alias]
 	cm = commit
 	cmm = commit -m
@@ -37,6 +45,8 @@
 	rv = revert
 	mg = merge
 	ada = add -A
+	out = log @{u}..
+	lgn = log --graph --abbrev-commit --decorate --date=format:'%y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) %C(dim blue)%ad%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
 	lg1 = log --graph --abbrev-commit --decorate --date=format:'%y/%m/%d %H:%M' --format=format:'%C(bold blue)%h%C(reset) %C(dim blue)%ad%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 	last = "!f() { for i in $(seq 1 $1); do git name-rev --name-only --exclude=refs/tags/\\* @{-$i}; done; }; f"
 

@@ -6,9 +6,13 @@ export DOTFILES_DIR="${${(%):-%x}:A:h:h}"
 export LANG="ko_KR.UTF-8"
 export EDITOR="vim"
 export CLICOLOR=1
+export OP_BIOMETRIC_UNLOCK_ENABLED=true   # 1Password CLI(op)를 Touch ID 로 연다
 
 typeset -U path
 path=("$HOME/.local/bin" $path)
+# 언어별 설치기가 만든 경로 (있을 때만)
+[[ -d "$HOME/.cargo/bin" ]] && path+=("$HOME/.cargo/bin")
+[[ -d "$HOME/.bun/bin" ]] && path+=("$HOME/.bun/bin")
 
 ########################################
 # History

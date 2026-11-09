@@ -4,3 +4,10 @@
 node_modules
 npm-debug.log
 .env.local
+.run
+
+# Claude Code·MCP 의 개인 로컬 설정
+CLAUDE.local.md
+.claude/settings.local.json
+.mcp.json
+.serena

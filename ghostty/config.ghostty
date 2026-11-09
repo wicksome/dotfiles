@@ -1,4 +1,16 @@
 # https://ghostty.org/docs/config
 
+theme = GitHub Dark
+background-opacity = 0.95
+background-blur-radius = 10
+shell-integration = zsh
+working-directory = home
+confirm-close-surface = false
+
 # 영문은 기본 폰트(JetBrains Mono), 한글만 D2Coding (한글 1자 = 영문 2칸으로 정렬됨)
 font-codepoint-map = U+1100-U+11FF,U+3130-U+318F,U+A960-U+A97F,U+AC00-U+D7AF,U+D7B0-U+D7FF=D2Coding
+
+# 어디서든 ⌘⇧⌃` 로 아래쪽 quick terminal 을 열고 닫는다
+keybind = global:cmd+shift+ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-position = bottom
+quick-terminal-autohide = true
