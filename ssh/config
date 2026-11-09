@@ -17,7 +17,7 @@ Host *
     AddKeysToAgent yes
     UseKeychain yes
 
-# 기본 계정(wicksome). 다른 계정은 git/accounts/의 core.sshCommand로 덮어쓴다.
+# 기본 계정(wicksome). 다른 계정은 비공개 층의 git 설정(core.sshCommand)이 디렉터리별로 덮어쓴다.
 # 키를 지정하지 않으면 agent의 키를 순서대로 시도해 엉뚱한 계정으로 인증될 수 있다.
 Host github.com
     IdentityFile ~/.ssh/id_ed25519

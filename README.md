@@ -59,10 +59,13 @@ git clone https://github.com/wicksome/dotfiles ~/workspace/wicksome/dotfiles
 2. Homebrew 설치 (없으면)
 3. `brew bundle`로 [Brewfile](Brewfile)의 CLI·앱 설치 (컨테이너 런타임은 고른 것만. 고르지 않은 쪽이 이미 있으면 지우지 않고 경고)
 4. [Claude Code](https://claude.com/claude-code) 설치 (없으면, 네이티브 설치기. 자동 업데이트됨)와 [agent-browser](https://github.com/vercel-labs/agent-browser) CLI·브라우저 설치 (npm 전역)
-5. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)
+   - 폰트 등록, App Store 앱(`mas`), Orca(GitHub 릴리즈) 설치
+5. 설정 파일을 홈 디렉터리에 심링크 (기존 파일은 `~/.dotfiles-backup/`으로 백업)하고 vim 플러그인 설치
 6. GitHub: `gh` 로그인, `known_hosts`, SSH 키 준비(`local`: 생성 / `1password`: 공개키 저장 / `work`: 건너뜀) 및 등록
 7. `work` 면 overlay 클론 (없을 때만)
 8. `../dotfiles-private` 클론 후 그 레포의 `install.sh` 실행 (`work` 면 프로필 work 로, 그 끝에서 overlay 의 `install.sh`)
+9. 이 머신의 서명 공개키를 `ssh/allowed_signers` 에 더한다 (이메일은 비공개 층이 정해서 그 뒤에 한다)
+10. 처음 HTTPS 로 받았으면 SSH 접속을 확인하고 remote 를 SSH 로 바꾼다
 
 어느 단계부터 다시 실행해도 된다. 각 단계는 링크를 덮어쓰거나(기존 파일은 백업), 없는 것만 만들거나, 저장된 선택을 다시 쓴다.
 

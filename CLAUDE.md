@@ -76,7 +76,7 @@
 | Orca | `ls -d /Applications/Orca.app` | 있다 |
 | 폰트 | `ls ~/Library/Fonts \| grep -cE 'D2Coding\|JetBrainsMono'` | 1 이상 |
 | GitHub 키 | personal: `ssh -T git@github.com` / work: `test ! -e ~/.ssh/id_ed25519 && echo none` | personal: 개인 계정 인사 / work: `none` (계정별 키는 다음 층이 본다) |
-| 레포가 깨끗하다 | `git -C <이 레포> status --short` | 출력 없음. 있으면 ⚠️ 이고 다른 설치기가 덧붙인 줄이다 (커밋하지 말고 되돌린다) |
+| 레포가 깨끗하다 | `git -C <이 레포> status --short` | 출력 없음. 있으면 ⚠️ 다. `ssh/allowed_signers` 에 이 머신 공개키가 더해진 것은 install.sh 가 한 일이라 커밋한다. 그 밖은 다른 설치기가 덧붙인 줄이다 (커밋하지 말고 되돌린다) |
 | 다음 층 실행 | `cat ~/.config/dotfiles/private.env` | `PROFILE` 이 `MACHINE` 과 같다 |
 
 ## 이 레포에 넣으면 안 되는 것
