@@ -61,13 +61,13 @@ if [[ "$RECONFIGURE" == 0 ]]; then
   [[ -n "$GITHUB_MODE" ]]  || GITHUB_MODE="$(saved GITHUB_MODE || true)"
   [[ -n "$CONTAINER" ]]    || CONTAINER="$(saved CONTAINER || true)"
   # 업무 맥 값은 업무 맥으로 다시 설치할 때만 이어 쓴다 (--machine=personal 로 바꿀 때 막히지 않게)
-  if [[ "$MACHINE" == work || -z "$MACHINE" ]]; then
+  if [[ "$MACHINE" == work ]]; then
     [[ -n "$OVERLAY_REPO" ]] || OVERLAY_REPO="$(saved OVERLAY_REPO || true)"
     [[ -n "$OVERLAY" ]]      || OVERLAY="$(saved OVERLAY || true)"
   fi
   [[ "$MACHINE" != personal || "$GITHUB_MODE" != account ]] || GITHUB_MODE=""
 fi
-# 예전 저장값(OVERLAY 만 있음)과 --overlay 만 준 경우는 work 로 본다
+# --overlay 만 준 경우는 work 로 본다
 [[ -z "$MACHINE" && -n "$OVERLAY$OVERLAY_REPO" ]] && MACHINE=work
 
 # $1: 질문, 나머지: "값|설명" (첫 번째가 기본값). 고른 값을 stdout으로 낸다

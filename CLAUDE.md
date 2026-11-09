@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-> **2026-11-09 이력 재작성.** 이 레포는 이력을 다시 쓰고 force push 했다. 그 전에 받은 clone 에서 `git pull` 이 `Not possible to fast-forward` 로 실패하면 merge·rebase·force push 를 하지 않는다. `git fetch` 후 `git log origin/<branch>..HEAD` 로 안 올린 커밋을 확인한다. 원격에 없는 새 내용이 없으면 `git reset --hard origin/<branch>` 한다. 있으면 사용자에게 목록을 보여 주고, 살릴 커밋만 reset 뒤 cherry-pick 한다.
-
 이 레포는 **PUBLIC** 이다(github.com/wicksome/dotfiles). 커밋한 내용은 지워도 히스토리·포크·캐시에 남는다고 가정한다.
 
 ## 값을 어디에 둘지
