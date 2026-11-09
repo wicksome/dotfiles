@@ -4,7 +4,7 @@
 --
 -- 빠르게 하기 위한 처리
 --   * 마우스 이벤트 탭은 정확히 그 수정키 조합을 누른 동안만 켠다
---   * 창은 마우스 아래 접근성 요소에서 바로 찾는다 (모든 창을 순회하지 않음)
+--   * 창은 화면 창 목록(앞→뒤)에서 마우스 아래 첫 창으로 찾는다 (떠 있는 패널도 잡힌다)
 --   * 이벤트마다 창을 옮기지 않고, 시작점 기준 목표 위치만 계산해 최대 60fps로 적용한다
 
 local MOVE_MODS   = { cmd = true, shift = true }
@@ -21,22 +21,23 @@ local function flagsEqual(flags, mods)
     return true
 end
 
+-- 화면 창 목록(앞→뒤 순서)에서 마우스 아래 가장 앞 창을 고른다.
+-- 접근성 hit-test 와 orderedWindows 는 떠 있는 패널(QuickMermaid 등, subrole AXSystemDialog)을 놓쳐 뒤 창을 잡는다.
+-- 레벨 0~19 만 본다: 일반 창(0)·floating(3)·modal(8)·utility(19). Dock(20)·메뉴바(24~25) 등은 제외
+local MAX_WINDOW_LAYER = 19
+
 local function windowUnderMouse()
     local pos = hs.mouse.absolutePosition()
-    local ok, win = pcall(function()
-        local elem = hs.axuielement.systemElementAtPosition(pos)
-        if not elem then return nil end
-        if elem:attributeValue("AXRole") ~= "AXWindow" then
-            elem = elem:attributeValue("AXWindow")
+    for _, info in ipairs(hs.window.list(false) or {}) do
+        local layer, b = info.kCGWindowLayer, info.kCGWindowBounds
+        if layer and layer >= 0 and layer <= MAX_WINDOW_LAYER and b
+            and pos.x >= b.X and pos.x < b.X + b.Width
+            and pos.y >= b.Y and pos.y < b.Y + b.Height then
+            local win = hs.window.get(info.kCGWindowNumber)
+            if win then return win end
         end
-        return elem and elem:asHSWindow()
-    end)
-    if ok and win and win:isStandard() then return win end
-
-    -- 접근성 요소로 못 찾는 앱용 (느리지만 드묾)
-    return hs.fnutils.find(hs.window.orderedWindows(), function(w)
-        return hs.geometry(pos):inside(w:frame())
-    end)
+    end
+    return nil
 end
 
 local state = {}   -- mode, win, startMouse, startFrame, pending, lastApply
