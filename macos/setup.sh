@@ -91,6 +91,21 @@ defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 100
 defaults write com.clipy-app.Clipy kCPYBetaPastePlainText -bool true   # 서식 없이 붙여넣기
 
 ###############################################################################
+# 손쉬운 사용 — 확대/축소                                                     #
+###############################################################################
+
+# ⌘⌥8 확대 켜기/끄기, ⌘⌥= / ⌘⌥- 확대·축소. 전체 화면 방식, 이미지 다듬기 끔, 스크롤 확대 끔.
+# 터미널에 권한이 없어 쓰기가 막히면 설정 화면에서 켠다
+if ! {
+  defaults write com.apple.universalaccess closeViewHotkeysEnabled -bool true &&
+  defaults write com.apple.universalaccess closeViewZoomMode -int 0 &&
+  defaults write com.apple.universalaccess closeViewSmoothImages -bool false &&
+  defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool false
+} 2>/dev/null; then
+  echo "확대/축소 설정을 쓰지 못했다. 시스템 설정 > 손쉬운 사용 > 확대/축소 > '키보드 단축키를 사용하여 확대/축소' 를 켠다" >&2
+fi
+
+###############################################################################
 # 적용                                                                        #
 ###############################################################################
 
