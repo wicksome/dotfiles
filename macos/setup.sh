@@ -61,31 +61,16 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # 실행 중이면 종료할 때 설정을 덮어쓰므로 먼저 끈다
 osascript -e 'tell application "Clipy" to quit' 2>/dev/null || true
 
-# 단축키는 Magnet.KeyCombo 를 NSKeyedArchiver 로 묶은 data 다 (Clipy 1.2.1 기준, 키 이름은 kCPYHotKey*).
-# modifiers: ⌘ 256, ⇧ 512, ⌥ 2048, ⌃ 4096. keyCode: v 9, b 11
+# 단축키는 JSON 을 data 로 쓴다 (Clipy 1.4.1 기준). modifiers: ⌘ 256, ⇧ 512, ⌥ 2048, ⌃ 4096
 clipy_hotkey() {
-  local hex
-  hex="$(plutil -convert binary1 -o - - <<EOF | xxd -p | tr -d '\n'
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-<key>\$archiver</key><string>NSKeyedArchiver</string>
-<key>\$version</key><integer>100000</integer>
-<key>\$top</key><dict><key>root</key><dict><key>CF\$UID</key><integer>1</integer></dict></dict>
-<key>\$objects</key><array>
-<string>\$null</string>
-<dict><key>\$class</key><dict><key>CF\$UID</key><integer>2</integer></dict><key>doubledModifiers</key><false/><key>keyCode</key><integer>$3</integer><key>modifiers</key><integer>$2</integer></dict>
-<dict><key>\$classes</key><array><string>Magnet.KeyCombo</string><string>NSObject</string></array><key>\$classname</key><string>Magnet.KeyCombo</string></dict>
-</array></dict></plist>
-EOF
-)"
-  defaults write com.clipy-app.Clipy "$1" -data "$hex"
+  local json="{\"doubledModifiers\":false,\"modifiers\":$2,\"key\":\"$3\"}"
+  defaults write com.clipy-app.Clipy "$1" -data "$(printf '%s' "$json" | xxd -p | tr -d '\n')"
 }
-clipy_hotkey kCPYHotKeyMainKeyCombo    768  9    # ⌘⇧V 클립보드 메뉴
-clipy_hotkey kCPYHotKeyHistoryKeyCombo 4352 9    # ⌘⌃V 히스토리
-clipy_hotkey kCPYHotKeySnippetKeyCombo 768  11   # ⌘⇧B 스니펫
-# 첫 실행 때 옛 형식 단축키를 옮기는 단계가 위 값을 덮지 않게 이미 옮긴 것으로 표시한다
-defaults write com.clipy-app.Clipy kCPYMigrateNewKeyCombo -bool true
+clipy_hotkey mainKeyCombo    768  v   # ⌘⇧V 클립보드 메뉴
+clipy_hotkey historyKeyCombo 4352 v   # ⌘⌃V 히스토리
+clipy_hotkey snippetKeyCombo 768  b   # ⌘⇧B 스니펫
+# 첫 실행 때 옛 형식(kCPY*) 설정을 옮기는 단계가 위 값을 덮지 않게 이미 옮긴 것으로 표시한다
+defaults write com.clipy-app.Clipy appMigrationUserDefaultsCodable -bool true
 
 defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 200
 
