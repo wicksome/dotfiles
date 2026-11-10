@@ -87,7 +87,17 @@ clipy_hotkey kCPYHotKeySnippetKeyCombo 768  11   # ⌘⇧B 스니펫
 # 첫 실행 때 옛 형식 단축키를 옮기는 단계가 위 값을 덮지 않게 이미 옮긴 것으로 표시한다
 defaults write com.clipy-app.Clipy kCPYMigrateNewKeyCombo -bool true
 
-defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 100
+defaults write com.clipy-app.Clipy kCPYPrefMaxHistorySizeKey -int 200
+
+# 메뉴 표현: 메뉴에 바로 30개, 나머지는 폴더당 20개, 제목 40자, 번호·툴팁 없음, 이미지 미리보기 200×200
+defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInlineKey -int 30
+defaults write com.clipy-app.Clipy kCPYPrefNumberOfItemsPlaceInsideFolderKey -int 20
+defaults write com.clipy-app.Clipy kCPYPrefMaxMenuItemTitleLengthKey -int 40
+defaults write com.clipy-app.Clipy menuItemsAreMarkedWithNumbers -bool false
+defaults write com.clipy-app.Clipy showToolTipOnMenuItem -bool false
+defaults write com.clipy-app.Clipy thumbnailWidth -int 200
+defaults write com.clipy-app.Clipy thumbnailHeight -int 200
+
 defaults write com.clipy-app.Clipy kCPYBetaPastePlainText -bool true   # 서식 없이 붙여넣기
 
 ###############################################################################
