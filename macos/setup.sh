@@ -66,9 +66,10 @@ clipy_hotkey() {
   local json="{\"doubledModifiers\":false,\"modifiers\":$2,\"key\":\"$3\"}"
   defaults write com.clipy-app.Clipy "$1" -data "$(printf '%s' "$json" | xxd -p | tr -d '\n')"
 }
-clipy_hotkey mainKeyCombo    768  v   # ⌘⇧V 클립보드 메뉴
-clipy_hotkey historyKeyCombo 4352 v   # ⌘⌃V 히스토리
-clipy_hotkey snippetKeyCombo 768  b   # ⌘⇧B 스니펫
+clipy_hotkey mainKeyCombo     768  v   # ⌘⇧V 클립보드 메뉴
+clipy_hotkey historyKeyCombo  4352 v   # ⌘⌃V 히스토리
+clipy_hotkey snippetKeyCombo  4352 b   # ⌘⌃B 스니펫
+clipy_hotkey settingsKeyCombo 6912 v   # ⌘⌃⌥⇧V 설정 창
 # 첫 실행 때 옛 형식(kCPY*) 설정을 옮기는 단계가 위 값을 덮지 않게 이미 옮긴 것으로 표시한다
 defaults write com.clipy-app.Clipy appMigrationUserDefaultsCodable -bool true
 
@@ -84,6 +85,13 @@ defaults write com.clipy-app.Clipy thumbnailWidth -int 200
 defaults write com.clipy-app.Clipy thumbnailHeight -int 200
 
 defaults write com.clipy-app.Clipy kCPYBetaPastePlainText -bool true   # 서식 없이 붙여넣기
+
+# 저장할 클립보드 형식에 PDF 를 더한다
+defaults write com.clipy-app.Clipy pasteboardTypeSettings -data "$(printf '%s' '{"values":{"PDF":true}}' | xxd -p | tr -d '\n')"
+
+# 업데이트 자동 확인·자동 설치
+defaults write com.clipy-app.Clipy SUEnableAutomaticChecks -bool true
+defaults write com.clipy-app.Clipy SUAutomaticallyUpdate -bool true
 
 ###############################################################################
 # 손쉬운 사용 — 확대/축소                                                     #
