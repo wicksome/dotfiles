@@ -6,5 +6,7 @@ require "apps-shortcut"
 require "mouse"
 doio = require "doio"
 require "doio-orca"
+-- 패드 `9` 키: 현재 앱 기준 패드 배치 보기
+doio.bind("9", require("doio-overlay").toggle, { label = "배치 보기" })
 
 hs.alert("Hammerspoon config loaded")
