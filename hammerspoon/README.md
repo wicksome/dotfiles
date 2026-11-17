@@ -43,7 +43,13 @@
 ## DOIO KB16B-02 매크로 패드
 
 `doio.lua` 가 패드 입력만 가로채 동작이나 다른 키로 바꾼다. 패드 키맵은 바꾸지 않는다.
-macOS 가 키 이벤트에 붙이는 keyboard type 으로 노트북 키보드와 패드를 구분한다(패드 40).
+macOS 가 키 이벤트에 붙이는 keyboard type 으로 다른 키보드와 패드를 구분한다.
+패드의 기본값 40 은 HHKB 같은 외장 키보드와 겹치므로, 맥마다 한 번 패드만 41(ISO)로 등록한다.
+패드에는 ISO 와 ANSI 가 다른 키가 없어 입력은 바뀌지 않는다. 등록 후 패드를 다시 연결한다.
+
+```zsh
+sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 41
+```
 
 - 동작 연결: `doio.bind("1", function() ... end)`
 - 다른 키로 바꾸기: `doio.remap("1", "f13")` (macOS 는 F20 까지만 있다)

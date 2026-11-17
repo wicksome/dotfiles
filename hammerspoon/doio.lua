@@ -1,12 +1,13 @@
 -- DOIO KB16B-02 매크로 패드 입력을 가로채 동작이나 다른 키로 바꾼다.
 -- 패드는 기본 키맵(숫자·방향키·Enter)을 그대로 보내므로, macOS 가 키 이벤트에 붙이는
--- keyboard type 값으로 노트북 키보드(91)와 패드(40)를 구분한다.
--- keyboard type 은 기기 고유 ID 가 아니다. 같은 type 의 외장 키보드를 함께 쓰면 그 입력도 잡힌다.
+-- keyboard type 값으로 다른 키보드와 패드를 구분한다.
+-- keyboard type 은 기기 고유 ID 가 아니다. 패드는 기본 40 이라 HHKB 같은 외장 키보드(40)와 겹친다.
+-- 그래서 패드만 41(ISO)로 등록해 쓴다(README 의 설정 명령). 패드에는 ISO 와 ANSI 가 다른 키가 없다.
 -- 패드 사용법(B/R 버튼, 유선 전환, VIA json, BT 1대 제한):
 -- https://blog.naver.com/cotton_mellow_s2/223348486592
 local doio = {}
 
-local DOIO_KEYBOARD_TYPE = 40
+local DOIO_KEYBOARD_TYPE = 41
 -- 이 모듈이 다시 보낸 키 이벤트 표시. 다시 가로채지 않게 한다.
 local REMAPPED_EVENT_MARK = 0x444F494F
 
