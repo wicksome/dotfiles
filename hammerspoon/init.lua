@@ -4,5 +4,7 @@ require "hs.ipc"
 require "windows-key-binding"
 require "apps-shortcut"
 require "mouse"
+doio = require "doio"
+require "doio-orca"
 
 hs.alert("Hammerspoon config loaded")
