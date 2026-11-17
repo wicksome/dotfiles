@@ -30,20 +30,22 @@ local function escape(text)
     return (tostring(text):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
 end
 
--- entry = { shortcut = 윗줄, description = 아랫줄 }
-local function cell(entry, changed, fixed)
+-- entry = { shortcut = 윗줄, description = 아랫줄 }. position 은 왼쪽 위 모서리에 작게 적는 위치 번호다.
+local function cell(entry, changed, fixed, position)
     local class = fixed and "cell fixed" or (changed and "cell changed" or "cell")
     local description = entry.description or ""
-    return string.format('<div class="%s"><b>%s</b>%s</div>', class, escape(entry.shortcut),
+    return string.format('<div class="%s">%s<b>%s</b>%s</div>', class,
+        position and ('<i class="pos">' .. position .. "</i>") or "",
+        escape(entry.shortcut),
         description ~= "" and ("<small>" .. escape(description) .. "</small>") or "")
 end
 
-local function keyCell(description, name)
+local function keyCell(description, name, position)
     if name == nil then
-        return cell({ shortcut = "MO", description = "레이어" }, false, true)
+        return cell({ shortcut = "MO", description = "레이어" }, false, true, position)
     end
     local entry = description.keys[name]
-    return cell(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil)
+    return cell(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil, false, position)
 end
 
 local function knobAction(entry, changed, fixed)
@@ -60,31 +62,31 @@ local function padAction(description, name)
     return knobAction(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil)
 end
 
-local function knob(title, size, rotateLeft, press, rotateRight)
+local function knob(position, title, size, rotateLeft, press, rotateRight)
     return string.format([[
 <div class="knob">
-  <div class="dial %s">%s</div>
+  <div class="dial %s"><i class="pos">%s</i>%s</div>
   <div class="actions">
     <div><span>↺</span>%s</div>
     <div><span>누름</span>%s</div>
     <div><span>↻</span>%s</div>
   </div>
-</div>]], size, escape(title), rotateLeft, press, rotateRight)
+</div>]], size, position, escape(title), rotateLeft, press, rotateRight)
 end
 
 local function render(appName, description)
     local rows = {}
-    for _, row in ipairs(GRID) do
+    for rowIndex, row in ipairs(GRID) do
         for column = 1, 4 do
-            table.insert(rows, keyCell(description, row[column]))
+            table.insert(rows, keyCell(description, row[column], (rowIndex - 1) * 4 + column))
         end
     end
     local knobs = table.concat({
-        knob("왼쪽", "small",
+        knob(17, "왼쪽", "small",
             mediaAction(description, "PREVIOUS"), mediaAction(description, "PLAY"), mediaAction(description, "NEXT")),
-        knob("오른쪽", "small",
+        knob(18, "오른쪽", "small",
             padAction(description, "knobLeft"), knobAction({ shortcut = "—", description = "레이어 전환" }, false, true), padAction(description, "knobRight")),
-        knob("큰 노브", "large",
+        knob(19, "큰 노브", "large",
             mediaAction(description, "SOUND_DOWN"), mediaAction(description, "MUTE"), mediaAction(description, "SOUND_UP")),
     })
     return string.format([[
@@ -98,6 +100,10 @@ local function render(appName, description)
   .grid .cell { height: 56px; }
   .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
           padding: 2px 4px; border-radius: 8px; background: #3a3a42; color: #d0d0d8; word-break: keep-all; }
+  .cell, .dial { position: relative; }
+  .pos { position: absolute; top: 3px; left: 5px; font-style: normal; font-size: 9.5px; opacity: 0.6; }
+  .actions .pos { display: none; }
+  .dial .pos { top: -2px; left: -4px; opacity: 0.8; }
   .cell b { font-size: 14px; font-weight: 600; }
   .cell small { margin-top: 2px; font-size: 10.5px; opacity: 0.85; }
   .actions .cell { flex-direction: row; gap: 6px; }
@@ -118,7 +124,7 @@ local function render(appName, description)
   .legend b { display: inline-block; width: 10px; height: 10px; margin: 0 4px 0 10px; border-radius: 3px; vertical-align: -1px; }
 </style></head><body><div class="wrap">
   <h1>DOIO 배치 — %s</h1>
-  <p class="sub">레이어 1 기준. 노브가 반응하지 않으면 표시창 숫자부터 확인한다.</p>
+  <p class="sub">레이어 1 기준. 칸 왼쪽 위 숫자(키 1~16, 노브 17~19)로 위치를 부른다. 노브가 반응하지 않으면 표시창 숫자부터 확인한다.</p>
   <div class="body"><div class="grid">%s</div><div class="knobs">%s</div></div>
   <div class="legend"><b style="background:#2f6fd6"></b>바뀐 입력<b style="background:#3a3a42"></b>원래 키<b style="border:1px dashed #66666f"></b>바꿀 수 없음</div>
 </div></body></html>]], escape(appName), table.concat(rows), knobs)
