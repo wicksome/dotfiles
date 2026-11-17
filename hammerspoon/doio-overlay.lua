@@ -30,31 +30,34 @@ local function escape(text)
     return (tostring(text):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
 end
 
-local function cell(label, changed, fixed)
+-- entry = { shortcut = 윗줄, description = 아랫줄 }
+local function cell(entry, changed, fixed)
     local class = fixed and "cell fixed" or (changed and "cell changed" or "cell")
-    return string.format('<div class="%s">%s</div>', class, escape(label))
+    local description = entry.description or ""
+    return string.format('<div class="%s"><b>%s</b>%s</div>', class, escape(entry.shortcut),
+        description ~= "" and ("<small>" .. escape(description) .. "</small>") or "")
 end
 
 local function keyCell(description, name)
     if name == nil then
-        return cell("MO", false, true)
+        return cell({ shortcut = "MO", description = "레이어" }, false, true)
     end
-    local label = description.keys[name]
-    return cell(label or DEFAULT_KEY_LABELS[name], label ~= nil)
+    local entry = description.keys[name]
+    return cell(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil)
 end
 
-local function knobAction(label, changed, fixed)
-    return cell(label, changed, fixed)
+local function knobAction(entry, changed, fixed)
+    return cell(entry, changed, fixed)
 end
 
 local function mediaAction(description, mediaKey)
-    local label = description.media[mediaKey]
-    return knobAction(label or DEFAULT_MEDIA_LABELS[mediaKey], label ~= nil)
+    local entry = description.media[mediaKey]
+    return knobAction(entry or { shortcut = DEFAULT_MEDIA_LABELS[mediaKey] }, entry ~= nil)
 end
 
 local function padAction(description, name)
-    local label = description.keys[name]
-    return knobAction(label or DEFAULT_KEY_LABELS[name], label ~= nil)
+    local entry = description.keys[name]
+    return knobAction(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil)
 end
 
 local function knob(title, size, rotateLeft, press, rotateRight)
@@ -80,7 +83,7 @@ local function render(appName, description)
         knob("왼쪽", "small",
             mediaAction(description, "PREVIOUS"), mediaAction(description, "PLAY"), mediaAction(description, "NEXT")),
         knob("오른쪽", "small",
-            padAction(description, "knobLeft"), knobAction("레이어 전환", false, true), padAction(description, "knobRight")),
+            padAction(description, "knobLeft"), knobAction({ shortcut = "—", description = "레이어 전환" }, false, true), padAction(description, "knobRight")),
         knob("큰 노브", "large",
             mediaAction(description, "SOUND_DOWN"), mediaAction(description, "MUTE"), mediaAction(description, "SOUND_UP")),
     })
@@ -93,8 +96,12 @@ local function render(appName, description)
   .body { display: flex; gap: 22px; }
   .grid { display: grid; grid-template-columns: repeat(4, 84px); gap: 6px; }
   .grid .cell { height: 56px; }
-  .cell { display: flex; align-items: center; justify-content: center; text-align: center;
+  .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
           padding: 2px 4px; border-radius: 8px; background: #3a3a42; color: #d0d0d8; word-break: keep-all; }
+  .cell b { font-size: 14px; font-weight: 600; }
+  .cell small { margin-top: 2px; font-size: 10.5px; opacity: 0.85; }
+  .actions .cell { flex-direction: row; gap: 6px; }
+  .actions .cell small { margin-top: 0; }
   .cell.changed { background: #2f6fd6; color: #ffffff; font-weight: 600; }
   .cell.fixed { background: transparent; border: 1px dashed #66666f; color: #8a8a94; }
   .knobs { display: flex; flex-direction: column; gap: 10px; width: 250px; }

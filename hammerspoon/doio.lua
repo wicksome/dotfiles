@@ -26,13 +26,14 @@ local padKeyCodes = {
 }
 
 -- keycode → 등록 순서대로의 handler 목록. 조건이 맞는 첫 handler 가 처리한다.
--- handler = { app = bundleID | nil, label = string, down = function(), up = function() | nil, repeats = boolean }
+-- handler = { app = bundleID | nil, shortcut = string, description = string,
+--             down = function(), up = function() | nil, repeats = boolean }
 local handlers = {}
 
 local MOD_SYMBOLS = { { "ctrl", "⌃" }, { "alt", "⌥" }, { "shift", "⇧" }, { "cmd", "⌘" } }
 local KEY_SYMBOLS = {
     up = "↑", down = "↓", left = "←", right = "→",
-    ["return"] = "⏎", delete = "⌫", tab = "⇥", space = "Space", escape = "Esc",
+    ["return"] = "⏎", delete = "⌫", tab = "⇥", space = "␣", escape = "⎋",
 }
 
 -- { "cmd", "shift" }, "[" → "⌘⇧["
@@ -147,10 +148,15 @@ local function register(name, handler)
 end
 
 -- 패드 키를 누르면 action 을 한 번 실행한다. options.app 이 있으면 그 앱이 앞에 있을 때만 적용한다.
--- options.label 은 배치 보기 화면에 표시할 이름이다.
+-- 배치 보기 화면에는 options.shortcut(윗줄)과 options.description(아랫줄)을 표시한다.
 function doio.bind(name, action, options)
     options = options or {}
-    register(name, { app = options.app, label = options.label or "동작", down = action })
+    register(name, {
+        app = options.app,
+        shortcut = options.shortcut or "동작",
+        description = options.description or "",
+        down = action,
+    })
 end
 
 -- 패드 키를 다른 키(조합)로 바꿔 보낸다. 누르고 있는 동안의 반복도 그대로 전달한다.
@@ -161,7 +167,8 @@ function doio.remap(name, targetKeyName, options)
     assert(hs.keycodes.map[targetKeyName], "unknown target key: " .. tostring(targetKeyName))
     register(name, {
         app = options.app,
-        label = options.label or shortcutLabel(mods, targetKeyName),
+        shortcut = options.shortcut or shortcutLabel(mods, targetKeyName),
+        description = options.description or "",
         down = function() postKey(mods, targetKeyName, true) end,
         up = function() postKey(mods, targetKeyName, false) end,
         repeats = true,
@@ -199,7 +206,12 @@ end)
 function doio.bindMedia(mediaKey, action, options)
     assert(options and options.app, "bindMedia needs options.app")
     mediaHandlers[mediaKey] = mediaHandlers[mediaKey] or {}
-    table.insert(mediaHandlers[mediaKey], { app = options.app, label = options.label or "동작", down = action })
+    table.insert(mediaHandlers[mediaKey], {
+        app = options.app,
+        shortcut = options.shortcut or "동작",
+        description = options.description or "",
+        down = action,
+    })
 end
 
 -- 미디어 키를 다른 키(조합)로 바꿔 보낸다. options.app 은 필수다.
@@ -212,18 +224,19 @@ function doio.remapMedia(mediaKey, targetKeyName, options)
         postKey(mods, targetKeyName, false)
     end, {
         app = options.app,
-        label = options.label or shortcutLabel(mods, targetKeyName),
+        shortcut = options.shortcut or shortcutLabel(mods, targetKeyName),
+        description = options.description,
     })
 end
 
 -- 앞 앱이 bundleID 일 때 각 입력이 무엇을 하는지 돌려준다. 바뀌지 않은 입력은 빠진다.
--- 반환: { keys = { [패드 키 이름] = label }, media = { [미디어 키] = label } }
+-- 반환: { keys = { [패드 키 이름] = { shortcut, description } }, media = { [미디어 키] = { shortcut, description } } }
 function doio.describe(bundleID)
     local result = { keys = {}, media = {} }
     for name, keyCode in pairs(padKeyCodes) do
         for _, handler in ipairs(handlers[keyCode] or {}) do
             if handler.app == nil or handler.app == bundleID then
-                result.keys[name] = handler.label
+                result.keys[name] = { shortcut = handler.shortcut, description = handler.description }
                 break
             end
         end
@@ -231,7 +244,7 @@ function doio.describe(bundleID)
     for mediaKey, candidates in pairs(mediaHandlers) do
         for _, handler in ipairs(candidates) do
             if handler.app == bundleID then
-                result.media[mediaKey] = handler.label
+                result.media[mediaKey] = { shortcut = handler.shortcut, description = handler.description }
                 break
             end
         end
