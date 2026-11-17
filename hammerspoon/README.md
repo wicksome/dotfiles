@@ -78,6 +78,7 @@ Orca 가 앞에 있을 때만 바뀐다.
 | `1` (1행 1열) | <kbd>⌘</kbd><kbd>⌥</kbd><kbd>A</kbd> |
 | `2` / `3` (1행 2·3열) | <kbd>⌘</kbd><kbd>⇧</kbd><kbd>[</kbd> / <kbd>⌘</kbd><kbd>⇧</kbd><kbd>]</kbd> (이전 / 다음 탭) |
 | `4` (1행 4열) | <kbd>⌘</kbd><kbd>⌥</kbd><kbd>T</kbd> |
+| `8` (2행 4열) | <kbd>esc</kbd> |
 | 왼쪽 작은 노브 ↺ / ↻ | <kbd>⌘</kbd><kbd>⇧</kbd><kbd>↑</kbd> / <kbd>⌘</kbd><kbd>⇧</kbd><kbd>↓</kbd> |
 | 왼쪽 작은 노브 누름 | 아무 동작 안 함 (음악 앱이 켜지지 않게 막음) |
 | 오른쪽 작은 노브 ↺ / ↻ | 한 칸에 2줄씩 위 / 아래 휠 스크롤 (마우스 포인터 아래 창) |

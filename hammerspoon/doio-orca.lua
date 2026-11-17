@@ -7,6 +7,7 @@ doio.remap("1", "a", { mods = { "cmd", "alt" }, app = ORCA })
 doio.remap("2", "[", { mods = { "cmd", "shift" }, app = ORCA, description = "이전 탭" })
 doio.remap("3", "]", { mods = { "cmd", "shift" }, app = ORCA, description = "다음 탭" })
 doio.remap("4", "t", { mods = { "cmd", "alt" }, app = ORCA })
+doio.remap("8", "escape", { app = ORCA })
 
 -- 오른쪽 작은 노브 회전: PageUp/PageDown 대신 몇 줄씩 휠 스크롤한다. 마우스 포인터 아래 창이 스크롤된다.
 local SCROLL_LINES_PER_STEP = 2
