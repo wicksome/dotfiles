@@ -7,5 +7,6 @@ require "mouse"
 doio = require "doio"
 require "doio-default"
 require "doio-orca"
+require "doio-aside"
 
 hs.alert("Hammerspoon config loaded")

@@ -97,4 +97,10 @@ Orca 가 앞에 있을 때만 바뀐다. 표에 없는 키는 위 기본 동작�
 
 Orca 가 앞에 있으면 노트북의 곡 넘김·재생·볼륨·음소거 키도 같은 동작으로 바뀐다.
 
+### Aside 브라우저 (`doio-aside.lua`)
+
+| 패드 입력 | 동작 |
+| --- | --- |
+| 큰 노브 ↺ / ↻ | <kbd>←</kbd> / <kbd>→</kbd> (Aside 가 앞에 있으면 노트북 볼륨 키도 방향키가 된다) |
+
 참고: [DOIO KB16B-02 사용 후기 — 유선 전환·VIA·Bluetooth 제한](https://blog.naver.com/cotton_mellow_s2/223348486592)
