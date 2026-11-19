@@ -30,14 +30,23 @@ local function escape(text)
     return (tostring(text):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
 end
 
--- entry = { shortcut = 윗줄, description = 아랫줄 }. position 은 왼쪽 위 모서리에 작게 적는 위치 번호다.
+-- entry = { shortcut, description, appSpecific }. position 은 왼쪽 위 모서리에 작게 적는 위치 번호다.
+-- 모든 앱 공통 키는 보내는 키가 윗줄이다. 앱 전용 키는 하는 일(description)이 윗줄이고 보내는 키가 아랫줄이다.
 local function cell(entry, changed, fixed, position)
+    if entry.blocked then
+        return string.format('<div class="cell blocked">%s<b>✕</b></div>',
+            position and ('<i class="pos">' .. position .. "</i>") or "")
+    end
     local class = fixed and "cell fixed" or (changed and "cell changed" or "cell")
-    local description = entry.description or ""
+    local main, sub = entry.shortcut, entry.description or ""
+    if entry.appSpecific and sub ~= "" then
+        main, sub = sub, main
+        class = class .. " app"
+    end
     return string.format('<div class="%s">%s<b>%s</b>%s</div>', class,
         position and ('<i class="pos">' .. position .. "</i>") or "",
-        escape(entry.shortcut),
-        description ~= "" and ("<small>" .. escape(description) .. "</small>") or "")
+        escape(main),
+        sub ~= "" and ("<small>" .. escape(sub) .. "</small>") or "")
 end
 
 local function keyCell(description, name, position)
@@ -97,7 +106,7 @@ local function render(appName, description)
   .sub { margin: 0 0 14px; color: #a8a8b3; font-size: 12px; }
   .body { display: flex; gap: 22px; }
   .grid { display: grid; grid-template-columns: repeat(4, 84px); gap: 6px; }
-  .grid .cell { height: 56px; }
+  .grid .cell { min-height: 56px; }
   .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
           padding: 2px 4px; border-radius: 8px; background: #3a3a42; color: #d0d0d8; word-break: keep-all; }
   .cell, .dial { position: relative; }
@@ -106,10 +115,13 @@ local function render(appName, description)
   .dial .pos { top: -2px; left: -4px; opacity: 0.8; }
   .cell b { font-size: 14px; font-weight: 600; }
   .cell small { margin-top: 2px; font-size: 10.5px; opacity: 0.85; }
-  .actions .cell { flex-direction: row; gap: 6px; }
+  .actions .cell { flex-direction: row; justify-content: space-between; gap: 6px; padding: 2px 10px; }
   .actions .cell small { margin-top: 0; }
+  .actions .cell b, .actions .cell small { white-space: nowrap; }
+  .cell.app b { font-size: 12.5px; line-height: 1.25; }
   .cell.changed { background: #2f6fd6; color: #ffffff; font-weight: 600; }
   .cell.fixed { background: transparent; border: 1px dashed #66666f; color: #8a8a94; }
+  .cell.blocked { background: #5a2a30; color: #ff8f8f; }
   .knobs { display: flex; flex-direction: column; gap: 10px; width: 250px; }
   .knob { display: flex; gap: 10px; align-items: center; }
   .dial { flex: none; display: flex; align-items: center; justify-content: center; border-radius: 50%%;
@@ -117,7 +129,7 @@ local function render(appName, description)
   .dial.small { width: 44px; height: 44px; }
   .dial.large { width: 60px; height: 60px; }
   .actions { flex: 1; display: grid; gap: 4px; }
-  .actions div { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 6px; }
+  .actions > div { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 6px; }
   .actions span { color: #a8a8b3; font-size: 11px; text-align: right; }
   .actions .cell { height: 24px; font-size: 12px; }
   .legend { margin-top: 14px; color: #a8a8b3; font-size: 11px; }
@@ -126,7 +138,7 @@ local function render(appName, description)
   <h1>DOIO 배치 — %s</h1>
   <p class="sub">레이어 1 기준. 칸 왼쪽 위 숫자(키 1~16, 노브 17~19)로 위치를 부른다. 노브가 반응하지 않으면 표시창 숫자부터 확인한다.</p>
   <div class="body"><div class="grid">%s</div><div class="knobs">%s</div></div>
-  <div class="legend"><b style="background:#2f6fd6"></b>바뀐 입력<b style="background:#3a3a42"></b>원래 키<b style="border:1px dashed #66666f"></b>바꿀 수 없음</div>
+  <div class="legend"><b style="background:#2f6fd6"></b>바뀐 입력<b style="background:#3a3a42"></b>원래 키<b style="border:1px dashed #66666f"></b>바꿀 수 없음<b style="background:#5a2a30"></b>✕ 막음(아무 동작 없음)</div>
 </div></body></html>]], escape(appName), table.concat(rows), knobs)
 end
 
@@ -184,6 +196,27 @@ function overlay.toggle()
     else
         overlay.show()
     end
+end
+
+-- 패드 키에 연결한다. 길게 누르면 누르는 동안만 보이고, 짧게 누르면 toggle 처럼 SHOW_SECONDS 동안 보인다.
+local HOLD_SECONDS = 0.4
+local pressedAt
+
+function overlay.press()
+    if view then
+        overlay.hide()
+        pressedAt = nil
+        return
+    end
+    overlay.show()
+    pressedAt = hs.timer.secondsSinceEpoch()
+end
+
+function overlay.release()
+    if pressedAt and hs.timer.secondsSinceEpoch() - pressedAt >= HOLD_SECONDS then
+        overlay.hide()
+    end
+    pressedAt = nil
 end
 
 return overlay

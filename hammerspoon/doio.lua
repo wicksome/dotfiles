@@ -149,6 +149,7 @@ local function register(name, handler)
 end
 
 -- 패드 키를 누르면 action 을 한 번 실행한다. options.app 이 있으면 그 앱이 앞에 있을 때만 적용한다.
+-- options.up 이 있으면 키를 뗄 때 실행한다.
 -- 배치 보기 화면에는 options.shortcut(윗줄)과 options.description(아랫줄)을 표시한다.
 function doio.bind(name, action, options)
     options = options or {}
@@ -157,7 +158,13 @@ function doio.bind(name, action, options)
         shortcut = options.shortcut or "동작",
         description = options.description or "",
         down = action,
+        up = options.up,
     })
+end
+
+-- options.app 이 앞에 있을 때 이 키가 아무 동작도 하지 않게 막는다. 배치 보기 화면에는 ✕ 로 표시한다.
+function doio.block(name, options)
+    register(name, { app = options.app, blocked = true, down = function() end })
 end
 
 -- 패드 키를 다른 키(조합)로 바꿔 보낸다. 누르고 있는 동안의 반복도 그대로 전달한다.
@@ -192,7 +199,7 @@ doio.mediaTap = hs.eventtap.new({ types.systemDefined }, function(event)
     end
     local bundleID = frontmostBundleID()
     for _, handler in ipairs(candidates) do
-        if handler.app == bundleID then
+        if handler.app == nil or handler.app == bundleID then
             if media.down then
                 -- 탭 콜백 안에서 바로 키를 보내면 콜백이 다시 불리며 스택이 넘쳤다. 다음 실행 주기로 미룬다.
                 hs.timer.doAfter(0, handler.down)
@@ -205,14 +212,27 @@ end)
 
 -- 미디어 키를 누르면 action 을 한 번 실행한다. options.app 은 필수다.
 function doio.bindMedia(mediaKey, action, options)
-    assert(options and options.app, "bindMedia needs options.app")
+    assert(options and (options.app or options.blocked), "bindMedia needs options.app")
     mediaHandlers[mediaKey] = mediaHandlers[mediaKey] or {}
-    table.insert(mediaHandlers[mediaKey], {
+    local handler = {
         app = options.app,
         shortcut = options.shortcut or "동작",
         description = options.description or "",
         down = action,
-    })
+        blocked = options.blocked,
+    }
+    -- 앱 조건이 있는 handler 를 앞에 두어 모든 앱 handler 보다 먼저 고른다.
+    if handler.app then
+        table.insert(mediaHandlers[mediaKey], 1, handler)
+    else
+        table.insert(mediaHandlers[mediaKey], handler)
+    end
+end
+
+-- 미디어 키가 아무 동작도 하지 않게 막는다. 배치 보기 화면에는 ✕ 로 표시한다.
+-- options.app 이 없으면 모든 앱에서 막는다. 노트북 미디어 키도 함께 막힌다.
+function doio.blockMedia(mediaKey, options)
+    doio.bindMedia(mediaKey, function() end, { app = options and options.app, blocked = true })
 end
 
 -- 미디어 키를 다른 키(조합)로 바꿔 보낸다. options.app 은 필수다.
@@ -237,15 +257,17 @@ function doio.describe(bundleID)
     for name, keyCode in pairs(padKeyCodes) do
         for _, handler in ipairs(handlers[keyCode] or {}) do
             if handler.app == nil or handler.app == bundleID then
-                result.keys[name] = { shortcut = handler.shortcut, description = handler.description }
+                result.keys[name] = { shortcut = handler.shortcut, description = handler.description,
+                                      appSpecific = handler.app ~= nil, blocked = handler.blocked }
                 break
             end
         end
     end
     for mediaKey, candidates in pairs(mediaHandlers) do
         for _, handler in ipairs(candidates) do
-            if handler.app == bundleID then
-                result.media[mediaKey] = { shortcut = handler.shortcut, description = handler.description }
+            if handler.app == nil or handler.app == bundleID then
+                result.media[mediaKey] = { shortcut = handler.shortcut, description = handler.description,
+                                           appSpecific = handler.app ~= nil, blocked = handler.blocked }
                 break
             end
         end
