@@ -66,7 +66,7 @@ DOIO Studio 가 USB 로 키맵을 읽거나 쓸 때마다 갱신한다. 파일�
 | `action` + `params` | `doio-actions.lua` 의 동작을 실행한다 (`openApp`, `dictation`, `layoutOverlay`, `scroll`) |
 | `shortcut` / `description` | 배치 보기 화면의 윗줄 / 아랫줄 |
 
-`block`·`send`·`action` 중 정확히 하나만 쓴다. 잘못 적으면 Hammerspoon 콘솔에 규칙 번호와 함께 오류가 난다.
+`block`·`send`·`action` 중 정확히 하나만 쓴다. 잘못 적으면 알림이 뜨고, 콘솔에 문제가 있는 규칙 번호가 모두 나온다(`mapping.validate`).
 Lua 에서 직접 연결하려면 `doio.bind`·`doio.remap` 을 쓴다.
 
 | 자리 | 이름 |
