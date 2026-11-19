@@ -51,8 +51,19 @@ macOS 가 키 이벤트에 붙이는 keyboard type 으로 다른 키보드와 �
 sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 41
 ```
 
-- 동작 연결: `doio.bind("1", function() ... end)`
-- 다른 키로 바꾸기: `doio.remap("1", "f13")` (macOS 는 F20 까지만 있다)
+매핑은 `doio-mapping.json` 의 `rules` 에 적는다. 규칙 하나는 입력 하나와 할 일 하나다.
+
+| 필드 | 뜻 |
+| --- | --- |
+| `key` / `media` | 패드 키 이름 / 미디어 키 이름 (`PLAY`, `NEXT`, `PREVIOUS`, `MUTE`, `SOUND_UP`, `SOUND_DOWN`) |
+| `app` | 이 번들 ID 앱이 앞에 있을 때만 적용한다. 없으면 모든 앱 |
+| `block` | `true` 면 아무 동작도 하지 않게 막는다 |
+| `send` | 다른 키로 바꾼다. `{ "key": "a", "mods": ["cmd"] }` (macOS 는 F20 까지만 있다) |
+| `action` + `params` | `doio-actions.lua` 의 동작을 실행한다 (`openApp`, `dictation`, `layoutOverlay`, `scroll`) |
+| `shortcut` / `description` | 배치 보기 화면의 윗줄 / 아랫줄 |
+
+`block`·`send`·`action` 중 정확히 하나만 쓴다. 잘못 적으면 Hammerspoon 콘솔에 규칙 번호와 함께 오류가 난다.
+Lua 에서 직접 연결하려면 `doio.bind`·`doio.remap` 을 쓴다.
 
 | 패드 입력 | 바꿀 수 있나 |
 | --- | --- |
@@ -66,9 +77,9 @@ sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -di
 Bluetooth 연결은 1분 쉬면 잠들고, 깨우는 첫 입력은 맥에 전달되지 않는다.
 오른쪽 작은 노브를 누르면 레이어가 바뀐다(표시창 1~4). 키는 레이어 1~3 에서 같은 값을 보내 어느 레이어에서든 매핑이 동작하지만, Hammerspoon 은 같은 이유로 지금 레이어를 알 수 없다. 노브는 레이어 1 이 아니면 아무것도 보내지 않을 수 있으니 표시창을 1 로 둔다.
 
-### 모든 앱 (`doio-default.lua`)
+### 모든 앱
 
-1행의 1·4번과 3·4행 키는 모든 앱에서 아래처럼 바뀐다. 앱별 파일이 같은 키를 다시 매핑하면 그 앱에서는 앱별 매핑이 우선한다.
+1행의 1·4번과 3·4행 키는 모든 앱에서 아래처럼 바뀐다. `app` 이 있는 규칙이 같은 키를 다시 매핑하면 그 앱에서는 앱별 매핑이 우선한다.
 
 | 패드 입력 | 동작 |
 | --- | --- |
@@ -87,7 +98,7 @@ Mac 받아쓰기는 앞 앱의 「편집 > 받아쓰기 시작…」 메뉴를 �
 
 배치 보기는 `doio.describe` 로 등록된 매핑을 읽어 그린다. 모든 앱 공통 키는 윗줄에 보내는 키(`shortcut`), 아랫줄에 설명(`description`)을 표시한다. 앱 전용 키(`app` 조건이 있는 매핑)는 하는 일이 주된 정보라 설명을 윗줄, 보내는 키를 아랫줄에 표시한다. 둘 다 매핑 옵션으로 줄 수 있고, `remap` 은 윗줄을 키 조합에서 만든다.
 
-### Orca 모드 (`doio-orca.lua`)
+### Orca 모드 (`app`: `com.stablyai.orca`)
 
 Orca 가 앞에 있을 때만 바뀐다. 표에 없는 키는 위 기본 동작을 따른다.
 
@@ -104,7 +115,7 @@ Orca 가 앞에 있을 때만 바뀐다. 표에 없는 키는 위 기본 동작�
 
 Orca 가 앞에 있으면 노트북의 곡 넘김·재생·볼륨·음소거 키도 같은 동작으로 바뀐다.
 
-### Aside 브라우저 (`doio-aside.lua`)
+### Aside 브라우저 (`app`: `at.studio.AsideBrowser`)
 
 | 패드 입력 | 동작 |
 | --- | --- |

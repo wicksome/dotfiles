@@ -1,0 +1,35 @@
+{
+  "rules": [
+    { "key": "1", "action": "openApp", "params": { "bundleID": "com.stablyai.orca", "name": "Orca" }, "shortcut": "Orca", "description": "Orca 열기" },
+    { "key": "4", "action": "layoutOverlay", "shortcut": "⌨︎", "description": "패드 배치 보기" },
+    { "key": "9", "send": { "key": "escape" } },
+    { "key": "0", "action": "dictation", "shortcut": "🌐×2", "description": "Mac 받아쓰기" },
+    { "key": "up", "send": { "key": "tab" } },
+    { "key": "return", "send": { "key": "delete" } },
+    { "key": "left", "action": "dictation", "shortcut": "🌐×2", "description": "Mac 받아쓰기" },
+    { "key": "down", "send": { "key": "space" }, "description": "Claude 음성 입력" },
+    { "key": "right", "send": { "key": "return" } },
+    { "media": "PLAY", "block": true },
+
+    { "app": "com.stablyai.orca", "key": "1", "block": true },
+    { "app": "com.stablyai.orca", "key": "2", "block": true },
+    { "app": "com.stablyai.orca", "key": "3", "block": true },
+    { "app": "com.stablyai.orca", "key": "8", "block": true },
+    { "app": "com.stablyai.orca", "key": "5", "send": { "key": "a", "mods": ["cmd", "alt"] }, "description": "플로팅 토글" },
+    { "app": "com.stablyai.orca", "key": "6", "send": { "key": "[", "mods": ["cmd", "shift"] }, "description": "이전 탭" },
+    { "app": "com.stablyai.orca", "key": "7", "send": { "key": "]", "mods": ["cmd", "shift"] }, "description": "다음 탭" },
+    { "app": "com.stablyai.orca", "key": "knobLeft", "action": "scroll", "params": { "lines": 1 }, "shortcut": "휠 ↑", "description": "1줄 스크롤" },
+    { "app": "com.stablyai.orca", "key": "knobRight", "action": "scroll", "params": { "lines": -1 }, "shortcut": "휠 ↓", "description": "1줄 스크롤" },
+    { "app": "com.stablyai.orca", "key": "left", "send": { "key": "e", "mods": ["cmd"] }, "description": "Orca 음성 입력" },
+    { "app": "com.stablyai.orca", "media": "PREVIOUS", "send": { "key": "up", "mods": ["cmd", "shift"] }, "description": "이전 워크스페이스" },
+    { "app": "com.stablyai.orca", "media": "NEXT", "send": { "key": "down", "mods": ["cmd", "shift"] }, "description": "다음 워크스페이스" },
+    { "app": "com.stablyai.orca", "media": "MUTE", "block": true },
+    { "app": "com.stablyai.orca", "media": "SOUND_DOWN", "send": { "key": "left" } },
+    { "app": "com.stablyai.orca", "media": "SOUND_UP", "send": { "key": "right" } },
+
+    { "app": "at.studio.AsideBrowser", "media": "SOUND_DOWN", "send": { "key": "left" } },
+    { "app": "at.studio.AsideBrowser", "media": "SOUND_UP", "send": { "key": "right" } },
+    { "app": "at.studio.AsideBrowser", "key": "knobLeft", "action": "scroll", "params": { "lines": 3 }, "shortcut": "휠 ↑", "description": "3줄 스크롤" },
+    { "app": "at.studio.AsideBrowser", "key": "knobRight", "action": "scroll", "params": { "lines": -3 }, "shortcut": "휠 ↓", "description": "3줄 스크롤" }
+  ]
+}
