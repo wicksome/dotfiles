@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>DOIO Studio</title>
+  <link rel="stylesheet" href="/style.css">
+  <script>
+    // 그리기 전에 테마를 정해 깜빡임을 막는다. 고른 값이 없으면 시스템 설정을 따른다.
+    document.documentElement.dataset.theme = localStorage.getItem("doio-theme")
+      || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  </script>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">D</div>
+      <div>
+        <div class="brand-name">DOIO Studio</div>
+        <div class="brand-sub">KB16B-02 매크로 패드</div>
+      </div>
+    </div>
+    <div class="nav-label">연결</div>
+    <section class="status">
+      <div class="status-row"><span class="dot" id="hs-dot"></span>Hammerspoon <span id="hs-status">확인 중</span></div>
+      <div class="status-row"><span class="dot" id="hid-dot"></span>패드 USB <span id="hid-status">연결 안 됨</span></div>
+      <button id="hid-connect" class="btn primary connect">패드 연결</button>
+    </section>
+    <section class="status keyboard-type">
+      <h3>키보드 번호 (keyboard type)</h3>
+      <p class="muted">Hammerspoon 은 이 번호가 41 인 입력만 패드로 본다. USB·Bluetooth 가 따로 등록된다.</p>
+      <div class="status-row"><span class="dot" id="kt-usb-dot"></span>USB <span id="kt-usb">확인 중</span></div>
+      <div class="status-row"><span class="dot" id="kt-bt-dot"></span>Bluetooth <span id="kt-bt">확인 중</span></div>
+      <button id="kt-copy" class="btn connect" hidden>등록 명령 복사 (터미널에서 sudo)</button>
+    </section>
+    <section class="help">
+      <h3>두 층</h3>
+      <p><b>① 펌웨어 키맵</b>은 패드가 보내는 키 자체를 정한다. 패드 안에 저장되고 USB 로 연결했을 때만 읽고 쓸 수 있다.</p>
+      <p><b>② 앱별 매핑</b>은 패드가 보낸 키를 맥이 받아 앱마다 다른 일로 바꾼다. USB·Bluetooth 모두에서 동작한다. 저장하면 Hammerspoon 이 다시 읽는다.</p>
+    </section>
+  </aside>
+
+  <main>
+    <header class="page-header">
+      <h1>DOIO KB16B-02</h1>
+      <nav class="view-tabs">
+        <button class="tab active" data-tab="firmware"><span class="nav-icon">①</span>펌웨어 키맵</button>
+        <button class="tab" data-tab="macro"><span class="nav-icon">M</span>매크로</button>
+        <button class="tab" data-tab="mapping"><span class="nav-icon">②</span>앱별 매핑</button>
+      </nav>
+      <button id="theme-toggle" class="btn theme-toggle"></button>
+    </header>
+
+    <section id="tab-macro" class="panel hidden">
+      <div class="toolbar">
+        <span class="spacer"></span>
+        <span id="macro-dirty" class="muted"></span>
+        <button id="macro-reload" class="btn" disabled>패드에서 다시 읽기</button>
+        <button id="macro-save" class="btn danger" disabled>패드에 저장</button>
+      </div>
+      <p class="hint" id="macro-hint">매크로는 패드 안에 저장되는 입력 순서다. ① 펌웨어 키맵에서 칸에 M0~M15 를 넣으면 그 칸을 누를 때 실행된다. USB 로 연결했을 때만 읽고 쓸 수 있다.</p>
+      <div class="buffer">
+        <div class="buffer-head"><span>매크로 버퍼 (패드 저장 공간)</span><span id="buffer-total"></span></div>
+        <div class="buffer-bar" id="buffer-bar"></div>
+        <div class="buffer-legend" id="buffer-legend"></div>
+      </div>
+      <div class="macro-layout">
+        <div id="macro-list" class="macro-list"></div>
+        <div class="editor macro-editor">
+          <h2 id="macro-title"></h2>
+          <p class="note">글자는 그대로 입력된다(영문 자판 기준). 특수 동작은 중괄호로 쓴다: <code>{tap:Enter}</code> 누르고 떼기, <code>{down:LCmd}</code> 누른 채로, <code>{up:LCmd}</code> 떼기, <code>{delay:100}</code> 100ms 쉬기. 중괄호 글자 자체는 <code>{{</code> 로 쓴다.</p>
+          <div class="row" id="macro-inserts"></div>
+          <textarea id="macro-text" rows="8" spellcheck="false"></textarea>
+          <p class="note" id="macro-bytes"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-mapping" class="panel hidden">
+      <div class="toolbar">
+        <span class="toolbar-label">앱</span>
+        <div id="app-chips" class="chips"></div>
+        <select id="app-add" class="select"><option value="">+ 앱 추가</option></select>
+        <span class="spacer"></span>
+        <span id="dirty-count" class="muted"></span>
+        <button id="mapping-revert" class="btn" disabled>되돌리기</button>
+        <button id="mapping-save" class="btn primary" disabled>저장</button>
+      </div>
+      <p class="hint" id="mapping-hint">키를 눌러 아래에서 할 일을 고른다. 앱을 고르면 그 앱이 앞에 있을 때의 동작을 보여준다.</p>
+      <div id="mapping-pad" class="pad"></div>
+      <div class="legend">
+        <span><i class="sw app"></i>이 앱 전용</span>
+        <span><i class="sw global"></i>모든 앱 규칙</span>
+        <span><i class="sw none"></i>패드 키 그대로</span>
+        <span><i class="sw blocked"></i>막음</span>
+        <span><i class="sw fixed"></i>바꿀 수 없음</span>
+      </div>
+      <div id="mapping-editor" class="editor"></div>
+      <div id="mapping-problems" class="problems"></div>
+    </section>
+
+    <section id="tab-firmware" class="panel">
+      <div class="toolbar">
+        <span class="toolbar-label">레이어</span>
+        <div id="layer-buttons" class="chips"></div>
+        <button id="fw-tester" class="btn" disabled title="패드에서 누르고 있는 칸을 화면에 표시한다">키 눌림 보기</button>
+        <span class="spacer"></span>
+        <span id="fw-dirty" class="muted"></span>
+        <button id="fw-backup" class="btn" disabled>백업 내려받기</button>
+        <label class="btn" id="fw-restore-label">백업에서 복원<input type="file" id="fw-restore" accept=".json" hidden></label>
+        <button id="fw-revert" class="btn" disabled>되돌리기</button>
+        <button id="fw-write" class="btn danger" disabled>펌웨어에 쓰기</button>
+      </div>
+      <p class="hint" id="fw-hint">패드를 USB 로 꽂고 왼쪽 「패드 연결」을 누른다. 한 번 허용하면 다음부터는 열 때·다시 꽂을 때 자동으로 연결한다. Chrome·Edge 에서만 된다.</p>
+      <div id="firmware-pad" class="pad"></div>
+      <div id="firmware-picker" class="editor"></div>
+      <details class="matrix">
+        <summary>행렬 전체 보기 (5행 × 7열)</summary>
+        <div id="matrix-table"></div>
+      </details>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>

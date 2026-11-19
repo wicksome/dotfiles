@@ -6,5 +6,6 @@ require "apps-shortcut"
 require "mouse"
 doio = require "doio"
 require "doio-mapping"
+require "doio-studio"
 
 hs.alert("Hammerspoon config loaded")

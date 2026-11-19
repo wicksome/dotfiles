@@ -55,6 +55,23 @@ sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -di
 패드의 어느 자리가 어떤 키를 보내는지는 펌웨어 키맵이 정한다. `doio-firmware.json` 은 그 키맵을 자리별로 옮겨 적은 파일이고, `doio.lua` 는 이 파일로 패드 자리를 알아본다.
 DOIO Studio 가 USB 로 키맵을 읽거나 쓸 때마다 갱신한다. 파일이 없으면 펌웨어 기본 키맵으로 본다.
 
+### DOIO Studio (설정 페이지)
+
+Hammerspoon 이 `http://localhost:17816/` 에 설정 페이지를 띄운다(`doio-studio.lua`, `doio-studio/`). WebHID 를 쓰므로 Chrome 으로 연다.
+
+```zsh
+hs -c 'require("doio-studio").open()'
+```
+
+| 탭 | 하는 일 | 연결 |
+| --- | --- | --- |
+| 펌웨어 키맵 | 레이어별 키맵 읽기·쓰기, 백업·복원, 키 눌림 보기 | USB 만 (VIA 프로토콜) |
+| 매크로 | M0~M15 편집, 패드 저장 공간(355 바이트) 표시 | USB 만 |
+| 앱별 매핑 | `doio-mapping.json` 편집. 저장하면 같은 검사(`mapping.validate`)를 거쳐 Hammerspoon 을 다시 읽는다 | USB·Bluetooth |
+
+사이드바에서 패드 연결 상태와 keyboard type 등록 값을 보고, 등록 명령을 복사할 수 있다.
+서버는 localhost 에서만 받고, 쓰기 요청에는 `X-DOIO-Studio` 헤더를 요구해 다른 웹 페이지가 매핑을 덮어쓰지 못하게 한다.
+
 매핑은 `doio-mapping.json` 의 `rules` 에 적는다. 규칙 하나는 입력 하나와 할 일 하나다.
 
 | 필드 | 뜻 |
