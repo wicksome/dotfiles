@@ -65,13 +65,17 @@ Hammerspoon 이 `http://localhost:17816/` 에 설정 페이지를 띄운다(`doi
 hs -c 'require("doio-studio").open()'
 ```
 
-| 탭 | 하는 일 | 연결 |
-| --- | --- | --- |
-| 펌웨어 키맵 | 레이어별 키맵 읽기·쓰기, 백업·복원, 키 눌림 보기 | USB 만 (VIA 프로토콜) |
-| 매크로 | M0~M15 편집, 패드 저장 공간(355 바이트) 표시 | USB 만 |
-| 앱별 매핑 | `doio-mapping.json` 편집. 저장하면 같은 검사(`mapping.validate`)를 거쳐 Hammerspoon 을 다시 읽는다 | USB·Bluetooth |
+메뉴는 「키맵」과 「매크로」 둘이다. 키맵 안의 「펌웨어」 탭이 바닥이고, 「앱별 매핑」 탭은 그 위에 덮는 Hammerspoon 규칙이다. 두 탭은 고른 칸을 함께 기억한다.
 
-사이드바에서 패드 연결 상태와 keyboard type 등록 값을 보고, 등록 명령을 복사할 수 있다.
+| 화면 | 하는 일 | 연결 |
+| --- | --- | --- |
+| 키맵 › 펌웨어 | 레이어별 키맵 읽기·쓰기, 백업·복원, 키 눌림 보기 | USB 만 (VIA 프로토콜) |
+| 매크로 | M0~M15 편집, 패드 저장 공간(355 바이트) 표시 | USB 만 |
+| 키맵 › 앱별 매핑 | `doio-mapping.json` 편집. 레이어는 구분하지 못하고 펌웨어 레이어 0 이 보내는 키를 덮는다. 저장하면 같은 검사(`mapping.validate`)를 거쳐 Hammerspoon 을 다시 읽는다 | USB·Bluetooth |
+
+사이드바에서 패드 연결 방식(USB·Bluetooth)을 본다. 「인식 정보」를 펼치면 최근 키를 보낸 기기의 87번 값과 keyboard type 이 나온다.
+Bluetooth 로 연결돼 있으면 패드 배터리(%)와 충전 이후 사용량도 보인다. 값은 `system_profiler` 에서 읽고, 바뀔 때마다 `~/Library/Caches/doio-battery.json` 에 기록한다(10분마다 확인).
+앱별 매핑 칸은 Hammerspoon 이 덮어쓴 동작이고, 규칙이 있는 칸 오른쪽 위에 원래 펌웨어 키가 나온다. 펌웨어 키맵 탭은 패드에 저장된 값만 보여준다.
 서버는 localhost 에서만 받고, 쓰기 요청에는 `X-DOIO-Studio` 헤더를 요구해 다른 웹 페이지가 매핑을 덮어쓰지 못하게 한다.
 
 매핑은 `doio-mapping.json` 의 `rules` 에 적는다. 규칙 하나는 입력 하나와 할 일 하나다.

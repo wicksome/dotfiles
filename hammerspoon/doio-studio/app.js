@@ -161,8 +161,12 @@ function cellHtml(cell, extraClass, positionLabel) {
   const labels = ruleLabels(rule, input);
   const classes = ["key", extraClass, rule?.block ? "blocked" : source];
   if (mappingState.selectedInput && inputId(mappingState.selectedInput) === inputId(input)) classes.push("selected");
-  return `<button class="${classes.join(" ")}" data-input="${escapeHtml(inputId(input))}" data-pos="${cell.pos.join(",")}">
-    <i class="pos">${positionLabel}</i><span class="main">${escapeHtml(labels.main)}</span><span class="sub">${escapeHtml(labels.sub)}</span></button>`;
+  const firmwareLabel = input.sends ? shortcutLabel([], input.sends) : MEDIA_LABELS[input.media];
+  // 규칙이 있으면 Hammerspoon 이 펌웨어 키를 덮어쓴 것이다. 오른쪽 위에 펌웨어 키를 남겨 둘을 구분한다.
+  const origin = rule ? `<i class="fw-origin" title="펌웨어가 보내는 키">펌웨어 ${escapeHtml(firmwareLabel)}</i>` : "";
+  const title = rule ? `펌웨어가 ${firmwareLabel} 를 보내면 Hammerspoon 이 「${labels.main}」 로 바꾼다` : `Hammerspoon 규칙 없음. 펌웨어 키 ${firmwareLabel} 가 그대로 간다`;
+  return `<button class="${classes.join(" ")}" data-input="${escapeHtml(inputId(input))}" data-pos="${cell.pos.join(",")}" title="${escapeHtml(title)}">
+    <i class="pos">${positionLabel}</i>${origin}<span class="main">${escapeHtml(labels.main)}</span><span class="sub">${escapeHtml(labels.sub)}</span></button>`;
 }
 
 function renderPad(container, cellRenderer) {
@@ -197,7 +201,7 @@ function renderMapping() {
   });
   const duplicates = Object.entries(bySentKey).filter(([, ids]) => ids.length > 1);
   const source = mappingState.server?.firmware ? "USB 로 마지막에 읽은 펌웨어 키맵" : "펌웨어 기본 키맵(아직 USB 로 읽지 않음)";
-  $("#mapping-hint").textContent = `칸은 ${source} 기준이다. 키를 눌러 아래에서 할 일을 고른다.` +
+  $("#mapping-hint").textContent = `펌웨어 레이어 0(${source}) 위에 덮는 동작이다. Hammerspoon 은 레이어를 구분하지 못하고 받은 키만 본다. 오른쪽 위 작은 글자가 원래 펌웨어 키다.` +
     (duplicates.length ? ` 같은 키를 보내는 자리가 있어 맥이 구분하지 못한다: ${duplicates.map(([key, ids]) => `${key}(${ids.join("·")})`).join(", ")}` : "");
 }
 
@@ -327,10 +331,10 @@ async function loadMapping() {
     const ruleApps = [...new Set(mappingState.rules.map((rule) => rule.app).filter(Boolean))];
     mappingState.apps = [...new Set([...ruleApps, ...mappingState.apps])];
     mappingState.saved = serializeRules();
-    setStatus("hs", true, "연결됨");
+    setStatus("hs", true, "활성화됨");
     renderMapping();
   } catch (error) {
-    setStatus("hs", false, "응답 없음");
+    setStatus("hs", false, "꺼짐");
   }
 }
 
@@ -386,6 +390,7 @@ function setupMappingEvents() {
     mappingState.selectedInput = type === "key"
       ? cellInput(ALL_CELLS.find((c) => c.id === name))
       : { media: name };
+    view.selectedPos = cell.dataset.pos.split(",").map(Number);
     renderMapping();
   });
   $("#mapping-editor").addEventListener("change", (event) => {
@@ -641,9 +646,9 @@ function renderFirmware() {
   const connected = Boolean(firmwareState.device);
   const noUsb = firmwareState.usbAttached === false;
   $("#tab-firmware").classList.toggle("disabled", noUsb && !connected);
-  $("#hid-connect").disabled = noUsb;
+  $("#hid-connect").hidden = noUsb;
   if (noUsb && !connected) {
-    setStatus("hid", false, "USB 아님");
+    setStatus("hid", false, "Bluetooth 는 안 됨");
     $("#fw-hint").textContent = "패드가 USB 로 연결돼 있지 않다. Bluetooth 연결에서는 펌웨어 키맵을 읽고 쓸 수 없다. ② 앱별 매핑은 그대로 쓸 수 있다.";
   }
   $("#layer-buttons").innerHTML = Array.from({ length: firmwareState.layers }, (_, i) =>
@@ -807,6 +812,7 @@ function setupFirmwareEvents() {
     const cell = event.target.closest("[data-pos]");
     if (!cell || !firmwareState.keymap.length) return;
     firmwareState.selectedPos = cell.dataset.pos.split(",").map(Number);
+    view.selectedPos = firmwareState.selectedPos;
     renderFirmware();
   });
   $("#firmware-picker").addEventListener("click", (event) => {
@@ -1043,21 +1049,73 @@ function setupMacroEvents() {
 }
 
 // ===========================================================================
-// 키보드 번호 (macOS keyboard type)
+// 패드 인식: 키를 보낸 기기(이벤트 87번 값)와 keyboard type
 // ===========================================================================
-let keyboardTypeCommand = "";
+function secondsAgo(seconds) {
+  if (seconds < 5) return "방금";
+  if (seconds < 60) return `${seconds}초 전`;
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}분 전`;
+  return `${Math.floor(seconds / 3600)}시간 전`;
+}
 
-async function loadKeyboardTypes() {
+function transportLabel(transport) {
+  if (!transport) return "알 수 없음";
+  if (transport.startsWith("Bluetooth")) return "Bluetooth";
+  return transport;
+}
+
+const TRANSPORT_ICONS = {
+  USB: `<svg viewBox="0 0 16 16" width="14" height="14" aria-label="USB"><path fill="currentColor" d="M8 1l2 3H9v6.2l2.5-1.5V7h-.8V5h2.6v2h-.8v2.3L9 11.3v1.2a1.5 1.5 0 1 1-2 0V9.8L4.5 8.3V6.9a1 1 0 1 1 1 0v.8L7 8.6V4H6z"/></svg>`,
+  Bluetooth: `<svg viewBox="0 0 16 16" width="14" height="14" aria-label="Bluetooth"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M4.5 5l7 6L8 14V2l3.5 3-7 6"/></svg>`,
+};
+
+function deviceHtml(device) {
+  const transport = transportLabel(device.transport);
+  const icon = TRANSPORT_ICONS[transport] || "";
+  const name = device.isPad ? "DOIO KB16B-02" : (device.name || "알 수 없는 기기");
+  return `
+    <div class="input-device ${device.isPad ? "pad-device" : ""} ${device.connected ? "" : "disconnected"}" title="기기가 알리는 이름: ${escapeHtml(device.name || "없음")} · 제조사 ${device.vendorID ?? "?"} / 제품 ${device.productID ?? "?"}">
+      <div class="status-row"><span class="transport-icon" title="${escapeHtml(transport)}">${icon || escapeHtml(transport)}</span><b>${escapeHtml(name)}</b><span>${device.isPad ? "패드" : "패드 아님"}</span></div>
+      <div class="input-device-meta"><code>${escapeHtml(device.id)}</code> · type ${device.keyboardType}${device.connected ? "" : " · 연결 끊김"}${device.method === "keyboard type" ? " · keyboard type 로 판단" : ""}</div>
+    </div>`;
+}
+
+async function loadInputDevices() {
   try {
-    const result = await (await fetch("/api/keyboard-type", { cache: "no-store" })).json();
-    const show = (which, value) => {
-      $(`#kt-${which}`).textContent = value === null ? "등록 안 됨" : String(value);
-      $(`#kt-${which}-dot`).className = `dot ${value === result.expected ? "ok" : "bad"}`;
-    };
-    show("usb", result.usb);
-    show("bt", result.bluetooth);
-    keyboardTypeCommand = result.fixCommand || "";
-    $("#kt-copy").hidden = !keyboardTypeCommand;
+    const result = await (await fetch("/api/input-devices", { cache: "no-store" })).json();
+    const seen = Array.isArray(result.seen) ? result.seen : [];
+    const connectedPads = result.connectedPads || [];
+    for (const [transport, prefix] of [["Bluetooth", "bt"], ["USB", "usb"]]) {
+      const on = connectedPads.includes(transport);
+      $(`#${prefix}-icon`).innerHTML = TRANSPORT_ICONS[transport];
+      $(`#${prefix}-icon`).classList.toggle("ok", on);
+      $(`#${prefix}-status`).textContent = on ? "연결됨" : "연결 안 됨";
+    }
+    $("#input-devices").innerHTML = seen.map(deviceHtml).join("");
+  } catch (error) { /* Hammerspoon 리로드 중 */ }
+}
+
+// 패드 배터리. Bluetooth 로 연결됐을 때만 값이 있다. 「썼다」는 마지막으로 오른 시점(충전) 이후 줄어든 양이다.
+function durationLabel(seconds) {
+  if (seconds < 3600) return `${Math.max(1, Math.round(seconds / 60))}분`;
+  if (seconds < 86400 * 2) return `${Math.round(seconds / 3600)}시간`;
+  return `${Math.round(seconds / 86400)}일`;
+}
+
+async function loadBattery() {
+  try {
+    const battery = await (await fetch("/api/battery", { cache: "no-store" })).json();
+    $("#battery").hidden = !(battery.connected && battery.level != null);
+    if ($("#battery").hidden) return;
+    const history = battery.history || [];
+    let chargedAt = history.length - 1;
+    while (chargedAt > 0 && history[chargedAt - 1].level >= history[chargedAt].level) chargedAt -= 1;
+    const peak = history[chargedAt];
+    const used = peak ? peak.level - battery.level : 0;
+    const color = battery.level <= 20 ? "var(--danger)" : battery.level <= 40 ? "var(--warn)" : "var(--ok)";
+    $("#battery").innerHTML = `
+      <div class="battery-bar"><span style="width:${battery.level}%;background:${color}"></span></div>
+      <span class="battery-text" title="${used > 0 ? `충전 후 ${durationLabel(battery.now - peak.time)} 동안 ${used}% 사용` : "아직 줄지 않음"}">${battery.level}%</span>`;
   } catch (error) { /* Hammerspoon 리로드 중 */ }
 }
 
@@ -1069,15 +1127,48 @@ function setStatus(which, ok, text) {
   $(`#${which}-status`).textContent = text;
 }
 
+// 메뉴: 키맵(펌웨어 | 앱별 매핑) · 매크로. 키맵 안의 두 탭은 같은 패드를 두 단계로 본다.
+const view = { tab: "keymap", sub: "firmware", selectedPos: null }; // selectedPos: 두 탭이 함께 기억하는 칸
+
+function showView() {
+  const panelId = view.tab === "keymap" ? `tab-${view.sub}` : `tab-${view.tab}`;
+  document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === view.tab));
+  document.querySelectorAll(".sub-tab").forEach((t) => t.classList.toggle("active", t.dataset.sub === view.sub));
+  $("#keymap-tabs").hidden = view.tab !== "keymap";
+  document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("hidden", panel.id !== panelId));
+}
+
+// 한 탭에서 고른 칸을 다른 탭에서도 고른다.
+function carrySelection() {
+  const cell = view.selectedPos && ALL_CELLS.find((c) => c.pos.join(",") === view.selectedPos.join(","));
+  if (!cell) return;
+  if (view.sub === "mapping") {
+    const input = cellInput(cell);
+    mappingState.selectedInput = input.fixed ? null : input;
+    if (mappingState.server) renderMapping();
+  } else if (firmwareState.keymap.length) {
+    firmwareState.selectedPos = cell.pos;
+    renderFirmware();
+  }
+}
+
 document.querySelectorAll(".tab").forEach((tab) => tab.addEventListener("click", () => {
-  document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === tab));
-  document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("hidden", panel.id !== `tab-${tab.dataset.tab}`));
+  view.tab = tab.dataset.tab;
+  showView();
 }));
+document.querySelectorAll(".sub-tab").forEach((tab) => tab.addEventListener("click", () => {
+  view.sub = tab.dataset.sub;
+  showView();
+  carrySelection();
+}));
+showView();
 
 // 테마 전환. 버튼에는 누르면 바뀔 모양을 쓴다. 고른 값은 이 브라우저에 기억한다.
 function renderThemeToggle() {
   const dark = document.documentElement.dataset.theme !== "light";
-  $("#theme-toggle").textContent = dark ? "☀ 밝게" : "☾ 어둡게";
+  $("#theme-toggle").textContent = dark ? "☀" : "☾";
+  $("#theme-toggle").title = dark ? "밝게" : "어둡게";
+  $("#theme-toggle").setAttribute("aria-label", $("#theme-toggle").title);
 }
 $("#theme-toggle").addEventListener("click", () => {
   const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
@@ -1091,12 +1182,10 @@ setupMappingEvents();
 setupFirmwareEvents();
 setupMacroEvents();
 renderMacros();
-loadKeyboardTypes();
-setInterval(loadKeyboardTypes, 5000);
-$("#kt-copy").addEventListener("click", async () => {
-  await navigator.clipboard.writeText(keyboardTypeCommand);
-  $("#kt-copy").textContent = "복사했다. 터미널에 붙여 넣고 패드를 다시 연결한다";
-});
+loadInputDevices();
+setInterval(loadInputDevices, 3000);
+loadBattery();
+setInterval(loadBattery, 30000);
 renderFirmware();
 pollUsb().then(() => autoConnectPad()).catch(showConnectError);
 setInterval(pollUsb, 2000);

@@ -19,23 +19,27 @@
         <div class="brand-sub">KB16B-02 매크로 패드</div>
       </div>
     </div>
-    <div class="nav-label">연결</div>
+    <div class="nav-label">패드</div>
     <section class="status">
-      <div class="status-row"><span class="dot" id="hs-dot"></span>Hammerspoon <span id="hs-status">확인 중</span></div>
-      <div class="status-row"><span class="dot" id="hid-dot"></span>패드 USB <span id="hid-status">연결 안 됨</span></div>
+      <div class="status-row"><span class="transport-icon" id="bt-icon"></span>Bluetooth <span id="bt-status">확인 중</span></div>
+      <div class="battery" id="battery" hidden></div>
+      <div class="status-row"><span class="transport-icon" id="usb-icon"></span>USB <span id="usb-status">확인 중</span></div>
+      <div class="status-row sub-row"><span class="dot" id="hid-dot"></span>펌웨어 편집 <span id="hid-status">연결 안 됨</span></div>
       <button id="hid-connect" class="btn primary connect">패드 연결</button>
+      <details class="kt-detail" id="device-detail">
+        <summary>인식 정보</summary>
+        <p class="muted">Hammerspoon 은 키를 보낸 기기(이벤트 87번 값)로 패드를 알아본다.</p>
+        <div id="input-devices" class="input-devices"></div>
+      </details>
     </section>
-    <section class="status keyboard-type">
-      <h3>키보드 번호 (keyboard type)</h3>
-      <p class="muted">Hammerspoon 은 이 번호가 41 인 입력만 패드로 본다. USB·Bluetooth 가 따로 등록된다.</p>
-      <div class="status-row"><span class="dot" id="kt-usb-dot"></span>USB <span id="kt-usb">확인 중</span></div>
-      <div class="status-row"><span class="dot" id="kt-bt-dot"></span>Bluetooth <span id="kt-bt">확인 중</span></div>
-      <button id="kt-copy" class="btn connect" hidden>등록 명령 복사 (터미널에서 sudo)</button>
+    <div class="nav-label">Hammerspoon</div>
+    <section class="status">
+      <div class="status-row"><span class="dot" id="hs-dot"></span>앱별 매핑 <span id="hs-status">확인 중</span></div>
     </section>
     <section class="help">
       <h3>두 층</h3>
-      <p><b>① 펌웨어 키맵</b>은 패드가 보내는 키 자체를 정한다. 패드 안에 저장되고 USB 로 연결했을 때만 읽고 쓸 수 있다.</p>
-      <p><b>② 앱별 매핑</b>은 패드가 보낸 키를 맥이 받아 앱마다 다른 일로 바꾼다. USB·Bluetooth 모두에서 동작한다. 저장하면 Hammerspoon 이 다시 읽는다.</p>
+      <p><b>① 펌웨어</b>: 바닥. 패드가 보내는 키를 레이어별로 정한다. 패드에 저장되고 USB 로만 고친다.</p>
+      <p><b>② 앱별 매핑</b>: 펌웨어 위에 덮는다(Hammerspoon). 레이어는 구분하지 못하고 받은 키를 앱마다 바꾼다. USB·Bluetooth 모두 동작한다.</p>
     </section>
   </aside>
 
@@ -43,12 +47,16 @@
     <header class="page-header">
       <h1>DOIO KB16B-02</h1>
       <nav class="view-tabs">
-        <button class="tab active" data-tab="firmware"><span class="nav-icon">①</span>펌웨어 키맵</button>
-        <button class="tab" data-tab="macro"><span class="nav-icon">M</span>매크로</button>
-        <button class="tab" data-tab="mapping"><span class="nav-icon">②</span>앱별 매핑</button>
+        <button class="tab active" data-tab="keymap">키맵</button>
+        <button class="tab" data-tab="macro">매크로</button>
       </nav>
       <button id="theme-toggle" class="btn theme-toggle"></button>
     </header>
+
+    <nav class="sub-tabs" id="keymap-tabs">
+      <button class="sub-tab active" data-sub="firmware"><span class="nav-icon">①</span>펌웨어</button>
+      <button class="sub-tab" data-sub="mapping"><span class="nav-icon">②</span>앱별 매핑</button>
+    </nav>
 
     <section id="tab-macro" class="panel hidden">
       <div class="toolbar">

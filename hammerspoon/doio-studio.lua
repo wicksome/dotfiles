@@ -3,6 +3,7 @@
 -- WebHID 는 Chrome·Edge 에서만 동작하므로 Chrome 으로 연다.
 local mapping = require "doio-mapping"
 local actions = require "doio-actions"
+local doio = require "doio"
 
 local studio = {}
 
@@ -152,26 +153,37 @@ local function padStatus()
     return json(200, { usb = usb })
 end
 
--- macOS 가 기기별로 기억하는 keyboard type. 키 = "PID-VID-0". doio.lua 는 41 인 입력만 패드로 본다.
-local KEYBOARD_TYPE_EXPECTED = 41
-local KEYBOARD_TYPE_IDS = { usb = "24672-65261-0", bluetooth = "61166-6421-0" }
-
-local function keyboardTypes()
-    local output = hs.execute("defaults read /Library/Preferences/com.apple.keyboardtype keyboardtype 2>/dev/null") or ""
-    local result = { expected = KEYBOARD_TYPE_EXPECTED }
-    local commands = {}
-    for which, id in pairs(KEYBOARD_TYPE_IDS) do
-        local value = tonumber(output:match('"' .. id:gsub("%-", "%%-") .. '"%s*=%s*(%d+)'))
-        result[which] = value
-        if value ~= KEYBOARD_TYPE_EXPECTED then
-            table.insert(commands, string.format('"%s" -int %d', id, KEYBOARD_TYPE_EXPECTED))
+-- 최근 키를 보낸 기기. doio.lua 는 키를 보낸 기기(이벤트 87번 값)로 패드를 알아보고,
+-- 그 값을 못 얻을 때만 keyboard type 41 로 판단한다. 기기마다 keyboard type 도 함께 보여준다.
+local function inputDevices()
+    -- 지금 연결된 HID 서비스. 다시 연결하면 ID 가 바뀌므로, 목록에 없는 기록은 끊긴 예전 기록이다.
+    -- 키를 누르기 전에도 패드 연결 방식을 보이려고 패드 서비스의 연결 방식도 모은다.
+    local connected, padTransports = {}, {}
+    local currentID, vendorID
+    for line in (hs.execute("/usr/sbin/ioreg -r -c IOHIDEventService -d1 -w0 -l") or ""):gmatch("[^\n]+") do
+        local id = line:match("<class [^,]+, id (0x%x+)")
+        if id then
+            currentID, vendorID = id, nil
+            connected[id] = true
+        end
+        vendorID = tonumber(line:match('"VendorID" = (%d+)')) or vendorID
+        local transport = line:match('"Transport" = "(.-)"')
+        if transport and (vendorID == 6421 or vendorID == 65261) then
+            padTransports[transport:find("Bluetooth") and "Bluetooth" or transport] = true
         end
     end
-    if #commands > 0 then
-        result.fixCommand = "sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "
-            .. table.concat(commands, " ")
+    local seen = {}
+    for _, sender in pairs(doio.seenSenders) do
+        sender.connected = connected[sender.id] == true
+        table.insert(seen, sender)
     end
-    return json(200, result)
+    table.sort(seen, function(a, b) return a.lastSeen > b.lastSeen end)
+    local pads = {}
+    for transport in pairs(padTransports) do
+        table.insert(pads, transport)
+    end
+    table.sort(pads)
+    return json(200, { seen = seen, connectedPads = pads })
 end
 
 -- 패드 배터리. Bluetooth 로 연결됐을 때만 macOS 가 알려준다(system_profiler, 약 0.15초).
@@ -239,8 +251,8 @@ local function handleRequest(method, path, headers, body)
         return putFirmware(headers, body)
     elseif route == "/api/battery" and method == "GET" then
         return padBattery()
-    elseif route == "/api/keyboard-type" and method == "GET" then
-        return keyboardTypes()
+    elseif route == "/api/input-devices" and method == "GET" then
+        return inputDevices()
     elseif route == "/api/pad" and method == "GET" then
         return padStatus()
     elseif route == "/api/apps" and method == "GET" then
