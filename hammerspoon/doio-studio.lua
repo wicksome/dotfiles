@@ -174,6 +174,58 @@ local function keyboardTypes()
     return json(200, result)
 end
 
+-- 패드 배터리. Bluetooth 로 연결됐을 때만 macOS 가 알려준다(system_profiler, 약 0.15초).
+-- 얼마나 썼는지 보려고 값이 바뀔 때마다 시각과 함께 기록한다. 기록은 이 맥에만 둔다(저장소 밖).
+local BATTERY_HISTORY_PATH = os.getenv("HOME") .. "/Library/Caches/doio-battery.json"
+local BATTERY_HISTORY_LIMIT = 500
+
+local function readPadBattery()
+    local output = hs.execute("/usr/sbin/system_profiler SPBluetoothDataType -json 2>/dev/null") or ""
+    local ok, data = pcall(hs.json.decode, output)
+    if not ok or type(data) ~= "table" then
+        return { connected = false }
+    end
+    for _, controller in ipairs(data.SPBluetoothDataType or {}) do
+        for _, device in ipairs(controller.device_connected or {}) do
+            for name, info in pairs(device) do
+                if name:find("DOIO") then
+                    return { connected = true, level = tonumber(tostring(info.device_batteryLevelMain or ""):match("(%d+)")) }
+                end
+            end
+        end
+    end
+    return { connected = false }
+end
+
+local function batteryHistory()
+    return (hs.fs.attributes(BATTERY_HISTORY_PATH) and hs.json.read(BATTERY_HISTORY_PATH)) or {}
+end
+
+local function recordBattery()
+    local battery = readPadBattery()
+    if battery.level then
+        local history = batteryHistory()
+        local last = history[#history]
+        if not last or last.level ~= battery.level then
+            table.insert(history, { time = os.time(), level = battery.level })
+            while #history > BATTERY_HISTORY_LIMIT do
+                table.remove(history, 1)
+            end
+            hs.json.write(history, BATTERY_HISTORY_PATH, false, true)
+        end
+    end
+    return battery
+end
+
+studio.batteryTimer = hs.timer.doEvery(600, recordBattery)
+
+local function padBattery()
+    local battery = recordBattery()
+    battery.history = batteryHistory()
+    battery.now = os.time()
+    return json(200, battery)
+end
+
 studio.server = hs.httpserver.new(false, false)
 studio.server:setInterface("localhost")
 studio.server:setPort(studio.port)
@@ -185,6 +237,8 @@ local function handleRequest(method, path, headers, body)
         return putMapping(headers, body)
     elseif route == "/api/firmware" and method == "PUT" then
         return putFirmware(headers, body)
+    elseif route == "/api/battery" and method == "GET" then
+        return padBattery()
     elseif route == "/api/keyboard-type" and method == "GET" then
         return keyboardTypes()
     elseif route == "/api/pad" and method == "GET" then
