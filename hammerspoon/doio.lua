@@ -14,17 +14,52 @@ local REMAPPED_EVENT_MARK = 0x444F494F
 local types = hs.eventtap.event.types
 local properties = hs.eventtap.event.properties
 
--- 패드 키 이름 → 기본 키맵이 보내는 keycode
--- 배치(왼쪽 위부터 행 순서): 1 2 3 4 / 5 6 7 8 / 9 0 up return / (레이어 키) left down right
--- 왼쪽 아래 레이어 키는 펌웨어가 처리해 맥으로 키 이벤트를 보내지 않는다.
-local padKeyCodes = {
-    ["1"] = 18, ["2"] = 19, ["3"] = 20, ["4"] = 21,
-    ["5"] = 23, ["6"] = 22, ["7"] = 26, ["8"] = 28,
-    ["9"] = 25, ["0"] = 29, ["up"] = 126, ["return"] = 36,
-    ["left"] = 123, ["down"] = 125, ["right"] = 124,
-    -- 오른쪽 작은 노브 회전. 나머지 노브(곡 넘김·볼륨)는 미디어 이벤트라 keyboard type 이 0 이어서 구분할 수 없다.
-    ["knobLeft"] = 116, ["knobRight"] = 121,
+-- 패드 자리 이름. 왼쪽 위부터 행 순서: 1 2 3 4 / 5 6 7 8 / 9 0 up return / bottomLeft left down right
+-- 노브는 자리마다 이름이 있다. knobLeft·knobRight 는 오른쪽 작은 노브 회전이다(예전 이름 유지).
+-- 이름은 물리 자리를 가리킨다. 그 자리가 어떤 키를 보내는지는 펌웨어 키맵이 정한다.
+local PAD_INPUTS = {
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "up", "return",
+    "bottomLeft", "left", "down", "right",
+    "leftKnobLeft", "leftKnobPress", "leftKnobRight",
+    "bigKnobLeft", "bigKnobPress", "bigKnobRight",
+    "knobLeft", "rightKnobPress", "knobRight",
 }
+
+-- 펌웨어 기본 키맵에서 자리마다 보내는 일반 키(hs.keycodes 이름).
+-- 레이어 키(bottomLeft = MO3, rightKnobPress = TO)와 미디어 키(나머지 노브)는 맥에 일반 키 이벤트가 오지 않아 빠진다.
+local DEFAULT_PAD_KEYS = {
+    ["1"] = "1", ["2"] = "2", ["3"] = "3", ["4"] = "4",
+    ["5"] = "5", ["6"] = "6", ["7"] = "7", ["8"] = "8",
+    ["9"] = "9", ["0"] = "0", ["up"] = "up", ["return"] = "return",
+    ["left"] = "left", ["down"] = "down", ["right"] = "right",
+    ["knobLeft"] = "pageup", ["knobRight"] = "pagedown",
+}
+
+-- doio-firmware.json: 설정 페이지가 USB 로 펌웨어 키맵을 읽을 때마다 저장한다.
+-- inputs[자리] = { key = hs.keycodes 이름 } 이면 그 자리는 그 키를 보낸다. key 가 없으면 일반 키를 보내지 않는다.
+-- 파일이 없으면(아직 USB 로 읽은 적 없음) 펌웨어 기본 키맵을 쓴다.
+local FIRMWARE_PATH = hs.configdir .. "/doio-firmware.json"
+
+local function loadPadKeys()
+    local firmware = hs.fs.attributes(FIRMWARE_PATH) and hs.json.read(FIRMWARE_PATH)
+    if not (firmware and firmware.inputs) then
+        return DEFAULT_PAD_KEYS
+    end
+    local keys = {}
+    for name, input in pairs(firmware.inputs) do
+        keys[name] = input.key
+    end
+    return keys
+end
+
+-- 패드 자리 이름 → 그 자리가 보내는 keycode. 일반 키를 보내지 않는 자리는 빠진다.
+local padKeyCodes = {}
+for name, keyName in pairs(loadPadKeys()) do
+    local keyCode = hs.keycodes.map[keyName]
+    if keyCode then
+        padKeyCodes[name] = keyCode
+    end
+end
 
 -- keycode → 등록 순서대로의 handler 목록. 조건이 맞는 첫 handler 가 처리한다.
 -- handler = { app = bundleID | nil, shortcut = string, description = string,
@@ -138,7 +173,11 @@ end)
 
 local function register(name, handler)
     local keyCode = padKeyCodes[name]
-    assert(keyCode, "unknown DOIO key: " .. tostring(name))
+    if not keyCode then
+        -- 펌웨어에서 이 자리를 레이어 키·미디어 키로 바꾸면 맥에 일반 키가 오지 않는다. 규칙은 남겨 두고 건너뛴다.
+        print("doio: " .. tostring(name) .. " 자리는 지금 펌웨어에서 일반 키를 보내지 않아 규칙을 건너뛴다")
+        return
+    end
     -- 앱 조건이 있는 handler 를 앞에 두어 전체 적용 handler 보다 먼저 고른다.
     handlers[keyCode] = handlers[keyCode] or {}
     if handler.app then
@@ -276,6 +315,17 @@ function doio.describe(bundleID)
 end
 
 doio.frontmostApplication = frontmostApplication
+
+-- 패드 자리 이름인지 돌려준다. doio-mapping.lua 가 규칙을 검사할 때 쓴다.
+-- 지금 펌웨어에서 일반 키를 보내는지와는 상관없다. 펌웨어를 바꿔도 규칙 파일이 오류가 되지 않게 한다.
+function doio.isPadKey(name)
+    for _, input in ipairs(PAD_INPUTS) do
+        if input == name then
+            return true
+        end
+    end
+    return false
+end
 
 doio.tap:start()
 doio.mediaTap:start()

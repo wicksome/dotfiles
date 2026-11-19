@@ -42,20 +42,24 @@
 
 ## DOIO KB16B-02 매크로 패드
 
-`doio.lua` 가 패드 입력만 가로채 동작이나 다른 키로 바꾼다. 패드 키맵은 바꾸지 않는다.
+`doio.lua` 가 패드 입력만 가로채 동작이나 다른 키로 바꾼다.
 macOS 가 키 이벤트에 붙이는 keyboard type 으로 다른 키보드와 패드를 구분한다.
 패드의 기본값 40 은 HHKB 같은 외장 키보드와 겹치므로, 맥마다 한 번 패드만 41(ISO)로 등록한다.
+번호는 연결 방식마다 따로 저장되므로 Bluetooth(`61166-6421-0`)와 USB(`24672-65261-0`)를 둘 다 등록한다.
 패드에는 ISO 와 ANSI 가 다른 키가 없어 입력은 바뀌지 않는다. 등록 후 패드를 다시 연결한다.
 
 ```zsh
-sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 41
+sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 41 "24672-65261-0" -int 41
 ```
+
+패드의 어느 자리가 어떤 키를 보내는지는 펌웨어 키맵이 정한다. `doio-firmware.json` 은 그 키맵을 자리별로 옮겨 적은 파일이고, `doio.lua` 는 이 파일로 패드 자리를 알아본다.
+DOIO Studio 가 USB 로 키맵을 읽거나 쓸 때마다 갱신한다. 파일이 없으면 펌웨어 기본 키맵으로 본다.
 
 매핑은 `doio-mapping.json` 의 `rules` 에 적는다. 규칙 하나는 입력 하나와 할 일 하나다.
 
 | 필드 | 뜻 |
 | --- | --- |
-| `key` / `media` | 패드 키 이름 / 미디어 키 이름 (`PLAY`, `NEXT`, `PREVIOUS`, `MUTE`, `SOUND_UP`, `SOUND_DOWN`) |
+| `key` / `media` | 패드 자리 이름 (아래 표) / 미디어 키 이름 (`PLAY`, `NEXT`, `PREVIOUS`, `MUTE`, `SOUND_UP`, `SOUND_DOWN`) |
 | `app` | 이 번들 ID 앱이 앞에 있을 때만 적용한다. 없으면 모든 앱 |
 | `block` | `true` 면 아무 동작도 하지 않게 막는다 |
 | `send` | 다른 키로 바꾼다. `{ "key": "a", "mods": ["cmd"] }` (macOS 는 F20 까지만 있다) |
@@ -65,12 +69,23 @@ sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -di
 `block`·`send`·`action` 중 정확히 하나만 쓴다. 잘못 적으면 Hammerspoon 콘솔에 규칙 번호와 함께 오류가 난다.
 Lua 에서 직접 연결하려면 `doio.bind`·`doio.remap` 을 쓴다.
 
+| 자리 | 이름 |
+| --- | --- |
+| 키 16개 (왼쪽 위부터 행 순서) | `1` `2` `3` `4` / `5` `6` `7` `8` / `9` `0` `up` `return` / `bottomLeft` `left` `down` `right` |
+| 왼쪽 작은 노브 ↺ · 누름 · ↻ | `leftKnobLeft` `leftKnobPress` `leftKnobRight` |
+| 큰 노브 ↺ · 누름 · ↻ | `bigKnobLeft` `bigKnobPress` `bigKnobRight` |
+| 오른쪽 작은 노브 ↺ · 누름 · ↻ | `knobLeft` `rightKnobPress` `knobRight` |
+
+`key` 규칙은 그 자리가 펌웨어에서 일반 키를 보낼 때만 동작한다. 기본 키맵에서는 아래와 같다.
+
 | 패드 입력 | 바꿀 수 있나 |
 | --- | --- |
 | 키 15개 (`1`~`0`, `up`, `return`, `left`, `down`, `right`) | O |
 | 오른쪽 작은 노브 회전 (`knobLeft`, `knobRight`) | O |
-| 왼쪽 아래 `MO` 키, 오른쪽 작은 노브 누름 | X. 펌웨어 레이어 키라 맥으로 이벤트를 보내지 않는다 |
-| 왼쪽 작은 노브(곡 넘김), 큰 노브(볼륨) | X. 미디어 이벤트는 keyboard type 이 0 이라 노트북 키와 구분할 수 없다 |
+| 왼쪽 아래 `bottomLeft`(MO3), 오른쪽 작은 노브 누름 | X. 펌웨어 레이어 키라 맥으로 이벤트를 보내지 않는다 |
+| 왼쪽 작은 노브(곡 넘김), 큰 노브(볼륨) | X. 미디어 이벤트는 keyboard type 이 0 이라 노트북 키와 구분할 수 없다. `media` 규칙을 쓴다 |
+
+펌웨어에서 자리를 레이어·미디어·매크로 키로 바꾸면 그 자리의 `key` 규칙은 건너뛰고 콘솔에 남긴다. 반대로 일반 키로 바꾸면 규칙이 동작한다.
 
 `doio.remapMedia` 로 미디어 키도 바꿀 수 있다. 노트북 미디어 키와 구분되지 않아서 `app` 조건을 반드시 건다.
 

@@ -1,0 +1,29 @@
+{
+  "inputs": {
+    "1": { "key": "1", "code": "0x001E" },
+    "2": { "key": "2", "code": "0x001F" },
+    "3": { "key": "3", "code": "0x0020" },
+    "4": { "key": "4", "code": "0x0021" },
+    "5": { "key": "5", "code": "0x0022" },
+    "6": { "key": "6", "code": "0x0023" },
+    "7": { "key": "7", "code": "0x0024" },
+    "8": { "key": "8", "code": "0x0025" },
+    "9": { "key": "9", "code": "0x0026" },
+    "0": { "key": "0", "code": "0x0027" },
+    "up": { "key": "up", "code": "0x0052" },
+    "return": { "key": "return", "code": "0x0028" },
+    "bottomLeft": { "key": "space", "code": "0x002C" },
+    "left": { "key": "left", "code": "0x0050" },
+    "down": { "key": "down", "code": "0x0051" },
+    "right": { "key": "right", "code": "0x004F" },
+    "leftKnobLeft": { "media": "PREVIOUS", "code": "0x00AC" },
+    "leftKnobPress": { "media": "PLAY", "code": "0x00AE" },
+    "leftKnobRight": { "media": "NEXT", "code": "0x00AB" },
+    "bigKnobLeft": { "media": "SOUND_DOWN", "code": "0x00AA" },
+    "bigKnobPress": { "media": "MUTE", "code": "0x00A8" },
+    "bigKnobRight": { "media": "SOUND_UP", "code": "0x00A9" },
+    "knobLeft": { "key": "pageup", "code": "0x004B" },
+    "rightKnobPress": { "code": "0x5011" },
+    "knobRight": { "key": "pagedown", "code": "0x004E" }
+  }
+}
