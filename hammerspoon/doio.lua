@@ -1,13 +1,16 @@
 -- DOIO KB16B-02 매크로 패드 입력을 가로채 동작이나 다른 키로 바꾼다.
--- 패드는 기본 키맵(숫자·방향키·Enter)을 그대로 보내므로, macOS 가 키 이벤트에 붙이는
--- keyboard type 값으로 다른 키보드와 패드를 구분한다.
--- keyboard type 은 기기 고유 ID 가 아니다. 패드는 기본 40 이라 HHKB 같은 외장 키보드(40)와 겹친다.
--- 그래서 패드만 41(ISO)로 등록해 쓴다(README 의 설정 명령). 패드에는 ISO 와 ANSI 가 다른 키가 없다.
+-- 패드는 숫자·방향키 같은 보통 키를 보내므로, 키 이벤트를 보낸 기기로 다른 키보드와 패드를 구분한다.
+-- 키 이벤트의 87번 값은 그 키를 보낸 HID 서비스의 IORegistry ID 다(공개 문서에는 없는 값).
+-- 이 ID 를 ioreg 로 찾아 제조사·제품 ID 가 패드면 패드 입력으로 본다. ID 는 다시 연결할 때마다 바뀐다.
+-- 87번 값이 없거나 찾지 못하면 keyboard type 41 로 판단한다(예전 방식. README 의 등록 명령).
 -- 패드 사용법(B/R 버튼, 유선 전환, VIA json, BT 1대 제한):
 -- https://blog.naver.com/cotton_mellow_s2/223348486592
 local doio = {}
 
-local DOIO_KEYBOARD_TYPE = 41
+local FALLBACK_KEYBOARD_TYPE = 41
+local EVENT_SENDER_FIELD = 87
+-- "제조사 ID:제품 ID" → 연결 방식
+local PAD_DEVICES = { ["6421:61166"] = "Bluetooth", ["65261:24672"] = "USB" }
 -- 이 모듈이 다시 보낸 키 이벤트 표시. 다시 가로채지 않게 한다.
 local REMAPPED_EVENT_MARK = 0x444F494F
 
@@ -102,10 +105,76 @@ local function postKey(mods, keyName, isDown)
     event:post()
 end
 
-local function isFromPad(event)
-    return event:getProperty(properties.keyboardEventKeyboardType) == DOIO_KEYBOARD_TYPE
-        and event:getProperty(properties.eventSourceUserData) ~= REMAPPED_EVENT_MARK
+-- IORegistry ID → { id, name, vendorID, productID, transport, isPad }
+local senders = {}
+
+local function scanSenders()
+    local output = hs.execute("/usr/sbin/ioreg -r -c IOHIDEventService -d1 -w0 -l") or ""
+    local current
+    for line in output:gmatch("[^\n]+") do
+        local id = line:match("<class [^,]+, id (0x%x+)")
+        if id then
+            current = { id = id }
+            senders[tonumber(id)] = current
+        elseif current then
+            local key, value = line:match('"(%w+)" = (.+)$')
+            if key == "VendorID" or key == "ProductID" then
+                current[key == "VendorID" and "vendorID" or "productID"] = tonumber(value)
+            elseif key == "Product" or key == "Transport" then
+                current[key == "Product" and "name" or "transport"] = value:match('^"(.*)"$')
+            end
+        end
+    end
+    for _, sender in pairs(senders) do
+        sender.isPad = PAD_DEVICES[tostring(sender.vendorID) .. ":" .. tostring(sender.productID)] ~= nil
+    end
 end
+
+-- 처음 보는 ID 일 때만 ioreg 를 다시 읽는다(약 60ms). 찾지 못한 ID 도 기억해 다시 읽지 않는다.
+local function senderOf(senderID)
+    if senderID == 0 then
+        return nil
+    end
+    if not senders[senderID] then
+        scanSenders()
+        senders[senderID] = senders[senderID] or { id = string.format("0x%x", senderID) }
+    end
+    return senders[senderID]
+end
+
+-- 설정 페이지에 보여줄, 키를 보낸 기기 기록. IORegistry ID → 기기 정보 + 마지막 입력
+doio.seenSenders = {}
+
+local function isFromPad(event)
+    if event:getProperty(properties.eventSourceUserData) == REMAPPED_EVENT_MARK then
+        return false
+    end
+    local senderID = event:getProperty(EVENT_SENDER_FIELD)
+    local keyboardType = event:getProperty(properties.keyboardEventKeyboardType)
+    local sender = senderOf(senderID)
+    local fromPad, method
+    if sender and sender.vendorID then
+        fromPad, method = sender.isPad, "기기"
+    else
+        fromPad, method = keyboardType == FALLBACK_KEYBOARD_TYPE, "keyboard type"
+    end
+    if event:getType() == types.keyDown then
+        local seen = doio.seenSenders[senderID] or {}
+        doio.seenSenders[senderID] = seen
+        seen.id = sender and sender.id or string.format("0x%x", senderID)
+        seen.name = sender and sender.name
+        seen.transport = sender and sender.transport
+        seen.vendorID = sender and sender.vendorID
+        seen.productID = sender and sender.productID
+        seen.keyboardType = keyboardType
+        seen.isPad = fromPad
+        seen.method = method
+        seen.lastSeen = os.time()
+    end
+    return fromPad
+end
+
+scanSenders()
 
 -- 앞에 있는 앱. 포커스 창의 앱을 먼저 본다.
 -- Claude Code 는 버전 이름(예: 2.1.316)의 번들 없는 프로세스로 앞 앱 자리를 가져갈 때가 있어,

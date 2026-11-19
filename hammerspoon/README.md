@@ -43,13 +43,15 @@
 ## DOIO KB16B-02 매크로 패드
 
 `doio.lua` 가 패드 입력만 가로채 동작이나 다른 키로 바꾼다.
-macOS 가 키 이벤트에 붙이는 keyboard type 으로 다른 키보드와 패드를 구분한다.
-패드의 기본값 40 은 HHKB 같은 외장 키보드와 겹치므로, 맥마다 한 번 패드만 41(ISO)로 등록한다.
-번호는 연결 방식마다 따로 저장되므로 Bluetooth(`61166-6421-0`)와 USB(`24672-65261-0`)를 둘 다 등록한다.
-패드에는 ISO 와 ANSI 가 다른 키가 없어 입력은 바뀌지 않는다. 등록 후 패드를 다시 연결한다.
+키 이벤트를 보낸 기기로 다른 키보드와 패드를 구분한다. 키 이벤트의 87번 값은 그 키를 보낸 HID 서비스의 IORegistry ID 다(Apple 공개 문서에는 없는 값).
+`doio.lua` 는 처음 보는 ID 를 `ioreg` 로 한 번 찾아, 제조사·제품 ID 가 패드(Bluetooth 6421/61166, USB 65261/24672)면 패드 입력으로 본다.
+ID 는 다시 연결할 때마다 바뀌므로 고정값으로 적지 않는다. DOIO Studio 사이드바 「인식 정보」에 최근 키를 보낸 기기와 ID 가 나온다.
+
+87번 값을 못 얻으면 예전 방식대로 keyboard type 41 을 패드로 본다. 그래서 keyboard type 은 등록하지 않아도 된다(기본값 40).
+예전에 패드를 41 로 등록했다면 아래 명령으로 기본값 40 으로 되돌릴 수 있다. 되돌린 뒤 패드를 다시 연결한다.
 
 ```zsh
-sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 41 "24672-65261-0" -int 41
+sudo defaults write /Library/Preferences/com.apple.keyboardtype keyboardtype -dict-add "61166-6421-0" -int 40 "24672-65261-0" -int 40
 ```
 
 패드의 어느 자리가 어떤 키를 보내는지는 펌웨어 키맵이 정한다. `doio-firmware.json` 은 그 키맵을 자리별로 옮겨 적은 파일이고, `doio.lua` 는 이 파일로 패드 자리를 알아본다.
