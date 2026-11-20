@@ -91,6 +91,7 @@ local function putMapping(headers, body)
     if #problems > 0 then
         return json(400, { problems = problems })
     end
+    hs.fs.mkdir((mapping.path:match("^(.*)/[^/]+$")))
     local file = assert(io.open(mapping.path, "w"))
     file:write(body)
     file:close()

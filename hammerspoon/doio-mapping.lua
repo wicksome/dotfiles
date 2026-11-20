@@ -1,4 +1,5 @@
 -- doio-mapping.json 의 규칙을 읽어 DOIO 패드에 연결한다.
+-- 매핑은 개인 설정이라 이 공개 레포에 두지 않는다. 비공개 dotfiles 가 ~/.config/doio/doio-mapping.json 으로 링크한다.
 -- 규칙 하나 = 입력(key 또는 media) + 적용 앱(app, 없으면 모든 앱) + 할 일(block / send / action 중 하나).
 -- 같은 입력에 앱 규칙과 모든 앱 규칙이 함께 있으면 앱 규칙이 우선한다(doio.lua 의 register 순서).
 local doio = require "doio"
@@ -6,7 +7,7 @@ local actions = require "doio-actions"
 
 local mapping = {}
 
-mapping.path = hs.configdir .. "/doio-mapping.json"
+mapping.path = os.getenv("HOME") .. "/.config/doio/doio-mapping.json"
 
 mapping.mediaKeys = { "PLAY", "NEXT", "PREVIOUS", "MUTE", "SOUND_UP", "SOUND_DOWN" }
 mapping.mods = { "cmd", "alt", "shift", "ctrl" }
@@ -106,7 +107,11 @@ local function apply(rule)
     end
 end
 
+-- 파일이 없으면(비공개 설정이 없는 맥) 규칙 없이 시작한다. DOIO Studio 에서 저장하면 만들어진다.
 function mapping.read()
+    if not hs.fs.attributes(mapping.path) then
+        return { rules = {} }
+    end
     return hs.json.read(mapping.path)
 end
 
