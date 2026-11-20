@@ -7,5 +7,6 @@ require "mouse"
 doio = require "doio"
 require "doio-mapping"
 require "doio-studio"
+require "menubar"
 
 hs.alert("Hammerspoon config loaded")

@@ -2,6 +2,17 @@
 
 `install.sh`가 `~/.hammerspoon`으로 심링크한다.
 
+## 메뉴바 개인화 메뉴
+
+메뉴바의 망치+✦ 아이콘은 이 설정이 더한 개인화 메뉴다 (`menubar.lua`). 기본 아이콘(망치)에 ✦ 를 얹어 구분한다. Hammerspoon 기본 메뉴는 항목을 더할 수 없어 아이콘을 따로 둔다. 설정 다시 읽기와 콘솔은 기본 메뉴에서 쓴다.
+
+| 항목 | 하는 일 |
+| --- | --- |
+| 단축키 보기 | 지금 불러온 설정의 키보드·마우스·DOIO 패드 단축키를 창 하나로 보여준다. Esc 로 닫는다 (`shortcuts.lua`) |
+| DOIO Studio 열기 | 설정 페이지를 Chrome 으로 연다 |
+
+단축키 보기 창은 `keymap.lua` 에 등록된 목록과 `doio-mapping.json` 을 읽어 그린다. 새 단축키는 `hs.hotkey.bind` 대신 `keymap.bind(섹션, 수정키, 키, 설명, 함수)` 로 묶는다. `hs.hotkey.bind` 로 직접 묶은 키는 창의 「설명 없는 단축키」에 나온다.
+
 ## Launch Apps
 
 <kbd>⌘</kbd> + <kbd>⇧</kbd> + <kbd>⌃</kbd> + key: 앱 실행, 이미 앞에 있으면 숨기기
