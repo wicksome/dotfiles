@@ -16,6 +16,8 @@
   --accent-soft: rgba(94, 106, 210, 0.16);
   --global: #4ea7fc;
   --global-soft: rgba(78, 167, 252, 0.12);
+  --app: #9ccc4a;
+  --app-soft: rgba(156, 204, 74, 0.16);
   --danger: #eb5757;
   --ok: #4cb782;
   --warn: #f2c94c;
@@ -44,6 +46,8 @@
   --accent-soft: rgba(94, 106, 210, 0.12);
   --global: #1e7fd9;
   --global-soft: rgba(30, 127, 217, 0.10);
+  --app: #5a8f12;
+  --app-soft: rgba(110, 170, 30, 0.14);
   --danger: #d23f3f;
   --ok: #2f9a66;
   --warn: #b8860b;
@@ -207,7 +211,7 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .key .pos { position: absolute; top: 4px; left: 6px; font-size: 10px; color: var(--faint); font-style: normal; }
 .key .main { font-family: var(--mono); font-size: 13px; font-weight: 600; line-height: 1.2; word-break: break-all; }
 .key .sub { font-size: 10.5px; color: var(--muted); line-height: 1.25; margin-top: 2px; }
-.key.app { border-color: var(--accent); background: var(--accent-soft); }
+.key.app { border-color: var(--app); background: var(--app-soft); }
 .key.global { border-color: rgba(78, 167, 252, 0.55); background: var(--global-soft); }
 .key.none .main { color: var(--muted); font-weight: 500; }
 .key.blocked { background: var(--danger-soft); border-color: var(--danger-line); }
@@ -229,7 +233,7 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 
 .legend { display: flex; gap: 14px; margin: 10px 0 0; color: var(--muted); font-size: 11px; flex-wrap: wrap; }
 .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--line-strong); }
-.sw.app { background: var(--accent-soft); border-color: var(--accent); }
+.sw.app { background: var(--app-soft); border-color: var(--app); }
 .sw.global { background: var(--global-soft); border-color: var(--global); }
 .sw.none { background: var(--raised); }
 .sw.blocked { background: var(--danger-soft); border-color: var(--danger-line); }
