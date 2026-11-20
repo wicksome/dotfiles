@@ -17,6 +17,14 @@ local STATIC_TYPES = { html = "text/html; charset=utf-8", js = "text/javascript;
 -- 사용자 정의 헤더가 붙은 교차 출처 요청은 브라우저가 사전 요청(preflight)을 보내고, 이 서버는 허용하지 않는다.
 local WRITE_HEADER = "X-DOIO-Studio"
 
+-- 이 설정을 읽은 시각. 페이지는 저장 뒤 이 값이 바뀌어야 Hammerspoon 이 정말 다시 읽었다고 본다.
+studio.loadedAt = hs.timer.secondsSinceEpoch()
+
+-- 응답을 보낸 뒤 리로드한다. 타이머를 변수에 잡아 두지 않으면 실행 전에 메모리에서 치워져 리로드가 빠진다(실측).
+local function scheduleReload()
+    studio.reloadTimer = hs.timer.doAfter(0.3, hs.reload)
+end
+
 local function respond(code, body, contentType)
     return body, code, { ["Content-Type"] = contentType or "application/json; charset=utf-8", ["Cache-Control"] = "no-store" }
 end
@@ -75,6 +83,7 @@ local function getMapping()
         mediaKeys = mapping.mediaKeys,
         mods = mapping.mods,
         appNames = appNames(data),
+        loadedAt = studio.loadedAt,
     })
 end
 
@@ -96,7 +105,7 @@ local function putMapping(headers, body)
     file:write(body)
     file:close()
     -- 응답을 보낸 뒤 리로드한다. 리로드하면 이 서버도 다시 뜬다.
-    hs.timer.doAfter(0.3, hs.reload)
+    scheduleReload()
     return json(200, { saved = #data.rules })
 end
 
@@ -116,7 +125,7 @@ local function putFirmware(headers, body)
     local file = assert(io.open(FIRMWARE_PATH, "w"))
     file:write(body)
     file:close()
-    hs.timer.doAfter(0.3, hs.reload)
+    scheduleReload()
     return json(200, { changed = true })
 end
 

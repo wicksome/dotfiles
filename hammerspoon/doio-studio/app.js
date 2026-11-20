@@ -362,8 +362,13 @@ async function saveMapping() {
   problems.textContent = `저장했다 (규칙 ${result.saved}개). Hammerspoon 이 다시 읽는 중…`;
   // 리로드하는 동안 서버가 잠깐 내려간다. 다시 응답하면 새로 읽는다.
   setStatus("hs", false, "다시 읽는 중");
-  await waitForHammerspoon();
+  const reloaded = await waitForHammerspoon();
   await loadMapping();
+  if (!reloaded) {
+    problems.className = "problems";
+    problems.textContent = `파일에는 저장했지만 Hammerspoon 이 다시 읽지 않았다. 메뉴바 Hammerspoon › Reload Config 를 누른다.`;
+    return;
+  }
   problems.textContent = `저장했고 Hammerspoon 이 새 매핑을 읽었다 (규칙 ${result.saved}개).`;
 }
 
@@ -555,12 +560,16 @@ async function syncFirmwareSnapshot() {
 
 // Hammerspoon 이 리로드하는 동안 서버가 잠깐 내려간다. 다시 응답할 때까지 기다린다.
 async function waitForHammerspoon() {
+  // 저장 전 읽은 시각과 달라져야 다시 읽은 것이다. 서버가 응답만 하는 것으로는 부족하다(리로드가 빠진 적이 있다).
+  const before = mappingState.server?.loadedAt;
   for (let attempt = 0; attempt < 20; attempt++) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     try {
-      if ((await fetch("/api/mapping", { cache: "no-store" })).ok) return;
+      const response = await fetch("/api/mapping", { cache: "no-store" });
+      if (response.ok && (await response.json()).loadedAt !== before) return true;
     } catch (error) { /* 아직 리로드 중 */ }
   }
+  return false;
 }
 
 // 장치를 열고 프로토콜·레이어 수·키맵을 읽는다. 버튼(권한 요청)과 자동 연결이 함께 쓴다.
