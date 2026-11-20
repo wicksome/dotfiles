@@ -284,6 +284,8 @@ function doio.bind(name, action, options)
         description = options.description or "",
         down = action,
         up = options.up,
+        -- 이 앱이 앞에 있으면 배치 보기에 「← 이전 앱」으로 보인다(openApp 의 돌아가기)
+        returnsFrom = options.returnsFrom,
     })
 end
 
@@ -384,6 +386,9 @@ function doio.describe(bundleID)
             if handler.app == nil or handler.app == bundleID then
                 result.keys[name] = { shortcut = handler.shortcut, description = handler.description,
                                       appSpecific = handler.app ~= nil, blocked = handler.blocked }
+                if handler.returnsFrom and handler.returnsFrom == bundleID then
+                    result.keys[name].shortcut, result.keys[name].description = "←", "이전 앱으로"
+                end
                 break
             end
         end

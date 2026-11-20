@@ -147,6 +147,10 @@ function ruleLabels(rule, input) {
   if (!rule) return { main: input.sends ? shortcutLabel([], input.sends) : MEDIA_LABELS[input.media], sub: "" };
   if (rule.block) return { main: "✕", sub: "막음" };
   if (rule.send) return { main: rule.shortcut || shortcutLabel(rule.send.mods, rule.send.key), sub: rule.description || "" };
+  // 앱 열기는 그 앱에서 다시 누르면 이전 앱으로 돌아간다. 그 앱을 고른 화면에서는 그렇게 보인다.
+  if (rule.action === "openApp" && mappingState.selectedApp && rule.params?.bundleID === mappingState.selectedApp) {
+    return { main: "←", sub: "이전 앱으로" };
+  }
   const action = mappingState.server.actions[rule.action];
   return { main: rule.shortcut || action?.label || rule.action, sub: rule.description || "" };
 }

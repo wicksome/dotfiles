@@ -95,6 +95,7 @@ local function apply(rule)
             doio.remap(rule.key, rule.send.key, options)
         else
             options.up = up
+            options.returnsFrom = rule.action == "openApp" and rule.params.bundleID or nil
             doio.bind(rule.key, down, options)
         end
     elseif rule.block then

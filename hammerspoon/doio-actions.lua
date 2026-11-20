@@ -8,14 +8,31 @@ local actions = {}
 
 -- 앱이 켜져 있으면 그 창을 앞으로 가져오고, 꺼져 있으면 실행한다.
 -- 앱이 켜져 있었는지에 따라 「이동」과 「실행」을 알림으로 구분해 보여준다.
+-- 앱 열기. 이 키로 넘어온 뒤 그 앱에서 다시 누르면 넘어오기 전 창으로 돌아간다.
+-- 키마다 돌아갈 창을 하나 기억한다. 다른 방법(⌘⇥, 클릭)으로 앱을 옮겨도 기억은 남는다.
+local returnWindows = {}
+
 actions.openApp = {
-    label = "앱 열기",
+    label = "앱 열기 (다시 누르면 돌아가기)",
     params = { bundleID = "string", name = "string" },
     make = function(params)
         return function()
+            local window = hs.window.focusedWindow()
+            local frontApp = window and window:application() or hs.application.frontmostApplication()
+            local frontBundleID = frontApp and frontApp:bundleID()
+            hs.alert.closeAll()
+            if frontBundleID == params.bundleID then
+                local back = returnWindows[params.bundleID]
+                returnWindows[params.bundleID] = nil
+                if back and back:application() then
+                    back:focus()
+                    hs.alert.show("← " .. back:application():name(), 1)
+                end
+                return
+            end
+            returnWindows[params.bundleID] = window
             local action = hs.application.get(params.bundleID) and "로 이동" or " 실행"
             hs.application.launchOrFocusByBundleID(params.bundleID)
-            hs.alert.closeAll()
             hs.alert.show(params.name .. action, 1)
         end
     end,
