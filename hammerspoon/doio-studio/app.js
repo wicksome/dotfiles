@@ -412,6 +412,7 @@ function setupMappingEvents() {
     const chip = event.target.closest(".chip");
     if (!chip) return;
     mappingState.selectedApp = chip.dataset.app || null;
+    writeUrl();
     renderMapping();
   });
   $("#app-add").addEventListener("change", (event) => {
@@ -420,6 +421,7 @@ function setupMappingEvents() {
     mappingState.appNames[bundleID] = event.target.selectedOptions[0].textContent;
     if (!mappingState.apps.includes(bundleID)) mappingState.apps.push(bundleID);
     mappingState.selectedApp = bundleID;
+    writeUrl();
     event.target.value = "";
     renderMapping();
   });
@@ -1240,12 +1242,34 @@ function setStatus(which, ok, text) {
 // 메뉴: 키맵(펌웨어 | 앱별 매핑) · 매크로. 키맵 안의 두 탭은 같은 패드를 두 단계로 본다.
 const view = { tab: "keymap", sub: "firmware", selectedPos: null }; // selectedPos: 두 탭이 함께 기억하는 칸
 
+// 새로고침해도 같은 화면이 뜨도록 화면과 고른 앱을 쿼리에 둔다. ?view=firmware|mapping|macro&app=<번들 ID>
+const URL_VIEWS = { firmware: ["keymap", "firmware"], mapping: ["keymap", "mapping"], macro: ["macro", "firmware"] };
+
+function readUrl() {
+  const params = new URLSearchParams(location.search);
+  const target = URL_VIEWS[params.get("view")];
+  if (target) [view.tab, view.sub] = target;
+  const app = params.get("app");
+  if (app) {
+    mappingState.selectedApp = app;
+    if (!mappingState.apps.includes(app)) mappingState.apps.push(app);
+  }
+}
+
+function writeUrl() {
+  const params = new URLSearchParams();
+  params.set("view", view.tab === "keymap" ? view.sub : view.tab);
+  if (mappingState.selectedApp) params.set("app", mappingState.selectedApp);
+  history.replaceState(null, "", `?${params}`);
+}
+
 function showView() {
   const panelId = view.tab === "keymap" ? `tab-${view.sub}` : `tab-${view.tab}`;
   document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === view.tab));
   document.querySelectorAll(".sub-tab").forEach((t) => t.classList.toggle("active", t.dataset.sub === view.sub));
   $("#keymap-tabs").hidden = view.tab !== "keymap";
   document.querySelectorAll(".panel").forEach((panel) => panel.classList.toggle("hidden", panel.id !== panelId));
+  writeUrl();
 }
 
 // 한 탭에서 고른 칸을 다른 탭에서도 고른다.
@@ -1271,6 +1295,7 @@ document.querySelectorAll(".sub-tab").forEach((tab) => tab.addEventListener("cli
   showView();
   carrySelection();
 }));
+readUrl();
 showView();
 
 // 테마 전환. 버튼에는 누르면 바뀔 모양을 쓴다. 고른 값은 이 브라우저에 기억한다.
