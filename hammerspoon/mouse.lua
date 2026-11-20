@@ -12,6 +12,16 @@ local RESIZE_MODS = { cmd = true, ctrl = true }
 local INTERVAL_NS = 1e9 / 60
 local MIN_SIZE    = 200
 
+local keymap = require "keymap"
+local function modsLabel(set)
+    local list = {}
+    for mod in pairs(set) do table.insert(list, mod) end
+    return keymap.modsLabel(list)
+end
+keymap.note("마우스", modsLabel(MOVE_MODS) .. " + 마우스 이동", "마우스 아래 창 이동 (클릭 없이)")
+keymap.note("마우스", modsLabel(RESIZE_MODS) .. " + 마우스 이동", "마우스 아래 창 크기 조절 (왼쪽 위 고정, 오른쪽→넓게, 아래→길게)")
+keymap.note("마우스", "6번째 버튼", "Mission Control")
+
 local types = hs.eventtap.event.types
 
 local function flagsEqual(flags, mods)

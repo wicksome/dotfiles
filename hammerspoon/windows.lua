@@ -113,6 +113,15 @@ M.move_to_grid_slot = function(slot)
     place_unit(col / g.cols, row / g.rows, 1 / g.cols, 1 / g.rows)
 end
 
+-- 단축키 안내에 쓸 그리드 모양 목록. 가로 칸 × 세로 칸, 전환 순서대로
+M.grid_mode_names = function()
+    local names = {}
+    for _, g in ipairs(grid_modes) do
+        table.insert(names, g.cols .. "×" .. g.rows)
+    end
+    return table.concat(names, " → ")
+end
+
 M.toggle_grid_mode = function()
     grid_index = grid_index % #grid_modes + 1
     if grid_alert_uuid then hs.alert.closeSpecific(grid_alert_uuid) end
