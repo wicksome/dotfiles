@@ -22,6 +22,8 @@
   --radius: 6px;
   --mono: "Berkeley Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --stripe: #202125;
+  --danger-soft: #5a2a30;
+  --danger-line: rgba(235, 87, 87, 0.55);
   --stripe-strong: #3a3a3e;
   color-scheme: dark;
 }
@@ -46,6 +48,8 @@
   --ok: #2f9a66;
   --warn: #b8860b;
   --stripe: #e2e3e7;
+  --danger-soft: #fbe3e4;
+  --danger-line: rgba(210, 63, 63, 0.45);
   --stripe-strong: #c4c7cd;
   color-scheme: light;
 }
@@ -206,7 +210,7 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .key.app { border-color: var(--accent); background: var(--accent-soft); }
 .key.global { border-color: rgba(78, 167, 252, 0.55); background: var(--global-soft); }
 .key.none .main { color: var(--muted); font-weight: 500; }
-.key.blocked { background: repeating-linear-gradient(45deg, var(--raised), var(--raised) 5px, var(--stripe) 5px, var(--stripe) 10px); }
+.key.blocked { background: var(--danger-soft); border-color: var(--danger-line); }
 .key.blocked .main { color: var(--danger); }
 .key.fixed { cursor: default; opacity: 0.5; border-style: dashed; }
 .key.selected { outline: 1.5px solid var(--text); outline-offset: 2px; }
@@ -228,7 +232,7 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .sw.app { background: var(--accent-soft); border-color: var(--accent); }
 .sw.global { background: var(--global-soft); border-color: var(--global); }
 .sw.none { background: var(--raised); }
-.sw.blocked { background: repeating-linear-gradient(45deg, var(--raised), var(--raised) 2px, var(--stripe-strong) 2px, var(--stripe-strong) 4px); }
+.sw.blocked { background: var(--danger-soft); border-color: var(--danger-line); }
 .sw.fixed { border-style: dashed; }
 
 /* ---------- 편집 패널 ---------- */
@@ -346,3 +350,8 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .btn.icon-btn.busy .icon-spin { animation: spin 0.8s linear infinite; }
 .btn.icon-btn.done { box-shadow: 0 0 0 3px rgba(76, 183, 130, 0.45); color: var(--ok); }
 @keyframes spin { to { transform: rotate(360deg); } }
+.key .main.symbol { font-size: 18px; line-height: 1; }
+/* 저장하지 않은 변경: 테두리 색을 바꾸고, 저장된 값은 빨간 삭선으로 위에, 바뀐 값은 그 아래에 */
+.key.unsaved { border: 1.5px solid var(--warn); box-shadow: 0 0 0 2px rgba(242, 201, 76, 0.25); }
+.key .was { font-size: 10.5px; color: var(--muted); text-decoration: line-through 1.5px var(--danger); }
+#bt-status.on, #usb-status.on { color: var(--ok); }

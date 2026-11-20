@@ -14,7 +14,7 @@ const PAD_KEYS = [
 
 const KNOBS = [
   {
-    className: "left-small", title: "왼쪽 작은 노브", short: "왼쪽",
+    className: "left-small", title: "왼쪽 작은 노브", number: 17,
     slots: [
       { name: "↺", id: "leftKnobLeft", pos: [4, 6], defaultCode: 0xac },
       { name: "누름", id: "leftKnobPress", pos: [4, 5], defaultCode: 0xae },
@@ -22,7 +22,7 @@ const KNOBS = [
     ],
   },
   {
-    className: "big", title: "큰 노브", short: "큰",
+    className: "big", title: "큰 노브", number: 23,
     slots: [
       { name: "↺", id: "bigKnobLeft", pos: [1, 6], defaultCode: 0xaa },
       { name: "누름", id: "bigKnobPress", pos: [2, 5], defaultCode: 0xa8 },
@@ -30,7 +30,7 @@ const KNOBS = [
     ],
   },
   {
-    className: "right-small", title: "오른쪽 작은 노브", short: "오른쪽",
+    className: "right-small", title: "오른쪽 작은 노브", number: 20,
     slots: [
       { name: "↺", id: "knobLeft", pos: [1, 5], defaultCode: 0x4b },
       { name: "누름", id: "rightKnobPress", pos: [3, 5], defaultCode: 0x5011 },
@@ -92,6 +92,11 @@ function shortcutLabel(mods, key) {
   return prefix + (KEY_SYMBOLS[key] || key.toUpperCase());
 }
 
+// 기호 한두 글자(⌫ ␣ ⏎ ⇥ 등)는 대체 글꼴로 그려져 같은 크기에서도 글자보다 작아 보인다. 이런 칸만 키운다.
+function mainClass(label) {
+  return /^[^\p{L}\p{N}]{1,2}$/u.test(String(label).trim()) ? "main symbol" : "main";
+}
+
 function inputId(input) {
   return input.key !== undefined ? `key:${input.key}` : `media:${input.media}`;
 }
@@ -126,21 +131,38 @@ const mappingState = {
   selectedInput: null, // { key } 또는 { media }
 };
 
-function findRule(input, app) {
-  return mappingState.rules.find((rule) =>
+function findRule(input, app, rules = mappingState.rules) {
+  return rules.find((rule) =>
     (input.key !== undefined ? rule.key === input.key : rule.media === input.media) && (rule.app ?? null) === app);
 }
 
-// 앞 앱이 app 일 때 이 입력에 적용되는 규칙과 그 출처.
-function effectiveRule(input) {
+// 앞 앱이 app 일 때 이 입력에 적용되는 규칙과 그 출처. rules 를 주면 그 목록(저장된 규칙 등)으로 계산한다.
+function effectiveRule(input, rules = mappingState.rules) {
   const app = mappingState.selectedApp;
   if (app) {
-    const own = findRule(input, app);
+    const own = findRule(input, app, rules);
     if (own) return { rule: own, source: "app" };
   }
-  const global = findRule(input, null);
+  const global = findRule(input, null, rules);
   if (global) return { rule: global, source: "global" };
   return { rule: null, source: "none" };
+}
+
+// 저장된 값과 바뀐 값의 차이. 윗줄(키·동작)과 아랫줄(설명) 각각, 달라진 줄만 저장된 값을 삭선으로 바로 위에 둔다.
+function diffLine(savedText, text, className) {
+  const before = savedText !== false && savedText !== undefined && savedText !== text && savedText !== ""
+    ? `<s class="was">${escapeHtml(savedText)}</s>` : "";
+  return `${before}<span class="${className}">${escapeHtml(text)}</span>`;
+}
+
+function savedLabels(input) {
+  return ruleLabels(effectiveRule(input, mappingState.server?.mapping?.rules || []).rule, input);
+}
+
+// 저장하지 않은 변경이 이 칸(지금 고른 앱 기준)에 보이는지
+function isUnsaved(input) {
+  const saved = mappingState.server?.mapping?.rules || [];
+  return JSON.stringify(effectiveRule(input).rule ?? null) !== JSON.stringify(effectiveRule(input, saved).rule ?? null);
 }
 
 function ruleLabels(rule, input) {
@@ -164,23 +186,32 @@ function cellHtml(cell, extraClass, positionLabel) {
   const { rule, source } = effectiveRule(input);
   const labels = ruleLabels(rule, input);
   const classes = ["key", extraClass, rule?.block ? "blocked" : source];
+  const unsaved = isUnsaved(input);
+  if (unsaved) classes.push("unsaved");
+  const was = unsaved ? savedLabels(input) : {};
   if (mappingState.selectedInput && inputId(mappingState.selectedInput) === inputId(input)) classes.push("selected");
   const firmwareLabel = input.sends ? shortcutLabel([], input.sends) : MEDIA_LABELS[input.media];
   // 규칙이 있으면 Hammerspoon 이 펌웨어 키를 덮어쓴 것이다. 오른쪽 위에 펌웨어 키를 남겨 둘을 구분한다.
-  const origin = rule ? `<i class="fw-origin" title="펌웨어가 보내는 키">펌웨어 ${escapeHtml(firmwareLabel)}</i>` : "";
+  const origin = rule ? `<i class="fw-origin" title="펌웨어가 보내는 키">${escapeHtml(firmwareLabel)}</i>` : "";
   const title = rule ? `펌웨어가 ${firmwareLabel} 를 보내면 Hammerspoon 이 「${labels.main}」 로 바꾼다` : `Hammerspoon 규칙 없음. 펌웨어 키 ${firmwareLabel} 가 그대로 간다`;
   return `<button class="${classes.join(" ")}" data-input="${escapeHtml(inputId(input))}" data-pos="${cell.pos.join(",")}" title="${escapeHtml(title)}">
-    <i class="pos">${positionLabel}</i>${origin}<span class="main">${escapeHtml(labels.main)}</span><span class="sub">${escapeHtml(labels.sub)}</span></button>`;
+    <i class="pos">${positionLabel}</i>${origin}${diffLine(unsaved && was.main, labels.main, mainClass(labels.main))}${diffLine(unsaved && was.sub, labels.sub, "sub")}</button>`;
+}
+
+// 노브 버튼 번호는 보이는 순서(위 ↺, 위 ↻, 아래 누름)로 1씩 늘린다.
+function knobButtonNumber(knob, slot) {
+  return knob.number + ({ "↺": 0, "↻": 1, "누름": 2 })[slot.name];
 }
 
 function renderPad(container, cellRenderer) {
   let html = "";
   PAD_KEYS.forEach((row, r) => row.forEach((cell, c) => {
-    html += `<div style="grid-row:${r + 1};grid-column:${c + 1};display:grid">${cellRenderer(cell, "", `${r * 4 + c + 1}`)}</div>`;
+    // 칸 왼쪽 위에는 자리 번호를 # 을 붙여 적는다(키 #1~#16, 노브 버튼 #17~#25). # 이 없으면 숫자 키 값과 헷갈린다.
+    html += `<div style="grid-row:${r + 1};grid-column:${c + 1};display:grid">${cellRenderer(cell, "", `#${r * 4 + c + 1}`)}</div>`;
   }));
   KNOBS.forEach((knob) => {
     html += `<div class="knob-wrap ${knob.className}" title="${knob.title}"><div class="knob-slots">`;
-    knob.slots.forEach((slot) => { html += cellRenderer(slot, "", slot.name); });
+    knob.slots.forEach((slot) => { html += cellRenderer(slot, "", `#${knobButtonNumber(knob, slot)} ${slot.name}`); });
     html += `</div></div>`;
   });
   container.innerHTML = html;
@@ -660,7 +691,7 @@ function firmwareCellHtml(input, extraClass, positionLabel) {
   if (firmwareState.selectedPos?.join(",") === input.pos.join(",")) classes.push("selected");
   const label = code === undefined ? "?" : keycodeName(code);
   return `<button class="${classes.join(" ")}" data-pos="${row},${col}">
-    <i class="pos">${positionLabel}</i><span class="main">${escapeHtml(label)}</span><span class="sub">${row},${col}</span></button>`;
+    <i class="pos">${positionLabel}</i><span class="${mainClass(label)}">${escapeHtml(label)}</span></button>`;
 }
 
 function renderFirmware() {
@@ -686,6 +717,20 @@ function renderFirmware() {
   showPressed(tester.pressed);
 }
 
+// 행렬 위치 → 화면에 쓰는 자리 번호(키 #1~#16, 노브 버튼 #17~#25). 정의되지 않은 칸은 행렬 위치만.
+function positionName(pos) {
+  const key = pos.join(",");
+  for (const [r, row] of PAD_KEYS.entries()) {
+    const c = row.findIndex((cell) => cell.pos.join(",") === key);
+    if (c >= 0) return `#${r * 4 + c + 1} (행렬 ${key})`;
+  }
+  for (const knob of KNOBS) {
+    const slot = knob.slots.find((cell) => cell.pos.join(",") === key);
+    if (slot) return `#${knobButtonNumber(knob, slot)} ${slot.name} (행렬 ${key})`;
+  }
+  return `행렬 ${key}`;
+}
+
 function renderPicker() {
   const picker = $("#firmware-picker");
   const pos = firmwareState.selectedPos;
@@ -694,7 +739,7 @@ function renderPicker() {
   const original = firmwareState.keymap[firmwareState.layer][pos[0] * COLS + pos[1]];
   const codes = PICKER_GROUPS[firmwareState.pickerGroup];
   picker.innerHTML = `
-    <h2>레이어 ${firmwareState.layer} · 칸 ${pos.join(",")} — ${escapeHtml(keycodeName(code))}</h2>
+    <h2>레이어 ${firmwareState.layer} · ${positionName(pos)} — ${escapeHtml(keycodeName(code))}</h2>
     <p class="note">패드에 지금 쓰여 있는 값: ${escapeHtml(keycodeName(original))} (0x${original.toString(16).toUpperCase().padStart(4, "0")}). ▽ 는 아래 레이어 값을 그대로 쓴다는 뜻이다. macOS 는 F20 까지만 받는다.</p>
     <div class="keycode-groups">${Object.keys(PICKER_GROUPS).map((group) =>
       `<button class="chip ${group === firmwareState.pickerGroup ? "active" : ""}" data-group="${group}">${group}</button>`).join("")}</div>
@@ -1124,6 +1169,7 @@ async function loadInputDevices() {
     $("#bt-icon").innerHTML = TRANSPORT_ICONS.Bluetooth;
     $("#bt-icon").classList.toggle("ok", bluetooth);
     $("#bt-status").textContent = bluetooth ? "연결됨" : "연결 안 됨";
+    $("#bt-status").classList.toggle("on", bluetooth);
     $("#input-devices").innerHTML = seen.map(deviceHtml).join("");
   } catch (error) { /* Hammerspoon 리로드 중 */ }
 }
@@ -1161,6 +1207,7 @@ function renderUsbStatus() {
   $("#usb-icon").innerHTML = TRANSPORT_ICONS.USB;
   $("#usb-icon").classList.toggle("ok", on);
   $("#usb-status").textContent = on ? "연결됨" : "연결 안 됨";
+  $("#usb-status").classList.toggle("on", on);
 }
 
 // 펌웨어 편집(USB·WebHID) 상태는 헤더 오른쪽 아이콘 하나로 보인다.
