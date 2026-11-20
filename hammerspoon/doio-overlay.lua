@@ -5,26 +5,48 @@ local overlay = {}
 
 local SHOW_SECONDS = 10
 
--- 왼쪽 위부터 행 순서. nil 은 펌웨어가 처리해 바꿀 수 없는 레이어 키다.
+-- 왼쪽 위부터 행 순서. 칸 왼쪽 위에 자리 번호(#1~#16)를 적는다. DOIO Studio 와 같은 번호다.
 local GRID = {
     { "1", "2", "3", "4" },
     { "5", "6", "7", "8" },
     { "9", "0", "up", "return" },
-    { nil, "left", "down", "right" },
+    { "bottomLeft", "left", "down", "right" },
 }
 
-local DEFAULT_KEY_LABELS = {
-    ["1"] = "1", ["2"] = "2", ["3"] = "3", ["4"] = "4",
-    ["5"] = "5", ["6"] = "6", ["7"] = "7", ["8"] = "8",
-    ["9"] = "9", ["0"] = "0", up = "↑", ["return"] = "⏎",
-    left = "←", down = "↓", right = "→",
-    knobLeft = "PgUp", knobRight = "PgDn",
+-- 노브: 첫 버튼 번호(↺·↻·누름 순서로 1씩), 이름, 크기, { ↺, 누름, ↻ } 자리
+local KNOBS = {
+    { 17, "왼쪽", "small", { "leftKnobLeft", "leftKnobPress", "leftKnobRight" } },
+    { 20, "오른쪽", "small", { "knobLeft", "rightKnobPress", "knobRight" } },
+    { 23, "큰 노브", "large", { "bigKnobLeft", "bigKnobPress", "bigKnobRight" } },
+}
+
+-- 펌웨어가 보내는 일반 키(hs.keycodes 이름) → 칸에 적을 글자
+local KEY_LABELS = {
+    up = "↑", down = "↓", left = "←", right = "→", ["return"] = "⏎", space = "␣",
+    delete = "⌫", forwarddelete = "⌦", escape = "⎋", tab = "⇥", pageup = "PgUp", pagedown = "PgDn",
+    home = "Home", ["end"] = "End",
 }
 
 local DEFAULT_MEDIA_LABELS = {
     PREVIOUS = "⏮", NEXT = "⏭", PLAY = "⏯",
     SOUND_DOWN = "🔉", SOUND_UP = "🔊", MUTE = "🔇",
 }
+
+-- 맥에 키 이벤트가 오지 않는 펌웨어 값(레이어·매크로·조명 키 등)의 이름
+local function codeLabel(code)
+    local n = tonumber(code or "") or 0
+    if n == 0 then return "없음" end
+    if n == 1 then return "▽" end
+    if n >= 0x5100 and n <= 0x51FF then return "MO" .. (n & 0xFF) end
+    if n >= 0x5010 and n <= 0x501F then return "TO" .. (n & 0x0F) end
+    if n >= 0x5F12 and n <= 0x5F21 then return "M" .. (n - 0x5F12) end
+    if n >= 0x5CC2 and n <= 0x5CCC then return "조명" end
+    return string.format("0x%04X", n)
+end
+
+local function keyLabel(keyName)
+    return KEY_LABELS[keyName] or (#keyName == 1 and keyName:upper()) or keyName
+end
 
 local function escape(text)
     return (tostring(text):gsub("&", "&amp;"):gsub("<", "&lt;"):gsub(">", "&gt;"))
@@ -49,55 +71,45 @@ local function cell(entry, changed, fixed, position)
         sub ~= "" and ("<small>" .. escape(sub) .. "</small>") or "")
 end
 
-local function keyCell(description, name, position)
-    if name == nil then
-        return cell({ shortcut = "MO", description = "레이어" }, false, true, position)
+-- 자리 하나를 그린다. 펌웨어가 보내는 것을 바닥으로 두고, Hammerspoon 규칙이 있으면 그 위에 덮는다.
+local function inputCell(description, name, position)
+    local input = doio.firmwareInputs[name] or {}
+    if input.key then
+        local entry = description.keys[name]
+        return cell(entry or { shortcut = keyLabel(input.key) }, entry ~= nil, false, position)
+    elseif input.media then
+        local entry = description.media[input.media]
+        return cell(entry or { shortcut = DEFAULT_MEDIA_LABELS[input.media] or input.media }, entry ~= nil, false, position)
     end
-    local entry = description.keys[name]
-    return cell(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil, false, position)
+    return cell({ shortcut = codeLabel(input.code), description = "펌웨어" }, false, true, position)
 end
 
-local function knobAction(entry, changed, fixed)
-    return cell(entry, changed, fixed)
-end
-
-local function mediaAction(description, mediaKey)
-    local entry = description.media[mediaKey]
-    return knobAction(entry or { shortcut = DEFAULT_MEDIA_LABELS[mediaKey] }, entry ~= nil)
-end
-
-local function padAction(description, name)
-    local entry = description.keys[name]
-    return knobAction(entry or { shortcut = DEFAULT_KEY_LABELS[name] }, entry ~= nil)
-end
-
-local function knob(position, title, size, rotateLeft, press, rotateRight)
+local function knob(number, title, size, slots, description)
+    local actions = {}
+    -- DOIO Studio 와 같은 번호: ↺, ↻, 누름 순서로 1씩
+    for offset, spec in ipairs({ { "↺", 1 }, { "↻", 3 }, { "누름", 2 } }) do
+        local symbol, slot = spec[1], spec[2]
+        table.insert(actions, string.format("<div><span>%s</span>%s</div>", symbol, inputCell(description, slots[slot], "#" .. (number + offset - 1))))
+    end
     return string.format([[
 <div class="knob">
-  <div class="dial %s"><i class="pos">%s</i>%s</div>
-  <div class="actions">
-    <div><span>↺</span>%s</div>
-    <div><span>누름</span>%s</div>
-    <div><span>↻</span>%s</div>
-  </div>
-</div>]], size, position, escape(title), rotateLeft, press, rotateRight)
+  <div class="dial %s">%s</div>
+  <div class="actions">%s</div>
+</div>]], size, escape(title), table.concat(actions))
 end
 
 local function render(appName, description)
     local rows = {}
     for rowIndex, row in ipairs(GRID) do
-        for column = 1, 4 do
-            table.insert(rows, keyCell(description, row[column], (rowIndex - 1) * 4 + column))
+        for column, name in ipairs(row) do
+            table.insert(rows, inputCell(description, name, "#" .. ((rowIndex - 1) * 4 + column)))
         end
     end
-    local knobs = table.concat({
-        knob(17, "왼쪽", "small",
-            mediaAction(description, "PREVIOUS"), mediaAction(description, "PLAY"), mediaAction(description, "NEXT")),
-        knob(18, "오른쪽", "small",
-            padAction(description, "knobLeft"), knobAction({ shortcut = "—", description = "레이어 전환" }, false, true), padAction(description, "knobRight")),
-        knob(19, "큰 노브", "large",
-            mediaAction(description, "SOUND_DOWN"), mediaAction(description, "MUTE"), mediaAction(description, "SOUND_UP")),
-    })
+    local knobs = {}
+    for _, spec in ipairs(KNOBS) do
+        table.insert(knobs, knob(spec[1], spec[2], spec[3], spec[4], description))
+    end
+    knobs = table.concat(knobs)
     return string.format([[
 <!doctype html><html><head><meta charset="utf-8"><style>
   html, body { overflow: hidden; } body { margin: 0; font: 13px -apple-system, sans-serif; color: #f2f2f2; background: rgba(28, 28, 32, 0.94); }
@@ -110,9 +122,8 @@ local function render(appName, description)
   .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
           padding: 2px 4px; border-radius: 8px; background: #3a3a42; color: #d0d0d8; word-break: keep-all; }
   .cell, .dial { position: relative; }
+  .actions .pos { position: static; margin-right: 6px; }
   .pos { position: absolute; top: 3px; left: 5px; font-style: normal; font-size: 9.5px; opacity: 0.6; }
-  .actions .pos { display: none; }
-  .dial .pos { top: -2px; left: -4px; opacity: 0.8; }
   .cell b { font-size: 14px; font-weight: 600; }
   .cell small { margin-top: 2px; font-size: 10.5px; opacity: 0.85; }
   .actions .cell { flex-direction: row; justify-content: space-between; gap: 6px; padding: 2px 10px; }
@@ -136,7 +147,7 @@ local function render(appName, description)
   .legend b { display: inline-block; width: 10px; height: 10px; margin: 0 4px 0 10px; border-radius: 3px; vertical-align: -1px; }
 </style></head><body><div class="wrap">
   <h1>DOIO 배치 — %s</h1>
-  <p class="sub">레이어 1 기준. 칸 왼쪽 위 숫자(키 1~16, 노브 17~19)로 위치를 부른다. 노브가 반응하지 않으면 표시창 숫자부터 확인한다.</p>
+  <p class="sub">펌웨어 레이어 0(DOIO Studio 가 마지막에 읽은 키맵) 위에 Hammerspoon 매핑을 덮은 모습. 칸 왼쪽 위 #번호(키 #1~#16, 노브 버튼 #17~#25)로 자리를 부른다.</p>
   <div class="body"><div class="grid">%s</div><div class="knobs">%s</div></div>
   <div class="legend"><b style="background:#2f6fd6"></b>바뀐 입력<b style="background:#3a3a42"></b>원래 키<b style="border:1px dashed #66666f"></b>바꿀 수 없음<b style="background:#5a2a30"></b>✕ 막음(아무 동작 없음)</div>
 </div></body></html>]], escape(appName), table.concat(rows), knobs)

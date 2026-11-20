@@ -43,11 +43,28 @@ local DEFAULT_PAD_KEYS = {
 -- 파일이 없으면(아직 USB 로 읽은 적 없음) 펌웨어 기본 키맵을 쓴다.
 local FIRMWARE_PATH = hs.configdir .. "/doio-firmware.json"
 
+-- 펌웨어 기본 키맵의 일반 키가 아닌 자리(미디어 키·레이어 키). 배치 보기가 파일이 없을 때 쓴다.
+local DEFAULT_OTHER_INPUTS = {
+    bottomLeft = { code = "0x5103" }, rightKnobPress = { code = "0x5011" },
+    leftKnobLeft = { media = "PREVIOUS" }, leftKnobPress = { media = "PLAY" }, leftKnobRight = { media = "NEXT" },
+    bigKnobLeft = { media = "SOUND_DOWN" }, bigKnobPress = { media = "MUTE" }, bigKnobRight = { media = "SOUND_UP" },
+}
+
+-- 자리 이름 → 펌웨어가 보내는 것({ key } | { media } | { code }). 배치 보기(doio-overlay.lua)가 그린다.
+doio.firmwareInputs = {}
+
 local function loadPadKeys()
     local firmware = hs.fs.attributes(FIRMWARE_PATH) and hs.json.read(FIRMWARE_PATH)
     if not (firmware and firmware.inputs) then
+        for name, keyName in pairs(DEFAULT_PAD_KEYS) do
+            doio.firmwareInputs[name] = { key = keyName }
+        end
+        for name, input in pairs(DEFAULT_OTHER_INPUTS) do
+            doio.firmwareInputs[name] = input
+        end
         return DEFAULT_PAD_KEYS
     end
+    doio.firmwareInputs = firmware.inputs
     local keys = {}
     for name, input in pairs(firmware.inputs) do
         keys[name] = input.key
