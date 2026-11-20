@@ -23,9 +23,7 @@
     <section class="status">
       <div class="status-row"><span class="transport-icon" id="bt-icon"></span>Bluetooth <span id="bt-status">확인 중</span></div>
       <div class="battery" id="battery" hidden></div>
-      <div class="status-row"><span class="transport-icon" id="usb-icon"></span>USB <span id="usb-status">확인 중</span></div>
-      <div class="status-row sub-row"><span class="dot" id="hid-dot"></span>펌웨어 편집 <span id="hid-status">연결 안 됨</span></div>
-      <button id="hid-connect" class="btn primary connect">패드 연결</button>
+      <div class="status-row"><span class="transport-icon" id="usb-icon"></span>USB <span class="row-end"><span id="usb-status">확인 중</span><button id="hid-connect" class="btn icon-btn small" title="패드 연결 (USB)" aria-label="패드 연결"></button></span></div>
       <details class="kt-detail" id="device-detail">
         <summary>인식 정보</summary>
         <p class="muted">Hammerspoon 은 키를 보낸 기기(이벤트 87번 값)로 패드를 알아본다.</p>
@@ -50,7 +48,7 @@
         <button class="tab active" data-tab="keymap">키맵</button>
         <button class="tab" data-tab="macro">매크로</button>
       </nav>
-      <button id="theme-toggle" class="btn theme-toggle"></button>
+      <button id="theme-toggle" class="btn icon-btn header-end"></button>
     </header>
 
     <nav class="sub-tabs" id="keymap-tabs">
@@ -118,7 +116,7 @@
         <button id="fw-revert" class="btn" disabled>되돌리기</button>
         <button id="fw-write" class="btn danger" disabled>펌웨어에 쓰기</button>
       </div>
-      <p class="hint" id="fw-hint">패드를 USB 로 꽂고 왼쪽 「패드 연결」을 누른다. 한 번 허용하면 다음부터는 열 때·다시 꽂을 때 자동으로 연결한다. Chrome·Edge 에서만 된다.</p>
+      <p class="hint" id="fw-hint">패드를 USB 로 꽂고 왼쪽 USB 옆 연결 아이콘을 누른다. 한 번 허용하면 다음부터는 자동으로 연결한다. Chrome·Edge 에서만 된다.</p>
       <div id="firmware-pad" class="pad"></div>
       <div id="firmware-picker" class="editor"></div>
       <details class="matrix">

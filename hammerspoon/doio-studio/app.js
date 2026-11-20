@@ -14,7 +14,7 @@ const PAD_KEYS = [
 
 const KNOBS = [
   {
-    className: "left-small", title: "왼쪽 작은 노브",
+    className: "left-small", title: "왼쪽 작은 노브", short: "왼쪽",
     slots: [
       { name: "↺", id: "leftKnobLeft", pos: [4, 6], defaultCode: 0xac },
       { name: "누름", id: "leftKnobPress", pos: [4, 5], defaultCode: 0xae },
@@ -22,7 +22,7 @@ const KNOBS = [
     ],
   },
   {
-    className: "big", title: "큰 노브",
+    className: "big", title: "큰 노브", short: "큰",
     slots: [
       { name: "↺", id: "bigKnobLeft", pos: [1, 6], defaultCode: 0xaa },
       { name: "누름", id: "bigKnobPress", pos: [2, 5], defaultCode: 0xa8 },
@@ -30,7 +30,7 @@ const KNOBS = [
     ],
   },
   {
-    className: "right-small", title: "오른쪽 작은 노브",
+    className: "right-small", title: "오른쪽 작은 노브", short: "오른쪽",
     slots: [
       { name: "↺", id: "knobLeft", pos: [1, 5], defaultCode: 0x4b },
       { name: "누름", id: "rightKnobPress", pos: [3, 5], defaultCode: 0x5011 },
@@ -175,7 +175,7 @@ function renderPad(container, cellRenderer) {
     html += `<div style="grid-row:${r + 1};grid-column:${c + 1};display:grid">${cellRenderer(cell, "", `${r * 4 + c + 1}`)}</div>`;
   }));
   KNOBS.forEach((knob) => {
-    html += `<div class="knob-wrap ${knob.className}"><span class="knob-title">${knob.title}</span><div class="knob-slots">`;
+    html += `<div class="knob-wrap ${knob.className}" title="${knob.title}"><div class="knob-slots">`;
     knob.slots.forEach((slot) => { html += cellRenderer(slot, "", slot.name); });
     html += `</div></div>`;
   });
@@ -575,7 +575,6 @@ async function openPad(device) {
   firmwareState.keymap = await readKeymap();
   firmwareState.pending.clear();
   setStatus("hid", true, `VIA ${firmwareState.protocol} · 레이어 ${firmwareState.layers}`);
-  $("#hid-connect").textContent = "다시 읽기";
   $("#fw-hint").textContent = "칸을 눌러 아래에서 키코드를 고른다. 「펌웨어에 쓰기」를 누르기 전에는 패드에 쓰지 않는다.";
   renderFirmware();
   await readMacros();
@@ -583,7 +582,10 @@ async function openPad(device) {
 }
 
 async function connectPad() {
-  if (firmwareState.usbAttached === false) return;
+  if (firmwareState.usbAttached === false) {
+    $("#fw-hint").textContent = "USB 로 연결된 패드가 없다. 케이블을 꽂고 패드를 유선 모드로 둔다.";
+    return;
+  }
   if (!("hid" in navigator)) {
     setStatus("hid", false, "WebHID 없음");
     $("#fw-hint").textContent = "이 브라우저에는 WebHID 가 없다. Chrome 이나 Edge 로 연다.";
@@ -593,8 +595,13 @@ async function connectPad() {
     await openPad(firmwareState.device);
     return;
   }
+  $("#fw-hint").textContent = "Chrome 주소창 아래에 뜬 창에서 패드를 고른다.";
   const [device] = await navigator.hid.requestDevice({ filters: [PAD_FILTER] });
-  if (device) await openPad(device);
+  if (device) {
+    await openPad(device);
+  } else {
+    $("#fw-hint").textContent = "패드를 고르지 않았다. 목록이 비어 있었다면 패드가 유선(USB) 모드인지 확인한다.";
+  }
 }
 
 // Hammerspoon 에 USB 연결 여부를 묻는다. 꽂거나 뽑으면 화면을 바꾼다.
@@ -604,9 +611,10 @@ async function pollUsb() {
     if (usb === firmwareState.usbAttached) return;
     const wasAttached = firmwareState.usbAttached;
     firmwareState.usbAttached = usb;
+    renderUsbStatus();
     if (usb && !firmwareState.device) {
       setStatus("hid", false, "연결 안 됨");
-      $("#fw-hint").textContent = "패드가 USB 로 꽂혀 있다. 왼쪽 「패드 연결」을 누른다. 한 번 허용하면 다음부터는 자동으로 연결한다.";
+      $("#fw-hint").textContent = "패드가 USB 로 꽂혀 있다. 왼쪽 USB 옆 연결 아이콘을 누른다. 한 번 허용하면 다음부터는 자동으로 연결한다.";
       if (wasAttached === false) await autoConnectPad();
     }
     renderFirmware();
@@ -646,10 +654,10 @@ function renderFirmware() {
   const connected = Boolean(firmwareState.device);
   const noUsb = firmwareState.usbAttached === false;
   $("#tab-firmware").classList.toggle("disabled", noUsb && !connected);
-  $("#hid-connect").hidden = noUsb;
+  $("#hid-connect").disabled = noUsb;
   if (noUsb && !connected) {
-    setStatus("hid", false, "Bluetooth 는 안 됨");
-    $("#fw-hint").textContent = "패드가 USB 로 연결돼 있지 않다. Bluetooth 연결에서는 펌웨어 키맵을 읽고 쓸 수 없다. ② 앱별 매핑은 그대로 쓸 수 있다.";
+    setStatus("hid", false, "불가");
+    $("#fw-hint").textContent = "USB 로 연결해야 펌웨어를 편집할 수 있다.";
   }
   $("#layer-buttons").innerHTML = Array.from({ length: firmwareState.layers }, (_, i) =>
     `<button class="chip ${i === firmwareState.layer ? "active" : ""}" data-layer="${i}">${i}</button>`).join("");
@@ -798,7 +806,22 @@ function setTester(on) {
 
 function setupFirmwareEvents() {
   $("#fw-tester").addEventListener("click", () => setTester(!tester.timer));
-  $("#hid-connect").addEventListener("click", () => connectPad().catch(showConnectError));
+  // 누르면 읽는 동안 아이콘이 돌고, 끝나면 잠깐 초록으로 빛난다.
+  $("#hid-connect").addEventListener("click", async () => {
+    const button = $("#hid-connect");
+    if (button.classList.contains("busy")) return;
+    button.classList.add("busy");
+    try {
+      await connectPad();
+      if (!firmwareState.device) return; // 기기 선택 창을 닫은 경우
+      button.classList.add("done");
+      setTimeout(() => button.classList.remove("done"), 900);
+    } catch (error) {
+      showConnectError(error);
+    } finally {
+      button.classList.remove("busy");
+    }
+  });
   navigator.hid?.addEventListener("connect", (event) => {
     if (isPadInterface(event.device)) openPad(event.device).catch(showConnectError);
   });
@@ -840,7 +863,6 @@ function setupFirmwareEvents() {
       macroState.count = 0;
       renderMacros();
       setStatus("hid", false, "연결 끊김");
-      $("#hid-connect").textContent = "패드 연결";
       renderFirmware();
     }
   });
@@ -1085,12 +1107,10 @@ async function loadInputDevices() {
     const result = await (await fetch("/api/input-devices", { cache: "no-store" })).json();
     const seen = Array.isArray(result.seen) ? result.seen : [];
     const connectedPads = result.connectedPads || [];
-    for (const [transport, prefix] of [["Bluetooth", "bt"], ["USB", "usb"]]) {
-      const on = connectedPads.includes(transport);
-      $(`#${prefix}-icon`).innerHTML = TRANSPORT_ICONS[transport];
-      $(`#${prefix}-icon`).classList.toggle("ok", on);
-      $(`#${prefix}-status`).textContent = on ? "연결됨" : "연결 안 됨";
-    }
+    const bluetooth = connectedPads.includes("Bluetooth");
+    $("#bt-icon").innerHTML = TRANSPORT_ICONS.Bluetooth;
+    $("#bt-icon").classList.toggle("ok", bluetooth);
+    $("#bt-status").textContent = bluetooth ? "연결됨" : "연결 안 됨";
     $("#input-devices").innerHTML = seen.map(deviceHtml).join("");
   } catch (error) { /* Hammerspoon 리로드 중 */ }
 }
@@ -1122,7 +1142,37 @@ async function loadBattery() {
 // ===========================================================================
 // 공통
 // ===========================================================================
+// 사이드바 USB 줄. Hammerspoon 이 본 USB 연결(2초마다)과 이 페이지의 WebHID 연결 중 하나라도 있으면 연결됨이다.
+function renderUsbStatus() {
+  const on = Boolean(firmwareState.device) || firmwareState.usbAttached === true;
+  $("#usb-icon").innerHTML = TRANSPORT_ICONS.USB;
+  $("#usb-icon").classList.toggle("ok", on);
+  $("#usb-status").textContent = on ? "연결됨" : "연결 안 됨";
+}
+
+// 펌웨어 편집(USB·WebHID) 상태는 헤더 오른쪽 아이콘 하나로 보인다.
+// 연결 전에는 연결 아이콘, 연결 뒤에는 다시 읽기 아이콘이고 상태는 마우스를 올리면 보인다.
+const PAD_ICONS = {
+  connect: `<svg viewBox="0 0 16 16" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M6 2v3M10 2v3M4.5 5h7v2.5a3.5 3.5 0 0 1-7 0zM8 11v3"/></svg>`,
+  refresh: `<svg viewBox="0 0 16 16" width="15" height="15"><path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" d="M13 8a5 5 0 1 1-1.5-3.6M13 2.5v2.5h-2.5"/></svg>`,
+};
+
 function setStatus(which, ok, text) {
+  if (which === "hid") {
+    const button = $("#hid-connect");
+    const connected = Boolean(firmwareState.device);
+    // 아이콘이 바뀔 때만 다시 그린다. 읽는 중에 다시 그리면 회전 애니메이션이 처음부터 다시 시작해 끊겨 보인다.
+    const icon = connected ? "refresh" : "connect";
+    if (button.dataset.icon !== icon) {
+      button.innerHTML = `<span class="icon-spin">${PAD_ICONS[icon]}</span>`;
+      button.dataset.icon = icon;
+    }
+    renderUsbStatus();
+    button.classList.toggle("ok", ok);
+    button.title = connected ? `패드에서 다시 읽기 (${text})` : `패드 연결 (USB) · ${text}`;
+    button.setAttribute("aria-label", button.title);
+    return;
+  }
   $(`#${which}-dot`).className = `dot ${ok ? "ok" : "bad"}`;
   $(`#${which}-status`).textContent = text;
 }
@@ -1186,6 +1236,7 @@ loadInputDevices();
 setInterval(loadInputDevices, 3000);
 loadBattery();
 setInterval(loadBattery, 30000);
+setStatus("hid", false, "확인 중");
 renderFirmware();
 pollUsb().then(() => autoConnectPad()).catch(showConnectError);
 setInterval(pollUsb, 2000);

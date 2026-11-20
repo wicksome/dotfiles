@@ -140,7 +140,11 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .page-header h1 { margin: 0; font-size: 13px; font-weight: 600; color: var(--text); }
 .view-tabs { display: flex; gap: 2px; }
 .view-tabs .tab { height: 28px; padding: 0 10px; font-size: 12px; }
-.theme-toggle { margin-left: auto; width: 28px; height: 28px; padding: 0; font-size: 14px; justify-content: center; }
+.icon-btn { width: 28px; height: 28px; padding: 0; font-size: 14px; justify-content: center; display: inline-grid; place-items: center; }
+.header-end { margin-left: auto; }
+.btn.icon-btn { border-color: transparent; background: transparent; }
+.btn.icon-btn:hover:not(:disabled) { background: var(--hover); }
+.icon-btn.ok { color: var(--ok); }
 
 .panel.hidden { display: none; }
 
@@ -170,7 +174,7 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 /* ---------- 패드 ---------- */
 .pad {
   display: grid;
-  grid-template-columns: repeat(4, 76px) 12px repeat(3, 104px);
+  grid-template-columns: repeat(4, 76px) 12px 76px 76px 4px 76px 76px;
   grid-template-rows: repeat(4, 76px);
   gap: 6px;
   padding: 20px;
@@ -209,16 +213,15 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .key.dirty::after { content: ""; position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
 .key.pressed { border-color: var(--ok) !important; background: rgba(76, 183, 130, 0.18) !important; box-shadow: 0 0 0 2px rgba(76, 183, 130, 0.5); }
 
-.knob-wrap { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
-.knob-wrap.left-small { grid-column: 6; grid-row: 1 / span 2; }
-.knob-wrap.right-small { grid-column: 8; grid-row: 1 / span 2; }
-.knob-wrap.big { grid-column: 7; grid-row: 3 / span 2; }
-.knob-title { font-size: 11px; color: var(--faint); text-align: center; }
-.knob-slots { display: grid; gap: 4px; }
-.knob-slots .key { min-height: 0; padding: 3px 4px; border-radius: 6px; }
-.knob-slots .key .main { font-size: 11.5px; }
-.knob-slots .key .sub { font-size: 10px; margin-top: 0; }
-.knob-slots .key .pos { position: static; display: inline; margin-right: 4px; }
+.knob-wrap { display: contents; }
+/* 노브 칸은 키와 같은 크기다. 역삼각형: 위 왼쪽 ↺, 위 오른쪽 ↻, 아래 가운데 누름 (슬롯 순서 ↺, 누름, ↻) */
+.knob-slots { display: grid; gap: 6px; grid-template-columns: 76px 76px; grid-template-rows: 76px 76px; grid-template-areas: "ccw cw" "press press"; justify-content: center; border-radius: 10px; box-shadow: 0 0 0 4px var(--hover); }
+.knob-wrap.left-small .knob-slots { grid-column: 6 / span 2; grid-row: 1 / span 2; }
+.knob-wrap.right-small .knob-slots { grid-column: 9 / span 2; grid-row: 1 / span 2; }
+.knob-wrap.big .knob-slots { grid-column: 7 / span 3; grid-row: 3 / span 2; }
+.knob-slots > :nth-child(1) { grid-area: ccw; }
+.knob-slots > :nth-child(2) { grid-area: press; justify-self: center; width: 76px; }
+.knob-slots > :nth-child(3) { grid-area: cw; }
 
 .legend { display: flex; gap: 14px; margin: 10px 0 0; color: var(--muted); font-size: 11px; flex-wrap: wrap; }
 .sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; border: 1px solid var(--line-strong); }
@@ -331,3 +334,15 @@ main { flex: 1; min-width: 0; padding: 0 28px 40px; }
 .sub-tab:hover { color: var(--text); }
 .sub-tab.active { background: var(--raised); color: var(--text); box-shadow: 0 0 0 1px var(--line-strong); }
 .sub-tab.active .nav-icon { color: var(--accent-hover); border-color: var(--accent); }
+.icon-btn svg { width: 15px; height: 15px; min-width: 15px; }
+.section-head { display: flex; align-items: center; justify-content: space-between; }
+.icon-btn.small { width: 22px; height: 22px; border-radius: 5px; }
+.icon-btn.small svg { width: 13px; height: 13px; min-width: 13px; }
+.row-end { margin-left: auto; display: inline-flex; align-items: center; gap: 2px; }
+.status-row .row-end > span { color: var(--muted); font-size: 12px; }
+.btn.icon-btn:active:not(:disabled) { transform: scale(0.88); background: var(--line-strong); }
+.btn.icon-btn { transition: transform 80ms, background 120ms, box-shadow 300ms; }
+.icon-spin { display: inline-grid; place-items: center; will-change: transform; }
+.btn.icon-btn.busy .icon-spin { animation: spin 0.8s linear infinite; }
+.btn.icon-btn.done { box-shadow: 0 0 0 3px rgba(76, 183, 130, 0.45); color: var(--ok); }
+@keyframes spin { to { transform: rotate(360deg); } }
